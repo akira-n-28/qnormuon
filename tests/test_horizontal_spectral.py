@@ -95,6 +95,17 @@ def test_full_column_rank_does_not_imply_unique_multiplier():
     close(hess @ torch.ones(2, dtype=DTYPE), torch.zeros(2, dtype=DTYPE), 1e-12)
 
 
+def test_same_selected_primal_at_full_rank_and_deficient_dual_optimizers():
+    u = d = torch.ones(2, 1, dtype=DTYPE)
+    a = torch.stack((u, d))
+    interior = minimum_norm_on_dual_face(u, d, a, torch.zeros(2, dtype=DTYPE), ranks=(1, 1))
+    endpoint = minimum_norm_on_dual_face(u, d, a, torch.ones(2, dtype=DTYPE), ranks=(0, 1))
+    certified(u, d, a, interior)
+    certified(u, d, a, endpoint)
+    close(interior.pair, endpoint.pair)
+    close(endpoint.pair, a / 2. ** .5)
+
+
 def test_one_side_deficient_requires_fractional_completion_and_new_leverage_mass():
     u, d, a, expected = fractional_example()
     lam = torch.zeros(3, dtype=DTYPE)
@@ -268,7 +279,7 @@ def test_shared_K_composes_but_old_logdet_gradient_is_not_coupled_row_mass():
 
 
 def test_shared_K_value_derivative_is_envelope_not_leverage():
-    u, d, a = random_example(901, m=5, n=2)
+    u, d, a = random_example(902, m=5, n=2)
     x = torch.linspace(-.3, .2, 5, dtype=DTYPE)
     weighted = torch.exp(x / 2)[None, :, None] * a
     result = solve_lmo(u, d, weighted, tolerance=1e-12)
@@ -286,6 +297,63 @@ def test_shared_K_value_derivative_is_envelope_not_leverage():
     close(torch.stack(fd), envelope, 2e-7)
     assert float((envelope - result.pair.square().sum((0, 2))).norm()) > .1
     print("K envelope float64 5x2 FD max error", float((torch.stack(fd) - envelope).abs().max()))
+
+
+def test_coupled_row_mass_jacobian_need_not_be_symmetric_even_after_centering():
+    u, d, a = random_example(902, m=5, n=2)
+    x = torch.linspace(-.3, .2, 5, dtype=DTYPE)
+    solved = solve_lmo(u, d, torch.exp(x / 2)[None, :, None] * a, tolerance=1e-12)
+    assert float(torch.linalg.svdvals(torch.exp(x / 2)[None, :, None] * a - adjoint(u, d, solved.lam)).min()) > .1
+    z = torch.cat((x, solved.lam))
+
+    def pair(v):
+        b = torch.exp(v[:5] / 2)[None, :, None] * a - adjoint(u, d, v[5:])
+        return partial_pair(b, (2, 2))
+
+    stationarity_jacobian = torch.autograd.functional.jacobian(
+        lambda v: -horizontal_residual(u, d, pair(v)), z)
+    hessian = stationarity_jacobian[:, 5:]
+    assert float(torch.linalg.eigvalsh(hessian).min()) > .05
+    dual_response = -torch.linalg.solve(hessian, stationarity_jacobian[:, :5])
+    mass_jacobian = torch.autograd.functional.jacobian(lambda v: pair(v).square().sum((0, 2)), z)
+    derived = mass_jacobian[:, :5] + mass_jacobian[:, 5:] @ dual_response
+    finite_difference = []
+    for e in torch.eye(5, dtype=DTYPE) * 1e-4:
+        masses = []
+        for v in (x + e, x - e):
+            r = solve_lmo(u, d, torch.exp(v / 2)[None, :, None] * a, tolerance=1e-12)
+            assert r.converged
+            masses.append(r.pair.square().sum((0, 2)))
+        finite_difference.append((masses[0] - masses[1]) / 2e-4)
+    close(derived, torch.stack(finite_difference, dim=1), 2e-7)
+    center = torch.eye(5, dtype=DTYPE) - torch.ones(5, 5, dtype=DTYPE) / 5
+    skew = center @ (derived - derived.T) @ center
+    assert float(skew.norm()) > .01
+    print("K centered row-mass Jacobian asymmetry float64 5x2", float(skew.norm()))
+
+
+def test_derived_log_support_balancing_candidate_convexity_shift_and_gradient():
+    u, d, a = random_example(902, m=5, n=2)
+    x = torch.linspace(-.3, .2, 5, dtype=DTYPE)
+    y = torch.tensor([.4, -.5, .1, .7, -.2], dtype=DTYPE)
+
+    def candidate(z):
+        b = torch.exp(z / 2)[None, :, None] * a
+        r = solve_lmo(u, d, b, tolerance=1e-12)
+        assert r.converged
+        value = (b * r.pair).sum()
+        return 2 * value.log() - z.mean(), (b * r.pair).sum((0, 2)) / value
+
+    fx, contributions = candidate(x)
+    fy, _ = candidate(y)
+    fm, _ = candidate(.4 * x + .6 * y)
+    assert float(fm) <= float(.4 * fx + .6 * fy) + 1e-9
+    close(candidate(x + 3)[0], fx, 1e-9)
+    assert float(contributions.min()) >= -1e-10
+    close(contributions.sum(), torch.tensor(1., dtype=DTYPE), 1e-12)
+    fd = torch.stack([(candidate(x + e)[0] - candidate(x - e)[0]) / 2e-4
+                      for e in torch.eye(5, dtype=DTYPE) * 1e-4])
+    close(fd, contributions - .2, 2e-7)
 
 
 def test_solver_limits_and_bad_inputs_are_not_silently_certified():
