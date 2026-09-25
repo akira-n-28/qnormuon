@@ -1,92 +1,203 @@
-# QNorMuon — Codex research starter
+# QNorMuon / Quotient Spectral Optimizer
 
-This repository is a self-contained research starter for **QNorMuon: Gauge-Canonical Spectral Optimization**.
+Research code for gauge-invariant spectral optimization of coupled SwiGLU
+parameters.
 
-It contains:
+The current core direction is a **K=I coupled horizontal spectral optimizer**
+defined on the quotient geometry induced by the positive diagonal rescaling
 
-- the current mathematical specification;
-- a minimal PyTorch reference implementation;
-- invariant/property tests;
-- gauge and trajectory stress experiments;
-- Codex project instructions;
-- the first theory-audit task;
-- a staged experiment plan.
+    U -> C U
+    D -> C^{-1} D.
 
-## Start here
+Rather than applying spectral normalization independently to the up/down
+matrices, the current method solves a coupled spectral linear minimization
+problem on the horizontal tangent space of the quotient.
 
-1. Read `AGENTS.md`.
-2. Read `docs/QNORMUON_THEORY.md`.
-3. Run the baseline tests.
-4. Give Codex the task in `docs/CODEX_FIRST_TASK.md`.
-5. Do not optimize performance before the theory audit is complete.
+## Current status
 
-## Setup
+This is an active research project.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate        # macOS/Linux
-# .venv\Scripts\activate       # Windows PowerShell
+The current production-v0 candidate combines:
 
-python -m pip install -U pip
-pip install -e ".[dev]"
-```
+- balanced gauge-canonical coordinates;
+- canonical paired momentum;
+- a quotient spectral norm;
+- a coupled horizontal spectral LMO;
+- a nuclear-norm dual problem;
+- warm-started row-whitened Newton-CG;
+- primal-dual certification;
+- explicit fallback when the smooth solver is unreliable.
 
-## Verify the baseline
+The current production candidate uses `K = I`.
 
-```bash
-pytest
-python -m experiments.gauge_stress
-python -m experiments.toy_trajectory
-```
+The following ideas are intentionally not part of production-v0:
 
-The current reference implementation intentionally uses an **exact thin-SVD polar factor**. It is slow by design: this isolates the mathematical construction from errors introduced by an approximate polar solver.
+- shared K weighting;
+- leverage balancing;
+- contribution balancing;
+- neuron birth;
+- custom approximate polar kernels;
+- distributed optimizer logic.
 
-## Expected baseline behavior
+## Mathematical core
 
-The mathematical tests should pass in float64. The gauge stress test should report very small equivariance/canonical-polar errors. The trajectory experiment should show QNorMuon preserving functional equivalence under a diagonal gauge reset much better than a raw spectral Muon baseline.
+In balanced canonical coordinates, define
 
-Exact numbers depend on PyTorch / BLAS / platform and should not be hard-coded as scientific claims.
+    L(P)_i =
+        <U_i, P_U[i]> - <D_i, P_D[i]>.
 
-## Repository layout
+The horizontal tangent space is
 
-```text
-.
-├── AGENTS.md
-├── README.md
-├── pyproject.toml
-├── docs/
-│   ├── QNORMUON_THEORY.md
-│   ├── CODEX_FIRST_TASK.md
-│   └── EXPERIMENT_PLAN.md
-├── qnormuon/
-│   ├── __init__.py
-│   └── core.py
-├── tests/
-│   └── test_qnormuon.py
-└── experiments/
-    ├── gauge_stress.py
-    └── toy_trajectory.py
-```
+    H = ker L.
 
-## Current scope and caveats
+The quotient spectral norm is
 
-The reference implementation currently focuses on paired SwiGLU matrices
+    ||P||_Q =
+        max(||P_U||_2, ||P_D||_2).
 
-- `up_proj.weight`: `[m, n]`
-- `down_proj.weight`: `[n, m]`
+The corresponding coupled LMO is
 
-with `m >= n`.
+    maximize
+        <A_U, P_U> + <A_D, P_D>
 
-Known research items include:
+    subject to
+        ||P_U||_2 <= 1
+        ||P_D||_2 <= 1
+        L(P) = 0.
 
-- zero/near-zero neuron norms;
-- rank-deficient momentum;
-- exact conditions behind leverage-balancing existence/uniqueness;
-- approximate polar solvers;
-- mixed precision;
-- intrinsic/gauge-compatible regularization and weight decay;
-- checkpoint/state semantics;
-- distributed training;
-- full LLM benchmarks.
+Its dual is
 
-`gate_proj` is deliberately excluded from the current gauge pair because SiLU is not positively homogeneous.
+    min_lambda
+        ||A_U - diag(lambda) U||_*
+        +
+        ||A_D + diag(lambda) D||_*.
+
+In the smooth full-column-rank regime, dual stationarity is exactly the
+horizontal condition.
+
+At deficient rank, primal recovery is a joint subgradient problem and separate
+partial polars are not generally sufficient.
+
+## Theory documents
+
+Read the theory in this order:
+
+1. `docs/QUOTIENT_SPECTRAL_GEOMETRY.md`
+2. `docs/HORIZONTAL_SPECTRAL_LMO.md`
+3. `docs/DUAL_SOLVER_STUDY.md`
+4. `docs/ZERO_STRATUM_GEOMETRY.md`
+5. `docs/RANK_DEFICIENT_THEORY.md`
+6. `docs/THEORY_AUDIT.md`
+7. `docs/QNORMUON_THEORY.md`
+
+Later reports supersede older statements where the design evolved.
+
+`docs/QNORMUON_THEORY.md` is the original research specification and should be
+treated as historical context rather than the final current contract.
+
+## Reference implementations
+
+Research/reference implementations live under `experiments/`, including:
+
+- `experiments/dual_solver.py`
+- `experiments/horizontal_spectral.py`
+- `experiments/quotient_spectral.py`
+- `experiments/rank_deficient.py`
+- `experiments/zero_stratum.py`
+
+Production code belongs under `qnormuon/`.
+
+## Tests
+
+Run the full suite with:
+
+    python -m pytest -q
+
+The mathematical suite contains adversarial tests for:
+
+- positive gauge equivariance;
+- canonicalization;
+- quotient geometry;
+- rank-deficient residuals;
+- zero momentum;
+- horizontal spectral optimization;
+- nuclear-norm duality;
+- primal-dual certification;
+- Newton-CG derivatives;
+- solver fallbacks;
+- finite-precision behavior.
+
+Do not remove failing adversarial tests merely to make a redesign pass.
+
+## Numerical solver
+
+The leading research solver for production-v0 is a warm-started,
+row-whitened Newton-CG method applied to the dual problem.
+
+A small fixed iteration budget is only an initial budget.
+
+A returned step must be accepted using numerical diagnostics such as:
+
+- primal-dual gap;
+- horizontal residual;
+- spectral feasibility;
+- residual conditioning.
+
+Near rank loss, a very small objective gap does not necessarily imply an
+accurate update direction.
+
+## Zero rows
+
+The exact quotient theory currently applies to the regular domain
+
+    ||u_i|| > 0
+    ||d_i|| > 0.
+
+Exact zero-weight rows belong to a singular stratum.
+
+Production-v0 must not pretend that an absolute epsilon clamp is an exact
+extension of the theory.
+
+Neuron birth is a separate research problem and is not part of the current
+optimizer.
+
+## Training plan
+
+The next experimental stage is a small decoder-only SwiGLU Transformer.
+
+Relevant comparisons include:
+
+- AdamW;
+- Muon with a conventional optimizer for unsupported parameters;
+- historical separate-polar QNorMuon;
+- coupled K=I Quotient Spectral Optimizer.
+
+Each optimizer should receive its own learning-rate sweep.
+
+Important measurements include optimization quality, wall-clock cost, solver
+iterations, fallback frequency, primal-dual gap, horizontal residual and GPU
+memory usage.
+
+## Compute environment
+
+GPU experiments are intended to run on the Lagrange cluster through SLURM.
+
+Operational and infrastructure requirements are documented in `AGENTS.md`.
+
+Large datasets, model weights and checkpoints must already be available on
+cluster-visible storage before compute jobs are launched.
+
+Training code must not rely on implicit downloads at runtime.
+
+## Research discipline
+
+Keep separate:
+
+- mathematical theorem;
+- numerical verification;
+- toy experiment;
+- tiny-model result;
+- large-scale empirical result;
+- conjecture.
+
+Do not claim superiority over existing optimizers without experimental evidence.
