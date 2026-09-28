@@ -1,0 +1,48 @@
+lagrange0
+2026-09-28T18:56:58+02:00
+JOB=28904 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Mon Sep 28 18:56:58 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   37C    P0             94W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+OUTPUT /home/prignano/qnormuon-runs/tiny-transformer/precision-28904-mini
+STEP 0 loss 7.010502815246582 solve_seconds 4.192960947751999 newton [4, 4, 4, 4, 4, 4]
+STEP 1 loss 6.866504669189453 solve_seconds 4.360035754740238 newton [4, 4, 5, 4, 4, 5]
+Traceback (most recent call last):
+  File "/home/prignano/qnormuon/cluster/training_solver_diagnosis.py", line 325, in <module>
+    if __name__=='__main__':main()
+  File "/home/prignano/qnormuon/cluster/training_solver_diagnosis.py", line 322, in main
+    else:mini(c,out,args.tolerance)
+  File "/home/prignano/qnormuon/cluster/training_solver_diagnosis.py", line 293, in mini
+    stats=train_step(model,opts,train,c,step);signal.alarm(0)
+  File "/home/prignano/qnormuon/benchmarks/tiny_transformer.py", line 293, in train_step
+    synchronize(model);optimizer_start=time.perf_counter();opts.step();synchronize(model)
+  File "/home/prignano/qnormuon/benchmarks/tiny_transformer.py", line 211, in step
+    for o in self.all:o.step()
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/optim/optimizer.py", line 526, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/qnormuon/optimizer.py", line 121, in step
+    result = solve_coupled(u, d, torch.stack((mu, md)), config=config,
+  File "/home/prignano/qnormuon/cluster/training_solver_diagnosis.py", line 287, in solver
+    raise RuntimeError('fp64 diagnostic failed: '+r.reason)
+RuntimeError: fp64 diagnostic failed: line_search_failed
