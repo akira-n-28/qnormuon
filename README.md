@@ -17,6 +17,11 @@ problem on the horizontal tangent space of the quotient.
 
 This is an active research project.
 
+The coupled production-v0 API is `QuotientSpectralOptimizer` with explicitly
+named `SwiGLUPair` registration. See [production-v0](docs/PRODUCTION_V0.md)
+for usage, certification, precision, fallback limitations, and H100 validation.
+The separate-polar `QNorMuon` API remains historical.
+
 The current production-v0 candidate combines:
 
 - balanced gauge-canonical coordinates;

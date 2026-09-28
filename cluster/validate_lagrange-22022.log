@@ -1,0 +1,341 @@
+
+## Identity and allocation
+
+$ hostname
+lagrange0
+[exit=0]
+
+$ date --iso-8601=seconds
+2026-09-25T16:44:58+02:00
+[exit=0]
+SLURM_JOB_ID=22022
+SLURM_JOB_NODELIST=lagrange0
+CUDA_VISIBLE_DEVICES=0
+SLURM_JOB_GPUS=0
+SLURM_CPUS_PER_TASK=1
+SLURM_CPUS_ON_NODE=2
+SLURM_MEM_PER_NODE=2048
+SLURM_SUBMIT_DIR=/home/prignano/qnormuon
+
+$ scontrol show job 22022
+JobId=22022 JobName=qso-env-validation
+   UserId=prignano(1021) GroupId=prignano(1021) MCS_label=N/A
+   Priority=1 Nice=0 Account=castelnuovo QOS=castelnuovo_qos
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A
+   SubmitTime=2026-09-25T16:44:58 EligibleTime=2026-09-25T16:44:58
+   AccrueTime=2026-09-25T16:44:58
+   StartTime=2026-09-25T16:44:58 EndTime=2026-09-25T16:49:58 Deadline=N/A
+   PreemptEligibleTime=2026-09-25T16:44:58 PreemptTime=None
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-25T16:44:58 Scheduler=Main
+   Partition=mat AllocNode:Sid=lagrangectl:1194850
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=lagrange0
+   BatchHost=lagrange0
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=1,mem=2G,node=1,billing=1,gres/gpu=1
+   AllocTRES=cpu=2,mem=2G,node=1,billing=2,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=1 MinMemoryNode=2G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/prignano/qnormuon/cluster/validate_lagrange.sbatch
+   WorkDir=/home/prignano/qnormuon
+   StdErr=/home/prignano/qnormuon/cluster/validate_lagrange-22022.log
+   StdIn=/dev/null
+   StdOut=/home/prignano/qnormuon/cluster/validate_lagrange-22022.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:1
+   
+
+[exit=0]
+
+## GPU inventory (management visibility may exceed allocation)
+
+$ nvidia-smi
+Fri Sep 25 16:44:58 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   42C    P0             66W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+[exit=0]
+
+$ nvidia-smi --query-gpu=index\,uuid\,name\,memory.total\,driver_version --format=csv
+index, uuid, name, memory.total [MiB], driver_version
+0, GPU-23fa2f27-82fd-0d5c-540f-29ab2bef077a, NVIDIA H100 NVL, 95830 MiB, 570.211.01
+[exit=0]
+
+## CPU and RAM visibility (host totals are not allocation limits)
+
+$ nproc
+1
+[exit=0]
+
+$ nproc --all
+96
+[exit=0]
+
+$ free -h
+               total        used        free      shared  buff/cache   available
+Mem:           755Gi        22Gi       134Gi        48Mi       604Gi       732Gi
+Swap:           15Gi       7.8Mi        15Gi
+[exit=0]
+
+$ bash -c grep\ -E\ \"Cpus_allowed_list\|Mems_allowed_list\"\ /proc/self/status\;\ cat\ /proc/self/cgroup
+Cpus_allowed_list:	24,72
+Mems_allowed_list:	0-1
+0::/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/task_0
+[exit=0]
+
+$ python3 -B -
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/task_0/memory.max: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/task_0/memory.high: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/task_0/cpuset.cpus.effective: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/task_0/cpuset.cpus: 
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/memory.max: 2147483648
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/memory.high: 2147483648
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/cpuset.cpus.effective: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/user/cpuset.cpus: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/memory.max: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/memory.high: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/cpuset.cpus.effective: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/step_batch/cpuset.cpus: 
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/memory.max: 2147483648
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/memory.high: 2147483648
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/cpuset.cpus.effective: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/job_22022/cpuset.cpus: 24,72
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/memory.max: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/memory.high: max
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/cpuset.cpus.effective: 0-95
+/sys/fs/cgroup/system.slice/lagrange0_slurmstepd.scope/cpuset.cpus: 
+/sys/fs/cgroup/system.slice/memory.max: max
+/sys/fs/cgroup/system.slice/memory.high: max
+/sys/fs/cgroup/system.slice/cpuset.cpus.effective: 0-95
+/sys/fs/cgroup/system.slice/cpuset.cpus: 
+/sys/fs/cgroup/cpuset.cpus.effective: 0-95
+[exit=0]
+
+## Project and frontend-created file
+
+$ pwd
+/home/prignano/qnormuon
+[exit=0]
+
+$ ls -ld /home/prignano/qnormuon /home/prignano/qnormuon/AGENTS.md /home/prignano/qnormuon/pyproject.toml
+drwxrwxr-x 8 prignano prignano  4096 Sep 25 16:43 /home/prignano/qnormuon
+-rw-rw-r-- 1 prignano prignano 23157 Sep 25 16:18 /home/prignano/qnormuon/AGENTS.md
+-rw-rw-r-- 1 prignano prignano   453 Sep 25 16:18 /home/prignano/qnormuon/pyproject.toml
+[exit=0]
+
+$ cat /home/prignano/qnormuon/cluster/frontend_visibility_probe.txt
+Created on frontend: lagrangectl
+UTC: 2026-09-25T14:44:37.051698+00:00
+Token: fd580300-6d0d-4645-8e52-3de9107eee64
+Project: /home/prignano/qnormuon
+[exit=0]
+
+$ sha256sum /home/prignano/qnormuon/cluster/frontend_visibility_probe.txt
+3826488af34796e6fdf3a62dc77eeb0073469593887c55a6aac73b63faf0c0a8  /home/prignano/qnormuon/cluster/frontend_visibility_probe.txt
+[exit=0]
+
+$ sha256sum /home/prignano/qnormuon/cluster/validate_lagrange.sbatch
+4f0f74a003d957035abd25ed78a50dcfffe88e6a8ac251c7c0f38517d24b1f18  /home/prignano/qnormuon/cluster/validate_lagrange.sbatch
+[exit=0]
+
+## Filesystems and quota queries
+
+$ df -h /home /
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+/dev/sda4                   200G   94G  107G  47% /
+[exit=0]
+
+$ df -hT
+Filesystem                    Type            Size  Used Avail Use% Mounted on
+tmpfs                         tmpfs            76G   27M   76G   1% /run
+efivarfs                      efivarfs        128K   82K   42K  67% /sys/firmware/efi/efivars
+/dev/sda4                     xfs             200G   94G  107G  47% /
+tmpfs                         tmpfs           378G  556K  378G   1% /dev/shm
+tmpfs                         tmpfs           5.0M     0  5.0M   0% /run/lock
+/dev/mapper/vg--data-lv--data xfs              14T  1.8T   13T  13% /lagrangeGFS
+/dev/sda2                     ext4            2.0G  195M  1.6G  11% /boot
+/dev/sda1                     vfat            1.1G  6.2M  1.1G   1% /boot/efi
+10.50.19.60:/lagrange_vol0    fuse.glusterfs   14T  1.9T   12T  14% /home
+[exit=0]
+
+$ df -i /home /
+Filesystem                     Inodes   IUsed      IFree IUse% Mounted on
+10.50.19.60:/lagrange_vol0 1477323520 5345269 1471978251    1% /home
+/dev/sda4                   104857600 1073295  103784305    2% /
+[exit=0]
+
+$ findmnt -T /home
+TARGET SOURCE                     FSTYPE         OPTIONS
+/home  10.50.19.60:/lagrange_vol0 fuse.glusterfs rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,max_read=131072
+[exit=0]
+
+$ findmnt -T /
+TARGET SOURCE    FSTYPE OPTIONS
+/      /dev/sda4 xfs    rw,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota
+[exit=0]
+
+$ ls -ld /scratch /data /datasets /checkpoints
+ls: cannot access '/scratch': No such file or directory
+ls: cannot access '/data': No such file or directory
+ls: cannot access '/datasets': No such file or directory
+ls: cannot access '/checkpoints': No such file or directory
+[exit=2]
+quota command unavailable
+QSO_DATA_ROOT=<unset>
+QSO_OUTPUT_ROOT=<unset>
+QSO_CACHE_ROOT=<unset>
+QSO_CHECKPOINT_ROOT=<unset>
+
+## Environment and module systems
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: module: not found
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: conda: not found
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: micromamba: not found
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+uv is /home/prignano/.local/bin/uv
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: apptainer: not found
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: singularity: not found
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: nvcc: not found
+/var/lib/slurm/slurmd/job22022/slurm_script: line 99: type: python: not found
+python3 is /usr/bin/python3
+python3 is /bin/python3
+module unavailable, including standard initialization paths
+
+$ uv --version
+uv 0.10.11
+[exit=0]
+
+## CUDA tools and runtime libraries
+
+$ nvcc --version
+timeout: failed to run command ‘nvcc’: No such file or directory
+[exit=127]
+
+$ /usr/local/cuda/bin/nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Thu_Sep_12_02:18:05_PDT_2024
+Cuda compilation tools, release 12.6, V12.6.77
+Build cuda_12.6.r12.6/compiler.34841621_0
+[exit=0]
+
+$ /usr/local/cuda-12.6/bin/nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Thu_Sep_12_02:18:05_PDT_2024
+Cuda compilation tools, release 12.6, V12.6.77
+Build cuda_12.6.r12.6/compiler.34841621_0
+[exit=0]
+
+$ bash -c ldconfig\ -p\ 2\>/dev/null\ \|\ grep\ -E\ \"libcuda\\.so\|libcudart\\.so\|libnvidia-ml\\.so\"
+	libnvidia-ml.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libnvidia-ml.so.1
+	libnvidia-ml.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libnvidia-ml.so
+	libcudart.so.12 (libc6,x86-64) => /usr/local/cuda-12.6/targets/x86_64-linux/lib/libcudart.so.12
+	libcudart.so (libc6,x86-64) => /usr/local/cuda-12.6/targets/x86_64-linux/lib/libcudart.so
+	libcuda.so.1 (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so.1
+	libcuda.so (libc6,x86-64) => /lib/x86_64-linux-gnu/libcuda.so
+[exit=0]
+
+## Existing Python environments and package imports
+
+$ python3 -B -
+
+INTERPRETER: /usr/bin/python3
+executable: /usr/bin/python3
+version: 3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]
+prefix: /usr
+torch module: None
+numpy module: None
+pytest module: None
+exit: 0
+
+INTERPRETER: /home/prignano/.venv/bin/python
+executable: /home/prignano/.venv/bin/python
+version: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+prefix: /home/prignano/.venv
+torch module: None
+numpy module: None
+pytest module: None
+exit: 0
+
+INTERPRETER: /home/prignano/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3
+executable: /home/prignano/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu/bin/python3
+version: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+prefix: /home/prignano/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu
+torch module: None
+numpy module: None
+pytest module: None
+exit: 0
+[exit=0]
+
+## Completion
+Frontend probe readable: 1
+2026-09-25T16:45:00+02:00

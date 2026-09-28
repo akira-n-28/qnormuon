@@ -1,4 +1,7 @@
-"""QNorMuon research prototype."""
+"""Coupled production-v0 and preserved historical QNorMuon prototype."""
+
+from .coupled_solver import SolverConfig, solve_coupled
+from .optimizer import QuotientSpectralOptimizer, SwiGLUPair, regular_canonicalize
 
 from .core import (
     PairDiagnostics,
@@ -14,6 +17,8 @@ from .core import (
 )
 
 __all__ = [
+    "SolverConfig", "solve_coupled", "QuotientSpectralOptimizer",
+    "SwiGLUPair", "regular_canonicalize",
     "PairDiagnostics",
     "QNorMuon",
     "balance_shared_metric",

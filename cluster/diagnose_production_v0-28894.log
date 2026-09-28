@@ -1,0 +1,79 @@
+HOSTNAME=lagrange0
+2026-09-28T13:58:03+02:00
+SLURM_JOB_ID=28894
+SLURM_JOB_NODELIST=lagrange0
+CUDA_VISIBLE_DEVICES=0
+SLURM_CPUS_PER_TASK=4
+SLURM_MEM_PER_NODE=16384
+PYTHONPATH=/home/prignano/qnormuon/.qso-tools/network-guard:/home/prignano/qnormuon/.qso-tools/pytest-site:/home/prignano/qnormuon
+pwd=/home/prignano/qnormuon
+DATASET_PATH=not applicable; TOKENIZER_PATH=not applicable; CHECKPOINT_PATH=not applicable
+OUTPUT_PATH=/home/prignano/qnormuon/cluster/diagnose_production_v0-28894.log
+RANDOM_SEED=not applicable; MODEL_CONFIG=not applicable; OPTIMIZER_CONFIG=reference suite; SOLVER_CONFIG=test-defined
+NETWORK_AUDIT_LOG=/home/prignano/qnormuon/cluster/diagnose_production_v0_network-28894.log
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Mon Sep 28 13:58:03 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   34C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+NETWORK_GUARD: /home/prignano/qnormuon/.qso-tools/network-guard/sitecustomize.py
+PYTHON_EXECUTABLE: /home/prignano/modded-nanogpt/.venv/bin/python
+PYTHON_VERSION: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+TORCH_VERSION: 2.10.0+cu128
+TORCH_CUDA_BUILD: 12.8
+NUMPY_VERSION: 2.2.6
+PYTEST_VERSION: 9.0.3
+PYTEST_PATH: /home/prignano/qnormuon/.qso-tools/pytest-site/pytest/__init__.py
+TORCH_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/__init__.py
+NUMPY_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/numpy/__init__.py
+CUDA_AVAILABLE: True
+GPU_NAME: NVIDIA H100 NVL
+GPU_PROPERTIES: _CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=23fa2f27-82fd-0d5c-540f-29ab2bef077a, pci_bus_id=1, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)
+SPECTRAL_SANITY torch.float64 PASS reconstruction=1.91618504e-15 polar_gram_max=5.55111512e-15
+SPECTRAL_SANITY torch.float32 PASS reconstruction=1.24045133e-06 polar_gram_max=1.93782005e-06
+SPECTRAL_SANITY torch.bfloat16 EXPECTED_FAILURE NotImplementedError: "svd_cuda_gesvdjBatched" not implemented for 'BFloat16'
+BF16_POLICY: promote SVD/polar work to at least float32 before calling torch.linalg.svd
+
+COLLECTION_BEGIN
+tests/test_dual_solver.py: 25
+tests/test_horizontal_spectral.py: 28
+tests/test_production_v0.py: 32
+tests/test_qnormuon.py: 5
+tests/test_rank_deficient.py: 30
+tests/test_theory_audit.py: 29
+tests/test_zero_stratum.py: 33
+
+COLLECTION_EXIT_CODE=0 COLLECTION_WALL_SECONDS=9
+
+FULL_PYTEST_BEGIN: python -m pytest -q
+fp32-native-901 oracle residual spectrum [[4.75520144253958, 2.3257290276487237, 5.425797946449216e-11], [3.9387883396805834, 2.798643124232668, 1.999440590386525]]
+fp32-native-901 research reason line_search_failed fallback True min_rcond 0.00010432308772578835 gap 2.9301606580129156e-12
+last history [{'iteration': 10, 'rcond': 0.00010438644676469266, 'polar_horizontal_residual': 0.09399491548538208, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.85046284868929e-17, 'spectral_norms': [1.0, 0.9964575811216558], 'spectral_excess': 0.0, 'primal_objective': 15.455428136617858, 'dual_objective': 15.817978386097655, 'signed_gap': 0.3625502494797974, 'normalized_gap': 0.02292013812576967, 'signed_normalized_gap': 0.02292013812576967}, {'iteration': 11, 'rcond': 0.00010438587196404114, 'polar_horizontal_residual': 0.09399746358394623, 'horizontal_residual': 1.6653345369377348e-16, 'normalized_horizontal_residual': 1.1775692874771028e-16, 'spectral_norms': [1.0, 0.9964569100098212], 'spectral_excess': 0.0, 'primal_objective': 15.455426137245187, 'dual_objective': 15.817978382307743, 'signed_gap': 0.362552245062556, 'normalized_gap': 0.02292026429041446, 'signed_normalized_gap': 0.02292026429041446}, {'iteration': 12, 'rcond': 0.00010432308772578835, 'polar_horizontal_residual': 0.09380030632019043, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.850462151991101e-17, 'spectral_norms': [1.0, 0.996444345053422], 'spectral_excess': 0.0, 'primal_objective': 15.456263583418004, 'dual_objective': 15.817978368873508, 'signed_gap': 0.3617147854555043, 'normalized_gap': 0.022867320780213213, 'signed_normalized_gap': 0.022867320780213213}]
+fp32-native-901 production reason line_search_failed fallback True min_rcond 0.00010432308772578835 gap 2.9301606580129156e-12
+last history [{'iteration': 10, 'rcond': 0.00010438644676469266, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.09399491548538208, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.85046284868929e-17, 'spectral_norms': [1.0, 0.9964575811216558], 'spectral_excess': 0.0, 'primal_objective': 15.455428136617858, 'dual_objective': 15.817978386097655, 'signed_gap': 0.3625502494797974, 'normalized_gap': 0.02292013812576967, 'signed_normalized_gap': 0.02292013812576967}, {'iteration': 11, 'rcond': 0.00010438587196404114, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.09399746358394623, 'horizontal_residual': 1.6653345369377348e-16, 'normalized_horizontal_residual': 1.1775692874771028e-16, 'spectral_norms': [1.0, 0.9964569100098212], 'spectral_excess': 0.0, 'primal_objective': 15.455426137245187, 'dual_objective': 15.817978382307743, 'signed_gap': 0.362552245062556, 'normalized_gap': 0.02292026429041446, 'signed_normalized_gap': 0.02292026429041446}, {'iteration': 12, 'rcond': 0.00010432308772578835, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.09380030632019043, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.850462151991101e-17, 'spectral_norms': [1.0, 0.996444345053422], 'spectral_excess': 0.0, 'primal_objective': 15.456263583418004, 'dual_objective': 15.817978368873508, 'signed_gap': 0.3617147854555043, 'normalized_gap': 0.022867320780213213, 'signed_normalized_gap': 0.022867320780213213}]
+fractional oracle residual spectrum [[1.0086940318157493, 0.9999999999999499], [0.9913059681842505, 1.0053069487980792e-13]]
+fractional research reason gap_stagnation fallback True min_rcond 1.3875392341278787e-08 gap 5.6695389124190376e-14
+last history [{'iteration': 11, 'rcond': 5.001928279772698e-08, 'polar_horizontal_residual': 0.500000019523247, 'horizontal_residual': 0.0, 'normalized_horizontal_residual': 0.0, 'spectral_norms': [1.0, 0.8382226345378984], 'spectral_excess': 0.0, 'primal_objective': 2.619445737022139, 'dual_objective': 3.0000000256814, 'signed_gap': 0.380554288659261, 'normalized_gap': 0.12685142846717956, 'signed_normalized_gap': 0.12685142846717956}, {'iteration': 12, 'rcond': 2.6398803398078434e-08, 'polar_horizontal_residual': 0.5000000103038333, 'horizontal_residual': 0.0, 'normalized_horizontal_residual': 0.0, 'spectral_norms': [1.0, 0.8382226363468679], 'spectral_excess': 0.0, 'primal_objective': 2.6194457407431884, 'dual_objective': 3.000000013553937, 'signed_gap': 0.3805542728107487, 'normalized_gap': 0.1268514236971375, 'signed_normalized_gap': 0.1268514236971375}, {'iteration': 13, 'rcond': 1.3875392341278787e-08, 'polar_horizontal_residual': 0.5000000054157656, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.850462293418875e-17, 'spectral_norms': [1.0, 0.8382226373059707], 'spectral_excess': 0.0, 'primal_objective': 2.6194457427160627, 'dual_objective': 3.0000000071240422, 'signed_gap': 0.38055426440797957, 'normalized_gap': 0.1268514211680949, 'signed_normalized_gap': 0.1268514211680949}]
+fractional production reason gap_stagnation fallback True min_rcond 1.3875392341278787e-08 gap 5.6695389124190376e-14
+last history [{'iteration': 11, 'rcond': 5.001928279772698e-08, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.500000019523247, 'horizontal_residual': 0.0, 'normalized_horizontal_residual': 0.0, 'spectral_norms': [1.0, 0.8382226345378984], 'spectral_excess': 0.0, 'primal_objective': 2.619445737022139, 'dual_objective': 3.0000000256814, 'signed_gap': 0.380554288659261, 'normalized_gap': 0.12685142846717956, 'signed_normalized_gap': 0.12685142846717956}, {'iteration': 12, 'rcond': 2.6398803398078434e-08, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.5000000103038333, 'horizontal_residual': 0.0, 'normalized_horizontal_residual': 0.0, 'spectral_norms': [1.0, 0.8382226363468679], 'spectral_excess': 0.0, 'primal_objective': 2.6194457407431884, 'dual_objective': 3.000000013553937, 'signed_gap': 0.3805542728107487, 'normalized_gap': 0.1268514236971375, 'signed_normalized_gap': 0.1268514236971375}, {'iteration': 13, 'rcond': 1.3875392341278787e-08, 'extended_initial_budget': True, 'polar_horizontal_residual': 0.5000000054157656, 'horizontal_residual': 1.1102230246251565e-16, 'normalized_horizontal_residual': 7.850462293418875e-17, 'spectral_norms': [1.0, 0.8382226373059707], 'spectral_excess': 0.0, 'primal_objective': 2.6194457427160627, 'dual_objective': 3.0000000071240422, 'signed_gap': 0.38055426440797957, 'normalized_gap': 0.1268514211680949, 'signed_normalized_gap': 0.1268514211680949}]
+PYTEST_EXIT_CODE=0 PYTEST_WALL_SECONDS=8
+NETWORK_AUDIT=NO_PYTHON_OUTBOUND_ATTEMPT_OBSERVED
+2026-09-28T13:58:29+02:00
+JOB_RESULT=PASS

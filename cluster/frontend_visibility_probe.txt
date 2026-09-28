@@ -1,0 +1,4 @@
+Created on frontend: lagrangectl
+UTC: 2026-09-25T14:44:37.051698+00:00
+Token: fd580300-6d0d-4645-8e52-3de9107eee64
+Project: /home/prignano/qnormuon

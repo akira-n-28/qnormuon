@@ -1,0 +1,1167 @@
+[1mdiff --git a/cluster/frontend_visibility_probe.txt b/cluster/frontend_visibility_probe.txt[m
+[1mnew file mode 100644[m
+[1mindex 0000000..efb6167[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/frontend_visibility_probe.txt[m
+[36m@@ -0,0 +1,4 @@[m
+[32m+[m[32mCreated on frontend: lagrangectl[m
+[32m+[m[32mUTC: 2026-09-25T14:44:37.051698+00:00[m
+[32m+[m[32mToken: fd580300-6d0d-4645-8e52-3de9107eee64[m
+[32m+[m[32mProject: /home/prignano/qnormuon[m
+[1mdiff --git a/cluster/install_qnormuon_env.sbatch b/cluster/install_qnormuon_env.sbatch[m
+[1mnew file mode 100644[m
+[1mindex 0000000..03a539d[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/install_qnormuon_env.sbatch[m
+[36m@@ -0,0 +1,194 @@[m
+[32m+[m[32m#!/bin/bash[m
+[32m+[m[32m# Submit only after staging the complete wheelhouse and assessing quota.[m
+[32m+[m[32m#SBATCH --job-name=qso-offline-install[m
+[32m+[m[32m#SBATCH --partition=mat[m
+[32m+[m[32m#SBATCH --nodes=1[m
+[32m+[m[32m#SBATCH --ntasks=1[m
+[32m+[m[32m#SBATCH --cpus-per-task=2[m
+[32m+[m[32m#SBATCH --mem=16G[m
+[32m+[m[32m#SBATCH --time=00:20:00[m
+[32m+[m[32m#SBATCH --output=cluster/install_qnormuon_env-%j.log[m
+[32m+[m[32m#SBATCH --error=cluster/install_qnormuon_env-%j.log[m
+[32m+[m
+[32m+[m[32mset -euo pipefail[m
+[32m+[m[32mfail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }[m
+[32m+[m[32m[[ ${SLURM_JOB_ID:-} =~ ^[0-9]+$ ]] || fail 'Submit this script with sbatch.'[m
+[32m+[m[32mgrep -Eq "/job_${SLURM_JOB_ID}(/|$)" /proc/self/cgroup || fail 'Not inside the SLURM job cgroup; refusing frontend execution.'[m
+[32m+[m[32m[[ $(hostname -s) != lagrangectl ]] || fail 'Installation on the frontend is forbidden.'[m
+[32m+[m
+[32m+[m[32mexport QSO_PYTHON=/home/prignano/.venv/bin/python[m
+[32m+[m[32mexport QSO_ENV=/home/prignano/.venv[m
+[32m+[m[32m: "${QSO_WHEELHOUSE:?Set QSO_WHEELHOUSE to the absolute shared /home wheelhouse directory}"[m
+[32m+[m[32m[[ "$QSO_WHEELHOUSE" == /home/* && -d "$QSO_WHEELHOUSE" ]] || fail "Wheelhouse absent or not an absolute /home directory: $QSO_WHEELHOUSE"[m
+[32m+[m[32mQSO_WHEELHOUSE=$(realpath -e -- "$QSO_WHEELHOUSE")[m
+[32m+[m[32mexport QSO_WHEELHOUSE[m
+[32m+[m[32m[[ "$QSO_WHEELHOUSE" == /home/* ]] || fail 'Wheelhouse resolves outside /home.'[m
+[32m+[m[32m[[ -x "$QSO_PYTHON" ]] || fail "Documented interpreter missing: $QSO_PYTHON"[m
+[32m+[m
+[32m+[m[32m# Discard inherited pip options, including extra indexes, remote find-links,[m
+[32m+[m[32m# constraints, and target directories. /dev/null disables all pip config files.[m
+[32m+[m[32mfor key in ${!PIP_@}; do unset "$key"; done[m
+[32m+[m[32mexport PIP_CONFIG_FILE=/dev/null PIP_NO_INDEX=1 PIP_DISABLE_PIP_VERSION_CHECK=1[m
+[32m+[m[32mexport PIP_NO_INPUT=1 PYTHONDONTWRITEBYTECODE=1[m
+[32m+[m[32mexport XDG_CACHE_HOME=/home/prignano/.cache/qnormuon[m
+[32m+[m[32mexport PIP_CACHE_DIR=/home/prignano/.cache/qnormuon/pip[m
+[32m+[m[32mexport TMPDIR=/home/prignano/.cache/qnormuon/tmp[m
+[32m+[m[32mexport TMP="$TMPDIR" TEMP="$TMPDIR"[m
+[32m+[m[32mexport OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2[m
+[32m+[m
+[32m+[m[32m# Check real paths before creating cache directories (no /dev/shm symlinks).[m
+[32m+[m[32mfor path in "$QSO_ENV" "$PIP_CACHE_DIR" "$TMPDIR"; do[m
+[32m+[m[32m    resolved=$(realpath -m -- "$path")[m
+[32m+[m[32m    [[ "$resolved" == /home/* ]] || fail "Storage path resolves outside /home: $path"[m
+[32m+[m[32mdone[m
+[32m+[m[32mmkdir -p "$PIP_CACHE_DIR" "$TMPDIR"[m
+[32m+[m[32mfor path in "$QSO_ENV" "$QSO_WHEELHOUSE" "$PIP_CACHE_DIR" "$TMPDIR"; do[m
+[32m+[m[32m    [[ $(findmnt -n -o TARGET -T "$path") == /home ]] || fail "Path is not on the shared /home mount: $path"[m
+[32m+[m[32mdone[m
+[32m+[m[32mexec 9>"$XDG_CACHE_HOME/environment.lock"[m
+[32m+[m[32mflock -n 9 || fail 'Another environment install or smoke job holds the environment lock.'[m
+[32m+[m[32mtrap 'printf "ERROR: offline installation failed at line %s; inspect this log. No online fallback.\n" "$LINENO" >&2' ERR[m
+[32m+[m
+[32m+[m[32mhostname[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[32m+[m[32mprintf 'SLURM_JOB_ID=%s SLURM_JOB_NODELIST=%s CPUS=%s MEMORY_MB=%s\n' "$SLURM_JOB_ID" "${SLURM_JOB_NODELIST:-}" "${SLURM_CPUS_PER_TASK:-}" "${SLURM_MEM_PER_NODE:-}"[m
+[32m+[m[32mpwd[m
+[32m+[m[32mprintf 'Python=%s\nWheelhouse=%s\nCache=%s\nTemp=%s\n' "$QSO_PYTHON" "$QSO_WHEELHOUSE" "$PIP_CACHE_DIR" "$TMPDIR"[m
+[32m+[m[32mdf -h /home[m
+[32m+[m[32mdu -sh -- "$QSO_WHEELHOUSE"[m
+[32m+[m[32mprintf 'Quota remains an external capacity prerequisite; df is not a personal quota.\n'[m
+[32m+[m
+[32m+[m[32m# Validate the complete, flat wheelhouse using stdlib only. Hash every wheel[m
+[32m+[m[32m# before importing the bootstrap pip. No package or project code runs here.[m
+[32m+[m[32m"$QSO_PYTHON" -I - <<'PY'[m
+[32m+[m[32mimport email, hashlib, importlib.metadata, os, pathlib, re, sys, zipfile[m
+[32m+[m
+[32m+[m[32mdef fail(message): raise SystemExit('ERROR: ' + message)[m
+[32m+[m[32mdef canon(name): return re.sub(r'[-_.]+', '-', name).lower()[m
+[32m+[m[32mdef digest(path):[m
+[32m+[m[32m    h = hashlib.sha256()[m
+[32m+[m[32m    with path.open('rb') as f:[m
+[32m+[m[32m        for chunk in iter(lambda: f.read(1024 * 1024), b''): h.update(chunk)[m
+[32m+[m[32m    return h.hexdigest()[m
+[32m+[m
+[32m+[m[32mif sys.version_info[:3] != (3, 10, 20) or sys.prefix != '/home/prignano/.venv':[m
+[32m+[m[32m    fail(f'Expected documented Python 3.10.20 venv; got {sys.version} at {sys.prefix}')[m
+[32m+[m[32mroot = pathlib.Path(os.environ['QSO_WHEELHOUSE'])[m
+[32m+[m[32mlock = root / 'requirements.lock'[m
+[32m+[m[32mif not lock.is_file() or lock.is_symlink(): fail('Missing regular requirements.lock in wheelhouse')[m
+[32m+[m[32malias = root / 'requirements-offline.txt'[m
+[32m+[m[32mif alias.exists():[m
+[32m+[m[32m    if not alias.is_file() or alias.is_symlink() or alias.read_bytes() != lock.read_bytes():[m
+[32m+[m[32m        fail('requirements-offline.txt must be a regular, identical copy of requirements.lock')[m
+[32m+[m[32mpins = {}[m
+[32m+[m[32mpattern = r'([A-Za-z0-9][A-Za-z0-9_.-]*)==([A-Za-z0-9][A-Za-z0-9.!+_-]*)\s+--hash=sha256:([0-9a-fA-F]{64})'[m
+[32m+[m[32mfor number, raw in enumerate(lock.read_text().splitlines(), 1):[m
+[32m+[m[32m    line = raw.strip()[m
+[32m+[m[32m    if not line or line.startswith('#'): continue[m
+[32m+[m[32m    match = re.fullmatch(pattern, line)[m
+[32m+[m[32m    if not match: fail(f'Lock line {number}: require one name==version --hash=sha256:HEX; URLs/options/includes/continuations forbidden')[m
+[32m+[m[32m    name, version, sha = match.groups()[m
+[32m+[m[32m    name = canon(name)[m
+[32m+[m[32m    if name in pins: fail(f'Duplicate lock entry: {name}')[m
+[32m+[m[32m    pins[name] = (version, sha.lower())[m
+[32m+[m[32mrequired = {'pip':'25.3', 'torch':'2.10.0+cu126', 'numpy':'2.2.6', 'pytest':'9.0.2'}[m
+[32m+[m[32mfor name, version in required.items():[m
+[32m+[m[32m    if name not in pins or pins[name][0] != version: fail(f'Lock must require {name}=={version}')[m
+[32m+[m[32mprint('Required packages, including all locked transitive dependencies:', flush=True)[m
+[32m+[m[32mfor name, (version, _) in sorted(pins.items()): print(f'  {name}=={version}', flush=True)[m
+[32m+[m
+[32m+[m[32mwheels, hashes = {}, {}[m
+[32m+[m[32mfor path in sorted(root.iterdir()):[m
+[32m+[m[32m    if path.name in ('requirements.lock', 'requirements-offline.txt', 'SHA256SUMS'): continue[m
+[32m+[m[32m    if path.suffix != '.whl' or not path.is_file() or path.is_symlink():[m
+[32m+[m[32m        fail(f'Wheelhouse must contain only regular wheels, requirements files, and optional SHA256SUMS: {path.name}')[m
+[32m+[m[32m    with zipfile.ZipFile(path) as z:[m
+[32m+[m[32m        entries = [i for i in z.infolist() if i.filename.endswith('.dist-info/METADATA')][m
+[32m+[m[32m        if len(entries) != 1 or entries[0].file_size > 1024 * 1024: fail(f'Invalid METADATA in {path.name}')[m
+[32m+[m[32m        meta = email.message_from_bytes(z.read(entries[0]))[m
+[32m+[m[32m    name, version = canon(meta['Name']), meta['Version'][m
+[32m+[m[32m    if name in wheels: fail(f'Keep exactly one wheel per distribution: {name}')[m
+[32m+[m[32m    if name not in pins or version != pins[name][0]: fail(f'Wheel not matched by lock: {path.name}')[m
+[32m+[m[32m    for requirement in meta.get_all('Requires-Dist', []):[m
+[32m+[m[32m        if '@' in requirement or '://' in requirement:[m
+[32m+[m[32m            fail(f'Direct URL dependency forbidden in {path.name}: {requirement}')[m
+[32m+[m[32m    sha = digest(path)[m
+[32m+[m[32m    if sha != pins[name][1]: fail(f'Lock SHA256 mismatch: {path.name}')[m
+[32m+[m[32m    wheels[name], hashes[path.name] = path, sha[m
+[32m+[m[32m    print(f'WHEEL_OK {path.name} bytes={path.stat().st_size}', flush=True)[m
+[32m+[m[32mmissing = sorted(set(pins) - set(wheels))[m
+[32m+[m[32mif missing: fail('Required wheels missing: ' + ', '.join(missing))[m
+[32m+[m[32mif wheels['pip'].name != 'pip-25.3-py3-none-any.whl': fail('Expected universal bootstrap wheel pip-25.3-py3-none-any.whl')[m
+[32m+[m[32mif wheels['torch'].name != 'torch-2.10.0+cu126-cp310-cp310-manylinux_2_28_x86_64.whl':[m
+[32m+[m[32m    fail('Expected the documented CPython 3.10/Linux x86_64/cu126 torch wheel')[m
+[32m+[m
+[32m+[m[32mmanifest = root / 'SHA256SUMS'[m
+[32m+[m[32mif manifest.exists():[m
+[32m+[m[32m    if not manifest.is_file() or manifest.is_symlink(): fail('SHA256SUMS must be a regular file')[m
+[32m+[m[32m    checked = set()[m
+[32m+[m[32m    for line in manifest.read_text().splitlines():[m
+[32m+[m[32m        match = re.fullmatch(r'([0-9a-fA-F]{64}) [ *]([^/\\]+)', line)[m
+[32m+[m[32m        if not match: fail('Invalid SHA256SUMS line; use sha256sum output with plain basenames')[m
+[32m+[m[32m        sha, name = match.groups()[m
+[32m+[m[32m        if name in checked or name not in {*hashes, 'requirements.lock', 'requirements-offline.txt'}: fail(f'Unexpected/duplicate manifest entry: {name}')[m
+[32m+[m[32m        actual = hashes.get(name) or digest(root / name)[m
+[32m+[m[32m        if sha.lower() != actual: fail(f'SHA256SUMS mismatch: {name}')[m
+[32m+[m[32m        checked.add(name)[m
+[32m+[m[32m    if not set(hashes).issubset(checked): fail('SHA256SUMS must cover every wheel when present')[m
+[32m+[m[32m    print('SHA256SUMS: verified', flush=True)[m
+[32m+[m[32melse:[m
+[32m+[m[32m    print('SHA256SUMS: absent; all wheels verified against mandatory lock hashes', flush=True)[m
+[32m+[m
+[32m+[m[32m# Do not overwrite an environment that has been repurposed for other work.[m
+[32m+[m[32mfor dist in importlib.metadata.distributions():[m
+[32m+[m[32m    name = canon(dist.metadata['Name'])[m
+[32m+[m[32m    if name not in pins or dist.version != pins[name][0]:[m
+[32m+[m[32m        fail(f'Existing environment differs from lock: {name}=={dist.version}; review before changing it')[m
+[32m+[m[32mprint('Wheelhouse verification complete; pip will check compatible tags and dependency closure.', flush=True)[m
+[32m+[m[32mPY[m
+[32m+[m
+[32m+[m[32m# Run pip directly from its verified universal wheel; no ensurepip, uv, or[m
+[32m+[m[32m# network bootstrap is needed even when the target environment has no pip.[m
+[32m+[m[32moffline_pip() {[m
+[32m+[m[32m    "$QSO_PYTHON" -I - "$QSO_WHEELHOUSE/pip-25.3-py3-none-any.whl" "$@" <<'PY'[m
+[32m+[m[32mimport runpy, sys[m
+[32m+[m[32msys.path.insert(0, sys.argv.pop(1))[m
+[32m+[m[32msys.argv[0] = 'pip'[m
+[32m+[m[32mrunpy.run_module('pip', run_name='__main__')[m
+[32m+[m[32mPY[m
+[32m+[m[32m}[m
+[32m+[m[32mpip_args=(install --no-index --find-links "$QSO_WHEELHOUSE" --only-binary=:all:[m
+[32m+[m[32m    --require-hashes --disable-pip-version-check --no-input[m
+[32m+[m[32m    --cache-dir "$PIP_CACHE_DIR" -r "$QSO_WHEELHOUSE/requirements.lock")[m
+[32m+[m[32mif ! offline_pip "${pip_args[@]}" --dry-run --ignore-installed; then[m
+[32m+[m[32m    fail 'Offline dependency preflight failed: missing/incompatible wheel, incomplete lock, or conflicting versions. Installation was not started.'[m
+[32m+[m[32mfi[m
+[32m+[m
+[32m+[m[32m# A failed installation must not leave an old success marker for smoke tests.[m
+[32m+[m[32m"$QSO_PYTHON" -I - <<'PY'[m
+[32m+[m[32mfrom pathlib import Path[m
+[32m+[m[32mPath('/home/prignano/.venv/qnormuon-offline-install.json').unlink(missing_ok=True)[m
+[32m+[m[32mPY[m
+[32m+[m[32moffline_pip "${pip_args[@]}"[m
+[32m+[m[32m"$QSO_PYTHON" -I -m pip --disable-pip-version-check check[m
+[32m+[m[32m"$QSO_PYTHON" -I - <<'PY'[m
+[32m+[m[32mimport hashlib, importlib.metadata, json, os, pathlib, re, sys[m
+[32m+[m[32mroot = pathlib.Path(os.environ['QSO_WHEELHOUSE'])[m
+[32m+[m[32mversions = {re.sub(r'[-_.]+', '-', d.metadata['Name']).lower(): d.version for d in importlib.metadata.distributions()}[m
+[32m+[m[32mfor line in (root / 'requirements.lock').read_text().splitlines():[m
+[32m+[m[32m    if not line.strip() or line.lstrip().startswith('#'): continue[m
+[32m+[m[32m    name, version = line.split()[0].split('==')[m
+[32m+[m[32m    name = re.sub(r'[-_.]+', '-', name).lower()[m
+[32m+[m[32m    if versions.get(name) != version: raise SystemExit(f'ERROR: installed version mismatch: {name}')[m
+[32m+[m[32mprint('FINAL INSTALLED VERSIONS:', json.dumps(versions, sort_keys=True, indent=2))[m
+[32m+[m[32mrecord = {'python': sys.version.split()[0], 'environment': sys.prefix,[m
+[32m+[m[32m          'slurm_job_id': os.environ['SLURM_JOB_ID'], 'wheelhouse': str(root),[m
+[32m+[m[32m          'lock_sha256': hashlib.sha256((root / 'requirements.lock').read_bytes()).hexdigest(),[m
+[32m+[m[32m          'versions': versions}[m
+[32m+[m[32mmarker = pathlib.Path(sys.prefix) / 'qnormuon-offline-install.json'[m
+[32m+[m[32mtemporary = marker.with_suffix('.tmp')[m
+[32m+[m[32mtemporary.write_text(json.dumps(record, sort_keys=True, indent=2) + '\n')[m
+[32m+[m[32mtemporary.replace(marker)[m
+[32m+[m[32mprint('INSTALLATION_SUCCESS:', marker)[m
+[32m+[m[32mPY[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[1mdiff --git a/cluster/plan_python_environment-22028.log b/cluster/plan_python_environment-22028.log[m
+[1mnew file mode 100644[m
+[1mindex 0000000..636c6bc[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/plan_python_environment-22028.log[m
+[36m@@ -0,0 +1,76 @@[m
+[32m+[m[32mlagrange0[m
+[32m+[m[32m2026-09-25T16:55:09+02:00[m
+[32m+[m[32mSLURM_JOB_ID=22028[m
+[32m+[m[32mSLURM_JOB_NODELIST=lagrange0[m
+[32m+[m[32mSLURM_CPUS_PER_TASK=2[m
+[32m+[m[32mSLURM_MEM_PER_NODE=16384[m
+[32m+[m[32mCUDA_VISIBLE_DEVICES=0[m
+[32m+[m[32m/home/prignano/qnormuon[m
+[32m+[m[32mJobId=22028 JobName=qso-python-plan[m
+[32m+[m[32m   UserId=prignano(1021) GroupId=prignano(1021) MCS_label=N/A[m
+[32m+[m[32m   Priority=1 Nice=0 Account=castelnuovo QOS=castelnuovo_qos[m
+[32m+[m[32m   JobState=RUNNING Reason=None Dependency=(null)[m
+[32m+[m[32m   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0[m
+[32m+[m[32m   RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A[m
+[32m+[m[32m   SubmitTime=2026-09-25T16:55:09 EligibleTime=2026-09-25T16:55:09[m
+[32m+[m[32m   AccrueTime=2026-09-25T16:55:09[m
+[32m+[m[32m   StartTime=2026-09-25T16:55:09 EndTime=2026-09-25T17:00:09 Deadline=N/A[m
+[32m+[m[32m   PreemptEligibleTime=2026-09-25T16:55:09 PreemptTime=None[m
+[32m+[m[32m   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-25T16:55:09 Scheduler=Main[m
+[32m+[m[32m   Partition=mat AllocNode:Sid=lagrangectl:1211014[m
+[32m+[m[32m   ReqNodeList=(null) ExcNodeList=(null)[m
+[32m+[m[32m   NodeList=lagrange0[m
+[32m+[m[32m   BatchHost=lagrange0[m
+[32m+[m[32m   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*[m
+[32m+[m[32m   ReqTRES=cpu=2,mem=16G,node=1,billing=2,gres/gpu=1[m
+[32m+[m[32m   AllocTRES=cpu=2,mem=16G,node=1,billing=2,gres/gpu=1[m
+[32m+[m[32m   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*[m
+[32m+[m[32m   MinCPUsNode=2 MinMemoryNode=16G MinTmpDiskNode=0[m
+[32m+[m[32m   Features=(null) DelayBoot=00:00:00[m
+[32m+[m[32m   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)[m
+[32m+[m[32m   Command=/home/prignano/qnormuon/cluster/plan_python_environment.sbatch[m
+[32m+[m[32m   WorkDir=/home/prignano/qnormuon[m
+[32m+[m[32m   StdErr=/home/prignano/qnormuon/cluster/plan_python_environment-22028.log[m
+[32m+[m[32m   StdIn=/dev/null[m
+[32m+[m[32m   StdOut=/home/prignano/qnormuon/cluster/plan_python_environment-22028.log[m
+[32m+[m[32m   Power=[m
+[32m+[m[32m   TresPerNode=gres/gpu:1[m
+[32m+[m[32m   TresPerTask=cpu:2[m
+[32m+[m[41m   [m
+[32m+[m
+[32m+[m[32mname, memory.total [MiB], driver_version[m
+[32m+[m[32mNVIDIA H100 NVL, 95830 MiB, 570.211.01[m
+[32m+[m[32mFilesystem                  Size  Used Avail Use% Mounted on[m
+[32m+[m[32m10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home[m
+[32m+[m[32m/dev/sda4                   200G   94G  107G  47% /[m
+[32m+[m[32mFilesystem                     Inodes   IUsed      IFree IUse% Mounted on[m
+[32m+[m[32m10.50.19.60:/lagrange_vol0 1477323520 5345428 1471978092    1% /home[m
+[32m+[m[32mTARGET SOURCE                     FSTYPE         OPTIONS[m
+[32m+[m[32m/home  10.50.19.60:/lagrange_vol0 fuse.glusterfs rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,max_read=131072[m
+[32m+[m[32m/usr/local/cuda-12.6[m
+[32m+[m[32mnvcc: NVIDIA (R) Cuda compiler driver[m
+[32m+[m[32mCopyright (c) 2005-2024 NVIDIA Corporation[m
+[32m+[m[32mBuilt on Thu_Sep_12_02:18:05_PDT_2024[m
+[32m+[m[32mCuda compilation tools, release 12.6, V12.6.77[m
+[32m+[m[32mBuild cuda_12.6.r12.6/compiler.34841621_0[m
+[32m+[m[32muv 0.10.11[m
+[32m+[m[32mPython executable: /home/prignano/.venv/bin/python[m
+[32m+[m[32mPython version: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ][m
+[32m+[m[32mPrefix: /home/prignano/.venv base prefix: /home/prignano/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu[m
+[32m+[m[32mArchitecture/libc: x86_64 ('glibc', '2.39')[m
+[32m+[m[32mTLS: OpenSSL 3.5.5 27 Jan 2026[m
+[32m+[m[32mExisting distributions: [][m
+[32m+[m[32mStorage path: /home/prignano exists: True writable: True[m
+[32m+[m[32mStorage path: /home/prignano/.venv exists: True writable: True[m
+[32m+[m[32mStorage path: /home/prignano/.cache exists: True writable: True[m
+[32m+[m[32mHOME_WRITE_READ_OK: /home/prignano/.qso-storage-probe-8cnvcat4/probe[m
+[32m+[m[32mHOME_HARDLINK_OK: True[m
+[32m+[m[32mTemporary probe removed[m
+[32m+[m[32mQuota-related xattrs (absence or permission failure does not establish no quota):[m
+[32m+[m[32mtrusted.glusterfs.quota.limit-set OSError [Errno 61] No data available: '/home/prignano'[m
+[32m+[m[32mtrusted.glusterfs.quota.size OSError [Errno 61] No data available: '/home/prignano'[m
+[32m+[m[32mTORCH_METADATA_CHECK_FAILED: URLError <urlopen error [Errno -3] Temporary failure in name resolution>[m
+[32m+[m[32mPYPI_METADATA_CHECK_FAILED: numpy URLError <urlopen error [Errno -3] Temporary failure in name resolution>[m
+[32m+[m[32mPYPI_METADATA_CHECK_FAILED: pytest URLError <urlopen error [Errno -3] Temporary failure in name resolution>[m
+[32m+[m[32mTOTAL_METADATA_BODY_BYTES: 0[m
+[32m+[m[32m2026-09-25T16:55:10+02:00[m
+[1mdiff --git a/cluster/plan_python_environment.sbatch b/cluster/plan_python_environment.sbatch[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d14c515[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/plan_python_environment.sbatch[m
+[36m@@ -0,0 +1,136 @@[m
+[32m+[m[32m#!/bin/bash[m
+[32m+[m[32m# Environment planning only: no environment creation or package installation.[m
+[32m+[m[32m# Submit from /home/prignano/qnormuon.[m
+[32m+[m[32m#SBATCH --job-name=qso-python-plan[m
+[32m+[m[32m#SBATCH --partition=mat[m
+[32m+[m[32m#SBATCH --nodes=1[m
+[32m+[m[32m#SBATCH --ntasks=1[m
+[32m+[m[32m#SBATCH --cpus-per-task=2[m
+[32m+[m[32m#SBATCH --gres=gpu:1[m
+[32m+[m[32m#SBATCH --mem=16G[m
+[32m+[m[32m#SBATCH --time=00:05:00[m
+[32m+[m[32m#SBATCH --output=cluster/plan_python_environment-%j.log[m
+[32m+[m[32m#SBATCH --error=cluster/plan_python_environment-%j.log[m
+[32m+[m
+[32m+[m[32mset -euo pipefail[m
+[32m+[m[32mexport PYTHONDONTWRITEBYTECODE=1[m
+[32m+[m[32mexport OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2[m
+[32m+[m[32mhostname[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[32m+[m[32mfor key in SLURM_JOB_ID SLURM_JOB_NODELIST SLURM_CPUS_PER_TASK SLURM_MEM_PER_NODE CUDA_VISIBLE_DEVICES; do[m
+[32m+[m[32m    printf '%s=%s\n' "$key" "${!key-<unset>}"[m
+[32m+[m[32mdone[m
+[32m+[m[32mpwd[m
+[32m+[m[32mscontrol show job "$SLURM_JOB_ID"[m
+[32m+[m[32mnvidia-smi --query-gpu=name,memory.total,driver_version --format=csv[m
+[32m+[m[32mdf -h /home /[m
+[32m+[m[32mdf -i /home[m
+[32m+[m[32mfindmnt -T /home/prignano[m
+[32m+[m[32mreadlink -f /usr/local/cuda[m
+[32m+[m[32m/usr/local/cuda-12.6/bin/nvcc --version[m
+[32m+[m[32m/home/prignano/.local/bin/uv --version[m
+[32m+[m
+[32m+[m[32m/home/prignano/.venv/bin/python -B - <<'PY'[m
+[32m+[m[32mimport email, hashlib, html.parser, importlib.metadata, json, os, pathlib[m
+[32m+[m[32mimport platform, ssl, sys, tempfile, urllib.parse, urllib.request[m
+[32m+[m
+[32m+[m[32mprint('Python executable:', sys.executable)[m
+[32m+[m[32mprint('Python version:', sys.version)[m
+[32m+[m[32mprint('Prefix:', sys.prefix, 'base prefix:', sys.base_prefix)[m
+[32m+[m[32mprint('Architecture/libc:', platform.machine(), platform.libc_ver())[m
+[32m+[m[32mprint('TLS:', ssl.OPENSSL_VERSION)[m
+[32m+[m[32mprint('Existing distributions:', sorted((d.metadata['Name'], d.version) for d in importlib.metadata.distributions()))[m
+[32m+[m[32mfor path in ['/home/prignano', '/home/prignano/.venv', '/home/prignano/.cache']:[m
+[32m+[m[32m    p = pathlib.Path(path)[m
+[32m+[m[32m    print('Storage path:', path, 'exists:', p.exists(), 'writable:', os.access(p, os.W_OK))[m
+[32m+[m
+[32m+[m[32m# Only transient, tiny files; no cache or virtual environment is created.[m
+[32m+[m[32mwith tempfile.TemporaryDirectory(prefix='.qso-storage-probe-', dir='/home/prignano') as tmp:[m
+[32m+[m[32m    p = pathlib.Path(tmp) / 'probe'[m
+[32m+[m[32m    p.write_bytes(b'qso home write test\n')[m
+[32m+[m[32m    with p.open('rb') as f: os.fsync(f.fileno())[m
+[32m+[m[32m    assert p.read_bytes() == b'qso home write test\n'[m
+[32m+[m[32m    print('HOME_WRITE_READ_OK:', p)[m
+[32m+[m[32m    linked = pathlib.Path(tmp) / 'hardlink'[m
+[32m+[m[32m    try:[m
+[32m+[m[32m        os.link(p, linked)[m
+[32m+[m[32m        print('HOME_HARDLINK_OK:', p.stat().st_ino == linked.stat().st_ino)[m
+[32m+[m[32m    except OSError as e:[m
+[32m+[m[32m        print('HOME_HARDLINK_FAILED:', type(e).__name__, str(e))[m
+[32m+[m[32mprint('Temporary probe removed')[m
+[32m+[m
+[32m+[m[32mprint('Quota-related xattrs (absence or permission failure does not establish no quota):')[m
+[32m+[m[32mfor key in ['trusted.glusterfs.quota.limit-set', 'trusted.glusterfs.quota.size']:[m
+[32m+[m[32m    try: print(key, os.getxattr('/home/prignano', key).hex())[m
+[32m+[m[32m    except OSError as e: print(key, type(e).__name__, str(e))[m
+[32m+[m
+[32m+[m[32m# HTTPS metadata only. Never GET a wheel/archive. Bound each response body and[m
+[32m+[m[32m# total payload; use default certificate verification and HTTPS-only redirects.[m
+[32m+[m[32mclass HTTPSOnly(urllib.request.HTTPRedirectHandler):[m
+[32m+[m[32m    def redirect_request(self, req, fp, code, msg, headers, newurl):[m
+[32m+[m[32m        if urllib.parse.urlsplit(newurl).scheme != 'https':[m
+[32m+[m[32m            raise RuntimeError('Refusing non-HTTPS redirect')[m
+[32m+[m[32m        return super().redirect_request(req, fp, code, msg, headers, newurl)[m
+[32m+[m[32mopener = urllib.request.build_opener(HTTPSOnly())[m
+[32m+[m[32mtotal_bytes = 0[m
+[32m+[m[32mdef metadata(url, method='GET'):[m
+[32m+[m[32m    global total_bytes[m
+[32m+[m[32m    if method == 'GET' and not (url.endswith('/') or url.endswith('/json') or url.endswith('.metadata')):[m
+[32m+[m[32m        raise RuntimeError('Only metadata GETs permitted')[m
+[32m+[m[32m    req = urllib.request.Request(url, method=method, headers={'User-Agent': 'qnormuon-environment-plan/1.0', 'Accept-Encoding': 'identity'})[m
+[32m+[m[32m    with opener.open(req, timeout=12) as r:[m
+[32m+[m[32m        length = r.headers.get('Content-Length')[m
+[32m+[m[32m        print('HTTPS:', method, url, 'status:', r.status, 'final:', r.url, 'content-length:', length)[m
+[32m+[m[32m        if method == 'HEAD': return b''[m
+[32m+[m[32m        cap = min(262144, 1048576-total_bytes)[m
+[32m+[m[32m        if length is not None and int(length) > cap:[m
+[32m+[m[32m            raise RuntimeError('Metadata length exceeds payload budget')[m
+[32m+[m[32m        data = r.read(cap + 1)[m
+[32m+[m[32m        total_bytes += len(data)[m
+[32m+[m[32m        if len(data) > cap: raise RuntimeError('Metadata body exceeds payload budget')[m
+[32m+[m[32m        print('Metadata bytes read:', len(data))[m
+[32m+[m[32m        return data[m
+[32m+[m
+[32m+[m[32mclass Links(html.parser.HTMLParser):[m
+[32m+[m[32m    def __init__(self): super().__init__(); self.links=[][m
+[32m+[m[32m    def handle_starttag(self, tag, attrs):[m
+[32m+[m[32m        if tag == 'a': self.links.append(dict(attrs))[m
+[32m+[m
+[32m+[m[32mtry:[m
+[32m+[m[32m    index = 'https://download.pytorch.org/whl/cu126/torch/'[m
+[32m+[m[32m    parser = Links()[m
+[32m+[m[32m    parser.feed(metadata(index).decode())[m
+[32m+[m[32m    filename = 'torch-2.10.0+cu126-cp310-cp310-manylinux_2_28_x86_64.whl'[m
+[32m+[m[32m    matches = [a for a in parser.links if urllib.parse.unquote(urllib.parse.urlsplit(a.get('href','')).path).endswith('/'+filename)][m
+[32m+[m[32m    if len(matches) != 1: raise RuntimeError(f'Expected exactly one matching torch wheel; found {len(matches)}')[m
+[32m+[m[32m    link = urllib.parse.urljoin(index, matches[0]['href'])[m
+[32m+[m[32m    print('SELECTED_TORCH_WHEEL:', link)[m
+[32m+[m[32m    print('TORCH_INDEX_ATTRIBUTES:', matches[0])[m
+[32m+[m[32m    wheel, _ = urllib.parse.urldefrag(link)[m
+[32m+[m[32m    metadata(wheel, 'HEAD')  # headers only, no binary body[m
+[32m+[m[32m    if matches[0].get('data-dist-info-metadata') or matches[0].get('data-core-metadata'):[m
+[32m+[m[32m        raw = metadata(wheel + '.metadata')[m
+[32m+[m[32m        print('Torch metadata SHA256:', hashlib.sha256(raw).hexdigest())[m
+[32m+[m[32m        msg = email.message_from_bytes(raw)[m
+[32m+[m[32m        for key in ['Name','Version','Requires-Python','Requires-Dist']:[m
+[32m+[m[32m            for value in msg.get_all(key, []): print('TORCH_METADATA:', key, value)[m
+[32m+[m[32m    else:[m
+[32m+[m[32m        print('No metadata sidecar advertised; wheel was NOT downloaded')[m
+[32m+[m[32mexcept Exception as e:[m
+[32m+[m[32m    print('TORCH_METADATA_CHECK_FAILED:', type(e).__name__, str(e))[m
+[32m+[m
+[32m+[m[32mfor name, version in [('numpy','2.2.6'), ('pytest','9.0.2')]:[m
+[32m+[m[32m    try:[m
+[32m+[m[32m        obj = json.loads(metadata(f'https://pypi.org/pypi/{name}/{version}/json'))[m
+[32m+[m[32m        print('PYPI:', name, version, 'Requires-Python:', obj['info']['requires_python'])[m
+[32m+[m[32m        for f in obj['urls']:[m
+[32m+[m[32m            fn = f['filename'][m
+[32m+[m[32m            suitable = ('cp310-cp310-manylinux' in fn and 'x86_64' in fn) if name == 'numpy' else fn.endswith('py3-none-any.whl')[m
+[32m+[m[32m            if suitable:[m
+[32m+[m[32m                print('PYPI_WHEEL:', fn, 'size:', f['size'], 'sha256:', f['digests']['sha256'], 'url:', f['url'])[m
+[32m+[m[32m                metadata(f['url'], 'HEAD')[m
+[32m+[m[32m    except Exception as e:[m
+[32m+[m[32m        print('PYPI_METADATA_CHECK_FAILED:', name, type(e).__name__, str(e))[m
+[32m+[m[32mprint('TOTAL_METADATA_BODY_BYTES:', total_bytes)[m
+[32m+[m[32mPY[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[1mdiff --git a/cluster/prepare_qnormuon_wheelhouse.sh b/cluster/prepare_qnormuon_wheelhouse.sh[m
+[1mnew file mode 100644[m
+[1mindex 0000000..d73b286[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/prepare_qnormuon_wheelhouse.sh[m
+[36m@@ -0,0 +1,254 @@[m
+[32m+[m[32m#!/usr/bin/env bash[m
+[32m+[m[32m# External Ubuntu x86_64 preparation ONLY. No sudo or system pip is used.[m
+[32m+[m[32m# Usage: bash prepare_qnormuon_wheelhouse.sh[m
+[32m+[m[32m# Read-only package verification on Lagrange, INSIDE SLURM:[m
+[32m+[m[32m#   bash prepare_qnormuon_wheelhouse.sh --verify-only /home/prignano/qnormuon-wheelhouse[m
+[32m+[m[32m# This file is self-contained; it does not require a repository checkout.[m
+[32m+[m[32mset -euo pipefail[m
+[32m+[m[32mfail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }[m
+[32m+[m
+[32m+[m[32m# pip is executed from the wheel as zipimport code; it is never installed on[m
+[32m+[m[32m# the preparation PC. The actual interpreter is 3.10.20, including for marker[m
+[32m+[m[32m# evaluation. -I ignores system PYTHONPATH and the user site.[m
+[32m+[m[32mwheel_pip() {[m
+[32m+[m[32m    "$target_python" -I - "$wheelhouse/pip-25.3-py3-none-any.whl" "$@" <<'PY'[m
+[32m+[m[32mimport os, runpy, sys[m
+[32m+[m[32mif os.environ.get('QSO_OFFLINE_CHECK') == '1':[m
+[32m+[m[32m    def prohibit_network(event, args):[m
+[32m+[m[32m        if event in {'socket.connect', 'socket.getaddrinfo', 'socket.gethostbyname',[m
+[32m+[m[32m                     'socket.gethostbyaddr', 'socket.sendto', 'socket.sendmsg'}:[m
+[32m+[m[32m            raise RuntimeError('Offline completeness check blocked a network operation: ' + event)[m
+[32m+[m[32m    sys.addaudithook(prohibit_network)[m
+[32m+[m[32msys.path.insert(0, sys.argv.pop(1))[m
+[32m+[m[32msys.argv[0] = 'pip'[m
+[32m+[m[32mrunpy.run_module('pip', run_name='__main__')[m
+[32m+[m[32mPY[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mverify_wheelhouse() {[m
+[32m+[m[32m    [[ -d "$wheelhouse" ]] || fail "Wheelhouse absent: $wheelhouse"[m
+[32m+[m[32m    [[ -x "$target_python" ]] || fail "Python 3.10.20 interpreter absent: $target_python"[m
+[32m+[m[32m    # Full byte hashes are checked BEFORE executing bootstrap pip.[m
+[32m+[m[32m    "$target_python" -I - "$wheelhouse" <<'PY'[m
+[32m+[m[32mimport email, hashlib, pathlib, re, sys, zipfile[m
+[32m+[m[32mdef fail(message): raise SystemExit('ERROR: ' + message)[m
+[32m+[m[32mdef canon(name): return re.sub(r'[-_.]+', '-', name).lower()[m
+[32m+[m[32mdef sha(path):[m
+[32m+[m[32m    h = hashlib.sha256()[m
+[32m+[m[32m    with path.open('rb') as f:[m
+[32m+[m[32m        for chunk in iter(lambda: f.read(1024*1024), b''): h.update(chunk)[m
+[32m+[m[32m    return h.hexdigest()[m
+[32m+[m[32mif sys.version_info[:3] != (3, 10, 20): fail('Verification must use Python 3.10.20, not host Python 3.12')[m
+[32m+[m[32mroot = pathlib.Path(sys.argv[1])[m
+[32m+[m[32mallowed = {'requirements-offline.txt', 'requirements.lock', 'SHA256SUMS'}[m
+[32m+[m[32mfor path in root.iterdir():[m
+[32m+[m[32m    if path.is_symlink() or not path.is_file() or (path.suffix != '.whl' and path.name not in allowed):[m
+[32m+[m[32m        fail('Unexpected wheelhouse entry: ' + path.name)[m
+[32m+[m[32mfor name in allowed:[m
+[32m+[m[32m    if not (root / name).is_file(): fail('Missing ' + name)[m
+[32m+[m[32mif (root/'requirements.lock').read_bytes() != (root/'requirements-offline.txt').read_bytes():[m
+[32m+[m[32m    fail('Requirements files differ')[m
+[32m+[m[32mpins = {}[m
+[32m+[m[32mfor line in (root/'requirements-offline.txt').read_text().splitlines():[m
+[32m+[m[32m    match = re.fullmatch(r'([a-z0-9][a-z0-9-]*)==([A-Za-z0-9][A-Za-z0-9.!+_-]*) --hash=sha256:([0-9a-f]{64})', line)[m
+[32m+[m[32m    if not match: fail('Requirements must contain only exact pins and SHA256 hashes')[m
+[32m+[m[32m    name, version, digest = match.groups()[m
+[32m+[m[32m    if name in pins: fail('Duplicate pin: ' + name)[m
+[32m+[m[32m    pins[name] = (version, digest)[m
+[32m+[m[32mfor name, version in {'pip':'25.3', 'torch':'2.10.0+cu126', 'numpy':'2.2.6', 'pytest':'9.0.2'}.items():[m
+[32m+[m[32m    if name not in pins or pins[name][0] != version: fail('Incorrect or missing pin: ' + name)[m
+[32m+[m[32mif 'setuptools' not in pins or 'wheel' not in pins: fail('Project build requirements are missing')[m
+[32m+[m[32mmanifest = {}[m
+[32m+[m[32mfor line in (root/'SHA256SUMS').read_text().splitlines():[m
+[32m+[m[32m    match = re.fullmatch(r'([0-9a-f]{64})  ([^/\\]+)', line)[m
+[32m+[m[32m    if not match: fail('Invalid SHA256SUMS line')[m
+[32m+[m[32m    digest, name = match.groups()[m
+[32m+[m[32m    if name in manifest: fail('Duplicate checksum: ' + name)[m
+[32m+[m[32m    manifest[name] = digest[m
+[32m+[m[32mexpected_files = {p.name for p in root.iterdir()} - {'SHA256SUMS'}[m
+[32m+[m[32mif set(manifest) != expected_files: fail('Checksum manifest does not cover exactly all wheels and both requirements files')[m
+[32m+[m[32mseen = set()[m
+[32m+[m[32mfor name, digest in sorted(manifest.items()):[m
+[32m+[m[32m    path = root/name[m
+[32m+[m[32m    if sha(path) != digest: fail('Checksum mismatch: ' + name)[m
+[32m+[m[32m    print('SHA256 OK:', name, flush=True)[m
+[32m+[m[32m    if path.suffix != '.whl': continue[m
+[32m+[m[32m    with zipfile.ZipFile(path) as archive:[m
+[32m+[m[32m        entries = [i for i in archive.infolist() if i.filename.endswith('.dist-info/METADATA')][m
+[32m+[m[32m        if len(entries) != 1 or entries[0].file_size > 1024*1024: fail('Invalid wheel metadata: ' + name)[m
+[32m+[m[32m        meta = email.message_from_bytes(archive.read(entries[0]))[m
+[32m+[m[32m    package = canon(meta['Name'])[m
+[32m+[m[32m    if package in seen or pins.get(package) != (meta['Version'], digest): fail('Wheel/pin mismatch: ' + name)[m
+[32m+[m[32m    seen.add(package)[m
+[32m+[m[32m    for req in meta.get_all('Requires-Dist', []):[m
+[32m+[m[32m        if '@' in req or '://' in req: fail('Remote dependency reference in ' + name)[m
+[32m+[m[32mif seen != set(pins): fail('Missing wheels: ' + ', '.join(sorted(set(pins)-seen)))[m
+[32m+[m[32mfor name in ['pip-25.3-py3-none-any.whl', 'torch-2.10.0+cu126-cp310-cp310-manylinux_2_28_x86_64.whl']:[m
+[32m+[m[32m    if not (root/name).is_file(): fail('Required exact wheel missing: ' + name)[m
+[32m+[m[32mPY[m
+[32m+[m[32m    # No download, installation, or index access. Empty cache, ignore-installed,[m
+[32m+[m[32m    # local find-links, mandatory hashes, and a socket audit guard prevent a[m
+[32m+[m[32m    # warmed cache, installed package, or working Internet from masking gaps.[m
+[32m+[m[32m    QSO_OFFLINE_CHECK=1 wheel_pip install --dry-run --ignore-installed \[m
+[32m+[m[32m        --no-index --find-links "$wheelhouse" --no-cache-dir \[m
+[32m+[m[32m        --only-binary=:all: --require-hashes --disable-pip-version-check \[m
+[32m+[m[32m        --no-input -r "$wheelhouse/requirements-offline.txt"[m
+[32m+[m[32m    printf '\nOFFLINE COMPLETENESS CHECK PASSED (resolution only; no packages installed).\n'[m
+[32m+[m[32m    printf 'Exact pins, including all CUDA and Python dependencies:\n'[m
+[32m+[m[32m    sed 's/ --hash=.*//' "$wheelhouse/requirements-offline.txt"[m
+[32m+[m[32m    printf 'Target Python: CPython 3.10.20; ABI cp310 (plus compatible abi3/pure wheels)\n'[m
+[32m+[m[32m    printf 'Target platform: Linux x86_64, glibc <= 2.39 wheel baseline\n'[m
+[32m+[m[32m    printf 'PyTorch CUDA build: 2.10.0+cu126; official index https://download.pytorch.org/whl/cu126\n'[m
+[32m+[m[32m    du -sh -- "$wheelhouse"[m
+[32m+[m[32m    "$target_python" -I - "$wheelhouse" <<'PY'[m
+[32m+[m[32mfrom pathlib import Path[m
+[32m+[m[32mimport sys[m
+[32m+[m[32mroot = Path(sys.argv[1])[m
+[32m+[m[32mprint('Wheel files:', len(list(root.glob('*.whl'))))[m
+[32m+[m[32mprint('Total file bytes:', sum(p.stat().st_size for p in root.iterdir()))[m
+[32m+[m[32mPY[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mfor tool in python3 uname hostname realpath mkdir mktemp sed du; do[m
+[32m+[m[32m    command -v "$tool" >/dev/null || fail "Required tool missing: $tool"[m
+[32m+[m[32mdone[m
+[32m+[m[32mfor key in ${!PIP_@} ${!UV_@}; do unset "$key"; done[m
+[32m+[m[32mexport PIP_CONFIG_FILE=/dev/null PIP_DISABLE_PIP_VERSION_CHECK=1 PIP_NO_INPUT=1[m
+[32m+[m[32mexport PYTHONDONTWRITEBYTECODE=1[m
+[32m+[m
+[32m+[m[32mif [[ ${1:-} == --verify-only ]]; then[m
+[32m+[m[32m    [[ $# == 2 ]] || fail 'Usage: --verify-only ABSOLUTE_WHEELHOUSE_PATH'[m
+[32m+[m[32m    wheelhouse=$(realpath -e -- "$2")[m
+[32m+[m[32m    target_python=/home/prignano/.venv/bin/python[m
+[32m+[m[32m    [[ ${SLURM_JOB_ID:-} =~ ^[0-9]+$ ]] || fail 'On Lagrange, run verification inside srun/sbatch, not on the frontend.'[m
+[32m+[m[32m    grep -Eq "/job_${SLURM_JOB_ID}(/|$)" /proc/self/cgroup || fail 'Not inside the SLURM job cgroup.'[m
+[32m+[m[32m    [[ $(hostname -s) != lagrangectl ]] || fail 'Do not hash multi-GB wheels on the frontend.'[m
+[32m+[m[32m    export PIP_CACHE_DIR=/home/prignano/.cache/qnormuon/pip[m
+[32m+[m[32m    export TMPDIR=/home/prignano/.cache/qnormuon/tmp[m
+[32m+[m[32m    for path in "$wheelhouse" "$PIP_CACHE_DIR" "$TMPDIR"; do[m
+[32m+[m[32m        [[ $(realpath -m -- "$path") == /home/* ]] || fail "Verification storage must stay on /home: $path"[m
+[32m+[m[32m    done[m
+[32m+[m[32m    mkdir -p "$TMPDIR" "$PIP_CACHE_DIR"[m
+[32m+[m[32m    for path in "$wheelhouse" "$TMPDIR" "$PIP_CACHE_DIR"; do[m
+[32m+[m[32m        [[ $(findmnt -n -o TARGET -T "$path") == /home ]] || fail "Not the shared /home mount: $path"[m
+[32m+[m[32m    done[m
+[32m+[m[32m    export TMP="$TMPDIR" TEMP="$TMPDIR"[m
+[32m+[m[32m    verify_wheelhouse[m
+[32m+[m[32m    exit 0[m
+[32m+[m[32mfi[m
+[32m+[m[32m[[ $# == 0 ]] || fail 'Usage: bash prepare_qnormuon_wheelhouse.sh (on the temporary PC)'[m
+[32m+[m[32mcase $(hostname -s) in lagrangectl*|lagrange[0-9]*) fail 'Preparation downloads are forbidden on Lagrange; use the temporary Internet-connected PC.';; esac[m
+[32m+[m[32m[[ -z ${SLURM_JOB_ID:-} ]] || fail 'Preparation is for the external PC, not a SLURM job.'[m
+[32m+[m[32m[[ $(uname -s) == Linux && $(uname -m) == x86_64 ]] || fail 'Preparation requires Linux x86_64.'[m
+[32m+[m[32mfor tool in wget tar sha256sum; do command -v "$tool" >/dev/null || fail "Required tool missing: $tool"; done[m
+[32m+[m[32mwheelhouse="$PWD/qnormuon-wheelhouse"[m
+[32m+[m[32m[[ ! -e "$wheelhouse" ]] || fail 'qnormuon-wheelhouse already exists; choose a fresh working directory to avoid mixing runs.'[m
+[32m+[m[32mwork=$(mktemp -d "$PWD/.qnormuon-wheelhouse-work.XXXXXXXX")[m
+[32m+[m[32mmkdir "$wheelhouse"[m
+[32m+[m[32mtrap 'printf "ERROR: preparation failed at line %s. Do not transfer this as a complete wheelhouse. Work retained at %s\n" "$LINENO" "$work" >&2' ERR[m
+[32m+[m[32mexport UV_CACHE_DIR="$work/cache" UV_PYTHON_INSTALL_DIR="$work/python"[m
+[32m+[m[32mexport UV_PYTHON_BIN_DIR="$work/bin" UV_NO_CONFIG=1[m
+[32m+[m[32mexport TMPDIR="$work/tmp" PIP_CACHE_DIR="$work/pip-cache"[m
+[32m+[m[32mexport TMP="$TMPDIR" TEMP="$TMPDIR"[m
+[32m+[m[32mmkdir -p "$TMPDIR" "$PIP_CACHE_DIR" "$work/bin"[m
+[32m+[m[32mprintf 'Private bootstrap/cache: %s\nOutput: %s\n' "$work" "$wheelhouse"[m
+[32m+[m
+[32m+[m[32m# Pin uv; verify its official release checksum before extracting. No installer[m
+[32m+[m[32m# script, shell profile change, sudo, or system package manager is involved.[m
+[32m+[m[32muv_version=0.10.11[m
+[32m+[m[32marchive=uv-x86_64-unknown-linux-gnu.tar.gz[m
+[32m+[m[32mrelease="https://github.com/astral-sh/uv/releases/download/$uv_version"[m
+[32m+[m[32mwget --https-only --timeout=60 --tries=3 -O "$work/$archive" "$release/$archive"[m
+[32m+[m[32mwget --https-only --timeout=60 --tries=3 -O "$work/$archive.sha256" "$release/$archive.sha256"[m
+[32m+[m[32mpython3 -I - "$work/$archive" "$work/$archive.sha256" <<'PY'[m
+[32m+[m[32mimport hashlib, pathlib, re, sys[m
+[32m+[m[32marchive, checksum = map(pathlib.Path, sys.argv[1:])[m
+[32m+[m[32mexpected = checksum.read_text().split()[0].lower()[m
+[32m+[m[32mif not re.fullmatch('[0-9a-f]{64}', expected): raise SystemExit('Invalid uv checksum response')[m
+[32m+[m[32mh = hashlib.sha256()[m
+[32m+[m[32mwith archive.open('rb') as f:[m
+[32m+[m[32m    for chunk in iter(lambda: f.read(1024*1024), b''): h.update(chunk)[m
+[32m+[m[32mif h.hexdigest() != expected: raise SystemExit('uv archive SHA256 mismatch')[m
+[32m+[m[32mPY[m
+[32m+[m[32mtar -xzf "$work/$archive" -C "$work/bin" --strip-components=1[m
+[32m+[m[32muv="$work/bin/uv"[m
+[32m+[m[32m"$uv" --version[m
+[32m+[m[32m"$uv" python install --no-config --no-bin 3.10.20[m
+[32m+[m[32mtarget_python=$("$uv" python find --no-config --managed-python --no-python-downloads 3.10.20)[m
+[32m+[m[32m"$target_python" -I - <<'PY'[m
+[32m+[m[32mimport platform, sys[m
+[32m+[m[32mif sys.version_info[:3] != (3,10,20) or platform.machine() != 'x86_64':[m
+[32m+[m[32m    raise SystemExit('Refusing to use a non-target interpreter')[m
+[32m+[m[32mprint('Private target interpreter:', sys.executable, sys.version)[m
+[32m+[m[32mprint('Host libc:', platform.libc_ver())[m
+[32m+[m[32mPY[m
+[32m+[m
+[32m+[m[32m# Obtain only the universal pip wheel via small PyPI metadata and HTTPS wget.[m
+[32m+[m[32m# System Python supplies stdlib only. No system pip or package installation.[m
+[32m+[m[32mpython3 -I - "$wheelhouse" <<'PY'[m
+[32m+[m[32mimport hashlib, json, pathlib, subprocess, sys, urllib.request, urllib.parse[m
+[32m+[m[32mroot = pathlib.Path(sys.argv[1])[m
+[32m+[m[32mwith urllib.request.urlopen('https://pypi.org/pypi/pip/25.3/json', timeout=60) as r:[m
+[32m+[m[32m    data = json.loads(r.read(1024*1024))[m
+[32m+[m[32mitems = [f for f in data['urls'] if f['filename'] == 'pip-25.3-py3-none-any.whl'][m
+[32m+[m[32mif len(items) != 1: raise SystemExit('Exact pip bootstrap wheel not found')[m
+[32m+[m[32mitem = items[0][m
+[32m+[m[32murl = urllib.parse.urlsplit(item['url'])[m
+[32m+[m[32mif url.scheme != 'https' or url.hostname != 'files.pythonhosted.org':[m
+[32m+[m[32m    raise SystemExit('Unexpected pip wheel source')[m
+[32m+[m[32mpath = root/item['filename'][m
+[32m+[m[32msubprocess.run(['wget','--https-only','--timeout=60','--tries=3','-O',str(path),item['url']], check=True)[m
+[32m+[m[32mif hashlib.sha256(path.read_bytes()).hexdigest() != item['digests']['sha256']:[m
+[32m+[m[32m    raise SystemExit('pip wheel SHA256 mismatch')[m
+[32m+[m[32mPY[m
+[32m+[m
+[32m+[m[32m# Explicit wheel tags target Lagrange's glibc 2.39, regardless of the temporary[m
+[32m+[m[32m# machine's system Python. Running pip under real 3.10.20 also makes conditional[m
+[32m+[m[32m# Requires-Dist markers use Python 3.10 (cross-tag flags alone are insufficient).[m
+[32m+[m[32mtarget_flags=(--python-version 3.10.20 --implementation cp --abi cp310 --abi abi3 --abi none)[m
+[32m+[m[32mfor minor in {39..5}; do target_flags+=(--platform "manylinux_2_${minor}_x86_64"); done[m
+[32m+[m[32mtarget_flags+=(--platform manylinux2014_x86_64 --platform manylinux2010_x86_64 --platform manylinux1_x86_64 --platform linux_x86_64)[m
+[32m+[m[32mwheel_pip download --no-deps --only-binary=:all: "${target_flags[@]}" \[m
+[32m+[m[32m    --index-url https://download.pytorch.org/whl/cu126 \[m
+[32m+[m[32m    --dest "$wheelhouse" 'torch==2.10.0+cu126'[m
+[32m+[m[32m[[ -f "$wheelhouse/torch-2.10.0+cu126-cp310-cp310-manylinux_2_28_x86_64.whl" ]] || fail 'Wrong torch artifact; exact cp310/cu126 wheel required.'[m
+[32m+[m
+[32m+[m[32m# Local torch and pip references preserve their sources. Resolve EVERY runtime[m
+[32m+[m[32m# dependency, including NVIDIA libraries and Triton, as well as project build[m
+[32m+[m[32m# requirements. Do not use --no-deps for this operation.[m
+[32m+[m[32mwheel_pip download --only-binary=:all: "${target_flags[@]}" \[m
+[32m+[m[32m    --index-url https://pypi.org/simple --find-links "$wheelhouse" --dest "$wheelhouse" \[m
+[32m+[m[32m    "$wheelhouse/torch-2.10.0+cu126-cp310-cp310-manylinux_2_28_x86_64.whl" \[m
+[32m+[m[32m    "$wheelhouse/pip-25.3-py3-none-any.whl" \[m
+[32m+[m[32m    'numpy==2.2.6' 'pytest==9.0.2' 'setuptools>=68' wheel[m
+[32m+[m
+[32m+[m[32m# Write one exact pin/hash per wheel. Both requirements names are intentionally[m
+[32m+[m[32m# identical so the existing Lagrange installer can continue using its lock name.[m
+[32m+[m[32m"$target_python" -I - "$wheelhouse" <<'PY'[m
+[32m+[m[32mimport email, hashlib, pathlib, re, sys, zipfile[m
+[32m+[m[32mroot = pathlib.Path(sys.argv[1])[m
+[32m+[m[32mentries, sums = {}, {}[m
+[32m+[m[32mfor path in sorted(root.glob('*.whl')):[m
+[32m+[m[32m    with zipfile.ZipFile(path) as archive:[m
+[32m+[m[32m        names = [n for n in archive.namelist() if n.endswith('.dist-info/METADATA')][m
+[32m+[m[32m        if len(names) != 1: raise SystemExit('Ambiguous wheel metadata: ' + path.name)[m
+[32m+[m[32m        meta = email.message_from_bytes(archive.read(names[0]))[m
+[32m+[m[32m    name = re.sub(r'[-_.]+', '-', meta['Name']).lower()[m
+[32m+[m[32m    if name in entries: raise SystemExit('Duplicate package wheel: ' + name)[m
+[32m+[m[32m    for requirement in meta.get_all('Requires-Dist', []):[m
+[32m+[m[32m        if '@' in requirement or '://' in requirement: raise SystemExit('Remote dependency reference: ' + path.name)[m
+[32m+[m[32m    h = hashlib.sha256()[m
+[32m+[m[32m    with path.open('rb') as f:[m
+[32m+[m[32m        for chunk in iter(lambda: f.read(1024*1024), b''): h.update(chunk)[m
+[32m+[m[32m    sums[path.name] = h.hexdigest()[m
+[32m+[m[32m    entries[name] = f"{name}=={meta['Version']} --hash=sha256:{h.hexdigest()}"[m
+[32m+[m[32mpayload = '\n'.join(entries[name] for name in sorted(entries)) + '\n'[m
+[32m+[m[32mfor name in ['requirements-offline.txt', 'requirements.lock']:[m
+[32m+[m[32m    (root/name).write_text(payload)[m
+[32m+[m[32m    sums[name] = hashlib.sha256(payload.encode()).hexdigest()[m
+[32m+[m[32m(root/'SHA256SUMS').write_text(''.join(f'{sums[name]}  {name}\n' for name in sorted(sums)))[m
+[32m+[m[32mPY[m
+[32m+[m[32mverify_wheelhouse[m
+[32m+[m[32mprintf '\nREADY TO TRANSFER: %s\n' "$wheelhouse"[m
+[32m+[m[32mprintf 'Keep the temporary PC powered on until transferred files pass --verify-only on Lagrange.\n'[m
+[32m+[m[32mprintf 'Private bootstrap files remain at %s; transfer only qnormuon-wheelhouse/.\n' "$work"[m
+[1mdiff --git a/cluster/smoke_h100.sbatch b/cluster/smoke_h100.sbatch[m
+[1mnew file mode 100644[m
+[1mindex 0000000..875934e[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/smoke_h100.sbatch[m
+[36m@@ -0,0 +1,145 @@[m
+[32m+[m[32m#!/bin/bash[m
+[32m+[m[32m# Submit after the offline installer succeeds; not a mathematical-suite run.[m
+[32m+[m[32m#SBATCH --job-name=qso-h100-smoke[m
+[32m+[m[32m#SBATCH --partition=mat[m
+[32m+[m[32m#SBATCH --nodes=1[m
+[32m+[m[32m#SBATCH --ntasks=1[m
+[32m+[m[32m#SBATCH --cpus-per-task=2[m
+[32m+[m[32m#SBATCH --gres=gpu:1[m
+[32m+[m[32m#SBATCH --mem=4G[m
+[32m+[m[32m#SBATCH --time=00:05:00[m
+[32m+[m[32m#SBATCH --output=cluster/smoke_h100-%j.log[m
+[32m+[m[32m#SBATCH --error=cluster/smoke_h100-%j.log[m
+[32m+[m
+[32m+[m[32mset -euo pipefail[m
+[32m+[m[32mfail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }[m
+[32m+[m[32m[[ ${SLURM_JOB_ID:-} =~ ^[0-9]+$ ]] || fail 'Submit this script with sbatch.'[m
+[32m+[m[32mgrep -Eq "/job_${SLURM_JOB_ID}(/|$)" /proc/self/cgroup || fail 'Not inside the SLURM job cgroup; refusing frontend execution.'[m
+[32m+[m[32m[[ $(hostname -s) != lagrangectl ]] || fail 'GPU smoke work on the frontend is forbidden.'[m
+[32m+[m[32mexport QSO_PYTHON=/home/prignano/.venv/bin/python[m
+[32m+[m[32m[[ -x "$QSO_PYTHON" ]] || fail 'Documented Python environment is missing.'[m
+[32m+[m[32m[[ -f /home/prignano/.venv/qnormuon-offline-install.json ]] || fail 'Successful offline installation marker is absent; run the installer first.'[m
+[32m+[m[32mexport XDG_CACHE_HOME=/home/prignano/.cache/qnormuon[m
+[32m+[m[32mexport TMPDIR=/home/prignano/.cache/qnormuon/tmp[m
+[32m+[m[32mexport TMP="$TMPDIR" TEMP="$TMPDIR"[m
+[32m+[m[32mexport CUDA_CACHE_PATH=/home/prignano/.cache/qnormuon/cuda[m
+[32m+[m[32mexport TORCH_HOME=/home/prignano/.cache/qnormuon/torch[m
+[32m+[m[32mexport TRITON_CACHE_DIR=/home/prignano/.cache/qnormuon/triton[m
+[32m+[m[32mexport HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONDONTWRITEBYTECODE=1[m
+[32m+[m[32mexport OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2[m
+[32m+[m[32mfor path in /home/prignano/.venv "$TMPDIR" "$CUDA_CACHE_PATH" "$TORCH_HOME" "$TRITON_CACHE_DIR"; do[m
+[32m+[m[32m    [[ $(realpath -m -- "$path") == /home/* ]] || fail "Path resolves outside /home: $path"[m
+[32m+[m[32mdone[m
+[32m+[m[32mmkdir -p "$TMPDIR" "$CUDA_CACHE_PATH" "$TORCH_HOME" "$TRITON_CACHE_DIR"[m
+[32m+[m[32mfor path in /home/prignano/.venv "$TMPDIR" "$CUDA_CACHE_PATH" "$TORCH_HOME" "$TRITON_CACHE_DIR"; do[m
+[32m+[m[32m    [[ $(findmnt -n -o TARGET -T "$path") == /home ]] || fail "Path is not on shared /home: $path"[m
+[32m+[m[32mdone[m
+[32m+[m[32mexec 9>"$XDG_CACHE_HOME/environment.lock"[m
+[32m+[m[32mflock -n -s 9 || fail 'Environment installation is in progress.'[m
+[32m+[m[32mhostname[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[32m+[m[32mprintf 'SLURM_JOB_ID=%s SLURM_JOB_NODELIST=%s CUDA_VISIBLE_DEVICES=%s CPUS=%s MEMORY_MB=%s\n' "$SLURM_JOB_ID" "${SLURM_JOB_NODELIST:-}" "${CUDA_VISIBLE_DEVICES:-}" "${SLURM_CPUS_PER_TASK:-}" "${SLURM_MEM_PER_NODE:-}"[m
+[32m+[m[32mpwd[m
+[32m+[m[32mnvidia-smi[m
+[32m+[m[32mdf -h /home[m
+[32m+[m
+[32m+[m[32m"$QSO_PYTHON" -I - <<'PY'[m
+[32m+[m[32mimport importlib.metadata, json, pathlib, re, sys[m
+[32m+[m
+[32m+[m[32mif sys.version_info[:3] != (3, 10, 20) or sys.prefix != '/home/prignano/.venv':[m
+[32m+[m[32m    raise SystemExit('ERROR: expected the documented Python 3.10.20 environment')[m
+[32m+[m[32mmarker = json.loads((pathlib.Path(sys.prefix) / 'qnormuon-offline-install.json').read_text())[m
+[32m+[m[32mversions = {re.sub(r'[-_.]+', '-', d.metadata['Name']).lower(): d.version for d in importlib.metadata.distributions()}[m
+[32m+[m[32mif marker.get('environment') != sys.prefix or marker.get('python') != '3.10.20' or marker.get('versions') != versions:[m
+[32m+[m[32m    raise SystemExit('ERROR: environment differs from successful installation record')[m
+[32m+[m[32mexpected = {'torch': '2.10.0+cu126', 'numpy': '2.2.6', 'pytest': '9.0.2', 'pip': '25.3'}[m
+[32m+[m[32mif any(versions.get(k) != v for k, v in expected.items()):[m
+[32m+[m[32m    raise SystemExit('ERROR: required package versions differ from the documented pins')[m
+[32m+[m[32mprint('Python:', sys.executable, sys.version)[m
+[32m+[m[32mprint('Installation provenance:', json.dumps(marker, sort_keys=True))[m
+[32m+[m
+[32m+[m[32mimport torch[m
+[32m+[m[32mprint('torch.__version__:', torch.__version__)[m
+[32m+[m[32mprint('torch.version.cuda:', torch.version.cuda)[m
+[32m+[m[32mprint('torch.cuda.is_available():', torch.cuda.is_available())[m
+[32m+[m[32mif str(torch.__version__) != expected['torch'] or torch.version.cuda != '12.6':[m
+[32m+[m[32m    raise SystemExit('ERROR: imported torch does not match the selected cu126 build')[m
+[32m+[m[32mif not torch.cuda.is_available(): raise SystemExit('ERROR: CUDA unavailable')[m
+[32m+[m[32mprint('torch.cuda.device_count():', torch.cuda.device_count())[m
+[32m+[m[32mprint('torch.cuda.get_device_name(0):', torch.cuda.get_device_name(0))[m
+[32m+[m[32mprint('torch.cuda.get_device_properties(0):', torch.cuda.get_device_properties(0))[m
+[32m+[m[32mprint('Compiled CUDA architectures:', torch.cuda.get_arch_list())[m
+[32m+[m[32mif 'H100' not in torch.cuda.get_device_name(0): raise SystemExit('ERROR: allocated GPU is not an H100')[m
+[32m+[m[32mtorch.set_num_threads(2)[m
+[32m+[m[32mtorch.backends.cuda.matmul.allow_tf32 = False[m
+[32m+[m[32mdevice = torch.device('cuda:0')[m
+[32m+[m[32mprint('Smoke configuration: deterministic tensors, pair shape=(2,16,8), seed not applicable; no model/data/optimizer')[m
+[32m+[m[32mfailures, results = [], {}[m
+[32m+[m
+[32m+[m[32mdef probe(label, operation, required=True):[m
+[32m+[m[32m    try:[m
+[32m+[m[32m        details = operation()[m
+[32m+[m[32m        torch.cuda.synchronize(device)[m
+[32m+[m[32m        results[label] = {'status': 'PASS', 'details': details}[m
+[32m+[m[32m    except Exception as e:[m
+[32m+[m[32m        results[label] = {'status': 'FAIL', 'error': f'{type(e).__name__}: {e}'}[m
+[32m+[m[32m        if required: failures.append(label)[m
+[32m+[m[32m    print(label + ': ' + json.dumps(results[label], sort_keys=True), flush=True)[m
+[32m+[m
+[32m+[m[32mdef allocation():[m
+[32m+[m[32m    a = torch.ones(16, device=device)[m
+[32m+[m[32m    if a.sum().item() != 16: raise RuntimeError('CUDA allocation/value check failed')[m
+[32m+[m[32m    return {'device': str(a.device), 'elements': a.numel()}[m
+[32m+[m[32mprobe('cuda_allocation', allocation)[m
+[32m+[m
+[32m+[m[32m# Full-column-rank batched matrices, including two sides as in SmoothDual.[m
+[32m+[m[32m# All casts below choose input dtype explicitly; native BF16 SVD is never[m
+[32m+[m[32m# promoted silently. Diagnostics alone are accumulated in float64.[m
+[32m+[m[32mbase = torch.zeros((2, 16, 8), dtype=torch.float64, device=device)[m
+[32m+[m[32mbase[:, :8, :] = torch.diag(torch.arange(1, 9, dtype=torch.float64, device=device))[m
+[32m+[m[32mbase[:, 8:, :] = torch.arange(64, dtype=torch.float64, device=device).reshape(8, 8) / 128[m
+[32m+[m[32meye = torch.eye(8, dtype=torch.float64, device=device)[m
+[32m+[m
+[32m+[m[32mdef matmul(dtype):[m
+[32m+[m[32m    a = torch.arange(16, device=device, dtype=torch.float32).reshape(4, 4).to(dtype)[m
+[32m+[m[32m    product = a @ torch.eye(4, device=device, dtype=dtype)[m
+[32m+[m[32m    if not torch.equal(product, a): raise RuntimeError('Identity matrix product differs from input')[m
+[32m+[m[32m    return {'input_dtype': str(dtype), 'output_dtype': str(product.dtype)}[m
+[32m+[m
+[32m+[m[32mdef svd(dtype):[m
+[32m+[m[32m    a = base.to(dtype)[m
+[32m+[m[32m    u, s, vh = torch.linalg.svd(a, full_matrices=False)[m
+[32m+[m[32m    if not all(torch.isfinite(x).all().item() for x in (u, s, vh)):[m
+[32m+[m[32m        raise RuntimeError('Nonfinite SVD outputs')[m
+[32m+[m[32m    reconstructed = (u.double() * s.double().unsqueeze(-2)) @ vh.double()[m
+[32m+[m[32m    error = (torch.linalg.vector_norm(reconstructed - a.double()) / torch.linalg.vector_norm(a.double())).item()[m
+[32m+[m[32m    tolerance = {torch.float64: 1e-10, torch.float32: 2e-5, torch.bfloat16: 5e-2}[dtype][m
+[32m+[m[32m    if error > tolerance: raise RuntimeError(f'SVD reconstruction error {error} > {tolerance}')[m
+[32m+[m[32m    return {'input_dtype': str(dtype), 'factor_dtype': str(u.dtype), 'relative_reconstruction_error': error}[m
+[32m+[m
+[32m+[m[32mdef polar(dtype):[m
+[32m+[m[32m    a = base.to(dtype)[m
+[32m+[m[32m    u, s, vh = torch.linalg.svd(a, full_matrices=False)[m
+[32m+[m[32m    p = u @ vh  # Same exact SVD/polar path as experiments/dual_solver.py.[m
+[32m+[m[32m    gram_error = (p.double().transpose(-2, -1) @ p.double() - eye).abs().max().item()[m
+[32m+[m[32m    support_error = (((a.double() * p.double()).sum((-2, -1)) - s.double().sum(-1)).abs() / s.double().sum(-1)).max().item()[m
+[32m+[m[32m    tolerance = 1e-10 if dtype == torch.float64 else 3e-5[m
+[32m+[m[32m    if not torch.isfinite(p).all().item() or gram_error > tolerance or support_error > tolerance:[m
+[32m+[m[32m        raise RuntimeError(f'Polar error: Gram={gram_error}, support={support_error}')[m
+[32m+[m[32m    return {'input_dtype': str(dtype), 'returned_dtype': str(p.dtype), 'max_gram_error': gram_error, 'relative_support_error': support_error}[m
+[32m+[m
+[32m+[m[32mfor dtype in (torch.float64, torch.float32, torch.bfloat16):[m
+[32m+[m[32m    probe('matmul_' + str(dtype), lambda d=dtype: matmul(d))[m
+[32m+[m[32m    probe('native_svd_' + str(dtype), lambda d=dtype: svd(d), required=(dtype != torch.bfloat16))[m
+[32m+[m[32mfor dtype in (torch.float64, torch.float32):[m
+[32m+[m[32m    probe('full_rank_polar_' + str(dtype), lambda d=dtype: polar(d))[m
+[32m+[m
+[32m+[m[32mprint('RESULTS:', json.dumps(results, sort_keys=True, indent=2))[m
+[32m+[m[32mif failures: raise SystemExit('SMOKE_FAILED: ' + ', '.join(failures))[m
+[32m+[m[32mif results['native_svd_torch.bfloat16']['status'] == 'FAIL':[m
+[32m+[m[32m    print('SMOKE_BASELINE_PASS; BFLOAT16_NATIVE_SVD_FAILED (see exact error above). No BF16 SVD support is claimed.')[m
+[32m+[m[32melse:[m
+[32m+[m[32m    print('SMOKE_BASELINE_PASS; BFLOAT16_NATIVE_SVD_PASSED for this small input only.')[m
+[32m+[m[32mprint('Full-rank polar checks do not establish deficient-rank selection, quotient certificates, or optimizer correctness.')[m
+[32m+[m[32mPY[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[1mdiff --git a/cluster/validate_existing_envs_h100-22045.log b/cluster/validate_existing_envs_h100-22045.log[m
+[1mnew file mode 100644[m
+[1mindex 0000000..abb14e8[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/validate_existing_envs_h100-22045.log[m
+[36m@@ -0,0 +1,50 @@[m
+[32m+[m[32mhostname=lagrange0[m
+[32m+[m[32m2026-09-25T18:12:46+02:00[m
+[32m+[m[32mSLURM_JOB_ID=22045[m
+[32m+[m[32mSLURM_JOB_NODELIST=lagrange0[m
+[32m+[m[32mCUDA_VISIBLE_DEVICES=0[m
+[32m+[m[32mSLURM_CPUS_PER_TASK=2[m
+[32m+[m[32mSLURM_MEM_PER_NODE=12288[m
+[32m+[m[32mPATH=/usr/local/bin:/usr/bin:/bin[m
+[32m+[m[32mLD_LIBRARY_PATH=<unset>[m
+[32m+[m[32mpwd=/home/prignano/qnormuon[m
+[32m+[m[32mNVIDIA H100 NVL, 95830 MiB, 570.211.01[m
+[32m+[m
+[32m+[m[32m=== CANDIDATE /home/prignano/modded-nanogpt/.venv ===[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "python", "executable": "/home/prignano/modded-nanogpt/.venv/bin/python", "prefix": "/home/prignano/modded-nanogpt/.venv", "status": "PASS", "version": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pytest", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pluggy", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_packaging", "status": "PRESENT", "version": "26.0"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_iniconfig", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pygments", "status": "PRESENT", "version": "2.19.2"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "numpy_import", "status": "PASS", "version": "2.2.6"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "torch_import", "cuda_build": "12.8", "status": "PASS", "version": "2.10.0+cu128"}[m
+[32m+[m[32mCHECK: {"available": true, "candidate": "/home/prignano/modded-nanogpt/.venv", "capability": [9, 0], "check": "gpu_info", "device_count": 1, "name": "NVIDIA H100 NVL", "properties": "_CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=55e37d33-05bd-f862-37d0-5f1f7c978f97, pci_bus_id=33, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)", "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_allocation", "device": "cuda:0", "elements": 8, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_matmul", "dtype": "torch.float32", "max_error": 0.0, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cpu_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_orthogonality_error": 9.941793403073688e-16, "relative_reconstruction_error": 1.1241954303702247e-15, "shape": [16, 8], "singular_max": 2.203143951183863, "singular_min": 1.0143810512812164, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_error_vs_cpu_float64": 1.5925741970669012e-15, "relative_polar_orthogonality_error": 2.4467498262233373e-15, "relative_reconstruction_error": 1.916185036636478e-15, "relative_singular_value_error_vs_cpu_float64": 1.1335822021376302e-15, "shape": [16, 8], "singular_max": 2.2031439511838644, "singular_min": 1.0143810512812175, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_float32_svd_polar", "factor_dtype": "torch.float32", "input_dtype": "torch.float32", "relative_polar_error_vs_cpu_float64": 5.879905493099862e-07, "relative_polar_orthogonality_error": 1.1623910400829599e-06, "relative_reconstruction_error": 1.2404513311212165e-06, "relative_singular_value_error_vs_cpu_float64": 5.51220948879426e-07, "shape": [16, 8], "singular_max": 2.203144073486328, "singular_min": 1.014380693435669, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_bfloat16_svd_polar", "error": "NotImplementedError: \"svd_cuda_gesvdjBatched\" not implemented for 'BFloat16'", "status": "FAIL"}[m
+[32m+[m[32mCANDIDATE_RESULT: PASS {"candidate": "/home/prignano/modded-nanogpt/.venv", "required_failures": []}[m
+[32m+[m
+[32m+[m[32m=== CANDIDATE /home/prignano/pg ===[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "python", "executable": "/home/prignano/pg/bin/python", "prefix": "/home/prignano/pg", "status": "PASS", "version": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pytest", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pluggy", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "metadata_packaging", "status": "PRESENT", "version": "26.0"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "metadata_iniconfig", "status": "ABSENT"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pygments", "status": "PRESENT", "version": "2.19.2"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "numpy_import", "status": "PASS", "version": "2.2.6"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "torch_import", "cuda_build": "12.8", "status": "PASS", "version": "2.10.0+cu128"}[m
+[32m+[m[32mCHECK: {"available": true, "candidate": "/home/prignano/pg", "capability": [9, 0], "check": "gpu_info", "device_count": 1, "name": "NVIDIA H100 NVL", "properties": "_CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=55e37d33-05bd-f862-37d0-5f1f7c978f97, pci_bus_id=33, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)", "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cuda_allocation", "device": "cuda:0", "elements": 8, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cuda_matmul", "dtype": "torch.float32", "max_error": 0.0, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cpu_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_orthogonality_error": 9.941793403073688e-16, "relative_reconstruction_error": 1.1241954303702247e-15, "shape": [16, 8], "singular_max": 2.203143951183863, "singular_min": 1.0143810512812164, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cuda_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_error_vs_cpu_float64": 1.5925741970669012e-15, "relative_polar_orthogonality_error": 2.4467498262233373e-15, "relative_reconstruction_error": 1.916185036636478e-15, "relative_singular_value_error_vs_cpu_float64": 1.1335822021376302e-15, "shape": [16, 8], "singular_max": 2.2031439511838644, "singular_min": 1.0143810512812175, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cuda_float32_svd_polar", "factor_dtype": "torch.float32", "input_dtype": "torch.float32", "relative_polar_error_vs_cpu_float64": 5.879905493099862e-07, "relative_polar_orthogonality_error": 1.1623910400829599e-06, "relative_reconstruction_error": 1.2404513311212165e-06, "relative_singular_value_error_vs_cpu_float64": 5.51220948879426e-07, "shape": [16, 8], "singular_max": 2.203144073486328, "singular_min": 1.014380693435669, "status": "PASS"}[m
+[32m+[m[32mCHECK: {"candidate": "/home/prignano/pg", "check": "cuda_bfloat16_svd_polar", "error": "NotImplementedError: \"svd_cuda_gesvdjBatched\" not implemented for 'BFloat16'", "status": "FAIL"}[m
+[32m+[m[32mCANDIDATE_RESULT: PASS {"candidate": "/home/prignano/pg", "required_failures": []}[m
+[32m+[m
+[32m+[m[32mJOB_RESULT: PASS[m
+[32m+[m[32m2026-09-25T18:13:05+02:00[m
+[1mdiff --git a/cluster/validate_existing_envs_h100.sbatch b/cluster/validate_existing_envs_h100.sbatch[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4736e4a[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/validate_existing_envs_h100.sbatch[m
+[36m@@ -0,0 +1,193 @@[m
+[32m+[m[32m#!/bin/bash[m
+[32m+[m[32m# Read-only GPU validation of two existing shared-home Python environments.[m
+[32m+[m[32m#SBATCH --job-name=qso-existing-h100[m
+[32m+[m[32m#SBATCH --partition=mat[m
+[32m+[m[32m#SBATCH --nodes=1[m
+[32m+[m[32m#SBATCH --ntasks=1[m
+[32m+[m[32m#SBATCH --cpus-per-task=2[m
+[32m+[m[32m#SBATCH --gres=gpu:1[m
+[32m+[m[32m#SBATCH --mem=12G[m
+[32m+[m[32m#SBATCH --time=00:08:00[m
+[32m+[m[32m#SBATCH --output=cluster/validate_existing_envs_h100-%j.log[m
+[32m+[m[32m#SBATCH --error=cluster/validate_existing_envs_h100-%j.log[m
+[32m+[m
+[32m+[m[32mset -euo pipefail[m
+[32m+[m[32mfail() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }[m
+[32m+[m[32m[[ ${SLURM_JOB_ID:-} =~ ^[0-9]+$ ]] || fail 'Submit with sbatch.'[m
+[32m+[m[32m[[ $(hostname -s) != lagrangectl ]] || fail 'Refusing to run on the login node.'[m
+[32m+[m[32m[[ ${CUDA_VISIBLE_DEVICES:-} != '' ]] || fail 'No allocated GPU is visible.'[m
+[32m+[m[32m[[ -d /home/prignano/qnormuon ]] || fail 'Project directory is not visible.'[m
+[32m+[m
+[32m+[m[32m# No toolkit or local package path is injected. Torch must use the installed[m
+[32m+[m[32m# wheels and the host driver as found in this allocation.[m
+[32m+[m[32mexport PATH=/usr/local/bin:/usr/bin:/bin[m
+[32m+[m[32munset LD_LIBRARY_PATH CUDA_HOME CUDA_PATH PYTHONPATH VIRTUAL_ENV CONDA_PREFIX[m
+[32m+[m[32mexport PYTHONDONTWRITEBYTECODE=1 PYTHONNOUSERSITE=1 CUDA_CACHE_DISABLE=1[m
+[32m+[m[32mexport OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=2 MKL_NUM_THREADS=2[m
+[32m+[m[32mexport HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1[m
+[32m+[m
+[32m+[m[32mprintf 'hostname=%s\n' "$(hostname)"[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[32m+[m[32mprintf 'SLURM_JOB_ID=%s\nSLURM_JOB_NODELIST=%s\nCUDA_VISIBLE_DEVICES=%s\n' \[m
+[32m+[m[32m  "$SLURM_JOB_ID" "${SLURM_JOB_NODELIST:-}" "${CUDA_VISIBLE_DEVICES:-}"[m
+[32m+[m[32mprintf 'SLURM_CPUS_PER_TASK=%s\nSLURM_MEM_PER_NODE=%s\n' \[m
+[32m+[m[32m  "${SLURM_CPUS_PER_TASK:-}" "${SLURM_MEM_PER_NODE:-}"[m
+[32m+[m[32mprintf 'PATH=%s\nLD_LIBRARY_PATH=%s\n' "$PATH" "${LD_LIBRARY_PATH:-<unset>}"[m
+[32m+[m[32mprintf 'pwd=%s\n' "$PWD"[m
+[32m+[m[32mnvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader[m
+[32m+[m
+[32m+[m[32mstatus=0[m
+[32m+[m[32mfor candidate in /home/prignano/modded-nanogpt/.venv /home/prignano/pg; do[m
+[32m+[m[32m    printf '\n=== CANDIDATE %s ===\n' "$candidate"[m
+[32m+[m[32m    if [[ ! -x "$candidate/bin/python" ]]; then[m
+[32m+[m[32m        printf 'CANDIDATE_RESULT: FAIL: Python executable missing\n'[m
+[32m+[m[32m        status=1[m
+[32m+[m[32m        continue[m
+[32m+[m[32m    fi[m
+[32m+[m[32m    if ! QSO_CANDIDATE="$candidate" "$candidate/bin/python" -I -B - <<'PY'[m
+[32m+[m[32mimport importlib.metadata as metadata[m
+[32m+[m[32mimport json[m
+[32m+[m[32mimport os[m
+[32m+[m[32mimport sys[m
+[32m+[m
+[32m+[m[32mname = os.environ['QSO_CANDIDATE'][m
+[32m+[m[32mresults = {}[m
+[32m+[m[32mfailures = [][m
+[32m+[m
+[32m+[m[32mdef emit(label, status, **details):[m
+[32m+[m[32m    results[label] = {'status': status, **details}[m
+[32m+[m[32m    print('CHECK:', json.dumps({'candidate': name, 'check': label, **results[label]}, sort_keys=True), flush=True)[m
+[32m+[m
+[32m+[m[32mdef probe(label, function, required=True):[m
+[32m+[m[32m    try:[m
+[32m+[m[32m        emit(label, 'PASS', **function())[m
+[32m+[m[32m    except Exception as exc:[m
+[32m+[m[32m        emit(label, 'FAIL', error=f'{type(exc).__name__}: {exc}')[m
+[32m+[m[32m        if required:[m
+[32m+[m[32m            failures.append(label)[m
+[32m+[m
+[32m+[m[32memit('python', 'PASS', executable=sys.executable, version=sys.version,[m
+[32m+[m[32m     prefix=sys.prefix)[m
+[32m+[m[32mif sys.version_info[:3] != (3, 10, 20) or sys.prefix != name:[m
+[32m+[m[32m    failures.append('python_expected_environment')[m
+[32m+[m
+[32m+[m[32mfor package in ('pytest', 'pluggy', 'packaging', 'iniconfig', 'pygments'):[m
+[32m+[m[32m    try:[m
+[32m+[m[32m        emit('metadata_' + package, 'PRESENT', version=metadata.version(package))[m
+[32m+[m[32m    except metadata.PackageNotFoundError:[m
+[32m+[m[32m        emit('metadata_' + package, 'ABSENT')[m
+[32m+[m
+[32m+[m[32mtry:[m
+[32m+[m[32m    import numpy as np[m
+[32m+[m[32m    emit('numpy_import', 'PASS', version=np.__version__)[m
+[32m+[m[32mexcept Exception as exc:[m
+[32m+[m[32m    emit('numpy_import', 'FAIL', error=f'{type(exc).__name__}: {exc}')[m
+[32m+[m[32m    failures.append('numpy_import')[m
+[32m+[m
+[32m+[m[32mtry:[m
+[32m+[m[32m    import torch[m
+[32m+[m[32m    emit('torch_import', 'PASS', version=torch.__version__, cuda_build=torch.version.cuda)[m
+[32m+[m[32mexcept Exception as exc:[m
+[32m+[m[32m    emit('torch_import', 'FAIL', error=f'{type(exc).__name__}: {exc}')[m
+[32m+[m[32m    print('CANDIDATE_RESULT: FAIL: torch import failed', flush=True)[m
+[32m+[m[32m    raise SystemExit(1)[m
+[32m+[m
+[32m+[m[32mtorch.set_num_threads(2)[m
+[32m+[m[32mtorch.backends.cuda.matmul.allow_tf32 = False[m
+[32m+[m[32mdevice = torch.device('cuda:0')[m
+[32m+[m
+[32m+[m[32mdef gpu_info():[m
+[32m+[m[32m    available = torch.cuda.is_available()[m
+[32m+[m[32m    details = {'available': available, 'device_count': torch.cuda.device_count()}[m
+[32m+[m[32m    if not available:[m
+[32m+[m[32m        raise RuntimeError(f'torch CUDA unavailable: {details}')[m
+[32m+[m[32m    details['name'] = torch.cuda.get_device_name(0)[m
+[32m+[m[32m    details['properties'] = str(torch.cuda.get_device_properties(0))[m
+[32m+[m[32m    details['capability'] = list(torch.cuda.get_device_capability(0))[m
+[32m+[m[32m    if 'H100' not in details['name']:[m
+[32m+[m[32m        raise RuntimeError(f'Allocated GPU is not H100: {details}')[m
+[32m+[m[32m    return details[m
+[32m+[m[32mprobe('gpu_info', gpu_info)[m
+[32m+[m
+[32m+[m[32mdef allocation():[m
+[32m+[m[32m    x = torch.ones(8, device=device)[m
+[32m+[m[32m    torch.cuda.synchronize()[m
+[32m+[m[32m    if x.sum().item() != 8:[m
+[32m+[m[32m        raise RuntimeError('GPU allocation produced incorrect values')[m
+[32m+[m[32m    return {'device': str(x.device), 'elements': x.numel()}[m
+[32m+[m[32mprobe('cuda_allocation', allocation)[m
+[32m+[m
+[32m+[m[32mdef matmul():[m
+[32m+[m[32m    a = torch.arange(16, dtype=torch.float32, device=device).reshape(4, 4)[m
+[32m+[m[32m    out = a @ torch.eye(4, dtype=torch.float32, device=device)[m
+[32m+[m[32m    torch.cuda.synchronize()[m
+[32m+[m[32m    if not torch.equal(out, a):[m
+[32m+[m[32m        raise RuntimeError('CUDA matrix product differs from identity product')[m
+[32m+[m[32m    return {'dtype': str(out.dtype), 'max_error': float((out - a).abs().max())}[m
+[32m+[m[32mprobe('cuda_matmul', matmul)[m
+[32m+[m
+[32m+[m[32m# One deterministic, full-column-rank tall matrix, used for every dtype and[m
+[32m+[m[32m# both devices. Full rank avoids comparing nonunique polar completions.[m
+[32m+[m[32mbase = torch.arange(128, dtype=torch.float64).reshape(16, 8) / 1000.0[m
+[32m+[m[32mbase[:8, :] += torch.diag(torch.linspace(1.0, 2.0, 8, dtype=torch.float64))[m
+[32m+[m
+[32m+[m[32mdef svd_polar(x):[m
+[32m+[m[32m    q, sigma, vt = torch.linalg.svd(x, full_matrices=False)[m
+[32m+[m[32m    polar = q @ vt  # Exactly the reference SmoothDual.evaluate path.[m
+[32m+[m[32m    return q, sigma, vt, polar[m
+[32m+[m
+[32m+[m[32mdef measured_svd(x, reference=None):[m
+[32m+[m[32m    q, sigma, vt, polar = svd_polar(x)[m
+[32m+[m[32m    if x.is_cuda:[m
+[32m+[m[32m        torch.cuda.synchronize()[m
+[32m+[m[32m    reconstruction = (q.double() * sigma.double().unsqueeze(-2)) @ vt.double()[m
+[32m+[m[32m    source = x.double()[m
+[32m+[m[32m    rel_reconstruction = (torch.linalg.vector_norm(reconstruction - source) /[m
+[32m+[m[32m                          torch.linalg.vector_norm(source)).item()[m
+[32m+[m[32m    gram = polar.double().T @ polar.double()[m
+[32m+[m[32m    orthogonality = (torch.linalg.vector_norm(gram - torch.eye(8, dtype=torch.float64,[m
+[32m+[m[32m                                                            device=x.device)) /[m
+[32m+[m[32m                     torch.linalg.vector_norm(torch.eye(8, dtype=torch.float64,[m
+[32m+[m[32m                                                        device=x.device))).item()[m
+[32m+[m[32m    details = {'input_dtype': str(x.dtype), 'factor_dtype': str(q.dtype),[m
+[32m+[m[32m               'shape': list(x.shape), 'relative_reconstruction_error': rel_reconstruction,[m
+[32m+[m[32m               'relative_polar_orthogonality_error': orthogonality,[m
+[32m+[m[32m               'singular_min': float(sigma[-1]), 'singular_max': float(sigma[0])}[m
+[32m+[m[32m    if reference is not None:[m
+[32m+[m[32m        ref_sigma, ref_polar = reference[m
+[32m+[m[32m        details['relative_singular_value_error_vs_cpu_float64'] = ([m
+[32m+[m[32m            torch.linalg.vector_norm(sigma.double().cpu() - ref_sigma) /[m
+[32m+[m[32m            torch.linalg.vector_norm(ref_sigma)).item()[m
+[32m+[m[32m        details['relative_polar_error_vs_cpu_float64'] = ([m
+[32m+[m[32m            torch.linalg.vector_norm(polar.double().cpu() - ref_polar) /[m
+[32m+[m[32m            torch.linalg.vector_norm(ref_polar)).item()[m
+[32m+[m[32m    return details[m
+[32m+[m
+[32m+[m[32mreference = None[m
+[32m+[m[32mtry:[m
+[32m+[m[32m    _, cpu_sigma, _, cpu_polar = svd_polar(base)[m
+[32m+[m[32m    reference = (cpu_sigma, cpu_polar)[m
+[32m+[m[32m    emit('cpu_float64_svd_polar', 'PASS', **measured_svd(base))[m
+[32m+[m[32mexcept Exception as exc:[m
+[32m+[m[32m    emit('cpu_float64_svd_polar', 'FAIL', error=f'{type(exc).__name__}: {exc}')[m
+[32m+[m[32m    failures.append('cpu_float64_svd_polar')[m
+[32m+[m
+[32m+[m[32mfor dtype, label in ((torch.float64, 'float64'),[m
+[32m+[m[32m                     (torch.float32, 'float32'),[m
+[32m+[m[32m                     (torch.bfloat16, 'bfloat16')):[m
+[32m+[m[32m    def run(dtype=dtype):[m
+[32m+[m[32m        return measured_svd(base.to(device=device, dtype=dtype), reference)[m
+[32m+[m[32m    probe('cuda_' + label + '_svd_polar', run, required=(dtype != torch.bfloat16))[m
+[32m+[m
+[32m+[m[32mprint('CANDIDATE_RESULT:', 'PASS' if not failures else 'FAIL',[m
+[32m+[m[32m      json.dumps({'candidate': name, 'required_failures': failures}, sort_keys=True), flush=True)[m
+[32m+[m[32mraise SystemExit(0 if not failures else 1)[m
+[32m+[m[32mPY[m
+[32m+[m[32m    then[m
+[32m+[m[32m        status=1[m
+[32m+[m[32m    fi[m
+[32m+[m[32mdone[m
+[32m+[m
+[32m+[m[32mprintf '\nJOB_RESULT: %s\n' "$([[ $status -eq 0 ]] && echo PASS || echo FAIL)"[m
+[32m+[m[32mdate --iso-8601=seconds[m
+[32m+[m[32mexit "$status"[m
+[1mdiff --git a/cluster/validate_lagrange-22022.log b/cluster/validate_lagrange-22022.log[m
+[1mnew file mode 100644[m
+[1mindex 0000000..c2fc677[m
+[1m--- /dev/null[m
+[1m+++ b/cluster/validate_lagrange-22022.log[m
+[36m@@ -0,0 +1,341 @@[m
+[32m+[m
+[32m+[m[32m## Identity and allocation[m
+[32m+[m
+[32m+[m[32m$ hostname[m
+[32m+[m[32mlagrange0[m
+[32m+[m[32m[exit=0][m
+[32m+[m
+[32m+[m[32m$ date --iso-8601=seconds[m
+[32m+[m[32m2026-09-25T16:44:58+02:00[m
+[32m+[m[32m[exit=0][m
+[32m+[m[32mSLURM_JOB_ID=22022[m
+[32m+[m[32mSLURM_JOB_NODELIST=lagrange0[m
+[32m+[m[32mCUDA_VISIBLE_DEVICES=0[m
+[32m+[m[32mSLURM_JOB_GPUS=0[m
+[32m+[m[32mSLURM_CPUS_PER_TASK=1[m
+[32m+[m[32mSLURM_CPUS_ON_NODE=2[m
+[32m+[m[32mSLURM_MEM_PER_NODE=2048[m
+[32m+[m[32mSLURM_SUBMIT_DIR=/home/prignano/qnormuon[m
+[32m+[m
+[32m+[m[32m$ scontrol show job 22022[m
+[32m+[m[32mJobId=22022 JobName=qso-env-validation[m
+[32m+[m[32m   UserId=prignano(1021) GroupId=prignano(1021) MCS_label=N/A[m
+[32m+[m[32m   Priority=1 Nice=0 Account=castelnuovo QOS=castelnuovo_qos[m
+[32m+[m[32m   JobState=RUNNING Reason=None Dependency=(null)[m
+[32m+[m[32m   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0[m
+[32m+[m[32m   RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A[m
+[32m+[m[32m   SubmitTime=2026-09-25T16:44:58 EligibleTime=2026-09-25T16:44:58[m
+[32m+[m[32m   AccrueTime=2026-09-25T16:44:58[m
+[32m+[m[32m   StartTime=2026-09-25T16:44:58 EndTime=2026-09-25T16:49:58 Deadline=N/A[m
+[32m+[m[32m   PreemptEligibleTime=2026-09-25T16:44:58 PreemptTime=None[m
+[32m+[m[32m   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-25T16:44:58 Scheduler=Main[m
+[32m+[m[32m   Partition=mat AllocNode:Sid=lagrangectl:1194850[m
+[32m+[m[32m   ReqNodeList=(null) ExcNodeList=(null)[m
+[32m+[m[32m   NodeList=lagrange0[m
+[32m+[m[32m   BatchHost=lagrange0[m
+[32m+[m[32m   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*[m
+[32m+[m[32m   ReqTRES=cpu=1,mem=2G,node=1,billing=1,gres/gpu=1[m
+[32m+[m[32m   AllocTRES=cpu=2,mem=2G,node=1,billing=2,gres/gpu=1[m
+[32m+[m[32m   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*[m
+[32m+[m[32m   MinCPUsNode=1 MinMemoryNode=2G MinTmpDiskNode=0[m
+[32m+[m[32m   Features=(null) DelayBoot=00:00:00[m
+[32m+[m[32m   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)[m
+[32m+[m[32m   Command=/home/prignano/qnormuon/cluster/validate_lagrange.sbatch[m
+[32m+[m[32m   WorkDir=/home/prignano/qnormuon[m
+[32m+[m[32m   StdErr=/home/prignano/qnormuon/cluster/validate_lagrange-22022.log[m
+[32m+[m[32m   StdIn=/dev/null[m
+[32m+[m[32m   StdOut=/home/prignano/qnormuon/cluster/validate_lagrange-22022.log[m
+[32m+[m[32m   Power=[m
+[32m+[m[32m   TresPerNode=gres/gpu:1[m
+[32m+[m[32m   TresPerTask=cpu:1[m
+[32m+[m[41m   [m
+[32m+[m
+[32m+[m[32m[exit=0][m
+[32m+[m
+[32m+[m[32m## GPU inventory (management visibility may exceed allocation)[m
+[32m+[m
+[32m+[m[32m$ nvidia-smi[m
+[32m+[m[32mFri Sep 25 16:44:58 2026[m[41m       [m
+[32m+[m[32m+-----------------------------------------------------------------------------------------+[m
+[32m+[m[32m| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |[m
+[32m+[m[32m|-----------------------------------------+--------
