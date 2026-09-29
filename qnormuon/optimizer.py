@@ -42,7 +42,7 @@ def regular_canonicalize(up, down, *, dtype=torch.float32):
     """Return U_bar, D_bar, sqrt(h), without materializing h or clamping.
 
     Scaled float64 norms and sqrt(r)/sqrt(s) avoid raw-square overflow.
-    Canonical weights have solver dtype; the lift scale remains float64.
+    Canonical weights have the requested representation dtype; the lift is float64.
     """
     if dtype not in (torch.float32, torch.float64):
         raise ValueError("canonical arithmetic requires float32 or float64")
@@ -67,9 +67,11 @@ class QuotientSpectralOptimizer(Optimizer):
     No bias correction, Nesterov, weight decay or balancing is implicit.
     Missing both gradients skips a pair; one missing gradient is an error.
     """
-    def __init__(self, pairs, *, lr=1e-3, beta=0.95, solver=None, diagnostics=True):
+    def __init__(self, pairs, *, lr=1e-3, beta=0.95, solver=None, momentum_dtype=torch.float32, diagnostics=True):
         if not math.isfinite(lr) or lr < 0 or not math.isfinite(beta) or not 0 <= beta < 1:
             raise ValueError("require finite lr >= 0 and beta in [0,1)")
+        if momentum_dtype not in (torch.float32, torch.float64):
+            raise ValueError("momentum dtype must be float32 or float64")
         pairs = list(pairs)
         if not pairs or any(not isinstance(p, SwiGLUPair) for p in pairs):
             raise ValueError("register a nonempty sequence of named SwiGLUPair objects")
@@ -83,7 +85,7 @@ class QuotientSpectralOptimizer(Optimizer):
         self.last_diagnostics = {}
         self._registration_closed = False
         groups = [dict(params=[p.up, p.down], pair_name=p.name) for p in self.pairs]
-        super().__init__(groups, dict(lr=lr, beta=beta, solver=asdict(solver or SolverConfig())))
+        super().__init__(groups, dict(lr=lr, beta=beta, momentum_dtype=momentum_dtype, solver=asdict(solver or SolverConfig())))
         self._registration_closed = True
 
     def add_param_group(self, param_group):
@@ -107,20 +109,28 @@ class QuotientSpectralOptimizer(Optimizer):
             if up.grad.is_sparse or down.grad.is_sparse:
                 raise ValueError("sparse gradients are unsupported")
             config = SolverConfig(**group["solver"])
+            momentum_dtype = group["momentum_dtype"]
+            if momentum_dtype not in (torch.float32, torch.float64):
+                raise ValueError("momentum dtype must be float32 or float64")
             beta, lr = group["beta"], group["lr"]
             if not math.isfinite(lr) or lr < 0 or not 0 <= beta < 1:
                 raise ValueError("invalid optimizer group controls")
             with torch.autocast(device_type=up.device.type, enabled=False):
-                u, d, root = regular_canonicalize(up, down, dtype=config.dtype)
+                u, d, root = regular_canonicalize(up, down, dtype=momentum_dtype)
                 # Exactly one raw-to-canonical covector transformation.
-                gu = (root[:, None] * up.grad.double()).to(config.dtype)
-                gd = (down.grad.T.double() / root[:, None]).to(config.dtype)
+                gu = (root[:, None] * up.grad.double()).to(momentum_dtype)
+                gd = (down.grad.T.double() / root[:, None]).to(momentum_dtype)
                 old = self.state.get(up, {})
                 mu = beta * old.get("momentum_up", torch.zeros_like(gu)) + (1 - beta) * gu
                 md = beta * old.get("momentum_down_t", torch.zeros_like(gd)) + (1 - beta) * gd
-                result = solve_coupled(u, d, torch.stack((mu, md)), config=config,
+                # Preserve canonical representation/EMA; promote BEFORE any dual
+                # residual, SVD, or Newton work. There is no fp32 trial/retry.
+                su, sd = u.to(config.dtype), d.to(config.dtype)
+                objective = torch.stack((mu, md)).to(config.dtype)
+                result = solve_coupled(su, sd, objective, config=config,
                                        initial_lambda=old.get("lambda"))
                 metrics = dict(result.metrics, model_dtype=str(up.dtype),
+                               momentum_dtype=str(momentum_dtype), canonical_dtype=str(momentum_dtype),
                                returned_update_dtype=str(up.dtype), pair_name=pair.name)
                 diagnostics[pair.name] = metrics
                 if not result.converged:
@@ -157,13 +167,14 @@ class QuotientSpectralOptimizer(Optimizer):
 
     def state_dict(self):
         result = super().state_dict()
-        result["qso_format_version"] = 1
+        result["qso_format_version"] = 2
         result["qso_pairs"] = self._topology()
         return result
 
     def load_state_dict(self, state_dict):
         saved = copy.deepcopy(state_dict)
-        if saved.pop("qso_format_version", None) != 1 or saved.pop("qso_pairs", None) != self._topology():
+        version = saved.pop("qso_format_version", None)
+        if version not in (1, 2) or saved.pop("qso_pairs", None) != self._topology():
             raise ValueError("checkpoint named pair topology does not match")
         groups = saved["param_groups"]
         if len(groups) != len(self.pairs):
@@ -172,14 +183,26 @@ class QuotientSpectralOptimizer(Optimizer):
         for pair, group in zip(self.pairs, groups):
             if group["pair_name"] != pair.name or len(group["params"]) != 2:
                 raise ValueError("checkpoint pair identity/order mismatch")
+            if version == 1:
+                # Legacy checkpoints coupled EMA to solver dtype. Preserve their
+                # explicit old policy; loading is not an implicit policy migration.
+                dtype = group["solver"]["dtype"]
+                group["momentum_dtype"] = dtype
+                if group["solver"].get("tolerance") is None:
+                    group["solver"]["tolerance"] = 1e-8 if dtype == torch.float64 else 3e-5
+                if group["solver"].get("rcond_guard") is None:
+                    group["solver"]["rcond_guard"] = 1e-8 if dtype == torch.float64 else 1e-4
             config = SolverConfig(**group["solver"])
+            momentum_dtype = group["momentum_dtype"]
+            if momentum_dtype not in (torch.float32, torch.float64):
+                raise ValueError("invalid checkpoint momentum dtype")
             if saved["state"].get(group["params"][1]):
                 raise ValueError("unexpected down-parameter state")
             source = saved["state"].get(group["params"][0], {})
             if source:
                 target = {}
-                for key, shape, dtype in (("momentum_up", pair.up.shape, config.dtype),
-                                          ("momentum_down_t", pair.up.shape, config.dtype),
+                for key, shape, dtype in (("momentum_up", pair.up.shape, momentum_dtype),
+                                          ("momentum_down_t", pair.up.shape, momentum_dtype),
                                           ("lambda", (pair.up.shape[0],), torch.float64)):
                     value = source[key]
                     if value.shape != shape or value.dtype != dtype or not torch.isfinite(value).all():

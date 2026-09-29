@@ -51,9 +51,9 @@ def _validate(u, d, a):
 
 @dataclass(frozen=True)
 class SolverConfig:
-    dtype: torch.dtype = torch.float32
-    tolerance: float | None = None
-    rcond_guard: float | None = None
+    dtype: torch.dtype = torch.float64
+    tolerance: float | None = 3e-5
+    rcond_guard: float | None = 1e-4
     initial_iterations: int = 2
     max_iterations: int = 100
     max_cg: int = 30
@@ -216,8 +216,8 @@ def _solve(u, d, a, *, config, initial_lambda=None):
     _validate(u, d, a)
     dtype = a.dtype
     eps = torch.finfo(dtype).eps
-    tolerance = (1e-8 if dtype == torch.float64 else 3e-5) if tolerance is None else tolerance
-    guard = (1e-8 if dtype == torch.float64 else 1e-4) if rcond_guard is None else rcond_guard
+    tolerance = 3e-5 if tolerance is None else tolerance
+    guard = 1e-4 if rcond_guard is None else rcond_guard
     if tolerance <= 0 or not 0 < guard < 1:
         raise ValueError("positive tolerance and rcond guard in (0,1) required")
     counts = Counts()
@@ -352,7 +352,7 @@ def solve_coupled(u, d, a, *, config=None, initial_lambda=None):
             result = _reference(u.double(), d.double(), a.double(), config.reference_max_iterations)
             result.fallback = True
             result.reason = "svd_failure: " + str(error)
-        tolerance = config.tolerance or (1e-8 if config.dtype == torch.float64 else 3e-5)
+        tolerance = config.tolerance if config.tolerance is not None else 3e-5
         result.converged = result.converged and accepted(result.metrics, tolerance)
         result.metrics.update({
             "newton_iterations": result.iterations if result.method == "newton" else 0,
@@ -365,6 +365,8 @@ def solve_coupled(u, d, a, *, config=None, initial_lambda=None):
             "fallback_used": result.fallback,
             "fallback_reason": result.reason if result.fallback else None,
             "solver_dtype": str(config.dtype),
+            "gap_tolerance": tolerance,
+            "fallback_backend": "cpu_float64_reference_admm" if result.fallback else None,
             "certification_dtype": "torch.float64",
             "returned_direction_dtype": str(result.pair.dtype),
             "secondary_selection": result.secondary_selection,

@@ -1,4 +1,126 @@
-# Tiny Transformer: first offline smoke results
+# Tiny Transformer: direct-fp64 Stage-C smoke and historical fp32 attempt
+
+## Current Stage-C result: direct-fp64 paired solve
+
+**Practicality classification: B — numerically stable but computationally
+impractical for an LR sweep in the current implementation.** Both AdamW and
+QSO completed the same 50-step, 102,400-token H100 smoke. QSO certified all
+300 paired solves at the unchanged `3e-5` gap target with **zero fallbacks**,
+finite losses/updates, and exact full-size checkpoint continuation. Its warm
+median step took **2.665 s**, about **80 times** AdamW's **0.0334 s**;
+the paired optimizer occupied about **99%** of measured QSO step time. This
+resolves the earlier fp32 certification failure but does not establish a
+practical training cost. No LR sweep, multi-seed comparison, gauge trajectory,
+or long run was started.
+
+Job **28914** completed on `lagrange0`, one NVIDIA H100 NVL, 4 CPUs, 16 GiB,
+SLURM elapsed **2m45s**, exit `0:0`. Runtime was Python 3.10.20,
+torch 2.10.0+cu128, NumPy 2.2.6; model storage fp32, forward/backward bf16
+autocast, canonical momentum fp32, paired solver/SVD/recovery/certificate
+fp64, TF32 disabled. Raw log:
+[run_tiny_smoke-28914.log](../cluster/run_tiny_smoke-28914.log). The two
+structured run directories are
+`/home/prignano/qnormuon-runs/tiny-transformer/smoke-28914-adamw-seed2026/`
+and
+`/home/prignano/qnormuon-runs/tiny-transformer/smoke-28914-qso-seed2026/`.
+They contain provenance, per-step JSONL, per-solve JSONL, summaries and one
+checkpoint each. The local network guard was active; no asset download was
+requested or observed.
+
+The model remained **11,457,408 parameters**, with six `[1024,384]` coupled
+pairs. Both methods used initialization SHA256
+`0607adc4c9cffa7b902c0956fa7477ea274078fdc31406d84d527b79ca6a2401`
+and identical batch hashes at all 50 steps. FineWeb SP1024 token-prefix hashes,
+batch size 16, context 128, seed 2026, five-step warmup, cosine schedule,
+evaluation batches, AdamW peak LR `3e-4`, QSO paired peak LR `1e-3`, and
+unsupported-parameter AdamW were unchanged from the first attempt. The only
+intended optimizer policy change was **direct fp64 paired solving** at the
+existing `3e-5` target and `1e-4` rcond guard; no fp32-first retry occurs.
+
+| Measurement, 50 completed steps | AdamW | QSO + AdamW |
+| --- | ---: | ---: |
+| First / last training loss | 7.010503 / 6.022851 | 7.010503 / 6.025261 |
+| Initial / final validation loss | 6.998700 / 5.982066 | 6.998700 / 5.984854 |
+| Measured training-step sum | 1.942 s | 137.579 s |
+| Measured optimizer sum | 0.149 s | 136.178 s |
+| Optimizer fraction of step sum | 7.65% | 98.98% |
+| Overall measured-step throughput | 52,731 tokens/s | 744 tokens/s |
+| Peak PyTorch GPU allocation | 745,862,144 B (711 MiB) | 724,071,424 B (691 MiB) |
+| Three-step checkpoint replay | exact | exact |
+
+The validation losses at steps 10/20/30/40/50 were AdamW
+`6.223100/6.030417/5.999305/5.988474/5.982066` and QSO
+`6.229504/6.032339/6.001319/5.990697/5.984854`. Both decreased on this
+single short run; the unswept learning rates do not support an optimizer-quality
+ranking. All gradient, parameter and update finiteness checks passed. QSO's
+first and last update/parameter RMS ratios were approximately `0.001687` and
+`0.000145`. Its measured live GPU allocation averaged 242.0 MB over steps
+5–9 and 240.5 MB over the last five steps, with no observed growth. PyTorch
+allocation excludes CUDA context, driver memory and CPU memory.
+
+### QSO certificates, warm starts, and fallbacks
+
+All **300/300** smooth pair solves converged. The normalized gap had median
+`2.27e-6`, p95 `1.89e-5`, maximum `2.99575e-5` against the unchanged
+`3e-5` limit. The maximum raw horizontal residual was `2.08e-17`; spectral
+excess was zero. The smallest residual rcond was `9.78e-4`, above the
+`1e-4` guard. The gap maximum is close to the threshold; this is 50-step
+empirical certification, not a margin guarantee for other trajectories.
+
+Newton certification bins were **0/0/269/31** for 0/1/2/3+ iterations; the
+maximum was 3. The cold first step contributed 0/0/1/5, and the remaining
+49 steps contributed 0/0/268/26. CG iterations had mean `4.79`, median 5,
+p95 6, maximum 9. Warm states therefore usually certified at the initial
+two-iteration budget, though warm starting did not reduce solves to zero or
+one iteration in this trajectory. **Fallback count and CPU ADMM time were zero**;
+there are no fallback reasons to report. The generic CPU reference solver was
+not part of the measured normal path.
+
+### Synchronized timing and practicality
+
+Timings below use steps 5–49, excluding five identified first-use/warmup
+steps. Values are per full optimizer step across six pairs. Instrumentation
+synchronizes CUDA around nested solver functions and is observational; it may
+add overhead. Nested categories **overlap**: residual SVD/polar includes SVD,
+certificate includes `svdvals`, and CG includes HVP. They must not be summed.
+
+| Timed category | Median | p95 |
+| --- | ---: | ---: |
+| AdamW full step | 0.03337 s | 0.03942 s |
+| QSO full step | 2.66489 s | 2.79889 s |
+| QSO forward/backward | 0.01279 s | 0.01366 s |
+| QSO complete optimizer | 2.63728 s | 2.77061 s |
+| QSO six paired solver calls | 2.37244 s | 2.50700 s |
+| Unsupported-parameter AdamW within QSO | 0.00193 s | 0.00210 s |
+| Residual SVD/polar evaluations | 0.78513 s | 0.83163 s |
+| All `torch.linalg.svd` calls | 0.77623 s | 0.82233 s |
+| Recovery/certificate, including `svdvals` | 1.53964 s | 1.62561 s |
+| All `torch.linalg.svdvals` calls | 1.52049 s | 1.60539 s |
+| Newton CG, including HVP | 0.02214 s | 0.02438 s |
+| HVP alone | 0.01429 s | 0.01577 s |
+| CPU reference ADMM fallback | 0 s | 0 s |
+
+The **cold first QSO step** took 3.557 s, including 3.528 s in the optimizer
+and 3.264 s in six pair solves; it is retained in the raw output and overall
+totals. QSO's warm median throughput was 769 tokens/s versus AdamW's
+61,368 tokens/s. The dominant measured work is GPU SVD and certificate
+spectral-value evaluation; CG/HVP is small. The current 50-step result therefore
+passes numerical stability but fails the present practicality gate for an LR
+sweep. Performance optimization is a separate task and was not attempted here.
+
+### Checkpoint and remaining scope
+
+Both methods saved after step 25 and replayed the next three minibatches from
+disk. Model parameters, losses and optimizer state all matched the uninterrupted
+run with maximum recorded error **zero**. The QSO checkpoint was 118,734,531
+bytes and includes canonical momentum, original lambda, step count, unsupported
+AdamW and scheduler/RNG state; AdamW's was 137,563,275 bytes. No memory-growth
+or nonfinite issue appeared over 50 steps. One seed and one LR per method leave
+quality, LR sensitivity, longer-run reliability and gauge-reset trajectories
+unresolved. The earlier `1e-8` warm-start line-search failure remains a separate
+known limitation and was not invoked by this `3e-5` production run.
+
+## Historical record: first fp32 Stage-C attempt (job 28897)
 
 **Stage C did not pass for QSO.** AdamW completed 50 steps on the H100. QSO
 encountered repeated costly reference fallbacks during its first step and hit
@@ -287,8 +409,9 @@ sbatch --parsable cluster/test_tiny_harness.sbatch
 sbatch --parsable cluster/run_tiny_smoke.sbatch
 ```
 
-The second command reproduces the current smoke configuration, including its
-known QSO failure risk; it is not a sweep launcher.
+The second command now reproduces the direct-fp64 Stage-C configuration reported
+above; it is not a sweep launcher. This historical section describes the earlier
+fp32 run and should not be read as the current solver policy.
 
 ## H. Limitations and decision
 

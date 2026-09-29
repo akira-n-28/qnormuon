@@ -44,7 +44,7 @@ def record(result, seconds):
 def solve(u, d, a, dtype, lam=None, budget=100, tol=None):
     sync(); start=time.perf_counter()
     result=cs.solve_coupled(u,d,a, initial_lambda=lam,
-        config=cs.SolverConfig(dtype=dtype, tolerance=tol, rcond_guard=1e-4,
+        config=cs.SolverConfig(dtype=dtype, tolerance=tol if tol is not None else (1e-8 if dtype == torch.float64 else 3e-5), rcond_guard=1e-4,
                                max_iterations=budget, fallback=False))
     sync()
     return result, record(result,time.perf_counter()-start)
@@ -310,6 +310,10 @@ def main():
     if args.tolerance not in (1e-8,3e-5):parser.error('study permits only strict 1e-8 or existing 3e-5 target')
     signal.signal(signal.SIGALRM,lambda *args: (_ for _ in ()).throw(TimeoutError('diagnostic budget')))
     c=json.loads(Path('configs/tiny_transformer/smoke.json').read_text())
+    if args.phase == 'mini':
+        # Recreate the original fp32 boundary for the historical injection
+        # study even though the production smoke config now selects fp64.
+        c['solver']['dtype'] = 'float32'
     out=Path(c['output_root'])/f"precision-{os.environ['SLURM_JOB_ID']}-{args.phase}"
     out.mkdir(parents=True,exist_ok=False)
     write(out/'environment.json',dict(python=platform.python_version(),torch=torch.__version__,cuda=torch.version.cuda,

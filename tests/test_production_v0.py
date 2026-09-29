@@ -32,7 +32,7 @@ def test_full_rank_reference_certificates_and_finite_step(seed, dtype, tol, devi
     oracle = reference(u, d, a)
     spectrum = torch.linalg.svdvals(a.double() - adjoint(u.double(), d.double(), oracle.lam))
     assert float((spectrum[:, -1] / spectrum[:, 0]).min()) > 1e-3
-    r = solve_coupled(u.to(device), d.to(device), a.to(device), config=SolverConfig(dtype=dtype))
+    r = solve_coupled(u.to(device), d.to(device), a.to(device), config=SolverConfig(dtype=dtype,tolerance=tol))
     assert r.converged and not r.fallback
     assert r.metrics['normalized_gap'] <= tol
     assert r.metrics['normalized_horizontal_residual'] <= 1e-10
@@ -49,11 +49,11 @@ def test_full_rank_reference_certificates_and_finite_step(seed, dtype, tol, devi
 def test_exact_zero_intrinsic_cotangent_and_no_parameter_motion(vertical):
     u = torch.tensor([[1., 0.], [0., 1.], [1., 0.]], dtype=torch.float64)
     a = adjoint(u, u, torch.tensor([2., -4., 8.], dtype=u.dtype)) if vertical else torch.zeros(2,3,2,dtype=u.dtype)
-    r = solve_coupled(u, u, a, config=SolverConfig(dtype=u.dtype))
+    r = solve_coupled(u, u, a, config=SolverConfig(dtype=u.dtype,tolerance=1e-8,rcond_guard=1e-8))
     assert r.converged and torch.count_nonzero(r.pair) == 0
     p = SwiGLUPair('zero', torch.nn.Parameter(u.clone()), torch.nn.Parameter(u.T.clone()))
     p.up.grad, p.down.grad = a[0], a[1].T
-    opt = QSO([p], beta=0, solver=SolverConfig(dtype=u.dtype))
+    opt = QSO([p], beta=0, solver=SolverConfig(dtype=u.dtype,tolerance=1e-8,rcond_guard=1e-8))
     opt.step()
     assert torch.equal(p.up, u) and torch.equal(p.down, u.T)
 
@@ -64,7 +64,7 @@ def test_extreme_positive_gauge_and_complete_momentum_lift(dtype, extent, tol):
     c = torch.logspace(-extent, extent, 7, dtype=dtype)
     gauged = SwiGLUPair('block', torch.nn.Parameter(base.up.detach()*c[:,None]),
                        torch.nn.Parameter(base.down.detach()/c))
-    opts = [QSO([p], lr=.01, beta=.7, solver=SolverConfig(dtype=dtype)) for p in (base,gauged)]
+    opts = [QSO([p], lr=.01, beta=.7, momentum_dtype=dtype, solver=SolverConfig(dtype=dtype,tolerance=1e-8 if dtype==torch.float64 else 3e-5)) for p in (base,gauged)]
     for _ in range(3):
         gauged.up.grad = base.up.grad / c[:,None]
         gauged.down.grad = base.down.grad * c
@@ -106,22 +106,22 @@ def test_promoted_storage_path_autocast_and_no_bf16_svd(monkeypatch, device, dty
     before=p.up.detach().clone()
     with torch.autocast(device_type=device,dtype=torch.bfloat16):
         opt.step()
-    assert seen and torch.float32 in seen
+    assert seen and set(seen) == {torch.float64}
     assert p.up.dtype == dtype and not torch.equal(before,p.up)
     assert opt.state[p.up]['momentum_up'].dtype == torch.float32
     assert opt.state[p.up]['lambda'].dtype == torch.float64
-    assert opt.last_diagnostics['block']['solver_dtype']=='torch.float32'
+    assert opt.last_diagnostics['block']['solver_dtype']=='torch.float64'
 
 
 def test_warm_lambda_original_coordinates_when_weights_and_objective_change(monkeypatch):
     frames=synthetic_sequence(m=24,n=8,steps=3)
-    first=solve_coupled(*frames[0],config=SolverConfig(dtype=torch.float64))
+    first=solve_coupled(*frames[0],config=SolverConfig(dtype=torch.float64,tolerance=1e-8,rcond_guard=1e-8))
     u,d,a=frames[1]
     # Nonuniform constraint scaling and objective scaling change internal z.
     scale=torch.logspace(-2,2,u.shape[0],dtype=u.dtype)
     warm=solve_coupled(u*scale[:,None],d*scale[:,None],3*a,
-                      initial_lambda=3*first.lam/scale,config=SolverConfig(dtype=u.dtype))
-    cold=solve_coupled(u*scale[:,None],d*scale[:,None],3*a,config=SolverConfig(dtype=u.dtype))
+                      initial_lambda=3*first.lam/scale,config=SolverConfig(dtype=u.dtype,tolerance=1e-8,rcond_guard=1e-8))
+    cold=solve_coupled(u*scale[:,None],d*scale[:,None],3*a,config=SolverConfig(dtype=u.dtype,tolerance=1e-8,rcond_guard=1e-8))
     assert warm.converged and cold.converged and warm.iterations < cold.iterations
     close(warm.pair,cold.pair,2e-4)
     import qnormuon.optimizer as module
@@ -132,7 +132,7 @@ def test_warm_lambda_original_coordinates_when_weights_and_objective_change(monk
         return original(*args,**kw)
     monkeypatch.setattr(module,'solve_coupled',observed)
     p=pair()
-    opt=QSO([p],solver=SolverConfig(dtype=torch.float64))
+    opt=QSO([p],solver=SolverConfig(dtype=torch.float64,tolerance=1e-8,rcond_guard=1e-8))
     opt.step()
     previous=opt.state[p.up]['lambda'].clone()
     opt.step()
@@ -170,13 +170,13 @@ def test_checkpoint_roundtrip_named_order_independent_and_precision_preserved(dt
 
 def test_fallback_rank_loss_and_fractional_direction_are_observable():
     u,d,a,expected=fractional_example()
-    r=solve_coupled(u,d,a,config=SolverConfig(dtype=torch.float64))
+    r=solve_coupled(u,d,a,config=SolverConfig(dtype=torch.float64,tolerance=1e-8,rcond_guard=1e-8))
     assert r.converged and r.fallback
     assert r.reason=='gap_stagnation'  # independently reproduced by the research solver
     assert 'primary_only' in r.secondary_selection
     close(r.pair,expected,3e-8)
     a=torch.zeros_like(a);a[:,0,0]=1.;a[:,1,1]=1e-12
-    r=solve_coupled(u,u,a,config=SolverConfig(dtype=torch.float64))
+    r=solve_coupled(u,u,a,config=SolverConfig(dtype=torch.float64,tolerance=1e-8,rcond_guard=1e-8))
     assert r.fallback and r.converged
     assert r.reason == 'ill_conditioned_residual'
     assert r.metrics['normalized_gap']<1e-8
@@ -206,7 +206,7 @@ def test_transpose_raw_covector_once_and_finite_delta_x_against_reference():
     a=torch.stack((root[:,None]*p.up.grad,p.down.grad.T/root[:,None]))
     oracle=reference(u,d,a)
     before_u,before_d=p.up.detach().clone(),p.down.detach().T.clone()
-    opt=QSO([p],beta=0,lr=.01,solver=SolverConfig(dtype=torch.float64,tolerance=1e-11))
+    opt=QSO([p],beta=0,lr=.01,momentum_dtype=torch.float64,solver=SolverConfig(dtype=torch.float64,tolerance=1e-11))
     opt.step()
     close(opt.state[p.up]['momentum_up'],a[0],1e-13)
     close(opt.state[p.up]['momentum_down_t'],a[1],1e-13)
@@ -226,7 +226,7 @@ def test_actual_swiglu_midtraining_gauge_reset():
     gate=torch.randn(7,3,generator=rng,dtype=torch.float64)
     target=torch.randn(16,3,generator=rng,dtype=torch.float64)
     forward=lambda p:(F.silu(x@gate.T)*(x@p.up.T))@p.down.T
-    opts=[QSO([v],solver=SolverConfig(dtype=torch.float64,tolerance=1e-11)) for v in (p,q)]
+    opts=[QSO([v],momentum_dtype=torch.float64,solver=SolverConfig(dtype=torch.float64,tolerance=1e-11)) for v in (p,q)]
     c=torch.logspace(-5,5,7,dtype=torch.float64)
     for step in range(4):
         if step==2:
@@ -285,7 +285,7 @@ def test_native_fp32_random_case_requires_observable_rank_boundary_fallback(devi
 @pytest.mark.parametrize('scale', [1e-12, 1e-200])
 def test_tiny_nonzero_intrinsic_objective_is_not_truncated(scale):
     u,d,a=random_example(902)
-    r=solve_coupled(u,d,scale*a,config=SolverConfig(dtype=torch.float64))
+    r=solve_coupled(u,d,scale*a,config=SolverConfig(dtype=torch.float64,tolerance=1e-8,rcond_guard=1e-8))
     oracle=reference(u,d,a)
     assert r.converged and r.pair.norm()>1
     close(r.pair,oracle.pair,2e-4)

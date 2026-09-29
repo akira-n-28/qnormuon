@@ -1,7 +1,7 @@
 """Auditable single-device causal SwiGLU benchmark with no network loaders.
 
 Training is launched only from cluster/run_tiny_smoke.py in a SLURM allocation.
-Float32 parameters, bf16 autocast forward/backward, explicit QSO fp32 solves.
+Float32 parameters, bf16 autocast forward/backward, explicit QSO fp64 solves with fp32 canonical momentum.
 """
 from __future__ import annotations
 from contextlib import nullcontext

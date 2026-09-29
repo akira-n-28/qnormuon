@@ -2,7 +2,8 @@
 
 The new API is `QuotientSpectralOptimizer`, `SwiGLUPair`, and `SolverConfig`.
 The historical `QNorMuon` API and its tests remain unchanged. This is an
-initial auditable implementation, not a throughput claim or a training result.
+auditable implementation. The current default is direct fp64 pair solving with
+fp32 canonical momentum and a `3e-5` gap target; see the latest validation below.
 
 ## Mathematical contract
 
@@ -96,15 +97,18 @@ radially scales by `max(1, ||Q_U||_2, ||Q_D||_2)`. A sign flip supplies a
 nonnegative primal lower bound. Certification evaluates the original objective
 and multiplier, not just the internally centered/scaled problem.
 
-Defaults:
+Production defaults (independent of solver dtype):
 
-| Criterion | float64 smooth work | float32 smooth work |
-| --- | ---: | ---: |
-| Normalized nonnegative primal-dual gap | `1e-8` | `3e-5` |
-| Smooth residual rcond guard | `1e-8` | `1e-4` |
-| Normalized horizontal residual | `1e-10` | `1e-10` |
-| Spectral excess | `1e-12` | `1e-12` |
-| Signed normalized gap lower bound | `-1e-10` | `-1e-10` |
+| Criterion | Default |
+| --- | ---: |
+| Normalized nonnegative primal-dual gap | `3e-5` |
+| Smooth residual rcond guard | `1e-4` |
+| Normalized horizontal residual | `1e-10` |
+| Spectral excess | `1e-12` |
+| Signed normalized gap lower bound | `-1e-10` |
+
+Explicit reference configurations may request stricter tolerances. Selecting
+fp64 no longer implicitly selects `1e-8`; `tolerance=None` also means `3e-5`.
 
 The gap denominator is `max(abs(primal),abs(dual),tiny_float64)`; it is not
 floored at one. Signed gap, its absolute magnitude, and normalized gap are
@@ -114,12 +118,47 @@ alone never certifies direction accuracy near rank loss.
 
 ## Precision and diagnostics
 
-`SolverConfig(dtype=torch.float32)` is the default, including for bf16/float16
-model tensors. Select `torch.float64` explicitly for high-accuracy solver work.
-Canonical gradients and EMA have solver dtype. Norm preprocessing, objective
-centering, feasible recovery, certificates, and stored lambda use float64.
-Smooth residual SVD/polar and CG use solver dtype. Autocast is disabled inside
-the production numerical path. No bf16 SVD is called.
+`SolverConfig()` now selects **float64** smooth arithmetic, gap target
+**3e-5**, and rcond guard **1e-4**. `QuotientSpectralOptimizer` independently
+selects `momentum_dtype=torch.float32`. Model parameters and gradients keep
+their existing storage dtype; bf16 autocast forward/backward remains unchanged.
+
+The optimizer boundary performs these casts explicitly:
+
+1. Scaled row norms and `sqrt(h)` are computed in fp64. Balanced canonical
+   weights are represented in the momentum dtype (normally fp32), preserving
+   the canonical inputs used by the numerical diagnosis.
+2. The raw gradient is pulled back exactly once in fp64, then rounded to the
+   momentum dtype. The EMA update and its stored tensors remain fp32 by default.
+3. Canonical U/D and the updated stacked EMA are promoted to fp64 **before**
+   calling the coupled solver. Centering, whitening, lambda, residual matrices,
+   residual SVD/polars, Newton-CG, line-search values, recovery and certificates
+   all use fp64 on this path. There is no fp32 trial, retry, or refinement stage.
+4. The fp64 direction is lifted with fp64 `sqrt(h)`, then cast to each original
+   parameter dtype before the configured learning-rate subtraction. Original
+   multiplier lambda remains fp64 in state.
+
+Autocast is disabled throughout the numerical boundary and solve. No bf16 SVD
+is called. Explicit `momentum_dtype=float64` remains available for mathematical
+reference tests, and explicit low-level fp32 configurations remain available
+for diagnostics; neither is the default training policy.
+
+**Empirical rationale.** On real `[1024,384]` Transformer pairs, the current
+fp32 SVD/polar/recovery path had a stable observed gap floor of approximately
+`4.03e-5`–`5.01e-5`, above the existing `3e-5` target. Direct fp64 was more
+reliable and faster than failed fp32 followed by fp64 refinement (about 2.99 s
+versus 15.43 s for six cold pairs at the training target). This is an engineering
+decision for the current solver and backend, not a theorem that quotient
+spectral optimization intrinsically requires fp64. See
+[TRAINING_SOLVER_DIAGNOSIS.md](TRAINING_SOLVER_DIAGNOSIS.md).
+
+**Known stricter-target limitation.** At `1e-8`, a real populated warm state
+failed the existing fp64 line search at gap `3.64e-8`, despite good conditioning.
+Its full trial improved the gradient but nuclear-value rounding exceeded the
+line-search allowance. The exact retained `[1024,384]` fixture and trace are
+linked in the diagnosis; no compact self-contained small-matrix reproducer
+has been established. The line-search rule is unchanged. `1e-8` is not the
+production target, and this task does not silently repair that separate issue.
 
 The certified direction is float64. The raw lifted direction is cast to the
 original parameter dtype before the learning-rate update. Certification applies
@@ -131,13 +170,19 @@ float64 gauge invariance for bf16 updates.
 objectives, signed/absolute/normalized gap, horizontal/normalized horizontal
 residual, both spectral norms/excess, final residual rcond, minimum encountered
 smooth rcond, Newton and CG counts, SVD counts, reference iterations, fallback
-status/reason, convergence, selection semantics, and solver/certificate/update
+status/reason, `fallback_backend`, `gap_tolerance`, convergence, selection semantics,
+and canonical/momentum/solver/certificate/update
 dtypes. Optional cast diagnostics measure relative direction error, horizontal
 residual, and spectral excess after lifting/casting and pulling back. Their two
 additional SVDs are separately counted. `diagnostics=False` avoids these cast
 checks and retaining optimizer diagnostics; solver certificates remain mandatory.
 
 ## Fallback and rank-loss limitation
+
+This is an expensive **reference fallback**, not an expected normal training
+operation. `fallback_backend="cpu_float64_reference_admm"` labels its use;
+`fallback_used`, reason, rcond, gap and solver dtype remain visible. The existing
+`fallback` configuration is retained, including the option to disable it.
 
 Fallback is an explicit lazy call to the existing CPU float64 generic ADMM
 reference solver. GPU fallback transfers inputs to CPU, then returns the pair
@@ -174,7 +219,7 @@ pairs = [
     for i, block in enumerate(model.blocks)
 ]
 qso = QuotientSpectralOptimizer(pairs, lr=1e-3, beta=0.95,
-                               solver=SolverConfig(dtype=torch.float32))
+                               solver=SolverConfig(), momentum_dtype=torch.float32)
 paired_ids = {id(p) for pair in pairs for p in (pair.up, pair.down)}
 other = [p for p in model.parameters() if id(p) not in paired_ids]
 adam = torch.optim.AdamW(other, lr=1e-3)
@@ -194,7 +239,11 @@ owned. Both missing gradients skip a pair; a single missing or sparse gradient
 is an error. Closures and ordinary optimizer parameter groups are supported;
 each group is a fixed named pair, with learning rate/beta/solver controls.
 
-Save model weights and `qso.state_dict()` together. The checkpoint stores named
+Save model weights and `qso.state_dict()` together. Format version 2 records
+`momentum_dtype` separately from solver dtype. Version-1 checkpoints preserve
+their saved solver/momentum precision and historical implicit tolerances when
+loaded; loading is not an automatic policy migration. New optimizers and
+version-2 checkpoints use the explicitly recorded separated policy. The checkpoint stores named
 pair topology, shapes, solver configuration, EMA tensors, original lambda, and
 step count. Loading validates names/shapes/state precision, maps sorted names
 deterministically, and explicitly preserves float32/64 state instead of casting
@@ -212,10 +261,47 @@ remain meaningful. The new API imports none of those update routines.
 
 Shared K, leverage/contribution balancing, signed gauges, neuron birth,
 minimum-Frobenius recovery on every deficient face, approximate polar kernels,
-custom CUDA, distributed optimization, and performance/quality claims from
-Transformer training are outside this implementation. No benchmark is started.
+custom CUDA and distributed optimization are outside this implementation.
+The Stage-C Transformer smoke is recorded separately; it does not establish
+optimizer-quality superiority.
 
-## Validation record
+## Direct-fp64 policy validation and Stage-C result
+
+H100 test job **28905** ran the complete, unfiltered suite with one NVIDIA
+H100 NVL, 4 CPUs and 16 GiB RAM: **212 collected, 212 passed, 0 failed,
+0 skipped**. Pytest took **9.30 s** and SLURM elapsed **37 s**, exit `0:0`.
+The full suite includes the prior 202 mathematical/production/Transformer
+checks and ten focused precision-policy regressions. Dedicated fp32-parameter and
+bf16-parameter smoke steps both used **fp64 pair solving**, **fp32 canonical
+momentum**, the **unchanged `3e-5` gap target**, and no fallback. The bf16 step
+returned bf16 updates without a bf16 SVD. Peak PyTorch CUDA allocation for
+the test job was **33,604,096 bytes** (about 32.05 MiB); it excludes the CUDA
+context and driver. The network guard observed no Python outbound attempt.
+Raw output: [run_production_tests_h100-28905.log](../cluster/run_production_tests_h100-28905.log).
+
+The test telemetry includes **115 solver evaluations**, **7 deliberate
+fallbacks**, and **2 deliberately uncertified low-level results** in adversarial
+tests. Twenty-three evaluations explicitly exercise fp32 research/diagnostic
+configurations; they do not indicate an fp32-first production attempt. The
+production smoke steps used no fallback. The 1e-8 warm-state line-search issue
+documented above remains a separate limitation, not the production target.
+
+The unchanged 50-step tiny Transformer smoke was rerun as job **28914** with
+direct fp64 solving, the same seed, token prefixes, minibatches, learning rates,
+schedule and bf16 forward/backward as the earlier fp32 attempt. Both AdamW and
+QSO completed 50 steps and checkpoint replay. All **300 QSO pair solves**
+certified at `3e-5` with **zero fallback**; fp32 momentum, fp64 lambda and
+fp32 model/update storage were preserved. The maximum normalized gap was
+`2.99575e-5`, and the minimum residual rcond was `9.78e-4` versus the `1e-4`
+guard. Numerically the short run was stable, but its warm median step took
+**2.665 s** versus **0.0334 s** for AdamW. QSO's optimizer consumed about
+**99%** of measured step time. It is classified **B: numerically stable but
+computationally impractical for an LR sweep in the current implementation**.
+See [TINY_TRANSFORMER_RESULTS.md](TINY_TRANSFORMER_RESULTS.md) for losses,
+timing breakdown, memory, checkpoint replay and limitations. No LR sweep was
+started.
+
+## Original validation record (before the direct-fp64 default)
 
 Validation runs on Lagrange inside SLURM using Python 3.10.20,
 torch 2.10.0+cu128 (CUDA build 12.8), NumPy 2.2.6, pytest 9.0.3,
@@ -296,5 +382,5 @@ ede583762a7f5368ef4bd97d228ad2346fa0e3cdb6fad18e712063236d4448b7  cluster/run_pr
 
 The current mathematical/reference suite and the production-v0 implementation
 are validated on the Lagrange H100 environment within the contracts and
-rank-loss limitations above. No tiny Transformer benchmark or training run has
-been started.
+rank-loss limitations above. That original validation preceded tiny Transformer training; the later
+training evidence is recorded in [TINY_TRANSFORMER_RESULTS.md](TINY_TRANSFORMER_RESULTS.md).

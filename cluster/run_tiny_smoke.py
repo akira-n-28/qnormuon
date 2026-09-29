@@ -22,6 +22,7 @@ import sitecustomize
 from benchmarks.tiny_transformer import (ModelConfig,TinyTransformer,Optimizers,datasets,seed_everything,
     evaluate,train_step,save_checkpoint,load_checkpoint,solver_summary,summarize)
 import qnormuon.optimizer as optimizer_module
+from benchmarks.solver_timing import SolverTiming
 
 
 def write_json(path,value):
@@ -93,7 +94,7 @@ def run(method,config,output):
         cpus=os.environ.get('SLURM_CPUS_PER_TASK'),memory=os.environ.get('SLURM_MEM_PER_NODE'),
         platform=platform.platform(),parameter_count=sum(p.numel() for p in model.parameters()),
         initialization_sha256=fingerprint(model),dataset=metadata,
-        model_storage='float32',forward_backward='bfloat16 autocast',solver_dtype='float32',
+        model_storage='float32',forward_backward='bfloat16 autocast',solver_dtype=config['solver']['dtype'],momentum_dtype='float32',
         certificate_dtype='float64',tf32=config['tf32'],deterministic_algorithms=True,
         checkpoint_path=str(output/'checkpoint.pt'),output_path=str(output),
         source_sha256={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in
@@ -107,6 +108,7 @@ def run(method,config,output):
     solve_file=(output/'solves.jsonl').open('w',buffering=1)
     pairs=list(opts.paired.pairs) if method=="qso" else model.pairs();solve_index=0
     completed_solves=[]
+    step_timing={}
     original=optimizer_module.solve_coupled
     def observed(u,d,a,**kwargs):
         nonlocal solve_index
@@ -115,24 +117,38 @@ def run(method,config,output):
                    solver_dtype=str(kwargs['config'].dtype),event='solve_begin')
         solve_file.write(json.dumps(event)+'\n')
         started=time.perf_counter()
-        result=original(u,d,a,**kwargs)
+        with SolverTiming() as timing:
+            result=original(u,d,a,**kwargs)
+        torch.cuda.synchronize()
         event.update(event='solve_end',seconds=time.perf_counter()-started,converged=result.converged,
                      fallback=result.fallback,reason=result.reason,rcond=result.metrics['residual_rcond'],
                      normalized_gap=result.metrics['normalized_gap'],newton=result.metrics['newton_iterations'],
                      cg=result.metrics['cg_iterations'])
+        event['timing']=dict(timing.seconds)
+        for key,value in timing.seconds.items():step_timing[key]=step_timing.get(key,0.)+value
+        step_timing['pair_solver_seconds']=step_timing.get('pair_solver_seconds',0.)+event['seconds']
         solve_file.write(json.dumps(event)+'\n')
         completed_solves.append(dict(result.metrics))
         if result.fallback:print('FALLBACK',json.dumps(event),flush=True)
         return result
+    original_adam_step=opts.adam.step
+    def timed_adam(*args,**kwargs):
+        torch.cuda.synchronize();started=time.perf_counter()
+        result=original_adam_step(*args,**kwargs);torch.cuda.synchronize()
+        step_timing['adam_seconds']=time.perf_counter()-started
+        return result
     try:
         with (output/'metrics.jsonl').open('w',buffering=1) as metrics:
             for step in range(config['steps']):
-                active.update(step=step,pair=None);solve_index=0
+                active.update(step=step,pair=None);solve_index=0;step_timing.clear()
                 print('STEP_BEGIN',method,step,flush=True)
                 signal.alarm(config['step_timeout_seconds'])
-                with patch.object(optimizer_module,'solve_coupled',observed):
+                with patch.object(optimizer_module,'solve_coupled',observed), patch.object(opts.adam,'step',timed_adam):
                     record=train_step(model,opts,train,config,step)
                 signal.alarm(0)
+                record['timing']=dict(step_timing)
+                record['solver_aggregate']=solver_summary([record])
+                record['fallback_reasons']={name:d['fallback_reason'] for name,d in record['qso'].items() if d['fallback_used']}
                 record['cuda_live_after_step_bytes']=torch.cuda.memory_allocated()
                 record['wall_seconds']=time.perf_counter()-total_start
                 if (step+1)%config['evaluation_interval']==0 or step+1==config['steps']:
@@ -162,6 +178,12 @@ def run(method,config,output):
                      late_live_bytes=summarize([r['cuda_live_after_step_bytes'] for r in records[-5:]]),
                      solver=solver_summary(records),resume=resume,
                      early_update_parameter_ratios=summarize([r['update_parameter_ratio'] for r in records[:5]]))
+        summary['timing_warmup_excluded_steps']=5
+        summary['warm_timing']={key:summarize([r.get('timing',{}).get(key,r.get(key,0.)) for r in records[5:]]) for key in
+            ['step_seconds','optimizer_seconds','forward_backward_seconds','tokens_per_second','adam_seconds',
+             'pair_solver_seconds','svd_seconds','svdvals_seconds','residual_svd_polar_seconds',
+             'cg_seconds','hvp_seconds','certificate_seconds','cpu_reference_fallback_seconds']}
+        summary['cold_step']=records[0]
         if not resume or not resume['passed']:raise AssertionError('checkpoint replay was not completed')
         write_json(output/'summary.json',summary)
         print('RUN_SUMMARY',json.dumps(summary),flush=True)
