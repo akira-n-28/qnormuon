@@ -67,11 +67,14 @@ class QuotientSpectralOptimizer(Optimizer):
     No bias correction, Nesterov, weight decay or balancing is implicit.
     Missing both gradients skips a pair; one missing gradient is an error.
     """
-    def __init__(self, pairs, *, lr=1e-3, beta=0.95, solver=None, momentum_dtype=torch.float32, diagnostics=True):
+    def __init__(self, pairs, *, lr=1e-3, beta=0.95, solver=None, momentum_dtype=torch.float32,
+                 diagnostics=True, cast_diagnostics=False):
         if not math.isfinite(lr) or lr < 0 or not math.isfinite(beta) or not 0 <= beta < 1:
             raise ValueError("require finite lr >= 0 and beta in [0,1)")
         if momentum_dtype not in (torch.float32, torch.float64):
             raise ValueError("momentum dtype must be float32 or float64")
+        if cast_diagnostics and not diagnostics:
+            raise ValueError("cast diagnostics require diagnostics=True")
         pairs = list(pairs)
         if not pairs or any(not isinstance(p, SwiGLUPair) for p in pairs):
             raise ValueError("register a nonempty sequence of named SwiGLUPair objects")
@@ -82,6 +85,7 @@ class QuotientSpectralOptimizer(Optimizer):
         if len(set(ids)) != len(ids):
             raise ValueError("a parameter may belong to only one pair")
         self.record_diagnostics = diagnostics
+        self.record_cast_diagnostics = cast_diagnostics
         self.last_diagnostics = {}
         self._registration_closed = False
         groups = [dict(params=[p.up, p.down], pair_name=p.name) for p in self.pairs]
@@ -141,7 +145,7 @@ class QuotientSpectralOptimizer(Optimizer):
                 new_up, new_down = up - lr * delta_up, down - lr * delta_down
                 if not all(bool(torch.isfinite(v).all()) for v in (delta_up, delta_down, new_up, new_down)):
                     raise RuntimeError(f"{pair.name}: raw update not representable in parameter dtype")
-                if self.record_diagnostics:
+                if self.record_cast_diagnostics:
                     cast_pair = torch.stack((delta_up.double() / root[:, None],
                                              delta_down.T.double() * root[:, None]))
                     magnitude = float(result.pair.norm())

@@ -293,7 +293,7 @@ def test_tiny_nonzero_intrinsic_objective_is_not_truncated(scale):
 
 def test_update_cast_errors_visible_for_bf16_and_no_fp64_invariance_claim():
     p=pair(dtype=torch.bfloat16)
-    opt=QSO([p],lr=.05)
+    opt=QSO([p],lr=.05,cast_diagnostics=True)
     opt.step()
     metrics=opt.last_diagnostics['block']
     assert 1e-5 < metrics['cast_direction_relative_error'] < .01

@@ -59,6 +59,7 @@ class SolverConfig:
     max_cg: int = 30
     fallback: bool = True
     reference_max_iterations: int = 20000
+    independent_certificate: bool = False  # debug/oracle: recompute original residual svdvals
 
     def __post_init__(self):
         if self.dtype not in (torch.float32, torch.float64):
@@ -88,6 +89,7 @@ class Evaluation:
     singular: torch.Tensor
     right: torch.Tensor
     rcond: float
+    coordinate: torch.Tensor
 
 
 class SmoothDual:
@@ -104,7 +106,7 @@ class SmoothDual:
         p = q @ vt
         ratio = sigma[:, -1] / sigma[:, 0].clamp_min(torch.finfo(sigma.dtype).tiny)
         return Evaluation(float(sigma.sum()), -horizontal_residual(self.u, self.d, p),
-                          p, q, sigma, vt, float(ratio.min()))
+                          p, q, sigma, vt, float(ratio.min()), lam)
 
     def polar_derivative(self, evaluation, e):
         q, s, vt = evaluation.left, evaluation.singular, evaluation.right
@@ -139,12 +141,23 @@ class SolverResult:
     history: list = field(default_factory=list)
 
 
-def certificate(u, d, a, lam, candidate, counts):
+@dataclass(frozen=True)
+class CachedDualSpectrum:
+    """Spectrum tied to this exact multiplier/candidate evaluation by identity."""
+    lam: torch.Tensor
+    candidate: torch.Tensor
+    singular: torch.Tensor  # normalized internal residual, two matrices
+    magnitude: float
+
+
+def certificate(u, d, a, lam, candidate, counts, *, cached_dual=None):
     """Float64 projection/radial feasible recovery and primal-dual diagnostics.
 
     This is an exact-arithmetic certificate evaluated in floating point, not
     interval arithmetic. The signed gap and equality residual remain visible.
     """
+    if cached_dual is not None and (cached_dual.lam is not lam or cached_dual.candidate is not candidate):
+        raise ValueError("cached spectrum must belong to the same multiplier and primal candidate")
     u, d, a, lam, candidate = (v.double() for v in (u, d, a, lam, candidate))
     p = horizontal_project(u, d, candidate)
     spectra = torch.linalg.svdvals(p)
@@ -153,10 +166,25 @@ def certificate(u, d, a, lam, candidate, counts):
     p = p / scale
     if float((a * p).sum()) < 0:
         p = -p  # central symmetry supplies a nonnegative lower bound
-    residual_spectra = torch.linalg.svdvals(a - adjoint(u, d, lam))
-    dual = float(residual_spectra.sum())
-    rcond = residual_spectra[:, -1] / residual_spectra[:, 0].clamp_min(torch.finfo(torch.float64).tiny)
-    counts.svd_matrices += 2
+    if cached_dual is None:
+        residual_spectra = torch.linalg.svdvals(a - adjoint(u, d, lam))
+        dual = float(residual_spectra.sum())
+        rcond = residual_spectra[:, -1] / residual_spectra[:, 0].clamp_min(torch.finfo(torch.float64).tiny)
+        counts.svd_matrices += 2
+        spectrum_source = "independent_original_residual"
+    else:
+        # Let centered=A-L*(beta), coord=W^(-1/2), lambda=beta+s*coord*z.
+        # L*(coord*z)=L_eff*(z), so exactly in real arithmetic:
+        # A-L*(lambda)=centered-s*L_eff*(z)
+        #             =s*(centered/s-L_eff*(z))=s*B_internal(z).
+        # A positive scalar s scales every singular value but leaves rcond
+        # unchanged. The cached SVD belongs to this exact z/evaluation only.
+        if cached_dual.singular.shape != (2, u.shape[1]) or cached_dual.magnitude <= 0:
+            raise ValueError("invalid cached residual spectrum")
+        dual = cached_dual.magnitude * float(cached_dual.singular.sum())
+        rcond = (cached_dual.singular[:, -1] /
+                 cached_dual.singular[:, 0].clamp_min(torch.finfo(torch.float64).tiny))
+        spectrum_source = "cached_smooth_residual"
     primal = float((a * p).sum())
     gap = dual - primal
     denom = max(abs(primal), abs(dual), torch.finfo(torch.float64).tiny)
@@ -170,6 +198,7 @@ def certificate(u, d, a, lam, candidate, counts):
         "spectral_excess": max(0., float(spectra.max()) / scale - 1.),
         "primal_objective": primal, "dual_objective": dual,
         "residual_rcond": float(rcond.min()),
+        "dual_spectrum_source": spectrum_source,
         "signed_gap": gap, "normalized_gap": max(0., gap) / denom,
         "signed_normalized_gap": gap / denom,
     }
@@ -249,7 +278,14 @@ def _solve(u, d, a, *, config, initial_lambda=None):
     best = None
     for iteration in range(max_iterations + 1):
         lam = beta + magnitude * coord * z.double()
-        p, metrics = certificate(ud, dd, ad, lam, ev.pair, counts)
+        if ev.coordinate is not z:
+            raise ValueError("smooth evaluation and multiplier coordinate do not match")
+        # In fp32, cached singular values have the diagnosed numerical floor;
+        # retain independent fp64 certification for that research configuration.
+        use_cached = (dtype == torch.float64 and not config.independent_certificate
+                      and magnitude > 32 * torch.finfo(torch.float64).eps * _stable_norm(ad))
+        cached = CachedDualSpectrum(lam, ev.pair, ev.singular, magnitude) if use_cached else None
+        p, metrics = certificate(ud, dd, ad, lam, ev.pair, counts, cached_dual=cached)
         history.append({"iteration": iteration, "rcond": ev.rcond,
                         "extended_initial_budget": iteration > config.initial_iterations,
                         "polar_horizontal_residual": float(horizontal_residual(u, d, ev.pair).abs().max()),

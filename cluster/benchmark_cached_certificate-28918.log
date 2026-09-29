@@ -1,0 +1,41 @@
+lagrange0
+2026-09-29T11:39:22+02:00
+JOB=28918 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Tue Sep 29 11:39:22 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   33C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+CERT_RUN 1 True 2.876789875328541 108
+CERT_RUN 2 False 1.585992194712162 72
+CERT_RUN 3 False 1.5772236660122871 72
+CERT_RUN 4 True 2.356291338801384 108
+CERT_RUN 5 False 1.5778405144810677 72
+CERT_RUN 6 True 2.35543742030859 108
+CERT_RUN 7 True 2.350295767188072 108
+CERT_RUN 8 False 1.576739639043808 72
+Traceback (most recent call last):
+  File "/home/prignano/qnormuon/cluster/benchmark_cached_certificate.py", line 126, in <module>
+    main()
+  File "/home/prignano/qnormuon/cluster/benchmark_cached_certificate.py", line 101, in main
+    errors = compare(reference["pair_rows"], cached["pair_rows"])
+  File "/home/prignano/qnormuon/cluster/benchmark_cached_certificate.py", line 37, in compare
+    assert a.iterations == b.iterations and a.counts.cg == b.counts.cg
+AttributeError: 'Counts' object has no attribute 'cg'

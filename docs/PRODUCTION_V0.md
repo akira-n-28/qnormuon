@@ -97,6 +97,25 @@ radially scales by `max(1, ||Q_U||_2, ||Q_D||_2)`. A sign flip supplies a
 nonnegative primal lower bound. Certification evaluates the original objective
 and multiplier, not just the internally centered/scaled problem.
 
+For a float64 smooth evaluation, the original dual residual spectrum is
+already available from that evaluation's cached SVD. Write
+`centered=A-L*(beta)`, `coord=W^(-1/2)`, `s=||centered||_F`, and
+`lambda=beta+s*coord*z`. Since `L*(coord*z)=L_eff*(z)`,
+
+```
+A-L*(lambda) = centered-s*L_eff*(z)
+             = s*(centered/s-L_eff*(z)) = s*B_internal(z).
+```
+
+Thus the original dual objective is `s*sum(singular_values(B_internal))` and
+the residual rcond is unchanged by positive scaling. Production reuses this
+spectrum only for the *same* smooth evaluation and multiplier; a mismatched
+candidate is rejected. `SolverConfig(independent_certificate=True)` restores
+the independent original-residual `svdvals` computation for debugging. The
+float32 research path, cancellation-dominated cases, zero cotangents, and CPU
+reference fallback retain the independent calculation. Primal radial
+feasibility still uses an exact full `svdvals` of the projected candidate.
+
 Production defaults (independent of solver dtype):
 
 | Criterion | Default |
@@ -172,10 +191,16 @@ residual, both spectral norms/excess, final residual rcond, minimum encountered
 smooth rcond, Newton and CG counts, SVD counts, reference iterations, fallback
 status/reason, `fallback_backend`, `gap_tolerance`, convergence, selection semantics,
 and canonical/momentum/solver/certificate/update
-dtypes. Optional cast diagnostics measure relative direction error, horizontal
-residual, and spectral excess after lifting/casting and pulling back. Their two
-additional SVDs are separately counted. `diagnostics=False` avoids these cast
-checks and retaining optimizer diagnostics; solver certificates remain mandatory.
+dtypes. Mandatory solver/certificate diagnostics remain on with the default
+`diagnostics=True`. Expensive post-cast research diagnostics are separately
+opted into with `cast_diagnostics=True`; they measure relative direction error,
+horizontal residual, and spectral excess after lifting/casting and pulling
+back. The latter adds one batched `svdvals` call over the two cast matrices per
+pair, separately counted as two matrix decompositions. With the default
+`cast_diagnostics=False`, all mandatory certificates and their metrics remain.
+`diagnostics=False` suppresses retained per-pair diagnostics but never skips
+certification. See [SOLVER_PERFORMANCE_OPTIMIZATION.md](SOLVER_PERFORMANCE_OPTIMIZATION.md)
+for measured costs and independent numerical checks.
 
 ## Fallback and rank-loss limitation
 

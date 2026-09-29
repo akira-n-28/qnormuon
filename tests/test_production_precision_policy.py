@@ -106,3 +106,22 @@ def test_default_target_is_independent_of_dtype_and_none():
         r=solve_coupled(u,d,a,config=config)
         assert r.metrics['gap_tolerance']==3e-5
         assert r.converged and r.metrics['normalized_gap']<=3e-5
+
+
+def test_basic_and_full_cast_diagnostics_have_identical_trajectory():
+    basic_pair, full_pair = make(), make()
+    basic = QSO([basic_pair], lr=.05)
+    full = QSO([full_pair], lr=.05, cast_diagnostics=True)
+    for _ in range(2):
+        basic.step(); full.step()
+        assert torch.equal(basic_pair.up, full_pair.up)
+        assert torch.equal(basic_pair.down, full_pair.down)
+        for key in ('momentum_up', 'momentum_down_t', 'lambda'):
+            assert torch.equal(basic.state[basic_pair.up][key], full.state[full_pair.up][key])
+        left, right = basic.last_diagnostics['pair'], full.last_diagnostics['pair']
+        for key in ('normalized_gap', 'horizontal_residual', 'residual_rcond',
+                    'newton_iterations', 'cg_iterations', 'fallback_used', 'solver_dtype'):
+            assert left[key] == right[key]
+        assert 'cast_spectral_excess' not in left
+        assert 'cast_spectral_excess' in right
+        assert right['cast_diagnostic_svd_evaluations'] == 2
