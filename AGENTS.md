@@ -40,6 +40,7 @@ decision order:
 5. `docs/TRAINING_SOLVER_DIAGNOSIS.md`
 6. `docs/SOLVER_PERFORMANCE_OPTIMIZATION.md`
 7. `docs/PRIMAL_SPECTRAL_NORM_OPTIMIZATION.md`
+8. `docs/SMOOTH_GRAM_BACKEND_STUDY.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -707,9 +708,9 @@ Comparisons should use identical:
 After pilot hyperparameter selection, use multiple seeds. Do not automatically
 advance from numerical correctness to a sweep: first establish mathematical
 correctness, H100 numerical validation, and solver practicality/performance.
-At the current project stage, broad LR sweeps remain deferred until the smooth
-decomposition performance study is reviewed. This is a workflow state, not a
-mathematical claim.
+At the current project stage, broad LR sweeps remain deferred while smooth
+decomposition safety and performance remain unresolved. This is a workflow
+state, not a mathematical claim.
 
 Report both quality and cost.
 
@@ -1043,10 +1044,18 @@ When uncertain:
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
 backend is validated and adopted. The dominant remaining production cost is
-the **smooth residual fp64 SVD/polar**. The next separate research direction is
-posterior-validated, mathematically equivalent alternatives to that smooth
-full SVD, with current full SVD retained as oracle and fallback. This does not
-authorize an implementation change without the requested study and review.
+the **smooth residual fp64 SVD/polar**. The first posterior-validated smooth
+Gram/EVD study is complete: exact-arithmetic equivalence was established and
+all 931 real shadow residual evaluations passed the tested posterior. The
+backend was NOT adopted for production; full fp64 SVD remains the smooth
+default and independent oracle. The real residuals were materially better
+conditioned than the `1e-4` guard, so their trajectory evidence does not
+establish safety near that boundary. The unresolved requirement is a
+decision-relevant bound on polar-derivative/HVP error and its effect on
+CG, Newton, and Armijo line-search decisions near the guard. The next approved
+research direction is posterior error bounds tied directly to those decision
+margins, or another validation mechanism with equivalent safety. This does not
+authorize a production backend change without the required validation and review.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
