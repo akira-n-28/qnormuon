@@ -41,6 +41,7 @@ decision order:
 6. `docs/SOLVER_PERFORMANCE_OPTIMIZATION.md`
 7. `docs/PRIMAL_SPECTRAL_NORM_OPTIMIZATION.md`
 8. `docs/SMOOTH_GRAM_BACKEND_STUDY.md`
+9. `docs/SMOOTH_GRAM_DECISION_BOUNDS.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1045,17 +1046,18 @@ Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
 backend is validated and adopted. The dominant remaining production cost is
 the **smooth residual fp64 SVD/polar**. The first posterior-validated smooth
-Gram/EVD study is complete: exact-arithmetic equivalence was established and
-all 931 real shadow residual evaluations passed the tested posterior. The
-backend was NOT adopted for production; full fp64 SVD remains the smooth
-default and independent oracle. The real residuals were materially better
-conditioned than the `1e-4` guard, so their trajectory evidence does not
-establish safety near that boundary. The unresolved requirement is a
-decision-relevant bound on polar-derivative/HVP error and its effect on
-CG, Newton, and Armijo line-search decisions near the guard. The next approved
-research direction is posterior error bounds tied directly to those decision
-margins, or another validation mechanism with equivalent safety. This does not
-authorize a production backend change without the required validation and review.
+Gram/EVD study established exact-arithmetic equivalence. A subsequent study
+derived decision-relevant posterior bounds for the polar derivative/HVP and
+validated them experimentally for conservative curvature, CG, descent,
+Armijo, and certificate decisions. Gram was NOT adopted for production: full
+fp64 SVD remains the smooth default and independent oracle. The obstacle is
+insufficient practical benefit after posterior-validation cost and unresolved
+control of a Gram-driven solver trajectory, not mathematical invalidity of
+Gram. Do not continue optimizing the smooth Gram posterior by default unless
+a future task explicitly reopens it. The next approved performance direction
+is to reduce the number of required smooth full-SVD evaluations, primarily
+through improved certified warm starts or temporal prediction of the dual
+multiplier, without changing the coupled LMO or acceptance criteria.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
