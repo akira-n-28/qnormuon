@@ -1,0 +1,112 @@
+{
+  "job_id": "28929",
+  "torch": "2.10.0+cu128",
+  "gpu": "NVIDIA H100 NVL",
+  "certificate_evaluations": 471,
+  "accepted_pairs": 150,
+  "max_accepted_svd_gap": 2.9957532368950462e-05,
+  "min_accepted_margin": 4.246763104953874e-08,
+  "max_gap_delta": 1.9926803751139014e-10,
+  "max_direction_error": 4.035691225645621e-11,
+  "max_primal_error": 1.4526191360886287e-10,
+  "max_dual_error": 0.0,
+  "near_threshold": [
+    {
+      "step": 5,
+      "pair": "blocks.1.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.9957532368950462e-05,
+      "gram_gap": 2.9957731568964476e-05,
+      "scale": 1.0000299707302385,
+      "direction_error": 3.2398805860367474e-11,
+      "dual_error": 0.0,
+      "primal_error": 1.0645928583130626e-10
+    },
+    {
+      "step": 3,
+      "pair": "blocks.4.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.8336995799174406e-05,
+      "gram_gap": 2.8337195016600345e-05,
+      "scale": 1.0000283439569764,
+      "direction_error": 3.619127220133578e-11,
+      "dual_error": 0.0,
+      "primal_error": 6.848482891896879e-11
+    },
+    {
+      "step": 3,
+      "pair": "blocks.5.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.801776405333963e-05,
+      "gram_gap": 2.8017963200721273e-05,
+      "scale": 1.0000280077551564,
+      "direction_error": 3.7270631025876355e-11,
+      "dual_error": 0.0,
+      "primal_error": 6.115902229097969e-11
+    },
+    {
+      "step": 4,
+      "pair": "blocks.0.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.7337718726175478e-05,
+      "gram_gap": 2.7337917878365564e-05,
+      "scale": 1.000027333647826,
+      "direction_error": 3.261607650628662e-11,
+      "dual_error": 0.0,
+      "primal_error": 1.403410720968168e-10
+    },
+    {
+      "step": 6,
+      "pair": "blocks.0.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.663510566229952e-05,
+      "gram_gap": 2.663530481651859e-05,
+      "scale": 1.0000266375764437,
+      "direction_error": 3.36640160192303e-11,
+      "dual_error": 0.0,
+      "primal_error": 1.3019030298266898e-10
+    },
+    {
+      "step": 10,
+      "pair": "blocks.1.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.6519797320067227e-05,
+      "gram_gap": 2.651999645213573e-05,
+      "scale": 1.0000265262210335,
+      "direction_error": 3.3953811984233084e-11,
+      "dual_error": 0.0,
+      "primal_error": 8.519468464029956e-11
+    },
+    {
+      "step": 8,
+      "pair": "blocks.1.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.4760537230788647e-05,
+      "gram_gap": 2.476073639708859e-05,
+      "scale": 1.0000247801699425,
+      "direction_error": 3.425407180124296e-11,
+      "dual_error": 0.0,
+      "primal_error": 9.344414131362555e-11
+    },
+    {
+      "step": 3,
+      "pair": "blocks.2.mlp",
+      "accepted_svd": true,
+      "accepted_gram": true,
+      "svd_gap": 2.3671583347254217e-05,
+      "gram_gap": 2.367178251829095e-05,
+      "scale": 1.0000236810045853,
+      "direction_error": 3.3930830367623344e-11,
+      "dual_error": 0.0,
+      "primal_error": 9.447626014846833e-11
+    }
+  ],
+  "mismatches": []
+}

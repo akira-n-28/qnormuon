@@ -1,0 +1,85 @@
+HOSTNAME=lagrange0
+2026-09-29T12:44:11+02:00
+SLURM_JOB_ID=28931
+SLURM_JOB_NODELIST=lagrange0
+CUDA_VISIBLE_DEVICES=0
+SLURM_CPUS_PER_TASK=4
+SLURM_MEM_PER_NODE=16384
+PYTHONPATH=/home/prignano/qnormuon/.qso-tools/network-guard:/home/prignano/qnormuon/.qso-tools/pytest-site:/home/prignano/qnormuon
+pwd=/home/prignano/qnormuon
+DATASET_PATH=not applicable; TOKENIZER_PATH=not applicable; CHECKPOINT_PATH=not applicable
+OUTPUT_PATH=/home/prignano/qnormuon/cluster/run_production_tests_h100-28931.log
+RANDOM_SEED=not applicable; MODEL_CONFIG=not applicable; OPTIMIZER_CONFIG=reference suite; SOLVER_CONFIG=test-defined
+NETWORK_AUDIT_LOG=/home/prignano/qnormuon/cluster/run_production_tests_h100_network-28931.log
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Tue Sep 29 12:44:11 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   33C    P0             61W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+NETWORK_GUARD: /home/prignano/qnormuon/.qso-tools/network-guard/sitecustomize.py
+PYTHON_EXECUTABLE: /home/prignano/modded-nanogpt/.venv/bin/python
+PYTHON_VERSION: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+TORCH_VERSION: 2.10.0+cu128
+TORCH_CUDA_BUILD: 12.8
+NUMPY_VERSION: 2.2.6
+PYTEST_VERSION: 9.0.3
+PYTEST_PATH: /home/prignano/qnormuon/.qso-tools/pytest-site/pytest/__init__.py
+TORCH_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/__init__.py
+NUMPY_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/numpy/__init__.py
+CUDA_AVAILABLE: True
+GPU_NAME: NVIDIA H100 NVL
+GPU_PROPERTIES: _CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=55e37d33-05bd-f862-37d0-5f1f7c978f97, pci_bus_id=33, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)
+SPECTRAL_SANITY torch.float64 PASS reconstruction=1.91618504e-15 polar_gram_max=5.55111512e-15
+SPECTRAL_SANITY torch.float32 PASS reconstruction=1.24045133e-06 polar_gram_max=1.93782005e-06
+SPECTRAL_SANITY torch.bfloat16 EXPECTED_FAILURE NotImplementedError: "svd_cuda_gesvdjBatched" not implemented for 'BFloat16'
+BF16_POLICY: promote SVD/polar work to at least float32 before calling torch.linalg.svd
+
+COLLECTION_BEGIN
+tests/test_cached_certificate.py: 12
+tests/test_dual_solver.py: 25
+tests/test_horizontal_spectral.py: 28
+tests/test_primal_spectral_norm.py: 48
+tests/test_production_precision_policy.py: 11
+tests/test_production_v0.py: 39
+tests/test_qnormuon.py: 5
+tests/test_rank_deficient.py: 30
+tests/test_theory_audit.py: 29
+tests/test_tiny_transformer.py: 12
+tests/test_training_solver_precision.py: 1
+tests/test_zero_stratum.py: 33
+
+COLLECTION_EXIT_CODE=0 COLLECTION_WALL_SECONDS=10
+
+FULL_PYTEST_BEGIN: python -m pytest -q
+........................................................................ [ 26%]
+........................................................................ [ 52%]
+........................................................................ [ 79%]
+.........................................................                [100%]
+273 passed in 10.13s
+PRODUCTION_TEST_TELEMETRY {"solves": 133, "fallbacks": 7, "uncertified_results": 2, "solver_dtype:torch.float64": 110, "fallback_reason:iteration_budget": 3, "solver_dtype:torch.float32": 23, "fallback_reason:gap_stagnation": 3, "fallback_reason:ill_conditioned_residual": 1}
+PRODUCTION_H100_SMOKE torch.float32 {"smoke": {"horizontal_residual": 1.6653345369377348e-16, "normalized_horizontal_residual": 4.485444824849183e-17, "spectral_norms": [0.9999984759469157, 1.0], "spectral_excess": 0.0, "primal_spectral_backend": "gram_eigh_upper", "primal_objective": 2.903162330468299, "dual_objective": 2.9032211528959317, "residual_rcond": 0.17018254997534063, "dual_spectrum_source": "cached_smooth_residual", "signed_gap": 5.882242763277645e-05, "normalized_gap": 2.026109088317358e-05, "signed_normalized_gap": 2.026109088317358e-05, "newton_iterations": 3, "cg_iterations": 6, "svd_evaluations": 8, "reference_iterations": 0, "primal_dual_gap": 5.882242763277645e-05, "absolute_gap": 5.882242763277645e-05, "minimum_smooth_rcond": 0.16651942923761912, "fallback_used": false, "fallback_reason": null, "solver_dtype": "torch.float64", "gap_tolerance": 3e-05, "fallback_backend": null, "certification_dtype": "torch.float64", "returned_direction_dtype": "torch.float64", "secondary_selection": "smooth_primary_unique_in_exact_limit", "converged": true, "extended_initial_budget": true, "model_dtype": "torch.float32", "momentum_dtype": "torch.float32", "canonical_dtype": "torch.float32", "returned_update_dtype": "torch.float32", "pair_name": "smoke"}}
+PRODUCTION_H100_SMOKE torch.bfloat16 {"smoke": {"horizontal_residual": 3.3306690738754696e-16, "normalized_horizontal_residual": 7.458942730366512e-17, "spectral_norms": [0.999998377654922, 1.0], "spectral_excess": 0.0, "primal_spectral_backend": "gram_eigh_upper", "primal_objective": 2.9029672151781276, "dual_objective": 2.9030260602758355, "residual_rcond": 0.17010058125716845, "dual_spectrum_source": "cached_smooth_residual", "signed_gap": 5.88450977079269e-05, "normalized_gap": 2.027026161189047e-05, "signed_normalized_gap": 2.027026161189047e-05, "newton_iterations": 3, "cg_iterations": 6, "svd_evaluations": 8, "reference_iterations": 0, "primal_dual_gap": 5.88450977079269e-05, "absolute_gap": 5.88450977079269e-05, "minimum_smooth_rcond": 0.16643192816586055, "fallback_used": false, "fallback_reason": null, "solver_dtype": "torch.float64", "gap_tolerance": 3e-05, "fallback_backend": null, "certification_dtype": "torch.float64", "returned_direction_dtype": "torch.float64", "secondary_selection": "smooth_primary_unique_in_exact_limit", "converged": true, "extended_initial_budget": true, "model_dtype": "torch.bfloat16", "momentum_dtype": "torch.float32", "canonical_dtype": "torch.float32", "returned_update_dtype": "torch.bfloat16", "pair_name": "smoke"}}
+PRODUCTION_TOTAL_SECONDS 10.69665676355362
+PEAK_CUDA_ALLOCATED_BYTES 34741760
+PEAK_CUDA_RESERVED_BYTES 56623104
+PYTEST_EXIT_CODE=0 PYTEST_WALL_SECONDS=19
+NETWORK_AUDIT=NO_PYTHON_OUTBOUND_ATTEMPT_OBSERVED
+2026-09-29T12:44:50+02:00
+JOB_RESULT=PASS

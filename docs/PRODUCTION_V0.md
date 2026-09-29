@@ -114,7 +114,18 @@ candidate is rejected. `SolverConfig(independent_certificate=True)` restores
 the independent original-residual `svdvals` computation for debugging. The
 float32 research path, cancellation-dominated cases, zero cotangents, and CPU
 reference fallback retain the independent calculation. Primal radial
-feasibility still uses an exact full `svdvals` of the projected candidate.
+feasibility needs only each projected matrix's top singular value. The default
+`primal_norm_backend="gram_upper"` computes a conservative fp64 upper estimate
+from `P.T @ P` and a full symmetric eigensystem. An a posteriori eigensystem
+residual/orthogonality bound and fp64 rounding allowances protect the radial
+scale against underestimation under the standard floating-point model. The
+reported `spectral_norms` are upper estimates in this mode. The acceptance
+thresholds below are unchanged. `primal_norm_backend="svd"` selects the
+independent full-`svdvals` radial reference; a nonrepresentable Gram bound or
+a negative top eigenvalue beyond roundoff also uses that reference. Neither
+mode changes the smooth residual SVD/polar
+backend. See `docs/PRIMAL_SPECTRAL_NORM_OPTIMIZATION.md` for the bound,
+adversarial H100 evidence, and its numerical limits.
 
 Production defaults (independent of solver dtype):
 

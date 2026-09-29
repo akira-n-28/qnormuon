@@ -60,6 +60,7 @@ class SolverConfig:
     fallback: bool = True
     reference_max_iterations: int = 20000
     independent_certificate: bool = False  # debug/oracle: recompute original residual svdvals
+    primal_norm_backend: str = "gram_upper"  # "svd" retains independent radial reference
 
     def __post_init__(self):
         if self.dtype not in (torch.float32, torch.float64):
@@ -70,6 +71,8 @@ class SolverConfig:
             raise ValueError("rcond guard must lie in (0,1)")
         if self.initial_iterations < 0 or self.max_iterations < 0 or self.max_cg < 1 or self.reference_max_iterations < 1:
             raise ValueError("invalid iteration budget")
+        if self.primal_norm_backend not in ("gram_upper", "svd"):
+            raise ValueError("primal norm backend must be gram_upper or svd")
 
 @dataclass
 class Counts:
@@ -150,7 +153,68 @@ class CachedDualSpectrum:
     magnitude: float
 
 
-def certificate(u, d, a, lam, candidate, counts, *, cached_dual=None):
+def _gamma(k):
+    unit = torch.finfo(torch.float64).eps / 2
+    return k * unit / (1 - k * unit)
+
+
+def primal_top_singular_upper(p):
+    """Model-conservative fp64 top singular value for each tall matrix in p.
+
+    Exact arithmetic has sigma_max(P)^2=lambda_max(P.T@P). For computed Gram
+    G and full computed EVD (Q,D), let R=GQ-QD and delta=||Q.TQ-I||_F. Since
+    G-QDQ.T=G(I-QQ.T)+RQ.T, delta<1 implies
+
+      lambda_max(G) <= max(d_max,0)*(1+delta) + ||G||_F*delta
+                       + ||R||_F*sqrt(1+delta).
+
+    The EVD error is thus checked a posteriori, not assumed. gamma_k bounds
+    below inflate measured reductions and cover fp64 Gram/GEMM rounding in the
+    standard floating-point model. Scaling by max|P| avoids Gram overflow and
+    underflow. This is not interval arithmetic or a backend-specific proof;
+    the independent SVD backend remains available for verification.
+    """
+    if p.ndim != 3 or p.dtype != torch.float64 or p.shape[-2] < p.shape[-1]:
+        raise ValueError("expected a batch of tall float64 primal matrices")
+    m, n = p.shape[-2:]
+    unit = torch.finfo(torch.float64).eps / 2
+    amplitude = p.abs().amax((-2, -1))
+    safe_amplitude = torch.where(amplitude > 0, amplitude, 1.)
+    x = p / safe_amplitude[:, None, None]
+    gram = x.transpose(-2, -1) @ x
+    gram = .5 * (gram + gram.transpose(-2, -1))
+    eigenvalues, q = torch.linalg.eigh(gram)
+    eye = torch.eye(n, dtype=p.dtype, device=p.device)
+    defect = torch.linalg.matrix_norm(q.transpose(-2, -1) @ q - eye, ord="fro")
+    residual = torch.linalg.matrix_norm(gram @ q - q * eigenvalues.unsqueeze(-2), ord="fro")
+    gram_fro = torch.linalg.matrix_norm(gram, ord="fro")
+    q_fro = torch.linalg.matrix_norm(q, ord="fro")
+    x_fro_squared = x.square().sum((-2, -1))
+    # n^2 and mn are conservative reduction lengths even for tree reductions.
+    gram_bound = gram_fro / (1 - _gamma(n*n))
+    q_bound = q_fro / (1 - _gamma(n*n))
+    x_squared_bound = x_fro_squared / (1 - _gamma(m*n+1))
+    delta = (defect / (1 - _gamma(n*n)) + _gamma(n)*q_bound.square()
+             + unit*math.sqrt(n))
+    rho = (residual / (1 - _gamma(n*n)) + _gamma(n)*gram_bound*q_bound
+           + 2*unit*q_bound*(gram_bound + eigenvalues.abs().amax(-1)))
+    gram_round = _gamma(m)*x_squared_bound + unit*gram_bound
+    # A PSD Gram matrix can have a negative computed top eigenvalue only at
+    # roundoff scale. Anything larger goes to the independent SVD path.
+    if bool((eigenvalues[:, -1] < -gram_round).any()):
+        raise torch.linalg.LinAlgError("Gram top eigenvalue is negative beyond roundoff")
+    lambda_upper = (eigenvalues[:, -1].clamp_min(0)*(1 + delta)
+                    + gram_bound*delta + rho*(1 + delta).sqrt() + gram_round)
+    # Each computed x_ij=fl(P_ij/amplitude) may differ relatively by <=u.
+    division_round = unit/(1-unit)*x_squared_bound.sqrt()
+    upper = safe_amplitude*(lambda_upper.clamp_min(0).sqrt()*(1+_gamma(16))
+                            + division_round)*(1+_gamma(16))
+    if bool((delta >= 1).any()) or not bool(torch.isfinite(upper).all()):
+        raise torch.linalg.LinAlgError("Gram radial norm bound is not representable")
+    return upper
+
+
+def certificate(u, d, a, lam, candidate, counts, *, cached_dual=None, primal_norm_backend="svd"):
     """Float64 projection/radial feasible recovery and primal-dual diagnostics.
 
     This is an exact-arithmetic certificate evaluated in floating point, not
@@ -160,9 +224,21 @@ def certificate(u, d, a, lam, candidate, counts, *, cached_dual=None):
         raise ValueError("cached spectrum must belong to the same multiplier and primal candidate")
     u, d, a, lam, candidate = (v.double() for v in (u, d, a, lam, candidate))
     p = horizontal_project(u, d, candidate)
-    spectra = torch.linalg.svdvals(p)
-    counts.svd_matrices += 2
-    scale = max(1., float(spectra.max()))
+    if primal_norm_backend == "gram_upper":
+        try:
+            radii = primal_top_singular_upper(p)
+            radial_source = "gram_eigh_upper"
+        except torch.linalg.LinAlgError:
+            radii = torch.linalg.svdvals(p)[:, 0]
+            counts.svd_matrices += 2
+            radial_source = "full_svd_guarded"
+    elif primal_norm_backend == "svd":
+        radii = torch.linalg.svdvals(p)[:, 0]
+        counts.svd_matrices += 2
+        radial_source = "full_svd_reference"
+    else:
+        raise ValueError("unknown primal norm backend")
+    scale = max(1., float(radii.max()))
     p = p / scale
     if float((a * p).sum()) < 0:
         p = -p  # central symmetry supplies a nonnegative lower bound
@@ -194,8 +270,10 @@ def certificate(u, d, a, lam, candidate, counts, *, cached_dual=None):
     return p, {
         "horizontal_residual": float(residual.abs().max()),
         "normalized_horizontal_residual": float(relative_h.max()),
-        "spectral_norms": (spectra[:, 0] / scale).tolist(),
-        "spectral_excess": max(0., float(spectra.max()) / scale - 1.),
+        # In Gram mode these are conservative upper estimates, not exact SVDs.
+        "spectral_norms": (radii / scale).tolist(),
+        "spectral_excess": max(0., float(radii.max()) / scale - 1.),
+        "primal_spectral_backend": radial_source,
         "primal_objective": primal, "dual_objective": dual,
         "residual_rcond": float(rcond.min()),
         "dual_spectrum_source": spectrum_source,
@@ -257,7 +335,8 @@ def _solve(u, d, a, *, config, initial_lambda=None):
     if not math.isfinite(magnitude) or not torch.isfinite(beta).all():
         raise ValueError("intrinsic objective normalization is not representable in float64")
     if magnitude == 0:
-        p, metrics = certificate(ud, dd, ad, beta, torch.zeros_like(ad), counts)
+        p, metrics = certificate(ud, dd, ad, beta, torch.zeros_like(ad), counts,
+                                 primal_norm_backend=config.primal_norm_backend)
         return SolverResult(p, beta, method, 0, accepted(metrics, tolerance), False,
             "zero_cotangent", metrics, counts, time.perf_counter() - started, 0., "exact_zero")
     w = (ud.square() + dd.square()).sum(1)
@@ -285,7 +364,8 @@ def _solve(u, d, a, *, config, initial_lambda=None):
         use_cached = (dtype == torch.float64 and not config.independent_certificate
                       and magnitude > 32 * torch.finfo(torch.float64).eps * _stable_norm(ad))
         cached = CachedDualSpectrum(lam, ev.pair, ev.singular, magnitude) if use_cached else None
-        p, metrics = certificate(ud, dd, ad, lam, ev.pair, counts, cached_dual=cached)
+        p, metrics = certificate(ud, dd, ad, lam, ev.pair, counts, cached_dual=cached,
+                                 primal_norm_backend=config.primal_norm_backend)
         history.append({"iteration": iteration, "rcond": ev.rcond,
                         "extended_initial_budget": iteration > config.initial_iterations,
                         "polar_horizontal_residual": float(horizontal_residual(u, d, ev.pair).abs().max()),
