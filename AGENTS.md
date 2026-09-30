@@ -45,6 +45,8 @@ decision order:
 10. `docs/DUAL_WARM_START_PREDICTOR_STUDY.md`
 11. `docs/DUAL_FACTOR_RECYCLING_PREDICTOR.md`
 12. `docs/SMOOTH_POLAR_ALTERNATIVE_STUDY.md`
+13. `docs/TORCH_POLAR_CAPABILITY.md`
+14. `docs/SMOOTH_QDWH_DECISION_VALIDATION.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1080,15 +1082,24 @@ Direct fp64 QDWH has now been studied as an alternative to the tall smooth
 SVD. It accurately recovered Q, H, the singular spectrum, nuclear value,
 rcond, and polar-derivative/HVP quantities on the tested corpus. All 931 real
 shadow evaluations passed the research posterior, and direct QDWH retained a
-material decomposition-kernel advantage over the current thin SVD. It was
-NOT adopted for production: the existing posterior does not yet certify
-curvature, CG, descent, and Armijo decisions throughout the admitted domain
-near the rcond guard. Full fp64 thin SVD remains the production smooth backend
-and independent oracle. The next approved low-cost research step is to check
-whether a native PyTorch/CUDA polar-decomposition primitive is available on
-Lagrange and whether it uses a genuine QDWH/backend path rather than an SVD
-fallback. If materially faster and numerically suitable, study that native
-backend before investing further in the custom QDWH implementation.
+material decomposition-kernel advantage over the current thin SVD. No
+already-installed Lagrange PyTorch environment exposes a supported matrix
+polar API, so custom direct fp64 QDWH remains the only serious tested polar
+alternative. Decision-relevant QDWH posterior validation is complete: no
+unsafe oracle decision was observed on the tested real or near-guard corpus.
+The first adaptive design was not production-worthy, requiring full SVD on
+865/931 fixed-trajectory evaluations. Ambiguous **rejection** of the QDWH
+primal certificate was the dominant cause, not unsafe QDWH acceptance. Full
+fp64 thin SVD remains the production smooth backend and independent oracle.
+
+One final approved QDWH research direction is one-sided conservative solver
+semantics: certify potentially unsafe acceptance, while allowing conservative
+certificate or Armijo rejection to continue the QDWH solver without
+immediately reproducing the SVD branch. A mathematically equivalent numerical
+backend need not follow identical floating-point branches. Any such study must
+preserve all final production certificate thresholds and use explicit full-SVD
+fallback on stagnation or budget exhaustion. It does not authorize production
+integration by default.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
