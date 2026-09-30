@@ -43,6 +43,7 @@ decision order:
 8. `docs/SMOOTH_GRAM_BACKEND_STUDY.md`
 9. `docs/SMOOTH_GRAM_DECISION_BOUNDS.md`
 10. `docs/DUAL_WARM_START_PREDICTOR_STUDY.md`
+11. `docs/DUAL_FACTOR_RECYCLING_PREDICTOR.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1062,14 +1063,20 @@ on two states; no real warm solve certified in zero or one Newton iteration.
 The previous original-coordinate lambda remains the production warm start.
 Do not continue tuning fixed two-history extrapolation by default.
 
-If explicitly requested, a distinct final warm-start research direction is
-to recycle the previous accepted smooth residual decomposition for a
-first-order stationarity predictor without a new current SVD. This permits
-O(mn+n^2) cached factor state, unlike the completed compact-history study.
-It remains research-only until a material reduction in smooth SVD count
-justifies its memory and checkpoint cost. Full fp64 SVD remains the production
-smooth backend; neither this possible predictor nor its state is a production
-default.
+Previous-factor recycling has now also been studied. On the locked replay it
+reduced warm smooth evaluations by about 6.9% and converted 52 of 294 warm
+solves to one-Newton-iteration certification. It required O(mn+n^2) cached
+decomposition state (roughly 52 MB fp64 for the six current pairs), caused
+four one-evaluation regressions, and yielded only about a 5% fair paired-solver
+speedup. The cheap mathematically sufficient Frobenius validity gate rejected
+all real warm states. It is not recommended for production integration.
+Previous original-coordinate lambda remains the production warm start; no
+cached residual-factor predictor state is part of production. Do not continue
+warm-start predictor work by default unless a future task explicitly reopens
+it. The next approved performance direction is to investigate numerically
+stable alternatives to the tall fp64 smooth residual SVD/polar itself, while
+retaining full SVD as oracle/fallback and preserving the exact coupled
+objective and certificate contract.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the

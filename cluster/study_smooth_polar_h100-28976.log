@@ -1,0 +1,46 @@
+lagrange0
+2026-09-30T11:10:14+02:00
+JOB=28976 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Wed Sep 30 11:10:14 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   35C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+PYTHON= /home/prignano/modded-nanogpt/.venv/bin/python 3.10.20
+TORCH= 2.10.0+cu128 CUDA= 12.8 NUMPY= 2.2.6
+GPU= NVIDIA H100 NVL SEED= 2026
+MODEL= {'vocab_size': 1024, 'width': 384, 'layers': 6, 'heads': 6, 'hidden': 1024, 'sequence_length': 128} SOLVER= {'dtype': 'float64', 'tolerance': 3e-05, 'rcond_guard': 0.0001, 'initial_iterations': 2, 'max_iterations': 100, 'max_cg': 30, 'fallback': True}
+DATA= {'kind': 'token_shards', 'train_path': '/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin', 'validation_path': '/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin', 'tokenizer_path': '/home/prignano/parameter-golf/data/tokenizers/fineweb_1024_bpe.model', 'train_tokens': 1048576, 'validation_tokens': 65536, 'seed': 2026} OUTPUT_ROOT= /home/prignano/qnormuon-runs/tiny-transformer
+Traceback (most recent call last):
+  File "/home/prignano/qnormuon/cluster/study_smooth_polar_h100.py", line 167, in <module>
+    main()
+  File "/home/prignano/qnormuon/cluster/study_smooth_polar_h100.py", line 138, in main
+    rows.append(compare(name,b,route))
+  File "/home/prignano/qnormuon/cluster/study_smooth_polar_h100.py", line 35, in compare
+    result=diagnose(b,route=route)
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/experiments/smooth_polar_alternative.py", line 108, in diagnose
+    q, it, qr_count, chol_count, status = _qdwh_unit(
+  File "/home/prignano/qnormuon/experiments/smooth_polar_alternative.py", line 46, in _qdwh_unit
+    a, b, c = _coefficients(ell)
+  File "/home/prignano/qnormuon/experiments/smooth_polar_alternative.py", line 32, in _coefficients
+    root = math.sqrt(1.0 + d)
+TypeError: must be real number, not complex

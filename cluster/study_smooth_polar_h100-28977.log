@@ -1,0 +1,31 @@
+lagrange0
+2026-09-30T11:11:03+02:00
+JOB=28977 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Wed Sep 30 11:11:03 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   35C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+PYTHON= /home/prignano/modded-nanogpt/.venv/bin/python 3.10.20
+TORCH= 2.10.0+cu128 CUDA= 12.8 NUMPY= 2.2.6
+GPU= NVIDIA H100 NVL SEED= 2026
+MODEL= {'vocab_size': 1024, 'width': 384, 'layers': 6, 'heads': 6, 'hidden': 1024, 'sequence_length': 128} SOLVER= {'dtype': 'float64', 'tolerance': 3e-05, 'rcond_guard': 0.0001, 'initial_iterations': 2, 'max_iterations': 100, 'max_cg': 30, 'fallback': True}
+DATA= {'kind': 'token_shards', 'train_path': '/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin', 'validation_path': '/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin', 'tokenizer_path': '/home/prignano/parameter-golf/data/tokenizers/fineweb_1024_bpe.model', 'train_tokens': 1048576, 'validation_tokens': 65536, 'seed': 2026} OUTPUT_ROOT= /home/prignano/qnormuon-runs/tiny-transformer
+STUDY_RESULT {"path": "cluster/smooth_polar_study-28977.json", "summary": {"tall": {"accepted": 80, "count": 95, "max_polar": 6.062410901280578e-13, "max_hvp": 3599.3172771426744, "decision_mismatches": 0}, "qr_square": {"accepted": 80, "count": 95, "max_polar": 5.724159671902317e-13, "max_hvp": 3360.033407743572, "decision_mismatches": 0}}, "performance": {"full_svd": {"median": 0.043328359723091125, "p95": 0.04340192675590515}, "tall": {"median": 0.024950630962848663, "p95": 0.025032341480255127}, "qr_square": {"median": 0.026694633066654205, "p95": 0.026751160621643066}}, "drivers": {"default": {"median": 0.02198723703622818, "p95": 0.024011068046092987, "singular_max_abs": 0.0, "polar_relative": 0.0}, "gesvd": {"median": 0.040249161422252655, "p95": 0.04027797281742096, "singular_max_abs": 2.3869795029440866e-14, "polar_relative": 6.090750099903364e-14}, "gesvdj": {"median": 0.022125832736492157, "p95": 0.02217426896095276, "singular_max_abs": 0.0, "polar_relative": 0.0}}}
