@@ -1,0 +1,177 @@
+lagrange0
+2026-09-28T14:48:34+02:00
+JOB=28897 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Mon Sep 28 14:48:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   33C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+RUN_BEGIN {"run_id": "smoke-28897-adamw-seed2026", "method": "adamw", "config": {"model": {"vocab_size": 1024, "width": 384, "layers": 6, "heads": 6, "hidden": 1024, "sequence_length": 128}, "data": {"kind": "token_shards", "train_path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin", "validation_path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin", "tokenizer_path": "/home/prignano/parameter-golf/data/tokenizers/fineweb_1024_bpe.model", "train_tokens": 1048576, "validation_tokens": 65536, "seed": 2026}, "seed": 2026, "steps": 50, "batch_size": 16, "gradient_accumulation": 1, "evaluation_batches": 4, "evaluation_interval": 10, "warmup_steps": 5, "minimum_lr_fraction": 0.1, "precision": "bf16_autocast_fp32_storage", "tf32": false, "adam_lr": 0.0003, "qso_lr": 0.001, "historical_lr": 0.001, "beta": 0.95, "adam_betas": [0.9, 0.95], "weight_decay": 0.0, "solver": {"dtype": "float32", "initial_iterations": 2, "max_iterations": 100, "max_cg": 30, "fallback": true}, "checkpoint_step": 25, "resume_check_steps": 3, "step_timeout_seconds": 180, "fallback_stop_fraction": 0.2, "fallback_stop_minimum_solves": 12, "output_root": "/home/prignano/qnormuon-runs/tiny-transformer"}, "seed": 2026, "python": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]", "python_executable": "/home/prignano/modded-nanogpt/.venv/bin/python", "torch": "2.10.0+cu128", "numpy": "2.2.6", "cuda_build": "12.8", "gpu": "NVIDIA H100 NVL", "hostname": "lagrange0", "job_id": "28897", "node_list": "lagrange0", "cpus": "4", "memory": "16384", "platform": "Linux-6.8.0-60-generic-x86_64-with-glibc2.39", "parameter_count": 11457408, "initialization_sha256": "0607adc4c9cffa7b902c0956fa7477ea274078fdc31406d84d527b79ca6a2401", "dataset": {"train": {"kind": "token_shard_prefix", "path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin", "file_bytes": 200001024, "header_tokens": 100000000, "loaded_tokens": 1048576, "prefix_sha256": "afce8cb11a4012770ee331ad3e3ca931ccc761c7716a680dfe28efc83e525e99"}, "validation": {"kind": "token_shard_prefix", "path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin", "file_bytes": 124044716, "header_tokens": 62021846, "loaded_tokens": 65536, "prefix_sha256": "09545e7dae1baab9e2c244bfc5d88103b759a56bc1d3a2aca83cb09b9a45db6a"}}, "model_storage": "float32", "forward_backward": "bfloat16 autocast", "solver_dtype": "float32", "certificate_dtype": "float64", "tf32": false, "deterministic_algorithms": true, "checkpoint_path": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28897-adamw-seed2026/checkpoint.pt", "output_path": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28897-adamw-seed2026", "source_sha256": {"benchmarks/tiny_transformer.py": "f2866560033c0a910c620643c9644b1f7aeb5e417c0598b29efcf5794ad39cb6", "qnormuon/optimizer.py": "df6552136f7a5c5e121622e97abd1e30c70762a0ee8422d61a02df54bd603ec6", "qnormuon/coupled_solver.py": "8345e386f00d9d9937d18ca512198bc3e37367fbb4a45f826874411e63b868c2", "cluster/run_tiny_smoke.py": "35fa128e9f73a8acb0a4536d59e206cbca4bb51aa2dfdbe6f0f8b073a9d6a64e"}}
+STEP_BEGIN adamw 0
+STEP_END adamw 0 7.010502815246582 0.048878416419029236
+STEP_BEGIN adamw 1
+STEP_END adamw 1 6.848625183105469 0.001964375376701355
+STEP_BEGIN adamw 2
+STEP_END adamw 2 6.688971042633057 0.0019187256693840027
+STEP_BEGIN adamw 3
+STEP_END adamw 3 6.601627826690674 0.001894839107990265
+STEP_BEGIN adamw 4
+STEP_END adamw 4 6.531088352203369 0.00190754234790802
+STEP_BEGIN adamw 5
+STEP_END adamw 5 6.466035842895508 0.001922518014907837
+STEP_BEGIN adamw 6
+STEP_END adamw 6 6.445292949676514 0.0019047334790229797
+STEP_BEGIN adamw 7
+STEP_END adamw 7 6.40998649597168 0.001906558871269226
+STEP_BEGIN adamw 8
+STEP_END adamw 8 6.338829040527344 0.001906372606754303
+STEP_BEGIN adamw 9
+STEP_END adamw 9 6.260809421539307 0.0018980354070663452
+STEP_BEGIN adamw 10
+STEP_END adamw 10 6.250827312469482 0.0019251182675361633
+STEP_BEGIN adamw 11
+STEP_END adamw 11 6.232532978057861 0.0019019916653633118
+STEP_BEGIN adamw 12
+STEP_END adamw 12 6.194664001464844 0.001909695565700531
+STEP_BEGIN adamw 13
+STEP_END adamw 13 6.129993438720703 0.0019215941429138184
+STEP_BEGIN adamw 14
+STEP_END adamw 14 6.1008687019348145 0.0019251629710197449
+STEP_BEGIN adamw 15
+STEP_END adamw 15 6.083393096923828 0.0019100308418273926
+STEP_BEGIN adamw 16
+STEP_END adamw 16 6.089162826538086 0.001920253038406372
+STEP_BEGIN adamw 17
+STEP_END adamw 17 6.091714382171631 0.0019102543592453003
+STEP_BEGIN adamw 18
+STEP_END adamw 18 6.0573344230651855 0.001995585858821869
+STEP_BEGIN adamw 19
+STEP_END adamw 19 6.037553787231445 0.001908324658870697
+STEP_BEGIN adamw 20
+STEP_END adamw 20 6.07719087600708 0.0019195452332496643
+STEP_BEGIN adamw 21
+STEP_END adamw 21 6.0055460929870605 0.0019048377871513367
+STEP_BEGIN adamw 22
+STEP_END adamw 22 6.072878837585449 0.0019020140171051025
+STEP_BEGIN adamw 23
+STEP_END adamw 23 6.05721378326416 0.001912429928779602
+STEP_BEGIN adamw 24
+STEP_END adamw 24 6.030240058898926 0.00190020352602005
+STEP_BEGIN adamw 25
+STEP_END adamw 25 6.117733001708984 0.004479750990867615
+STEP_BEGIN adamw 26
+STEP_END adamw 26 6.090054035186768 0.003347046673297882
+STEP_BEGIN adamw 27
+STEP_END adamw 27 6.025514602661133 0.0019122064113616943
+/home/prignano/qnormuon/cluster/run_tiny_smoke.py:54: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  max_parameter_error=max(float((p-q).abs().max()) for p,q in zip(model.parameters(),resumed.parameters()))
+RESUME_CHECK adamw {"passed": true, "steps": 3, "max_parameter_error": 0.0, "max_loss_error": 0.0, "max_optimizer_state_error": 0.0, "checkpoint_bytes": 137563211}
+STEP_BEGIN adamw 28
+STEP_END adamw 28 6.0173821449279785 0.002027466893196106
+STEP_BEGIN adamw 29
+STEP_END adamw 29 6.0831146240234375 0.0019140392541885376
+STEP_BEGIN adamw 30
+STEP_END adamw 30 6.0565009117126465 0.0019351840019226074
+STEP_BEGIN adamw 31
+STEP_END adamw 31 6.072300910949707 0.001924663782119751
+STEP_BEGIN adamw 32
+STEP_END adamw 32 6.023982048034668 0.0019015520811080933
+STEP_BEGIN adamw 33
+STEP_END adamw 33 6.048379898071289 0.0019220709800720215
+STEP_BEGIN adamw 34
+STEP_END adamw 34 6.024895668029785 0.0019071027636528015
+STEP_BEGIN adamw 35
+STEP_END adamw 35 6.030092716217041 0.0019226297736167908
+STEP_BEGIN adamw 36
+STEP_END adamw 36 6.0441389083862305 0.0020857229828834534
+STEP_BEGIN adamw 37
+STEP_END adamw 37 5.955496788024902 0.0019330605864524841
+STEP_BEGIN adamw 38
+STEP_END adamw 38 5.965404510498047 0.001905582845211029
+STEP_BEGIN adamw 39
+STEP_END adamw 39 6.023794174194336 0.0019313395023345947
+STEP_BEGIN adamw 40
+STEP_END adamw 40 5.99423360824585 0.001940116286277771
+STEP_BEGIN adamw 41
+STEP_END adamw 41 6.029587268829346 0.0019417181611061096
+STEP_BEGIN adamw 42
+STEP_END adamw 42 6.009108543395996 0.0019082576036453247
+STEP_BEGIN adamw 43
+STEP_END adamw 43 6.071448802947998 0.001911550760269165
+STEP_BEGIN adamw 44
+STEP_END adamw 44 5.997339248657227 0.0019313544034957886
+STEP_BEGIN adamw 45
+STEP_END adamw 45 5.998102188110352 0.001917511224746704
+STEP_BEGIN adamw 46
+STEP_END adamw 46 6.015563011169434 0.0019085332751274109
+STEP_BEGIN adamw 47
+STEP_END adamw 47 6.062292575836182 0.0019085705280303955
+STEP_BEGIN adamw 48
+STEP_END adamw 48 6.012322425842285 0.002692408859729767
+STEP_BEGIN adamw 49
+STEP_END adamw 49 6.022850513458252 0.0022599175572395325
+RUN_SUMMARY {"status": "passed", "method": "adamw", "parameter_count": 11457408, "steps": 50, "tokens": 102400, "initial_validation_loss": 6.998700022697449, "final_validation_loss": 5.98206639289856, "first_training_loss": 7.010502815246582, "last_training_loss": 6.022850513458252, "training_step_seconds": 1.6680602207779884, "optimizer_seconds": 0.14823851734399796, "optimizer_fraction": 0.0888688043138269, "tokens_per_second": 61388.670939134514, "total_wall_seconds": 3.271104633808136, "peak_cuda_bytes": 745862144, "reserved_cuda_bytes": 799014912, "early_live_bytes": {"mean": 253310976.0, "median": 253310976.0, "p95": 253310976.0, "max": 253310976.0}, "late_live_bytes": {"mean": 253310976.0, "median": 253310976.0, "p95": 253310976.0, "max": 253310976.0}, "solver": {"solves": 0, "fallbacks": 0, "fallback_percent": 0, "iteration_bins": {"0": 0, "1": 0, "2": 0, "3+": 0}, "distributions": {"newton_iterations": {}, "cg_iterations": {}, "normalized_gap": {}, "horizontal_residual": {}, "spectral_excess": {}, "residual_rcond": {}}}, "resume": {"passed": true, "steps": 3, "max_parameter_error": 0.0, "max_loss_error": 0.0, "max_optimizer_state_error": 0.0, "checkpoint_bytes": 137563211}, "early_update_parameter_ratios": {"mean": 0.0037509804724750024, "median": 0.003932576793319579, "p95": 0.004826918241286892, "max": 0.0049075659782134295}}
+RUN_BEGIN {"run_id": "smoke-28897-qso-seed2026", "method": "qso", "config": {"model": {"vocab_size": 1024, "width": 384, "layers": 6, "heads": 6, "hidden": 1024, "sequence_length": 128}, "data": {"kind": "token_shards", "train_path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin", "validation_path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin", "tokenizer_path": "/home/prignano/parameter-golf/data/tokenizers/fineweb_1024_bpe.model", "train_tokens": 1048576, "validation_tokens": 65536, "seed": 2026}, "seed": 2026, "steps": 50, "batch_size": 16, "gradient_accumulation": 1, "evaluation_batches": 4, "evaluation_interval": 10, "warmup_steps": 5, "minimum_lr_fraction": 0.1, "precision": "bf16_autocast_fp32_storage", "tf32": false, "adam_lr": 0.0003, "qso_lr": 0.001, "historical_lr": 0.001, "beta": 0.95, "adam_betas": [0.9, 0.95], "weight_decay": 0.0, "solver": {"dtype": "float32", "initial_iterations": 2, "max_iterations": 100, "max_cg": 30, "fallback": true}, "checkpoint_step": 25, "resume_check_steps": 3, "step_timeout_seconds": 180, "fallback_stop_fraction": 0.2, "fallback_stop_minimum_solves": 12, "output_root": "/home/prignano/qnormuon-runs/tiny-transformer"}, "seed": 2026, "python": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]", "python_executable": "/home/prignano/modded-nanogpt/.venv/bin/python", "torch": "2.10.0+cu128", "numpy": "2.2.6", "cuda_build": "12.8", "gpu": "NVIDIA H100 NVL", "hostname": "lagrange0", "job_id": "28897", "node_list": "lagrange0", "cpus": "4", "memory": "16384", "platform": "Linux-6.8.0-60-generic-x86_64-with-glibc2.39", "parameter_count": 11457408, "initialization_sha256": "0607adc4c9cffa7b902c0956fa7477ea274078fdc31406d84d527b79ca6a2401", "dataset": {"train": {"kind": "token_shard_prefix", "path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_train_000000.bin", "file_bytes": 200001024, "header_tokens": 100000000, "loaded_tokens": 1048576, "prefix_sha256": "afce8cb11a4012770ee331ad3e3ca931ccc761c7716a680dfe28efc83e525e99"}, "validation": {"kind": "token_shard_prefix", "path": "/home/prignano/parameter-golf/data/datasets/fineweb10B_sp1024/fineweb_val_000000.bin", "file_bytes": 124044716, "header_tokens": 62021846, "loaded_tokens": 65536, "prefix_sha256": "09545e7dae1baab9e2c244bfc5d88103b759a56bc1d3a2aca83cb09b9a45db6a"}}, "model_storage": "float32", "forward_backward": "bfloat16 autocast", "solver_dtype": "float32", "certificate_dtype": "float64", "tf32": false, "deterministic_algorithms": true, "checkpoint_path": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28897-qso-seed2026/checkpoint.pt", "output_path": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28897-qso-seed2026", "source_sha256": {"benchmarks/tiny_transformer.py": "f2866560033c0a910c620643c9644b1f7aeb5e417c0598b29efcf5794ad39cb6", "qnormuon/optimizer.py": "df6552136f7a5c5e121622e97abd1e30c70762a0ee8422d61a02df54bd603ec6", "qnormuon/coupled_solver.py": "8345e386f00d9d9937d18ca512198bc3e37367fbb4a45f826874411e63b868c2", "cluster/run_tiny_smoke.py": "35fa128e9f73a8acb0a4536d59e206cbca4bb51aa2dfdbe6f0f8b073a9d6a64e"}}
+STEP_BEGIN qso 0
+FALLBACK {"step": 0, "pair": "blocks.0.mlp", "objective_rms": 3.245583940707781e-05, "solver_dtype": "torch.float32", "event": "solve_end", "seconds": 52.12659028172493, "converged": true, "fallback": true, "reason": "line_search_failed", "rcond": 0.007587574029638532, "normalized_gap": 1.4761262048618106e-13, "newton": 5, "cg": 14}
+FALLBACK {"step": 0, "pair": "blocks.1.mlp", "objective_rms": 2.6289446452091122e-05, "solver_dtype": "torch.float32", "event": "solve_end", "seconds": 42.60835302621126, "converged": true, "fallback": true, "reason": "line_search_failed", "rcond": 0.00788652582472676, "normalized_gap": 1.2460386465568892e-13, "newton": 8, "cg": 24}
+FALLBACK {"step": 0, "pair": "blocks.2.mlp", "objective_rms": 2.5156733063799934e-05, "solver_dtype": "torch.float32", "event": "solve_end", "seconds": 49.54600800573826, "converged": true, "fallback": true, "reason": "line_search_failed", "rcond": 0.005906559262381586, "normalized_gap": 1.3932787609844149e-13, "newton": 14, "cg": 32}
+RUN_FAILURE {"status": "failed", "method": "qso", "active": {"step": 0, "pair": "blocks.3.mlp"}, "completed_steps": 0, "exception": "TimeoutError('smoke step exceeded the explicit wall-time safety budget; no solver settings changed')", "traceback": "Traceback (most recent call last):\n  File \"/home/prignano/qnormuon/cluster/run_tiny_smoke.py\", line 132, in run\n    record=train_step(model,opts,train,config,step)\n  File \"/home/prignano/qnormuon/benchmarks/tiny_transformer.py\", line 293, in train_step\n    synchronize(model);optimizer_start=time.perf_counter();opts.step();synchronize(model)\n  File \"/home/prignano/qnormuon/benchmarks/tiny_transformer.py\", line 211, in step\n    for o in self.all:o.step()\n  File \"/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/optim/optimizer.py\", line 526, in wrapper\n    out = func(*args, **kwargs)\n  File \"/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/home/prignano/qnormuon/qnormuon/optimizer.py\", line 121, in step\n    result = solve_coupled(u, d, torch.stack((mu, md)), config=config,\n  File \"/home/prignano/qnormuon/cluster/run_tiny_smoke.py\", line 117, in observed\n    result=original(u,d,a,**kwargs)\n  File \"/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/home/prignano/qnormuon/qnormuon/coupled_solver.py\", line 348, in solve_coupled\n    result = _solve(u, d, a, config=config, initial_lambda=initial_lambda)\n  File \"/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/home/prignano/qnormuon/qnormuon/coupled_solver.py\", line 310, in _solve\n    oracle = _reference(ud, dd, ad, config.reference_max_iterations)\n  File \"/home/prignano/qnormuon/qnormuon/coupled_solver.py\", line 326, in _reference\n    result = reference(u.cpu(), d.cpu(), a.cpu(), max_iterations=max_iterations)\n  File \"/home/prignano/qnormuon/experiments/dual_solver.py\", line 141, in reference\n    r = solve_lmo(u, d, centered, tolerance=tolerance, max_iterations=max_iterations,\n  File \"/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 124, in decorate_context\n    return func(*args, **kwargs)\n  File \"/home/prignano/qnormuon/experiments/horizontal_spectral.py\", line 120, in solve_lmo\n    z = ball_project(p + y)\n  File \"/home/prignano/qnormuon/experiments/horizontal_spectral.py\", line 54, in ball_project\n    left, values, right = torch.linalg.svd(p, full_matrices=False)\n  File \"/home/prignano/qnormuon/cluster/run_tiny_smoke.py\", line 39, in timeout_handler\n    raise TimeoutError('smoke step exceeded the explicit wall-time safety budget; no solver settings changed')\nTimeoutError: smoke step exceeded the explicit wall-time safety budget; no solver settings changed\n", "solver": {"solves": 0, "fallbacks": 0, "fallback_percent": 0, "iteration_bins": {"0": 0, "1": 0, "2": 0, "3+": 0}, "distributions": {"newton_iterations": {}, "cg_iterations": {}, "normalized_gap": {}, "horizontal_residual": {}, "spectral_excess": {}, "residual_rcond": {}}}, "initial_validation_loss": 6.998700022697449, "parameter_count": 11457408, "peak_cuda_bytes": 473767936}
+Traceback (most recent call last):
+  File "/home/prignano/qnormuon/cluster/run_tiny_smoke.py", line 203, in <module>
+    if __name__=='__main__':main()
+  File "/home/prignano/qnormuon/cluster/run_tiny_smoke.py", line 200, in main
+    run(method,config,root/f"smoke-{os.environ['SLURM_JOB_ID']}-{method}-seed{config['seed']}")
+  File "/home/prignano/qnormuon/cluster/run_tiny_smoke.py", line 132, in run
+    record=train_step(model,opts,train,config,step)
+  File "/home/prignano/qnormuon/benchmarks/tiny_transformer.py", line 293, in train_step
+    synchronize(model);optimizer_start=time.perf_counter();opts.step();synchronize(model)
+  File "/home/prignano/qnormuon/benchmarks/tiny_transformer.py", line 211, in step
+    for o in self.all:o.step()
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/optim/optimizer.py", line 526, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/qnormuon/optimizer.py", line 121, in step
+    result = solve_coupled(u, d, torch.stack((mu, md)), config=config,
+  File "/home/prignano/qnormuon/cluster/run_tiny_smoke.py", line 117, in observed
+    result=original(u,d,a,**kwargs)
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/qnormuon/coupled_solver.py", line 348, in solve_coupled
+    result = _solve(u, d, a, config=config, initial_lambda=initial_lambda)
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/qnormuon/coupled_solver.py", line 310, in _solve
+    oracle = _reference(ud, dd, ad, config.reference_max_iterations)
+  File "/home/prignano/qnormuon/qnormuon/coupled_solver.py", line 326, in _reference
+    result = reference(u.cpu(), d.cpu(), a.cpu(), max_iterations=max_iterations)
+  File "/home/prignano/qnormuon/experiments/dual_solver.py", line 141, in reference
+    r = solve_lmo(u, d, centered, tolerance=tolerance, max_iterations=max_iterations,
+  File "/home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/prignano/qnormuon/experiments/horizontal_spectral.py", line 120, in solve_lmo
+    z = ball_project(p + y)
+  File "/home/prignano/qnormuon/experiments/horizontal_spectral.py", line 54, in ball_project
+    left, values, right = torch.linalg.svd(p, full_matrices=False)
+  File "/home/prignano/qnormuon/cluster/run_tiny_smoke.py", line 39, in timeout_handler
+    raise TimeoutError('smoke step exceeded the explicit wall-time safety budget; no solver settings changed')
+TimeoutError: smoke step exceeded the explicit wall-time safety budget; no solver settings changed

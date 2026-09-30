@@ -1,0 +1,29 @@
+lagrange0
+2026-09-30T11:16:05+02:00
+JOB=28978 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Wed Sep 30 11:16:05 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+PYTHON= /home/prignano/modded-nanogpt/.venv/bin/python 3.10.20
+TORCH= 2.10.0+cu128 CUDA= 12.8 NUMPY= 2.2.6
+GPU= NVIDIA H100 NVL
+SHADOW_RESULT {"path": "cluster/smooth_polar_shadow-28978.json", "evaluations": 931, "accepted": 931, "max_polar": 6.726561319595271e-14, "max_gradient": 3.593368678926456e-08, "max_hvp": 1.0195034840501881e-13, "svd_seconds": 40.580853164196014, "candidate_seconds": 23.456098839640617}

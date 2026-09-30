@@ -1,0 +1,202 @@
+{
+  "job_id": "28924",
+  "checkpoint": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28914-qso-seed2026/checkpoint.pt",
+  "step": 25,
+  "gpu": "NVIDIA H100 NVL",
+  "torch": "2.10.0+cu128",
+  "errors": {
+    "lambda": 0.0,
+    "primal_direction": 0.0,
+    "primal_objective": 0.0,
+    "dual_objective": 4.718447854656915e-16,
+    "normalized_gap": 4.190312647648492e-15,
+    "residual_rcond": 3.0878077872387166e-16,
+    "horizontal_residual": 0.0,
+    "normalized_horizontal_residual": 0.0,
+    "spectral_excess": 0.0,
+    "spectral_norms": 0.0
+  },
+  "summary": {
+    "False": {
+      "optimizer_median": 1.577742651104927,
+      "optimizer_times": [
+        1.577742651104927,
+        1.5806343629956245,
+        1.5775410830974579
+      ],
+      "svd_evaluations": [
+        72
+      ]
+    },
+    "True": {
+      "optimizer_median": 2.3519510328769684,
+      "optimizer_times": [
+        2.3519510328769684,
+        2.3506222143769264,
+        2.3520581051707268
+      ],
+      "svd_evaluations": [
+        108
+      ]
+    }
+  },
+  "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+  "rows": [
+    {
+      "independent": true,
+      "optimizer_seconds": 2.875659689307213,
+      "step_seconds": 3.409022755920887,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 108
+    },
+    {
+      "independent": false,
+      "optimizer_seconds": 1.5770904943346977,
+      "step_seconds": 1.6027288436889648,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 72
+    },
+    {
+      "independent": false,
+      "optimizer_seconds": 1.577742651104927,
+      "step_seconds": 1.6036873310804367,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 72
+    },
+    {
+      "independent": true,
+      "optimizer_seconds": 2.3519510328769684,
+      "step_seconds": 2.3775222450494766,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 108
+    },
+    {
+      "independent": false,
+      "optimizer_seconds": 1.5806343629956245,
+      "step_seconds": 1.6077966764569283,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 72
+    },
+    {
+      "independent": true,
+      "optimizer_seconds": 2.3506222143769264,
+      "step_seconds": 2.3784305453300476,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 108
+    },
+    {
+      "independent": true,
+      "optimizer_seconds": 2.3520581051707268,
+      "step_seconds": 2.3778703436255455,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 108
+    },
+    {
+      "independent": false,
+      "optimizer_seconds": 1.5775410830974579,
+      "step_seconds": 1.6031332835555077,
+      "loss": 6.118260383605957,
+      "model_sha256": "7587dfd9743cdadde0f2fa5d1a9d435163aa4ad0c161eab67776c3dc18698279",
+      "svd_evaluations": 72
+    }
+  ],
+  "pair_metrics": [
+    {
+      "name": "blocks.0.mlp",
+      "independent": {
+        "primal_objective": 0.27966490008118916,
+        "dual_objective": 0.2796684640273893,
+        "residual_rcond": 0.012555290597512574,
+        "normalized_gap": 1.2743468279673288e-05
+      },
+      "cached": {
+        "primal_objective": 0.27966490008118916,
+        "dual_objective": 0.27966846402738915,
+        "residual_rcond": 0.012555290597512354,
+        "normalized_gap": 1.2743468279077829e-05
+      }
+    },
+    {
+      "name": "blocks.1.mlp",
+      "independent": {
+        "primal_objective": 0.20639681901426693,
+        "dual_objective": 0.2063970397445029,
+        "residual_rcond": 0.008739359456218,
+        "normalized_gap": 1.0694447762005563e-06
+      },
+      "cached": {
+        "primal_objective": 0.20639681901426693,
+        "dual_objective": 0.20639703974450266,
+        "residual_rcond": 0.008739359456218308,
+        "normalized_gap": 1.069444774990268e-06
+      }
+    },
+    {
+      "name": "blocks.2.mlp",
+      "independent": {
+        "primal_objective": 0.16843007804042182,
+        "dual_objective": 0.16843028533213356,
+        "residual_rcond": 0.005408951823009593,
+        "normalized_gap": 1.2307270710335696e-06
+      },
+      "cached": {
+        "primal_objective": 0.16843007804042182,
+        "dual_objective": 0.16843028533213358,
+        "residual_rcond": 0.005408951823009774,
+        "normalized_gap": 1.2307270711983592e-06
+      }
+    },
+    {
+      "name": "blocks.3.mlp",
+      "independent": {
+        "primal_objective": 0.1423768208202886,
+        "dual_objective": 0.14237704315726968,
+        "residual_rcond": 0.0037738394166370167,
+        "normalized_gap": 1.561606956751486e-06
+      },
+      "cached": {
+        "primal_objective": 0.1423768208202886,
+        "dual_objective": 0.1423770431572699,
+        "residual_rcond": 0.0037738394166371707,
+        "normalized_gap": 1.5616069583110371e-06
+      }
+    },
+    {
+      "name": "blocks.4.mlp",
+      "independent": {
+        "primal_objective": 0.12352972685174668,
+        "dual_objective": 0.12352982643834162,
+        "residual_rcond": 0.002611535873143902,
+        "normalized_gap": 8.061744909226314e-07
+      },
+      "cached": {
+        "primal_objective": 0.12352972685174668,
+        "dual_objective": 0.12352982643834183,
+        "residual_rcond": 0.0026115358731438,
+        "normalized_gap": 8.061744926077843e-07
+      }
+    },
+    {
+      "name": "blocks.5.mlp",
+      "independent": {
+        "primal_objective": 0.11260261964326952,
+        "dual_objective": 0.11260316949172797,
+        "residual_rcond": 0.0014670977062940533,
+        "normalized_gap": 4.883063779880991e-06
+      },
+      "cached": {
+        "primal_objective": 0.11260261964326952,
+        "dual_objective": 0.1126031694917275,
+        "residual_rcond": 0.0014670977062941092,
+        "normalized_gap": 4.883063775690679e-06
+      }
+    }
+  ]
+}

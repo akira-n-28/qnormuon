@@ -1,0 +1,47 @@
+lagrange0
+2026-09-29T17:30:29+02:00
+JOB=28969 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  14% /home
+Tue Sep 29 17:30:29 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   37C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+HOST=lagrange0 DATE=2026-09-29T17:30:29+02:00 JOB=28969 GPU=0 PYTHON=/home/prignano/modded-nanogpt/.venv/bin/python
+Tue Sep 29 17:30:29 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   37C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+RESULT {"path": "cluster/smooth_gram_decisions-28969.json", "totals": {"evaluations": 0, "structure_pass": 0, "derivative_bound_pass": 0, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 0, "hvp_bound_violations": 0, "curvature_certified": 0, "cg": 0, "cg_certified": 0, "armijo": 0, "armijo_certified": 0, "armijo_unsafe": 0, "certificates": 0, "certificate_certified": 0, "certificate_unsafe": 0}, "near_guard": [{"evaluations": 8, "structure_pass": 8, "derivative_bound_pass": 8, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 50, "hvp_bound_violations": 0, "curvature_certified": 20, "curvature_sign_violations": 0, "cg": 3, "cg_certified": 2, "cg_max_observed_direction_relative": 1.0, "cg_max_observed_direction_absolute": 0.0621994637075557, "cg_max_bound": 74.58034529206112, "cg_reasons": {"gram_cg_and_descent_certified": 2, "gram_curvature_ambiguous": 1}, "armijo": 7, "armijo_certified": 7, "armijo_unsafe": 0, "certificates": 4, "certificate_certified": 4, "certificate_unsafe": 0, "certificate_reasons": {"reject": 4}, "adaptive_gram_evaluations": 7, "adaptive_svd_evaluations": 1, "decomposition_fallback_reasons": {"gram_curvature_ambiguous": 1}, "armijo_reasons": {"accept": 3, "reject": 4}, "seconds": {"gram": 0.030518360435962677, "derivative": 0.15598497539758682, "decision": 0.05583367496728897, "certificate": 0.005541227757930756}, "min_rcond_lower": 0.00010099975715357789}, {"evaluations": 13, "structure_pass": 13, "derivative_bound_pass": 13, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 59, "hvp_bound_violations": 0, "curvature_certified": 30, "curvature_sign_violations": 0, "cg": 3, "cg_certified": 2, "cg_max_observed_direction_relative": 1.0, "cg_max_observed_direction_absolute": 0.04883940706981381, "cg_max_bound": 12.729839431865043, "cg_reasons": {"gram_cg_and_descent_certified": 2, "gram_curvature_ambiguous": 1}, "armijo": 12, "armijo_certified": 12, "armijo_unsafe": 0, "certificates": 4, "certificate_certified": 4, "certificate_unsafe": 0, "certificate_reasons": {"reject": 4}, "adaptive_gram_evaluations": 12, "adaptive_svd_evaluations": 1, "decomposition_fallback_reasons": {"gram_curvature_ambiguous": 1}, "armijo_reasons": {"accept": 3, "reject": 9}, "seconds": {"gram": 0.048570968210697174, "derivative": 0.19613655656576157, "decision": 0.08035994321107864, "certificate": 0.005541659891605377}, "min_rcond_lower": 0.00010499977501154149}, {"evaluations": 6, "structure_pass": 6, "derivative_bound_pass": 6, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 45, "hvp_bound_violations": 0, "curvature_certified": 15, "curvature_sign_violations": 0, "cg": 3, "cg_certified": 2, "cg_max_observed_direction_relative": 1.0, "cg_max_observed_direction_absolute": 0.06574052609046364, "cg_max_bound": 90.2043455998502, "cg_reasons": {"gram_cg_and_descent_certified": 2, "gram_curvature_ambiguous": 1}, "armijo": 5, "armijo_certified": 5, "armijo_unsafe": 0, "certificates": 4, "certificate_certified": 4, "certificate_unsafe": 0, "certificate_reasons": {"reject": 4}, "adaptive_gram_evaluations": 5, "adaptive_svd_evaluations": 1, "decomposition_fallback_reasons": {"gram_curvature_ambiguous": 1}, "armijo_reasons": {"accept": 3, "reject": 2}, "seconds": {"gram": 0.022435277700424194, "derivative": 0.13437414914369583, "decision": 0.04376856982707977, "certificate": 0.005706682801246643}, "min_rcond_lower": 0.0001199997869012935}, {"evaluations": 8, "structure_pass": 8, "derivative_bound_pass": 8, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 41, "hvp_bound_violations": 0, "curvature_certified": 18, "curvature_sign_violations": 0, "cg": 3, "cg_certified": 2, "cg_max_observed_direction_relative": 1.0, "cg_max_observed_direction_absolute": 0.051641777027590145, "cg_max_bound": 106.45132311096089, "cg_reasons": {"gram_cg_and_descent_certified": 2, "gram_curvature_ambiguous": 1}, "armijo": 7, "armijo_certified": 7, "armijo_unsafe": 0, "certificates": 4, "certificate_certified": 4, "certificate_unsafe": 0, "certificate_reasons": {"reject": 4}, "adaptive_gram_evaluations": 7, "adaptive_svd_evaluations": 1, "decomposition_fallback_reasons": {"gram_curvature_ambiguous": 1}, "armijo_reasons": {"accept": 3, "reject": 4}, "seconds": {"gram": 0.030155755579471588, "derivative": 0.1325119361281395, "decision": 0.050982505083084106, "certificate": 0.00544777512550354}, "min_rcond_lower": 0.00019999987625963033}, {"evaluations": 6, "structure_pass": 6, "derivative_bound_pass": 6, "value_interval_violations": 0, "gradient_bound_violations": 0, "hvps": 43, "hvp_bound_violations": 0, "curvature_certified": 42, "curvature_sign_violations": 0, "cg": 3, "cg_certified": 2, "cg_max_observed_direction_relative": 0.7101376016893114, "cg_max_observed_direction_absolute": 0.03937146022797637, "cg_max_bound": 44.30654242544185, "cg_reasons": {"gram_cg_and_descent_certified": 2, "gram_curvature_ambiguous": 1}, "armijo": 5, "armijo_certified": 5, "armijo_unsafe": 0, "certificates": 4, "certificate_certified": 4, "certificate_unsafe": 0, "certificate_reasons": {"reject": 4}, "adaptive_gram_evaluations": 5, "adaptive_svd_evaluations": 1, "decomposition_fallback_reasons": {"gram_curvature_ambiguous": 1}, "armijo_reasons": {"accept": 3, "reject": 2}, "seconds": {"gram": 0.022835366427898407, "derivative": 0.15628571808338165, "decision": 0.07678457349538803, "certificate": 0.005494467914104462}, "min_rcond_lower": 0.00029999992031292684}], "elapsed_seconds": 2.5560144558548927}

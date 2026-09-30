@@ -1,0 +1,138 @@
+HOSTNAME=lagrange0
+2026-09-28T13:56:57+02:00
+SLURM_JOB_ID=28893
+SLURM_JOB_NODELIST=lagrange0
+CUDA_VISIBLE_DEVICES=0
+SLURM_CPUS_PER_TASK=4
+SLURM_MEM_PER_NODE=16384
+PYTHONPATH=/home/prignano/qnormuon/.qso-tools/network-guard:/home/prignano/qnormuon/.qso-tools/pytest-site:/home/prignano/qnormuon
+pwd=/home/prignano/qnormuon
+DATASET_PATH=not applicable; TOKENIZER_PATH=not applicable; CHECKPOINT_PATH=not applicable
+OUTPUT_PATH=/home/prignano/qnormuon/cluster/run_production_tests_h100-28893.log
+RANDOM_SEED=not applicable; MODEL_CONFIG=not applicable; OPTIMIZER_CONFIG=reference suite; SOLVER_CONFIG=test-defined
+NETWORK_AUDIT_LOG=/home/prignano/qnormuon/cluster/run_production_tests_h100_network-28893.log
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Mon Sep 28 13:56:57 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   33C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+NETWORK_GUARD: /home/prignano/qnormuon/.qso-tools/network-guard/sitecustomize.py
+PYTHON_EXECUTABLE: /home/prignano/modded-nanogpt/.venv/bin/python
+PYTHON_VERSION: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+TORCH_VERSION: 2.10.0+cu128
+TORCH_CUDA_BUILD: 12.8
+NUMPY_VERSION: 2.2.6
+PYTEST_VERSION: 9.0.3
+PYTEST_PATH: /home/prignano/qnormuon/.qso-tools/pytest-site/pytest/__init__.py
+TORCH_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/torch/__init__.py
+NUMPY_PATH: /home/prignano/modded-nanogpt/.venv/lib/python3.10/site-packages/numpy/__init__.py
+CUDA_AVAILABLE: True
+GPU_NAME: NVIDIA H100 NVL
+GPU_PROPERTIES: _CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=23fa2f27-82fd-0d5c-540f-29ab2bef077a, pci_bus_id=1, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)
+SPECTRAL_SANITY torch.float64 PASS reconstruction=1.91618504e-15 polar_gram_max=5.55111512e-15
+SPECTRAL_SANITY torch.float32 PASS reconstruction=1.24045133e-06 polar_gram_max=1.93782005e-06
+SPECTRAL_SANITY torch.bfloat16 EXPECTED_FAILURE NotImplementedError: "svd_cuda_gesvdjBatched" not implemented for 'BFloat16'
+BF16_POLICY: promote SVD/polar work to at least float32 before calling torch.linalg.svd
+
+COLLECTION_BEGIN
+tests/test_dual_solver.py: 25
+tests/test_horizontal_spectral.py: 28
+tests/test_production_v0.py: 32
+tests/test_qnormuon.py: 5
+tests/test_rank_deficient.py: 30
+tests/test_theory_audit.py: 29
+tests/test_zero_stratum.py: 33
+
+COLLECTION_EXIT_CODE=0 COLLECTION_WALL_SECONDS=9
+
+FULL_PYTEST_BEGIN: python -m pytest -q
+........................................................F.....F......... [ 39%]
+.......F................................................................ [ 79%]
+......................................                                   [100%]
+=================================== FAILURES ===================================
+_ test_full_rank_reference_certificates_and_finite_step[cpu-dtype1-3e-05-901] __
+
+seed = 901, dtype = torch.float32, tol = 3e-05, device = 'cpu'
+
+    @pytest.mark.parametrize('seed', [901, 902, 903])
+    @pytest.mark.parametrize('dtype,tol', [(torch.float64, 1e-8), (torch.float32, 3e-5)])
+    @pytest.mark.parametrize('device', ['cpu', 'cuda'])
+    def test_full_rank_reference_certificates_and_finite_step(seed, dtype, tol, device):
+        u, d, a = random_example(seed, dtype=dtype)
+        oracle = reference(u, d, a)
+        r = solve_coupled(u.to(device), d.to(device), a.to(device), config=SolverConfig(dtype=dtype))
+>       assert r.converged and not r.fallback
+E       AssertionError: assert (True and not True)
+E        +  where True = SolverResult(pair=tensor([[[ 0.2546,  0.0539,  0.0091],\n         [ 0.6686, -0.4814, -0.1119],\n         [-0.3739, -0.25...gned_gap': 0.3617147854555043, 'normalized_gap': 0.022867320780213213, 'signed_normalized_gap': 0.022867320780213213}]).converged
+E        +  and   True = SolverResult(pair=tensor([[[ 0.2546,  0.0539,  0.0091],\n         [ 0.6686, -0.4814, -0.1119],\n         [-0.3739, -0.25...gned_gap': 0.3617147854555043, 'normalized_gap': 0.022867320780213213, 'signed_normalized_gap': 0.022867320780213213}]).fallback
+
+tests/test_production_v0.py:33: AssertionError
+_ test_full_rank_reference_certificates_and_finite_step[cuda-dtype1-3e-05-901] _
+
+seed = 901, dtype = torch.float32, tol = 3e-05, device = 'cuda'
+
+    @pytest.mark.parametrize('seed', [901, 902, 903])
+    @pytest.mark.parametrize('dtype,tol', [(torch.float64, 1e-8), (torch.float32, 3e-5)])
+    @pytest.mark.parametrize('device', ['cpu', 'cuda'])
+    def test_full_rank_reference_certificates_and_finite_step(seed, dtype, tol, device):
+        u, d, a = random_example(seed, dtype=dtype)
+        oracle = reference(u, d, a)
+        r = solve_coupled(u.to(device), d.to(device), a.to(device), config=SolverConfig(dtype=dtype))
+>       assert r.converged and not r.fallback
+E       AssertionError: assert (True and not True)
+E        +  where True = SolverResult(pair=tensor([[[ 0.2546,  0.0539,  0.0091],\n         [ 0.6686, -0.4814, -0.1119],\n         [-0.3739, -0.25...ned_gap': 0.36214594679555745, 'normalized_gap': 0.022894573931187535, 'signed_normalized_gap': 0.022894573931187535}]).converged
+E        +  and   True = SolverResult(pair=tensor([[[ 0.2546,  0.0539,  0.0091],\n         [ 0.6686, -0.4814, -0.1119],\n         [-0.3739, -0.25...ned_gap': 0.36214594679555745, 'normalized_gap': 0.022894573931187535, 'signed_normalized_gap': 0.022894573931187535}]).fallback
+
+tests/test_production_v0.py:33: AssertionError
+_______ test_fallback_rank_loss_and_fractional_direction_are_observable ________
+
+    def test_fallback_rank_loss_and_fractional_direction_are_observable():
+        u,d,a,expected=fractional_example()
+        r=solve_coupled(u,d,a,config=SolverConfig(dtype=torch.float64))
+        assert r.converged and r.fallback
+>       assert r.reason=='ill_conditioned_residual'
+E       AssertionError: assert 'gap_stagnation' == 'ill_conditioned_residual'
+E         
+E         - ill_conditioned_residual
+E         + gap_stagnation
+
+tests/test_production_v0.py:172: AssertionError
+=============================== warnings summary ===============================
+tests/test_production_v0.py::test_transpose_raw_covector_once_and_finite_delta_x_against_reference
+  /home/prignano/qnormuon/tests/test_production_v0.py:215: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+  Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+    assert float((measured-expected).norm()/expected.norm())<1e-5
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_production_v0.py::test_full_rank_reference_certificates_and_finite_step[cpu-dtype1-3e-05-901]
+FAILED tests/test_production_v0.py::test_full_rank_reference_certificates_and_finite_step[cuda-dtype1-3e-05-901]
+FAILED tests/test_production_v0.py::test_fallback_rank_loss_and_fractional_direction_are_observable
+3 failed, 179 passed, 1 warning in 8.04s
+PRODUCTION_TEST_TELEMETRY {"solves": 70, "fallbacks": 4, "uncertified_results": 1, "solver_dtype:torch.float64": 43, "solver_dtype:torch.float32": 27, "fallback_reason:line_search_failed": 2, "fallback_reason:gap_stagnation": 1, "fallback_reason:iteration_budget": 1}
+PRODUCTION_H100_SMOKE torch.float32 {"smoke": {"horizontal_residual": 1.3877787807814457e-16, "normalized_horizontal_residual": 3.212716268293532e-17, "spectral_norms": [0.9999983330896038, 1.0], "spectral_excess": 0.0, "primal_objective": 2.9031623407656877, "dual_objective": 2.9032211528963576, "signed_gap": 5.881213066993851e-05, "normalized_gap": 2.0257544145841395e-05, "signed_normalized_gap": 2.0257544145841395e-05, "newton_iterations": 3, "cg_iterations": 6, "svd_evaluations": 24, "reference_iterations": 0, "primal_dual_gap": 5.881213066993851e-05, "absolute_gap": 5.881213066993851e-05, "residual_rcond": 0.166519433259964, "fallback_used": false, "fallback_reason": null, "solver_dtype": "torch.float32", "certification_dtype": "torch.float64", "returned_direction_dtype": "torch.float64", "secondary_selection": "smooth_primary_unique_in_exact_limit", "converged": true, "extended_initial_budget": true, "model_dtype": "torch.float32", "returned_update_dtype": "torch.float32", "pair_name": "smoke"}}
+PRODUCTION_H100_SMOKE torch.bfloat16 {"smoke": {"horizontal_residual": 1.942890293094024e-16, "normalized_horizontal_residual": 5.883399980507126e-17, "spectral_norms": [0.9999983910305927, 1.0], "spectral_excess": 0.0, "primal_objective": 2.902967193011981, "dual_objective": 2.9030260602681546, "signed_gap": 5.8867256173655846e-05, "normalized_gap": 2.0277894497515547e-05, "signed_normalized_gap": 2.0277894497515547e-05, "newton_iterations": 3, "cg_iterations": 6, "svd_evaluations": 24, "reference_iterations": 0, "primal_dual_gap": 5.8867256173655846e-05, "absolute_gap": 5.8867256173655846e-05, "residual_rcond": 0.16643206775188446, "fallback_used": false, "fallback_reason": null, "solver_dtype": "torch.float32", "certification_dtype": "torch.float64", "returned_direction_dtype": "torch.float64", "secondary_selection": "smooth_primary_unique_in_exact_limit", "converged": true, "extended_initial_budget": true, "model_dtype": "torch.bfloat16", "returned_update_dtype": "torch.bfloat16", "pair_name": "smoke"}}
+PRODUCTION_TOTAL_SECONDS 8.878095790743828
+PEAK_CUDA_ALLOCATED_BYTES 33602560
+PEAK_CUDA_RESERVED_BYTES 35651584
+PYTEST_EXIT_CODE=1 PYTEST_WALL_SECONDS=17
+NETWORK_AUDIT=NO_PYTHON_OUTBOUND_ATTEMPT_OBSERVED
+2026-09-28T13:57:31+02:00
+JOB_RESULT=FAIL collection=0 tests=1 network=0

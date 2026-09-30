@@ -1,0 +1,42 @@
+lagrange0
+2026-09-29T18:07:30+02:00
+JOB=28970 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  14% /home
+Tue Sep 29 18:07:30 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   35C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+HOST=lagrange0 DATE=2026-09-29T18:07:30+02:00 JOB=28970 PYTHON=/home/prignano/modded-nanogpt/.venv/bin/python
+........................................................................ [ 24%]
+........................................................................ [ 48%]
+........................................................................ [ 72%]
+........................................................................ [ 96%]
+............                                                             [100%]
+replay step 5/50, pair solves 30
+replay step 10/50, pair solves 60
+replay step 15/50, pair solves 90
+replay step 20/50, pair solves 120
+replay step 25/50, pair solves 150
+replay step 30/50, pair solves 180
+replay step 35/50, pair solves 210
+replay step 40/50, pair solves 240
+replay step 45/50, pair solves 270
+replay step 50/50, pair solves 300
+RESULT {"output": "cluster/dual_warm_start_predictor-28970.json", "elapsed_seconds": 595.6307447552681, "summary": {"baseline": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 268, "3": 26}, "smooth_evaluations": 908, "mean_smooth_evaluations": 3.0884353741496597, "line_search_evaluations": 614, "seconds": 50.06481620669365, "median_pair_seconds": 0.16568061336874962, "mean_lambda_error": 6.8683616051553e-05}, "previous": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 268, "3": 26}, "smooth_evaluations": 908, "mean_smooth_evaluations": 3.0884353741496597, "line_search_evaluations": 614, "seconds": 50.078813306987286, "median_pair_seconds": 0.1657833568751812, "mean_lambda_error": 6.8683616051553e-05}, "center": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 0, "3": 294}, "smooth_evaluations": 1176, "mean_smooth_evaluations": 4, "line_search_evaluations": 882, "seconds": 64.79029770195484, "median_pair_seconds": 0.2205013632774353, "mean_lambda_error": 0.000466897186137343}, "raw:0.25": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 265, "3": 29}, "smooth_evaluations": 911, "mean_smooth_evaluations": 3.098639455782313, "line_search_evaluations": 617, "seconds": 50.22090297937393, "median_pair_seconds": 0.16573171317577362, "mean_lambda_error": 7.006169249327813e-05}, "raw:0.5": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 264, "3": 30}, "smooth_evaluations": 912, "mean_smooth_evaluations": 3.1020408163265305, "line_search_evaluations": 618, "seconds": 50.271641068160534, "median_pair_seconds": 0.16568206995725632, "mean_lambda_error": 7.608398454196619e-05}, "raw:0.75": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 262, "3": 32}, "smooth_evaluations": 914, "mean_smooth_evaluations": 3.108843537414966, "line_search_evaluations": 620, "seconds": 50.37095024436712, "median_pair_seconds": 0.16569732129573822, "mean_lambda_error": 8.561307149300185e-05}, "raw:1.0": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 256, "3": 38}, "smooth_evaluations": 920, "mean_smooth_evaluations": 3.129251700680272, "line_search_evaluations": 626, "seconds": 50.72309399396181, "median_pair_seconds": 0.16591788083314896, "mean_lambda_error": 9.754121089119194e-05}, "centered:0": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 271, "3": 23}, "smooth_evaluations": 905, "mean_smooth_evaluations": 3.078231292517007, "line_search_evaluations": 611, "seconds": 49.91688307374716, "median_pair_seconds": 0.1657727062702179, "mean_lambda_error": 6.839585017149471e-05}, "centered:0.5": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 264, "3": 30}, "smooth_evaluations": 912, "mean_smooth_evaluations": 3.1020408163265305, "line_search_evaluations": 618, "seconds": 50.269408881664276, "median_pair_seconds": 0.16572652384638786, "mean_lambda_error": 7.783959834581923e-05}, "centered:1.0": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 259, "3": 35}, "smooth_evaluations": 917, "mean_smooth_evaluations": 3.119047619047619, "line_search_evaluations": 623, "seconds": 50.546320505440235, "median_pair_seconds": 0.1656998172402382, "mean_lambda_error": 0.00010047693389800706}, "whitened:0.5": {"solves": 300, "warm_solves": 294, "warm_certified": 294, "failures": [], "newton_bins": {"0": 0, "1": 0, "2": 264, "3": 30}, "smooth_evaluations": 912, "mean_smooth_evaluations": 3.1020408163265305, "line_search_evaluations": 618, "seconds": 50.27382384240627, "median_pair_seconds": 0.1657499000430107, "mean_lambda_error": 7.784018822438013e-05}}}

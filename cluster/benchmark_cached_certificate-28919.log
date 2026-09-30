@@ -1,0 +1,34 @@
+lagrange0
+2026-09-29T11:43:40+02:00
+JOB=28919 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Tue Sep 29 11:43:40 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   32C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+CERT_RUN 1 True 2.8698639273643494 108
+CERT_RUN 2 False 1.5770211890339851 72
+CERT_RUN 3 False 1.5764769315719604 72
+CERT_RUN 4 True 2.353447377681732 108
+CERT_RUN 5 False 1.5819493010640144 72
+CERT_RUN 6 True 2.3505822271108627 108
+CERT_RUN 7 True 2.3526367247104645 108
+CERT_RUN 8 False 1.5763973593711853 72
+CERT_SUMMARY {"errors": {"lambda": 0.0, "primal_direction": 0.0, "primal_objective": 0.0, "dual_objective": 4.718447854656915e-16, "normalized_gap": 4.190312647648492e-15, "residual_rcond": 3.0878077872387166e-16}, "summary": {"False": {"optimizer_median": 1.5764769315719604, "optimizer_times": [1.5764769315719604, 1.5819493010640144, 1.5763973593711853], "svd_evaluations": [72]}, "True": {"optimizer_median": 2.3526367247104645, "optimizer_times": [2.353447377681732, 2.3505822271108627, 2.3526367247104645], "svd_evaluations": [108]}}}

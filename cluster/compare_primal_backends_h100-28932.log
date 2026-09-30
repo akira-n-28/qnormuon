@@ -1,0 +1,29 @@
+lagrange0
+2026-09-29T12:46:08+02:00
+JOB=28932 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Tue Sep 29 12:46:08 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:01:00.0 Off |                    0 |
+| N/A   33C    P0             63W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/home/prignano/qnormuon/cluster/compare_primal_backends_h100.py:67: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  model_max=max(float((p-q).abs().max()) for p,q in zip(old["model"].parameters(),new["model"].parameters()))
+BACKEND_COMPARISON {"job_id": "28932", "checkpoint": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28922-qso-seed2026/checkpoint.pt", "same_batch": true, "input_error": 0.0, "loss_abs_error": 0.0, "model_parameter_max_abs_error": 1.862645149230957e-09, "lifted_update_max_abs_error": 1.862645149230957e-09, "comparison": [{"pair": "blocks.0.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.2497615709559113e-11, "primal_objective_abs_error": 5.5710103197270655e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.9920051905424443e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 4.336808689942018e-18, "spectral_excess_abs_error": 0.0}, {"pair": "blocks.1.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.3770181095960083e-11, "primal_objective_abs_error": 4.111561091590943e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.9920639834169505e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 0.0, "spectral_excess_abs_error": 0.0}, {"pair": "blocks.2.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.445757568165675e-11, "primal_objective_abs_error": 3.3551550426835774e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.9920141060533756e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 0.0, "spectral_excess_abs_error": 0.0}, {"pair": "blocks.3.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.544148308165518e-11, "primal_objective_abs_error": 2.8364810500391968e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.9922320250085717e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 0.0, "spectral_excess_abs_error": 0.0}, {"pair": "blocks.4.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.5985048274511655e-11, "primal_objective_abs_error": 2.4604235315806022e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.99176474420815e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 3.469446951953614e-18, "spectral_excess_abs_error": 0.0}, {"pair": "blocks.5.mlp", "svd_iterations": 2, "gram_iterations": 2, "lambda_max_abs_error": 0.0, "primal_direction_max_abs_error": 3.73483188820245e-11, "primal_objective_abs_error": 2.242886432135549e-11, "dual_objective_abs_error": 0.0, "normalized_gap_abs_error": 1.9918501781598485e-10, "rcond_abs_error": 0.0, "horizontal_abs_error": 0.0, "spectral_excess_abs_error": 0.0}]}

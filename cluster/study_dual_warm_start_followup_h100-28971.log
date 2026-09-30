@@ -1,0 +1,26 @@
+lagrange0
+2026-09-29T18:21:31+02:00
+JOB=28971 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  14% /home
+Tue Sep 29 18:21:31 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+RESULT {"path": "cluster/dual_warm_start_followup-28971.json", "rows": [{"name": "blocks.0.mlp", "history": [{"iteration": 0, "gap": 0.002594914297953626, "rcond": 0.012549217640463678}, {"iteration": 1, "gap": 0.0004073497520139817, "rcond": 0.012556175323455487}, {"iteration": 2, "gap": 1.277420449438367e-05, "rcond": 0.0125554842244744}], "evaluations": 3, "certified": true}, {"name": "blocks.1.mlp", "history": [{"iteration": 0, "gap": 0.003966962543169698, "rcond": 0.008736540322738084}, {"iteration": 1, "gap": 0.00012398199847351505, "rcond": 0.008738106290530233}, {"iteration": 2, "gap": 1.0638111307450078e-06, "rcond": 0.008738091779322362}], "evaluations": 3, "certified": true}, {"name": "blocks.2.mlp", "history": [{"iteration": 0, "gap": 0.0019305265222708797, "rcond": 0.005406133567086155}, {"iteration": 1, "gap": 9.33529019746934e-05, "rcond": 0.0054079690163267}, {"iteration": 2, "gap": 1.3764012650458847e-06, "rcond": 0.005407973134086965}], "evaluations": 3, "certified": true}, {"name": "blocks.3.mlp", "history": [{"iteration": 0, "gap": 0.0024460889578007787, "rcond": 0.0037736324910434276}, {"iteration": 1, "gap": 0.0002452203787314754, "rcond": 0.0037738637425780435}, {"iteration": 2, "gap": 1.578587514699142e-06, "rcond": 0.0037738293758082415}], "evaluations": 3, "certified": true}, {"name": "blocks.4.mlp", "history": [{"iteration": 0, "gap": 0.00273306668653447, "rcond": 0.002611993673676376}, {"iteration": 1, "gap": 0.00015427268703766662, "rcond": 0.002612538799341774}, {"iteration": 2, "gap": 8.046473808329667e-07, "rcond": 0.0026125150719656857}], "evaluations": 3, "certified": true}, {"name": "blocks.5.mlp", "history": [{"iteration": 0, "gap": 0.002786661218912999, "rcond": 0.0014665148360317347}, {"iteration": 1, "gap": 0.00028025673781440484, "rcond": 0.0014665867007785341}, {"iteration": 2, "gap": 4.960387766667562e-06, "rcond": 0.001466583825731313}], "evaluations": 3, "certified": true}], "timing": {"previous": {"median_seconds": 1.5702098608016968e-05, "p95_seconds": 1.695007085800171e-05}, "center": {"median_seconds": 1.548975706100464e-05, "p95_seconds": 1.6286969184875488e-05}, "raw:0.5": {"median_seconds": 2.2079795598983765e-05, "p95_seconds": 2.3573637008666992e-05}, "raw:1.0": {"median_seconds": 2.1968036890029907e-05, "p95_seconds": 2.3074448108673096e-05}, "centered:0": {"median_seconds": 5.314871668815613e-05, "p95_seconds": 5.81890344619751e-05}, "centered:0.5": {"median_seconds": 5.289539694786072e-05, "p95_seconds": 5.903095006942749e-05}, "centered:1.0": {"median_seconds": 5.215778946876526e-05, "p95_seconds": 5.822628736495972e-05}, "whitened:0.5": {"median_seconds": 6.636232137680054e-05, "p95_seconds": 7.183849811553955e-05}}, "checkpoint_predictor_state_exact": {"previous": true, "center": true, "raw:0.5": true, "raw:1.0": true, "centered:0": true, "centered:0.5": true, "centered:1.0": true, "whitened:0.5": true}, "packed_state_bytes": 49152}

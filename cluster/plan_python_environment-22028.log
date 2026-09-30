@@ -1,0 +1,76 @@
+lagrange0
+2026-09-25T16:55:09+02:00
+SLURM_JOB_ID=22028
+SLURM_JOB_NODELIST=lagrange0
+SLURM_CPUS_PER_TASK=2
+SLURM_MEM_PER_NODE=16384
+CUDA_VISIBLE_DEVICES=0
+/home/prignano/qnormuon
+JobId=22028 JobName=qso-python-plan
+   UserId=prignano(1021) GroupId=prignano(1021) MCS_label=N/A
+   Priority=1 Nice=0 Account=castelnuovo QOS=castelnuovo_qos
+   JobState=RUNNING Reason=None Dependency=(null)
+   Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   RunTime=00:00:00 TimeLimit=00:05:00 TimeMin=N/A
+   SubmitTime=2026-09-25T16:55:09 EligibleTime=2026-09-25T16:55:09
+   AccrueTime=2026-09-25T16:55:09
+   StartTime=2026-09-25T16:55:09 EndTime=2026-09-25T17:00:09 Deadline=N/A
+   PreemptEligibleTime=2026-09-25T16:55:09 PreemptTime=None
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-09-25T16:55:09 Scheduler=Main
+   Partition=mat AllocNode:Sid=lagrangectl:1211014
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=lagrange0
+   BatchHost=lagrange0
+   NumNodes=1 NumCPUs=2 NumTasks=1 CPUs/Task=2 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=2,mem=16G,node=1,billing=2,gres/gpu=1
+   AllocTRES=cpu=2,mem=16G,node=1,billing=2,gres/gpu=1
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   MinCPUsNode=2 MinMemoryNode=16G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
+   Command=/home/prignano/qnormuon/cluster/plan_python_environment.sbatch
+   WorkDir=/home/prignano/qnormuon
+   StdErr=/home/prignano/qnormuon/cluster/plan_python_environment-22028.log
+   StdIn=/dev/null
+   StdOut=/home/prignano/qnormuon/cluster/plan_python_environment-22028.log
+   Power=
+   TresPerNode=gres/gpu:1
+   TresPerTask=cpu:2
+   
+
+name, memory.total [MiB], driver_version
+NVIDIA H100 NVL, 95830 MiB, 570.211.01
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+/dev/sda4                   200G   94G  107G  47% /
+Filesystem                     Inodes   IUsed      IFree IUse% Mounted on
+10.50.19.60:/lagrange_vol0 1477323520 5345428 1471978092    1% /home
+TARGET SOURCE                     FSTYPE         OPTIONS
+/home  10.50.19.60:/lagrange_vol0 fuse.glusterfs rw,relatime,user_id=0,group_id=0,default_permissions,allow_other,max_read=131072
+/usr/local/cuda-12.6
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2024 NVIDIA Corporation
+Built on Thu_Sep_12_02:18:05_PDT_2024
+Cuda compilation tools, release 12.6, V12.6.77
+Build cuda_12.6.r12.6/compiler.34841621_0
+uv 0.10.11
+Python executable: /home/prignano/.venv/bin/python
+Python version: 3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]
+Prefix: /home/prignano/.venv base prefix: /home/prignano/.local/share/uv/python/cpython-3.10-linux-x86_64-gnu
+Architecture/libc: x86_64 ('glibc', '2.39')
+TLS: OpenSSL 3.5.5 27 Jan 2026
+Existing distributions: []
+Storage path: /home/prignano exists: True writable: True
+Storage path: /home/prignano/.venv exists: True writable: True
+Storage path: /home/prignano/.cache exists: True writable: True
+HOME_WRITE_READ_OK: /home/prignano/.qso-storage-probe-8cnvcat4/probe
+HOME_HARDLINK_OK: True
+Temporary probe removed
+Quota-related xattrs (absence or permission failure does not establish no quota):
+trusted.glusterfs.quota.limit-set OSError [Errno 61] No data available: '/home/prignano'
+trusted.glusterfs.quota.size OSError [Errno 61] No data available: '/home/prignano'
+TORCH_METADATA_CHECK_FAILED: URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+PYPI_METADATA_CHECK_FAILED: numpy URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+PYPI_METADATA_CHECK_FAILED: pytest URLError <urlopen error [Errno -3] Temporary failure in name resolution>
+TOTAL_METADATA_BODY_BYTES: 0
+2026-09-25T16:55:10+02:00

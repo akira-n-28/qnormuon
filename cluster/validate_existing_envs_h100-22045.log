@@ -1,0 +1,50 @@
+hostname=lagrange0
+2026-09-25T18:12:46+02:00
+SLURM_JOB_ID=22045
+SLURM_JOB_NODELIST=lagrange0
+CUDA_VISIBLE_DEVICES=0
+SLURM_CPUS_PER_TASK=2
+SLURM_MEM_PER_NODE=12288
+PATH=/usr/local/bin:/usr/bin:/bin
+LD_LIBRARY_PATH=<unset>
+pwd=/home/prignano/qnormuon
+NVIDIA H100 NVL, 95830 MiB, 570.211.01
+
+=== CANDIDATE /home/prignano/modded-nanogpt/.venv ===
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "python", "executable": "/home/prignano/modded-nanogpt/.venv/bin/python", "prefix": "/home/prignano/modded-nanogpt/.venv", "status": "PASS", "version": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pytest", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pluggy", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_packaging", "status": "PRESENT", "version": "26.0"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_iniconfig", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "metadata_pygments", "status": "PRESENT", "version": "2.19.2"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "numpy_import", "status": "PASS", "version": "2.2.6"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "torch_import", "cuda_build": "12.8", "status": "PASS", "version": "2.10.0+cu128"}
+CHECK: {"available": true, "candidate": "/home/prignano/modded-nanogpt/.venv", "capability": [9, 0], "check": "gpu_info", "device_count": 1, "name": "NVIDIA H100 NVL", "properties": "_CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=55e37d33-05bd-f862-37d0-5f1f7c978f97, pci_bus_id=33, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)", "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_allocation", "device": "cuda:0", "elements": 8, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_matmul", "dtype": "torch.float32", "max_error": 0.0, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cpu_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_orthogonality_error": 9.941793403073688e-16, "relative_reconstruction_error": 1.1241954303702247e-15, "shape": [16, 8], "singular_max": 2.203143951183863, "singular_min": 1.0143810512812164, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_error_vs_cpu_float64": 1.5925741970669012e-15, "relative_polar_orthogonality_error": 2.4467498262233373e-15, "relative_reconstruction_error": 1.916185036636478e-15, "relative_singular_value_error_vs_cpu_float64": 1.1335822021376302e-15, "shape": [16, 8], "singular_max": 2.2031439511838644, "singular_min": 1.0143810512812175, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_float32_svd_polar", "factor_dtype": "torch.float32", "input_dtype": "torch.float32", "relative_polar_error_vs_cpu_float64": 5.879905493099862e-07, "relative_polar_orthogonality_error": 1.1623910400829599e-06, "relative_reconstruction_error": 1.2404513311212165e-06, "relative_singular_value_error_vs_cpu_float64": 5.51220948879426e-07, "shape": [16, 8], "singular_max": 2.203144073486328, "singular_min": 1.014380693435669, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/modded-nanogpt/.venv", "check": "cuda_bfloat16_svd_polar", "error": "NotImplementedError: \"svd_cuda_gesvdjBatched\" not implemented for 'BFloat16'", "status": "FAIL"}
+CANDIDATE_RESULT: PASS {"candidate": "/home/prignano/modded-nanogpt/.venv", "required_failures": []}
+
+=== CANDIDATE /home/prignano/pg ===
+CHECK: {"candidate": "/home/prignano/pg", "check": "python", "executable": "/home/prignano/pg/bin/python", "prefix": "/home/prignano/pg", "status": "PASS", "version": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pytest", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pluggy", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "metadata_packaging", "status": "PRESENT", "version": "26.0"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "metadata_iniconfig", "status": "ABSENT"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "metadata_pygments", "status": "PRESENT", "version": "2.19.2"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "numpy_import", "status": "PASS", "version": "2.2.6"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "torch_import", "cuda_build": "12.8", "status": "PASS", "version": "2.10.0+cu128"}
+CHECK: {"available": true, "candidate": "/home/prignano/pg", "capability": [9, 0], "check": "gpu_info", "device_count": 1, "name": "NVIDIA H100 NVL", "properties": "_CudaDeviceProperties(name='NVIDIA H100 NVL', major=9, minor=0, total_memory=95329MB, multi_processor_count=132, uuid=55e37d33-05bd-f862-37d0-5f1f7c978f97, pci_bus_id=33, pci_device_id=0, pci_domain_id=0, L2_cache_size=60MB)", "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cuda_allocation", "device": "cuda:0", "elements": 8, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cuda_matmul", "dtype": "torch.float32", "max_error": 0.0, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cpu_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_orthogonality_error": 9.941793403073688e-16, "relative_reconstruction_error": 1.1241954303702247e-15, "shape": [16, 8], "singular_max": 2.203143951183863, "singular_min": 1.0143810512812164, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cuda_float64_svd_polar", "factor_dtype": "torch.float64", "input_dtype": "torch.float64", "relative_polar_error_vs_cpu_float64": 1.5925741970669012e-15, "relative_polar_orthogonality_error": 2.4467498262233373e-15, "relative_reconstruction_error": 1.916185036636478e-15, "relative_singular_value_error_vs_cpu_float64": 1.1335822021376302e-15, "shape": [16, 8], "singular_max": 2.2031439511838644, "singular_min": 1.0143810512812175, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cuda_float32_svd_polar", "factor_dtype": "torch.float32", "input_dtype": "torch.float32", "relative_polar_error_vs_cpu_float64": 5.879905493099862e-07, "relative_polar_orthogonality_error": 1.1623910400829599e-06, "relative_reconstruction_error": 1.2404513311212165e-06, "relative_singular_value_error_vs_cpu_float64": 5.51220948879426e-07, "shape": [16, 8], "singular_max": 2.203144073486328, "singular_min": 1.014380693435669, "status": "PASS"}
+CHECK: {"candidate": "/home/prignano/pg", "check": "cuda_bfloat16_svd_polar", "error": "NotImplementedError: \"svd_cuda_gesvdjBatched\" not implemented for 'BFloat16'", "status": "FAIL"}
+CANDIDATE_RESULT: PASS {"candidate": "/home/prignano/pg", "required_failures": []}
+
+JOB_RESULT: PASS
+2026-09-25T18:13:05+02:00

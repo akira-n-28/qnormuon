@@ -1,0 +1,26 @@
+lagrange0
+2026-09-29T14:49:34+02:00
+JOB=28954 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  2.0T   12T  15% /home
+Tue Sep 29 14:49:34 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+RESULT {"path": "cluster/smooth_gram_adversarial-28954.json", "cases": 95, "accepted": 69, "reasons": {"negative_eigenvalue_roundoff": 6, "posterior_passed_research_only": 69, "rcond_lower_not_above_guard": 9, "reconstruction_posterior_failed": 11}, "guard_violations": 0, "newton_mismatches": 0, "performance": {"svd": {"median": 0.043356746435165405, "p95": 0.04340176284313202, "values": [0.04330276697874069, 0.043356746435165405, 0.04340176284313202, 0.04336800426244736, 0.043279655277729034]}, "raw_gram": {"median": 0.007718876004219055, "p95": 0.0077520012855529785, "values": [0.007718876004219055, 0.007715918123722076, 0.007713340222835541, 0.0077520012855529785, 0.007736913859844208]}, "validated": {"median": 0.010445594787597656, "p95": 0.019680559635162354, "values": [0.019680559635162354, 0.010445594787597656, 0.010438531637191772, 0.01041381061077118, 0.010450787842273712]}}}

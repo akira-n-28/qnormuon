@@ -17,8 +17,8 @@ The accepted provisional core is:
         -> coupled horizontal spectral LMO
         -> certified numerical solve
 
-The K=I coupled horizontal spectral optimizer is the current production-v0
-candidate.
+`QuotientSpectralOptimizer` is the implemented K=I coupled horizontal spectral
+production-v0. Historical `QNorMuon` remains separate.
 
 This is a research codebase. Mathematical claims must be treated as claims to
 verify, not as axioms to preserve at all costs.
@@ -27,22 +27,39 @@ verify, not as axioms to preserve at all costs.
 # 1. Read this before making changes
 
 Before modifying optimizer theory or core implementation, read the relevant
-documents.
+documents. For production optimizer work, read at minimum, in this order:
 
-For work on the current optimizer core, read in this order:
+1. `docs/PRODUCTION_V0.md`
+2. `docs/QUOTIENT_SPECTRAL_GEOMETRY.md`
+3. `docs/HORIZONTAL_SPECTRAL_LMO.md`
+4. `docs/DUAL_SOLVER_STUDY.md`
 
-1. `docs/QUOTIENT_SPECTRAL_GEOMETRY.md`
-2. `docs/HORIZONTAL_SPECTRAL_LMO.md`
-3. `docs/DUAL_SOLVER_STUDY.md`
-4. `docs/ZERO_STRATUM_GEOMETRY.md`
-5. `docs/RANK_DEFICIENT_THEORY.md`
-6. `docs/THEORY_AUDIT.md`
-7. `docs/QNORMUON_THEORY.md`
+For current numerical or performance work, additionally read in chronological
+decision order:
 
-Later reports override older statements when the theory has evolved.
+5. `docs/TRAINING_SOLVER_DIAGNOSIS.md`
+6. `docs/SOLVER_PERFORMANCE_OPTIMIZATION.md`
+7. `docs/PRIMAL_SPECTRAL_NORM_OPTIMIZATION.md`
+8. `docs/SMOOTH_GRAM_BACKEND_STUDY.md`
+9. `docs/SMOOTH_GRAM_DECISION_BOUNDS.md`
+10. `docs/DUAL_WARM_START_PREDICTOR_STUDY.md`
+11. `docs/DUAL_FACTOR_RECYCLING_PREDICTOR.md`
+12. `docs/SMOOTH_POLAR_ALTERNATIVE_STUDY.md`
+13. `docs/TORCH_POLAR_CAPABILITY.md`
+14. `docs/SMOOTH_QDWH_DECISION_VALIDATION.md`
+15. `docs/SMOOTH_QDWH_ONE_SIDED_SOLVER.md`
 
-`docs/QNORMUON_THEORY.md` is the historical/original specification. Do not
-assume every claim in it is still the current design.
+For singular-weight or deficient-rank questions, also read
+`docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
+`docs/THEORY_AUDIT.md` and `docs/QNORMUON_THEORY.md` provide older theory
+context; the latter is the historical/original specification. Later validated
+production/performance reports override older numerical implementation
+assumptions, but do not silently override mathematical theorems unless a report
+explicitly changes them.
+
+Historical `EXPERIMENT_PLAN.md` QNorMuon/shared-leverage entries are not current
+production QSO requirements. Historical experiment plans do not override the
+current quotient-spectral production contract.
 
 Important reference implementations and tests include:
 
@@ -244,7 +261,8 @@ For production-v0:
 
 - do not invent an epsilon-based "exact extension";
 - do not silently create a neuron-birth rule;
-- use an explicit policy such as error or skip-pair;
+- exact zero or one-sided zero rows raise an error; no skip-pair policy is
+  implemented;
 - report the event clearly.
 
 A one-sided zero row also has no finite balanced representative.
@@ -290,13 +308,16 @@ Signed gauge support is research-only unless explicitly requested by the task.
 
 # 10. Production-v0 scope
 
-The first production candidate is intentionally conservative.
+The implemented `QuotientSpectralOptimizer` production-v0 is intentionally
+conservative. Historical separate-polar `QNorMuon` is a different optimizer.
 
 IN SCOPE:
 
 - K = I;
 - regular nonzero paired rows;
-- canonical paired momentum;
+- explicitly named SwiGLU up/down pairs, with the down weight transposed into
+  the mathematical row layout;
+- canonical paired EMA momentum;
 - coupled horizontal spectral LMO;
 - warm-started dual solve;
 - row-whitened Newton-CG;
@@ -305,6 +326,10 @@ IN SCOPE:
 - PyTorch optimizer integration;
 - checkpointing;
 - tiny Transformer experiments.
+
+The raw covector is transformed into canonical coordinates exactly once.
+Momentum uses `M <- beta*M + (1-beta)*G_c`, and the current step solves with
+that updated EMA; no bias correction is implicit.
 
 OUT OF SCOPE unless explicitly requested:
 
@@ -321,9 +346,9 @@ OUT OF SCOPE unless explicitly requested:
 Do not add one of these because it merely seems useful during production-v0.
 
 
-# 11. Current numerical solver candidate
+# 11. Current numerical solver
 
-The leading smooth solver is:
+The production smooth solver is:
 
     warm-started
     row-whitened
@@ -344,6 +369,14 @@ weights and normalization change, transform it into the new internal whitened
 coordinates.
 
 Do not carry the previous whitened internal variable blindly between steps.
+
+For a float64 smooth evaluation, the original dual residual equals
+`magnitude * B_internal` under the implemented centering and whitening
+convention. Its dual objective and rcond may reuse the cached singular spectrum
+only when lambda, primal candidate, and smooth evaluation correspond exactly.
+Independent residual recomputation remains available for reference/debugging.
+Do not add an expensive decomposition solely for observability in normal
+training.
 
 
 # 12. Row whitening
@@ -398,7 +431,8 @@ Every production solve should expose at least:
 - normalized primal-dual gap;
 - horizontal residual;
 - normalized horizontal residual;
-- spectral norm of each primal side;
+- spectral norm of each primal side (a conservative upper estimate in the
+  default projected-primal Gram mode);
 - spectral excess;
 - residual conditioning / rcond;
 - number of Newton iterations;
@@ -406,10 +440,29 @@ Every production solve should expose at least:
 - number of SVD/polar evaluations if available;
 - whether fallback occurred;
 - fallback reason;
-- solver dtype;
+- solver dtype and primal norm backend;
 - returned-direction dtype.
 
 Do not silently turn an unsuccessful solve into success.
+
+The production acceptance checks are: normalized gap `<= 3e-5`, residual
+rcond `> 1e-4`, normalized horizontal residual `<= 1e-10`, spectral excess
+`<= 1e-12`, and signed normalized gap `>= -1e-10`. Do not weaken them merely
+for performance. A stricter `1e-8` warm-start line-search failure is a known
+separate limitation, not the production target.
+
+The default `primal_norm_backend="gram_upper"` applies ONLY to projected-primal
+radial feasibility. It uses a conservative fp64 Gram/eigensystem upper estimate
+of each top singular value under its documented numerical model and may
+overscale. It must not silently underestimate spectral norm under that
+contract. `primal_norm_backend="svd"` retains independent full SVD as an
+oracle/debug path. The smooth residual SVD/polar remains full fp64 SVD.
+
+Keep mandatory certificate diagnostics (gap, horizontality, spectral
+feasibility, rcond, Newton/CG counts, fallback status/reason, dtype/backend)
+separate from optional expensive research diagnostics. Certification applies
+before final model-dtype casting. Post-cast spectral diagnostics need not run
+by default when they require an additional decomposition.
 
 
 # 15. Gap versus direction accuracy
@@ -432,8 +485,9 @@ the relevant minimum singular value must be controlled.
 
 # 16. Fallback
 
-Keep the generic high-accuracy reference solver available during production-v0
-development.
+Keep the generic CPU float64 ADMM solver available as an expensive reference
+fallback, not an expected normal training path. An ordinary well-conditioned
+pair should normally remain on the smooth GPU path.
 
 Fallback must be explicit and observable.
 
@@ -455,6 +509,12 @@ Keep the distinction between:
 - primary-value certificate;
 - primal direction;
 - canonical minimum-Frobenius selection.
+
+Also distinguish a future experimental **decomposition fallback** (smooth
+Gram/EVD attempt to the current smooth fp64 full SVD) from the
+**optimizer/reference fallback** (failed smooth solve to generic CPU ADMM).
+Both must be observable, with explicit reasons; neither may silently turn an
+uncertified result into success.
 
 
 # 17. Shared K and balancing
@@ -511,13 +571,14 @@ Provide a clear mechanism to use:
 
 # 19. Optimizer state
 
-At minimum, paired optimizer state may include:
+Paired optimizer state includes at least:
 
 - canonical up momentum;
 - canonical down momentum;
 - previous dual multiplier lambda;
-- step count;
-- solver metadata if needed.
+- step count.
+
+Pair names, shapes, and solver configuration are checkpoint metadata.
 
 State must survive
 
@@ -580,13 +641,38 @@ Important production tests include:
 - final-direction casting effects;
 - finite-step delta-X comparisons.
 
+Current numerical-backend regressions must also cover direct fp64 default
+solving with fp32 canonical momentum; no bf16 SVD; cached dual spectrum versus
+independent certification; conservative projected-primal Gram norm versus
+full-SVD oracle with no unsafe spectral acceptance; explicit backend,
+guarded primal full-SVD and CPU ADMM fallback identities/reasons; checkpoint
+continuation; and locked real Transformer replay when a core numerical backend
+changes.
+Test a future smooth decomposition fallback separately when introduced.
+
 Use float64 for mathematical/reference tests unless the test is explicitly about
 reduced precision.
 
 
 # 22. Precision
 
-Do not assume native bfloat16 SVD support on every backend.
+The validated production-v0 dtype policy is:
+
+- model parameter and gradient storage: model-dependent;
+- forward/backward: bf16 autocast is supported on the tested H100 setup;
+- canonical paired EMA momentum: fp32 by default;
+- canonical inputs promoted to fp64 before the paired solver;
+- smooth residual SVD/polar, Newton-CG, recovery, and certification: fp64;
+- stored original-coordinate lambda: fp64;
+- final lifted update: cast to parameter dtype before application.
+
+Native CUDA bf16 `torch.linalg.svd` is unsupported in the validated H100
+environment. Production must never send bf16 tensors directly to the spectral
+SVD path. On real `[1024,384]` training pairs, the current fp32 smooth path
+could not reliably meet the `3e-5` certificate target. Direct fp64 is the
+production default; there is no normal fp32-first/fp64-refinement policy.
+This is an empirical engineering decision for the current implementation and
+backend, not a theorem that QSO inherently requires fp64.
 
 For H100 work, validate actual CUDA/H100 behavior rather than extrapolating from
 CPU results.
@@ -604,13 +690,20 @@ Do not claim float64-level invariance after casting a direction to bfloat16.
 
 Measure it.
 
+Mathematically equivalent conservative numerical backends need not give
+bitwise-identical training trajectories: tiny cast update differences can
+alter later losses. Validate the mathematical contract, safe certificate
+decisions, bounded numerical differences, determinism for a fixed backend,
+and checkpoint continuation. Claim trajectory identity only if measured.
+
 
 # 23. Experimental methodology
 
 When comparing optimizers, do not force the same learning rate if the methods
-have different natural scales.
+have different natural scales. QSO and AdamW need not use the same learning rate.
 
-Perform optimizer-specific learning-rate sweeps.
+Once the numerical and practicality gates are passed, perform
+optimizer-specific learning-rate sweeps.
 
 Comparisons should use identical:
 
@@ -623,7 +716,13 @@ Comparisons should use identical:
 - seed;
 - evaluation procedure.
 
-After pilot hyperparameter selection, use multiple seeds.
+Do not automatically advance from numerical correctness to a sweep: first
+establish mathematical correctness, H100 numerical validation, and solver
+practicality/performance.
+The next approved phase is optimizer-specific learning-rate sweeps on the
+controlled tiny Transformer. Proceed to longer and multi-seed experiments only
+if the tuned pilot is promising. This is a workflow state, not a mathematical
+claim.
 
 Report both quality and cost.
 
@@ -763,7 +862,10 @@ bandwidth, run it inside a SLURM compute allocation instead.
 
 Do not download or materialize large assets on the login node.
 
-This includes:
+Small dependency downloads are allowed only when explicitly small and
+memory-safe; they must not become an implicit large package/cache fetch.
+
+Prohibited large assets include:
 
 - datasets;
 - tokenizer corpora;
@@ -947,3 +1049,90 @@ When uncertain:
 6. report assumptions;
 7. do not hide fallbacks;
 8. do not download large assets on the Lagrange login node.
+
+
+# 39. Current research priority: optimizer-quality evaluation
+
+Redundant dual-certificate decompositions and normal-training post-cast
+research SVDs have been removed. The conservative projected-primal top-norm
+backend is validated and adopted. The dominant remaining production cost is
+the **smooth residual fp64 SVD/polar**. The first posterior-validated smooth
+Gram/EVD study established exact-arithmetic equivalence. A subsequent study
+derived decision-relevant posterior bounds for the polar derivative/HVP and
+validated them experimentally for conservative curvature, CG, descent,
+Armijo, and certificate decisions. Gram was NOT adopted for production: full
+fp64 SVD remains the smooth default and independent oracle. The obstacle is
+insufficient practical benefit after posterior-validation cost and unresolved
+control of a Gram-driven solver trajectory, not mathematical invalidity of
+Gram. Do not continue optimizing the smooth Gram posterior by default unless
+a future task explicitly reopens it. Fixed O(m)-state temporal/history-only
+lambda predictors have also been studied. None materially reduced smooth
+full-SVD evaluations: the best saved 3 of 908 warm evaluations and regressed
+on two states; no real warm solve certified in zero or one Newton iteration.
+The previous original-coordinate lambda remains the production warm start.
+Do not continue tuning fixed two-history extrapolation by default.
+
+Previous-factor recycling has now also been studied. On the locked replay it
+reduced warm smooth evaluations by about 6.9% and converted 52 of 294 warm
+solves to one-Newton-iteration certification. It required O(mn+n^2) cached
+decomposition state (roughly 52 MB fp64 for the six current pairs), caused
+four one-evaluation regressions, and yielded only about a 5% fair paired-solver
+speedup. The cheap mathematically sufficient Frobenius validity gate rejected
+all real warm states. It is not recommended for production integration.
+Previous original-coordinate lambda remains the production warm start; no
+cached residual-factor predictor state is part of production. Do not continue
+warm-start predictor work by default unless a future task explicitly reopens
+it.
+
+Direct fp64 QDWH has now been studied as an alternative to the tall smooth
+SVD. It accurately recovered Q, H, the singular spectrum, nuclear value,
+rcond, and polar-derivative/HVP quantities on the tested corpus. All 931 real
+shadow evaluations passed the research posterior, and direct QDWH retained a
+material decomposition-kernel advantage over the current thin SVD. No
+already-installed Lagrange PyTorch environment exposes a supported matrix
+polar API, so custom direct fp64 QDWH remains the only serious tested polar
+alternative. Decision-relevant QDWH posterior validation is complete: no
+unsafe oracle decision was observed on the tested real or near-guard corpus.
+The first adaptive design was not production-worthy, requiring full SVD on
+865/931 fixed-trajectory evaluations. Ambiguous **rejection** of the QDWH
+primal certificate was the dominant cause, not unsafe QDWH acceptance. Full
+fp64 thin SVD remains the production smooth backend and independent oracle.
+
+One-sided conservative QDWH-controlled solver semantics have now been studied.
+The final production certificate was preserved, and no unsafe accepted internal
+action was observed on the tested locked or near-guard corpora. Nevertheless,
+the approach is operationally impractical: conservative Armijo ambiguity caused
+extensive backtracking, 234/300 locked pair solves required full-SVD
+smooth-solver rescue, and paired-solver work was substantially slower than the
+current direct-fp64-SVD production solver. QDWH is NOT recommended for production
+integration. A mathematically equivalent numerical backend need not follow
+identical floating-point branches; that does not remove the final certificate
+requirements or explicit full-SVD fallback on stagnation or budget exhaustion.
+
+The resulting production-v0 performance decision is to retain full fp64 thin
+SVD as the smooth production backend and independent oracle, previous
+original-coordinate lambda as the warm start, and projected-primal
+`gram_upper` as the radial-feasibility backend. Do not continue by default with
+Gram smooth backends, QDWH posterior tuning, QDWH globalization variants,
+temporal lambda predictors, or previous-factor recycling.
+
+The exact-production-v0 numerical/performance optimization phase is considered
+complete unless a future task introduces a qualitatively new method with a
+clear mathematical and performance rationale. The next approved project phase
+is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
+on the controlled tiny Transformer, followed by longer and multi-seed
+experiments only if the tuned pilot is promising.
+
+A smooth Gram/EVD backend must NOT become the production default merely because
+it is faster. Before adoption, compare against independent full SVD for the
+singular spectrum, nuclear objective, residual rcond, polar, polar-derivative
+HVP, Newton direction, line-search decisions, and certificate decisions.
+Include repeated/clustered singular values, prescribed adversarial spectra,
+rcond near `1e-4`, and saved real Transformer residuals.
+
+If validated, prefer an adaptive design: Gram attempt, posterior numerical
+checks, then use Gram only when safe; otherwise use current fp64 full SVD with
+an explicit reason code. Do not silently truncate positive singular values or
+hide an unsafe decomposition fallback. Randomized SVD, low-rank approximation,
+Newton-Schulz approximation, hard singular-value truncation, and custom CUDA
+kernels are not approved defaults; each needs a separate explicit study.

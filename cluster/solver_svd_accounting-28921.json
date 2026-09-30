@@ -1,0 +1,934 @@
+{
+  "job_id": "28921",
+  "step": 25,
+  "checkpoint": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28914-qso-seed2026/checkpoint.pt",
+  "gpu": "NVIDIA H100 NVL",
+  "torch": "2.10.0+cu128",
+  "cuda_build": "12.8",
+  "loss": 6.118260383605957,
+  "optimizer_seconds": 1.5837095156311989,
+  "step_seconds": 1.6087250858545303,
+  "baseline_loss": 6.118260383605957,
+  "rows": [
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "calls": 12,
+      "matrices": 24,
+      "total_seconds": 0.5141792744398117,
+      "median_seconds": 0.04265201464295387
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "calls": 6,
+      "matrices": 12,
+      "total_seconds": 0.256287656724453,
+      "median_seconds": 0.04267778992652893
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "calls": 18,
+      "matrices": 36,
+      "total_seconds": 0.7417593896389008,
+      "median_seconds": 0.04132057726383209
+    }
+  ],
+  "per_pair": {
+    "blocks.0.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08468274772167206,
+        "median_seconds": 0.04234137386083603
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04248267412185669,
+        "median_seconds": 0.04248267412185669
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12475305795669556,
+        "median_seconds": 0.04169543832540512
+      }
+    ],
+    "blocks.1.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08479268103837967,
+        "median_seconds": 0.042396340519189835
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04306583106517792,
+        "median_seconds": 0.04306583106517792
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.122354656457901,
+        "median_seconds": 0.04106713831424713
+      }
+    ],
+    "blocks.2.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08601108193397522,
+        "median_seconds": 0.04300554096698761
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04278326779603958,
+        "median_seconds": 0.04278326779603958
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12321433424949646,
+        "median_seconds": 0.04128856211900711
+      }
+    ],
+    "blocks.3.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08536750078201294,
+        "median_seconds": 0.04268375039100647
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04260183125734329,
+        "median_seconds": 0.04260183125734329
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12362741678953171,
+        "median_seconds": 0.041255883872509
+      }
+    ],
+    "blocks.4.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08598598092794418,
+        "median_seconds": 0.04299299046397209
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04260030388832092,
+        "median_seconds": 0.04260030388832092
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12346874922513962,
+        "median_seconds": 0.041352592408657074
+      }
+    ],
+    "blocks.5.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08733928203582764,
+        "median_seconds": 0.04366964101791382
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04275374859571457,
+        "median_seconds": 0.04275374859571457
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12434117496013641,
+        "median_seconds": 0.04166997969150543
+      }
+    ]
+  },
+  "calls": [
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04248267412185669,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04191108047962189,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.0422867089509964,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04169543832540512,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04239603877067566,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04114653915166855,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04306583106517792,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041767388582229614,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04229921102523804,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04106713831424713,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04249347001314163,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.039520129561424255,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04278326779603958,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04128856211900711,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04263739287853241,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041412971913814545,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04337368905544281,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.040512800216674805,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04260183125734329,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041255883872509,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042700864374637604,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041518434882164,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042666636407375336,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.040853098034858704,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04260030388832092,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04147447645664215,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04260601848363876,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041352592408657074,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04337996244430542,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04064168035984039,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04275374859571457,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041916802525520325,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04390793293714523,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04166997969150543,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.043431349098682404,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04075439274311066,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    }
+  ],
+  "solver_metrics": {
+    "blocks.0.mlp": {
+      "horizontal_residual": 7.806255641895632e-18,
+      "normalized_horizontal_residual": 2.6020901021737467e-17,
+      "spectral_norms": [
+        0.9999991570899471,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.27966490008118916,
+      "dual_objective": 0.27966846402738915,
+      "residual_rcond": 0.012555290597512354,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 3.5639461999914523e-06,
+      "normalized_gap": 1.2743468279077829e-05,
+      "signed_normalized_gap": 1.2743468279077829e-05,
+      "newton_iterations": 2,
+      "cg_iterations": 3,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 3.5639461999914523e-06,
+      "absolute_gap": 3.5639461999914523e-06,
+      "minimum_smooth_rcond": 0.012548987452284551,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.0.mlp"
+    },
+    "blocks.1.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4566255994781837e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999999001567892
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.20639681901426693,
+      "dual_objective": 0.20639703974450266,
+      "residual_rcond": 0.008739359456218308,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 2.2073023572821704e-07,
+      "normalized_gap": 1.069444774990268e-06,
+      "signed_normalized_gap": 1.069444774990268e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.2073023572821704e-07,
+      "absolute_gap": 2.2073023572821704e-07,
+      "minimum_smooth_rcond": 0.008737781175201622,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.1.mlp"
+    },
+    "blocks.2.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4827612637482945e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999998343600013
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.16843007804042182,
+      "dual_objective": 0.16843028533213358,
+      "residual_rcond": 0.005408951823009774,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 2.0729171176792072e-07,
+      "normalized_gap": 1.2307270711983592e-06,
+      "signed_normalized_gap": 1.2307270711983592e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.0729171176792072e-07,
+      "absolute_gap": 2.0729171176792072e-07,
+      "minimum_smooth_rcond": 0.00540711443808581,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.2.mlp"
+    },
+    "blocks.3.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.409039723811681e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999996842850546
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.1423768208202886,
+      "dual_objective": 0.1423770431572699,
+      "residual_rcond": 0.0037738394166371707,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 2.223369812981435e-07,
+      "normalized_gap": 1.5616069583110371e-06,
+      "signed_normalized_gap": 1.5616069583110371e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.223369812981435e-07,
+      "absolute_gap": 2.223369812981435e-07,
+      "minimum_smooth_rcond": 0.0037736226210908475,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.3.mlp"
+    },
+    "blocks.4.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4703490546126884e-17,
+      "spectral_norms": [
+        0.9999999876680392,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.12352972685174668,
+      "dual_objective": 0.12352982643834183,
+      "residual_rcond": 0.0026115358731438,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 9.958659515085788e-08,
+      "normalized_gap": 8.061744926077843e-07,
+      "signed_normalized_gap": 8.061744926077843e-07,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 9.958659515085788e-08,
+      "absolute_gap": 9.958659515085788e-08,
+      "minimum_smooth_rcond": 0.0026110543549388845,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.4.mlp"
+    },
+    "blocks.5.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.646795171688978e-17,
+      "spectral_norms": [
+        0.9999997772172625,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.11260261964326952,
+      "dual_objective": 0.1126031694917275,
+      "residual_rcond": 0.0014670977062941092,
+      "dual_spectrum_source": "cached_smooth_residual",
+      "signed_gap": 5.498484579730123e-07,
+      "normalized_gap": 4.883063775690679e-06,
+      "signed_normalized_gap": 4.883063775690679e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 12,
+      "reference_iterations": 0,
+      "primal_dual_gap": 5.498484579730123e-07,
+      "absolute_gap": 5.498484579730123e-07,
+      "minimum_smooth_rcond": 0.0014669931325430924,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.5.mlp"
+    }
+  },
+  "total_svd_seconds": 0.7704669311642647,
+  "total_svdvals_seconds": 0.7417593896389008
+}

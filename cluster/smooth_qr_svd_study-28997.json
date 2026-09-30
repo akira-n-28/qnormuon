@@ -1,0 +1,6219 @@
+{
+  "job": "28997",
+  "cases": [
+    {
+      "name": "24x8/rcond=1",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 1.0742908910516194e-15,
+      "oracle_reconstruction": 1.3994478457984098e-15,
+      "left_orthogonality": 2.4713068229818616e-15,
+      "right_orthogonality": 1.7227599217263117e-15,
+      "polar_relative": 1.1719214970660918e-15,
+      "singular_max_relative": 6.661338147750936e-16,
+      "nuclear_relative": 2.220446049250313e-16,
+      "rcond_abs": 4.440892098500626e-16,
+      "oracle_rcond": 0.9999999999999983,
+      "candidate_rcond": 0.9999999999999979,
+      "derivative": {
+        "random": {
+          "absolute": 9.506482097719895e-15,
+          "oracle_norm": 8.197325077119523,
+          "relative": 1.1597053927084712e-15,
+          "informative": true,
+          "finite_difference_relative": 8.469949325493365e-10
+        },
+        "tangent": {
+          "absolute": 7.805605296036694e-15,
+          "oracle_norm": 3.861155659736149,
+          "relative": 2.021572291796723e-15,
+          "informative": true,
+          "finite_difference_relative": 7.07290551471543e-10
+        },
+        "normal": {
+          "absolute": 7.077705636648712e-15,
+          "oracle_norm": 7.679161847049916,
+          "relative": 9.216768415120377e-16,
+          "informative": true,
+          "finite_difference_relative": 1.1009124041823292e-09
+        },
+        "smallest": {
+          "absolute": 5.573375708889579e-16,
+          "oracle_norm": 2.510230082211956e-16,
+          "relative": 2.220264886626827,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.6428894018578547e-15,
+          "oracle_norm": 1.3488353374384638e-15,
+          "relative": 1.2180059020234604,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.819652285277547e-15,
+          "oracle_norm": 1.6222325317943131e-15,
+          "relative": 1.1216963349051279,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.1",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.8836191684235995e-15,
+      "oracle_reconstruction": 2.5705322480465287e-15,
+      "left_orthogonality": 9.451300390477713e-15,
+      "right_orthogonality": 2.8285366327803215e-15,
+      "polar_relative": 2.616236755532971e-15,
+      "singular_max_relative": 4.9687030446339045e-15,
+      "nuclear_relative": 1.1102230246251565e-15,
+      "rcond_abs": 5.134781488891349e-16,
+      "oracle_rcond": 0.09999999999999977,
+      "candidate_rcond": 0.10000000000000028,
+      "derivative": {
+        "random": {
+          "absolute": 9.621046580536972e-14,
+          "oracle_norm": 23.51284547345868,
+          "relative": 4.091825717732555e-15,
+          "informative": true,
+          "finite_difference_relative": 5.689532145450332e-10
+        },
+        "tangent": {
+          "absolute": 4.5650703960035126e-14,
+          "oracle_norm": 6.544110843669735,
+          "relative": 6.975845160720967e-15,
+          "informative": true,
+          "finite_difference_relative": 1.8315173323362498e-10
+        },
+        "normal": {
+          "absolute": 8.09839626337763e-14,
+          "oracle_norm": 23.093568161075414,
+          "relative": 3.5067756558415294e-15,
+          "informative": true,
+          "finite_difference_relative": 7.750823602358026e-10
+        },
+        "smallest": {
+          "absolute": 3.091214947895281e-14,
+          "oracle_norm": 1.4575166324307858e-14,
+          "relative": 2.1208779914503486,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 8.117715705379013e-16,
+          "oracle_norm": 7.791579897917171e-16,
+          "relative": 1.04185746815598,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.8095869441456003e-15,
+          "oracle_norm": 6.049382697717383e-16,
+          "relative": 4.644419248274279,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.01",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.4043963187126604e-15,
+      "oracle_reconstruction": 2.6015685401153816e-15,
+      "left_orthogonality": 9.039159799801885e-15,
+      "right_orthogonality": 3.654249153156889e-15,
+      "polar_relative": 5.304803489015392e-15,
+      "singular_max_relative": 1.9081958235744866e-15,
+      "nuclear_relative": 2.220446049250313e-16,
+      "rcond_abs": 1.9081958235744878e-17,
+      "oracle_rcond": 0.009999999999999998,
+      "candidate_rcond": 0.010000000000000018,
+      "derivative": {
+        "random": {
+          "absolute": 7.421260483683068e-13,
+          "oracle_norm": 203.77979726073082,
+          "relative": 3.641803840931181e-15,
+          "informative": true,
+          "finite_difference_relative": 6.437715746992699e-10
+        },
+        "tangent": {
+          "absolute": 3.6219559527159954e-13,
+          "oracle_norm": 7.233168253666601,
+          "relative": 5.007426656887142e-14,
+          "informative": true,
+          "finite_difference_relative": 2.598663622224277e-09
+        },
+        "normal": {
+          "absolute": 6.25574824299414e-13,
+          "oracle_norm": 203.72209075725846,
+          "relative": 3.0707265077345334e-15,
+          "informative": true,
+          "finite_difference_relative": 8.581678062947239e-10
+        },
+        "smallest": {
+          "absolute": 6.398454607982076e-13,
+          "oracle_norm": 2.0156312266486097e-14,
+          "relative": 31.74417285954032,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 6.019858404469445e-16,
+          "oracle_norm": 5.735927363389032e-16,
+          "relative": 1.049500459662839,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.7344645418625077e-15,
+          "oracle_norm": 1.7468922061133605e-15,
+          "relative": 0.9928858436671928,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.001",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 4.192002157123152e-15,
+      "oracle_reconstruction": 2.8173704375324957e-15,
+      "left_orthogonality": 8.733906716716877e-15,
+      "right_orthogonality": 2.7341636880235646e-15,
+      "polar_relative": 5.373147687637853e-14,
+      "singular_max_relative": 7.632783294297783e-14,
+      "nuclear_relative": 2.220446049250313e-16,
+      "rcond_abs": 7.741203511546502e-17,
+      "oracle_rcond": 0.0010000000000000202,
+      "candidate_rcond": 0.0009999999999999428,
+      "derivative": {
+        "random": {
+          "absolute": 1.747359166162392e-10,
+          "oracle_norm": 2034.1074730979017,
+          "relative": 8.590299132529127e-14,
+          "informative": true,
+          "finite_difference_relative": 1.0627965009933825e-09
+        },
+        "tangent": {
+          "absolute": 1.944690272971564e-11,
+          "oracle_norm": 7.339784042491652,
+          "relative": 2.6495197429697072e-12,
+          "informative": true,
+          "finite_difference_relative": 2.999131315547359e-07
+        },
+        "normal": {
+          "absolute": 1.5953815177903162e-10,
+          "oracle_norm": 2034.1015470601637,
+          "relative": 7.843175381760469e-14,
+          "informative": true,
+          "finite_difference_relative": 1.5489789300128498e-09
+        },
+        "smallest": {
+          "absolute": 6.289035933038157e-11,
+          "oracle_norm": 9.190851751286091e-13,
+          "relative": 68.42712844495748,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.4793756219592915e-15,
+          "oracle_norm": 2.6811869711829212e-15,
+          "relative": 0.5517614541094839,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.640610539113395e-14,
+          "oracle_norm": 1.3068478093673286e-14,
+          "relative": 1.2553952551733227,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.0003",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.685869260229693e-15,
+      "oracle_reconstruction": 3.4257270247409293e-15,
+      "left_orthogonality": 6.504143787529213e-15,
+      "right_orthogonality": 3.562841583506237e-15,
+      "polar_relative": 7.693939396649105e-14,
+      "singular_max_relative": 5.1499603193064566e-14,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 1.496198998029996e-17,
+      "oracle_rcond": 0.00029999999999998203,
+      "candidate_rcond": 0.000299999999999997,
+      "derivative": {
+        "random": {
+          "absolute": 4.5940610275713253e-10,
+          "oracle_norm": 6780.188453103414,
+          "relative": 6.775712886665475e-14,
+          "informative": true,
+          "finite_difference_relative": 5.042561065215563e-09
+        },
+        "tangent": {
+          "absolute": 9.232988163370695e-11,
+          "oracle_norm": 7.348506485788248,
+          "relative": 1.2564441742314534e-11,
+          "informative": true,
+          "finite_difference_relative": 2.357436386936352e-06
+        },
+        "normal": {
+          "absolute": 3.5458145517081083e-10,
+          "oracle_norm": 6780.18667168606,
+          "relative": 5.229670986073831e-14,
+          "informative": true,
+          "finite_difference_relative": 8.405499834233633e-09
+        },
+        "smallest": {
+          "absolute": 3.004303042111283e-10,
+          "oracle_norm": 5.947440256297386e-12,
+          "relative": 50.51421977598191,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 7.203644982695552e-15,
+          "oracle_norm": 1.1649706913833875e-14,
+          "relative": 0.6183541814379311,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.922095866950227e-14,
+          "oracle_norm": 3.249317756233545e-14,
+          "relative": 0.8992952016910104,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.0002",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.4580816359075056e-15,
+      "oracle_reconstruction": 5.348931253019187e-15,
+      "left_orthogonality": 7.027930959312869e-15,
+      "right_orthogonality": 2.4822888628925906e-15,
+      "polar_relative": 2.3775548485509313e-13,
+      "singular_max_relative": 1.4677386910022766e-13,
+      "nuclear_relative": 9.992007221626409e-16,
+      "rcond_abs": 2.9219248548484344e-17,
+      "oracle_rcond": 0.0001999999999999969,
+      "candidate_rcond": 0.0002000000000000261,
+      "derivative": {
+        "random": {
+          "absolute": 1.9359269099497174e-09,
+          "oracle_norm": 10170.260280257498,
+          "relative": 1.9035175665147305e-13,
+          "informative": true,
+          "finite_difference_relative": 9.488516017502587e-09
+        },
+        "tangent": {
+          "absolute": 4.2927870609725995e-10,
+          "oracle_norm": 7.3497578597413815,
+          "relative": 5.840719031692904e-11,
+          "informative": true,
+          "finite_difference_relative": 5.398677276180968e-06
+        },
+        "normal": {
+          "absolute": 1.5173943992763378e-09,
+          "oracle_norm": 10170.259092302636,
+          "relative": 1.491991880939177e-13,
+          "informative": true,
+          "finite_difference_relative": 4.742673475426159e-09
+        },
+        "smallest": {
+          "absolute": 1.392911312553061e-09,
+          "oracle_norm": 4.532510973412988e-12,
+          "relative": 307.31559630493217,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.1876134204077754e-14,
+          "oracle_norm": 1.3156067844898999e-14,
+          "relative": 0.902711535398663,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 5.5325148917840116e-14,
+          "oracle_norm": 5.029916527782413e-14,
+          "relative": 1.099921810078861,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.00015",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 4.314594552640643e-15,
+      "oracle_reconstruction": 3.800856847294083e-15,
+      "left_orthogonality": 9.461403593448057e-15,
+      "right_orthogonality": 4.036854756207238e-15,
+      "polar_relative": 2.3001320766817665e-13,
+      "singular_max_relative": 8.167656366057528e-14,
+      "nuclear_relative": 1.5543122344752192e-15,
+      "rcond_abs": 1.1899118843028411e-17,
+      "oracle_rcond": 0.00014999999999999926,
+      "candidate_rcond": 0.00015000000000001115,
+      "derivative": {
+        "random": {
+          "absolute": 2.2032551994377333e-09,
+          "oracle_norm": 13560.333856176208,
+          "relative": 1.6247794654659153e-13,
+          "informative": true,
+          "finite_difference_relative": 1.5382892572318654e-08
+        },
+        "tangent": {
+          "absolute": 5.531337326063516e-10,
+          "oracle_norm": 7.350384046666492,
+          "relative": 7.525235812096185e-11,
+          "informative": true,
+          "finite_difference_relative": 1.3946654820952067e-05
+        },
+        "normal": {
+          "absolute": 1.3630518455989195e-09,
+          "oracle_norm": 13560.33296508134,
+          "relative": 1.0051757940670475e-13,
+          "informative": true,
+          "finite_difference_relative": 9.935759571209312e-09
+        },
+        "smallest": {
+          "absolute": 1.7965248300132172e-09,
+          "oracle_norm": 1.4924237088997949e-12,
+          "relative": 1203.7632605941403,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.119860528836396e-14,
+          "oracle_norm": 1.407345438398229e-14,
+          "relative": 0.7957254120288804,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 6.883678449135456e-14,
+          "oracle_norm": 1.0834568005714283e-13,
+          "relative": 0.635344062218717,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.00012",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.825546014693971e-15,
+      "oracle_reconstruction": 2.9202209578885244e-15,
+      "left_orthogonality": 1.485796950577973e-14,
+      "right_orthogonality": 3.5301611603932345e-15,
+      "polar_relative": 5.00602613752032e-13,
+      "singular_max_relative": 6.305313259359361e-13,
+      "nuclear_relative": 1.2212453270876722e-15,
+      "rcond_abs": 7.566375911233214e-17,
+      "oracle_rcond": 0.00012000000000003158,
+      "candidate_rcond": 0.00011999999999995592,
+      "derivative": {
+        "random": {
+          "absolute": 1.2003611642777356e-08,
+          "oracle_norm": 16950.408131658405,
+          "relative": 7.081606265490516e-13,
+          "informative": true,
+          "finite_difference_relative": 1.4955452381001533e-08
+        },
+        "tangent": {
+          "absolute": 1.5038307138970805e-09,
+          "oracle_norm": 7.350759918938009,
+          "relative": 2.0458166645093536e-10,
+          "informative": true,
+          "finite_difference_relative": 1.2012433346719006e-05
+        },
+        "normal": {
+          "absolute": 1.0837793380160173e-08,
+          "oracle_norm": 16950.407418720726,
+          "relative": 6.393824710189838e-13,
+          "informative": true,
+          "finite_difference_relative": 2.0933750032602477e-08
+        },
+        "smallest": {
+          "absolute": 4.8876339429963515e-09,
+          "oracle_norm": 7.762136642240466e-12,
+          "relative": 629.6763595217493,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.5958675638492377e-14,
+          "oracle_norm": 1.90042140147916e-14,
+          "relative": 0.8397440497181952,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 6.087175922983008e-14,
+          "oracle_norm": 1.0897408475994916e-13,
+          "relative": 0.5585893138163988,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.000105",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.7448196021845396e-15,
+      "oracle_reconstruction": 4.272954708983849e-15,
+      "left_orthogonality": 1.1737494451390078e-14,
+      "right_orthogonality": 2.8577731977658482e-15,
+      "polar_relative": 4.707558837290916e-13,
+      "singular_max_relative": 2.0767634470582698e-13,
+      "nuclear_relative": 2.1094237467877974e-15,
+      "rcond_abs": 2.1968646519987534e-17,
+      "oracle_rcond": 0.00010500000000001372,
+      "candidate_rcond": 0.00010500000000003569,
+      "derivative": {
+        "random": {
+          "absolute": 1.1203497644817983e-08,
+          "oracle_norm": 19371.8899818789,
+          "relative": 5.783378728300698e-13,
+          "informative": true,
+          "finite_difference_relative": 1.4820388874896843e-08
+        },
+        "tangent": {
+          "absolute": 1.611225402585904e-09,
+          "oracle_norm": 7.350947900117879,
+          "relative": 2.1918607293626263e-10,
+          "informative": true,
+          "finite_difference_relative": 2.7304552575646127e-05
+        },
+        "normal": {
+          "absolute": 9.512807810324469e-09,
+          "oracle_norm": 19371.889358031396,
+          "relative": 4.910624686373481e-13,
+          "informative": true,
+          "finite_difference_relative": 1.6635526473862764e-08
+        },
+        "smallest": {
+          "absolute": 5.2528641578244185e-09,
+          "oracle_norm": 3.6073773367798545e-12,
+          "relative": 1456.1449128893782,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 2.4632648963145814e-14,
+          "oracle_norm": 2.6327992073554093e-14,
+          "relative": 0.9356068208440698,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.0795582917660463e-13,
+          "oracle_norm": 1.0086866751225262e-13,
+          "relative": 1.0702612797327884,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.000101",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.3450620147984085e-15,
+      "oracle_reconstruction": 2.9432494486594456e-15,
+      "left_orthogonality": 8.7352563977618e-15,
+      "right_orthogonality": 2.7485852476885362e-15,
+      "polar_relative": 2.889793675140984e-13,
+      "singular_max_relative": 1.0479726444445362e-13,
+      "nuclear_relative": 7.771561172376096e-16,
+      "rcond_abs": 1.0570971181733668e-17,
+      "oracle_rcond": 0.0001009999999999991,
+      "candidate_rcond": 0.00010100000000000966,
+      "derivative": {
+        "random": {
+          "absolute": 6.105974992582617e-09,
+          "oracle_norm": 20139.092178568008,
+          "relative": 3.031901804928718e-13,
+          "informative": true,
+          "finite_difference_relative": 2.1647789494712315e-08
+        },
+        "tangent": {
+          "absolute": 1.0306593497086614e-09,
+          "oracle_norm": 7.350998033511956,
+          "relative": 1.40206723632636e-10,
+          "informative": true,
+          "finite_difference_relative": 2.0248293578940167e-05
+        },
+        "normal": {
+          "absolute": 5.636010137515959e-09,
+          "oracle_norm": 20139.091578479194,
+          "relative": 2.798542384870352e-13,
+          "informative": true,
+          "finite_difference_relative": 1.4366286069385238e-08
+        },
+        "smallest": {
+          "absolute": 3.352115627871299e-09,
+          "oracle_norm": 1.318718986250596e-11,
+          "relative": 254.19484081305987,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 3.1412042485881085e-14,
+          "oracle_norm": 3.632257622286517e-14,
+          "relative": 0.864807669289358,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.1848461049411314e-13,
+          "oracle_norm": 9.599752462538855e-14,
+          "relative": 1.2342465178813309,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.0001",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 4.650248846340025e-15,
+      "oracle_reconstruction": 3.598070179213391e-15,
+      "left_orthogonality": 1.2340488123102678e-14,
+      "right_orthogonality": 4.405192758044819e-15,
+      "polar_relative": 6.286902303379923e-13,
+      "singular_max_relative": 6.385950795938114e-13,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 6.373753521499159e-17,
+      "oracle_rcond": 0.00010000000000002375,
+      "candidate_rcond": 9.999999999996001e-05,
+      "derivative": {
+        "random": {
+          "absolute": 2.0116222757027922e-08,
+          "oracle_norm": 20340.482756942427,
+          "relative": 9.889746962943658e-13,
+          "informative": true,
+          "finite_difference_relative": 1.389489027596013e-08
+        },
+        "tangent": {
+          "absolute": 2.262989826610599e-09,
+          "oracle_norm": 7.35101056721758,
+          "relative": 3.078474457243448e-10,
+          "informative": true,
+          "finite_difference_relative": 2.0673889224629467e-05
+        },
+        "normal": {
+          "absolute": 1.7439672950982128e-08,
+          "oracle_norm": 20340.482162793367,
+          "relative": 8.573873918722844e-13,
+          "informative": true,
+          "finite_difference_relative": 9.823989495146611e-09
+        },
+        "smallest": {
+          "absolute": 7.3657527748245465e-09,
+          "oracle_norm": 4.0483121842064594e-12,
+          "relative": 1819.4626401492217,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.5027235812052765e-14,
+          "oracle_norm": 2.3716241722896896e-14,
+          "relative": 0.633626355627194,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 9.490984183168691e-14,
+          "oracle_norm": 1.3484827588045694e-13,
+          "relative": 0.7038268840442908,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=9.9e-05",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 1.7446988997975402e-15,
+      "oracle_reconstruction": 3.276632438515089e-15,
+      "left_orthogonality": 6.995560854819713e-15,
+      "right_orthogonality": 3.963289947823956e-15,
+      "polar_relative": 3.5499116524279394e-13,
+      "singular_max_relative": 4.108195353066543e-13,
+      "nuclear_relative": 4.440892098500626e-16,
+      "rcond_abs": 4.048139861517752e-17,
+      "oracle_rcond": 9.90000000000088e-05,
+      "candidate_rcond": 9.899999999996832e-05,
+      "derivative": {
+        "random": {
+          "absolute": 9.252552721885586e-09,
+          "oracle_norm": 20545.941832565906,
+          "relative": 4.5033480564127873e-13,
+          "informative": true,
+          "finite_difference_relative": 1.92480087993004e-08
+        },
+        "tangent": {
+          "absolute": 1.2908180758654972e-09,
+          "oracle_norm": 7.351023101017938,
+          "relative": 1.7559706426262628e-10,
+          "informative": true,
+          "finite_difference_relative": 3.821703358712316e-05
+        },
+        "normal": {
+          "absolute": 8.966803999411862e-09,
+          "oracle_norm": 20545.94124435664,
+          "relative": 4.364270243338098e-13,
+          "informative": true,
+          "finite_difference_relative": 1.6665431342734067e-08
+        },
+        "smallest": {
+          "absolute": 4.201064200772695e-09,
+          "oracle_norm": 7.040130298519476e-12,
+          "relative": 596.7310294890664,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 3.3352133341687085e-14,
+          "oracle_norm": 1.7794409273007503e-14,
+          "relative": 1.874304048535021,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 9.648440402104542e-14,
+          "oracle_norm": 1.0179050835447794e-13,
+          "relative": 0.9478723073574364,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=5e-05",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.0686463769174055e-15,
+      "oracle_reconstruction": 4.065586640858312e-15,
+      "left_orthogonality": 7.983880693761046e-15,
+      "right_orthogonality": 2.232693706844767e-15,
+      "polar_relative": 9.121563827789995e-13,
+      "singular_max_relative": 1.2938597675908501e-12,
+      "nuclear_relative": 1.2212453270876722e-15,
+      "rcond_abs": 6.487594749610137e-17,
+      "oracle_rcond": 4.999999999996272e-05,
+      "candidate_rcond": 5.0000000000027595e-05,
+      "derivative": {
+        "random": {
+          "absolute": 5.7733381370823603e-08,
+          "oracle_norm": 40680.9329574147,
+          "relative": 1.4191754508496553e-12,
+          "informative": true,
+          "finite_difference_relative": 3.886939124794838e-08
+        },
+        "tangent": {
+          "absolute": 6.570725777875587e-09,
+          "oracle_norm": 7.3516374216099525,
+          "relative": 8.93777182014051e-10,
+          "informative": true,
+          "finite_difference_relative": 8.081530556633045e-05
+        },
+        "normal": {
+          "absolute": 5.3107586962773794e-08,
+          "oracle_norm": 40680.932660297265,
+          "relative": 1.3054663079198373e-12,
+          "informative": true,
+          "finite_difference_relative": 1.6943092938468716e-08
+        },
+        "smallest": {
+          "absolute": 2.137371527813828e-08,
+          "oracle_norm": 3.8017114516157204e-12,
+          "relative": 5622.129809208557,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 3.7070477539183964e-14,
+          "oracle_norm": 6.609787943444096e-14,
+          "relative": 0.560842160994775,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.5550643419705337e-13,
+          "oracle_norm": 3.0633965716629467e-13,
+          "relative": 0.5076274996045896,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/repeated_top",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.8979060675701354e-15,
+      "oracle_reconstruction": 2.7651212783434797e-15,
+      "left_orthogonality": 7.660237286263179e-15,
+      "right_orthogonality": 2.5618870817227275e-15,
+      "polar_relative": 3.683827027445642e-15,
+      "singular_max_relative": 2.775557561562893e-15,
+      "nuclear_relative": 1.1102230246251565e-15,
+      "rcond_abs": 1.5612511283791264e-17,
+      "oracle_rcond": 0.010000000000000018,
+      "candidate_rcond": 0.010000000000000002,
+      "derivative": {
+        "random": {
+          "absolute": 9.107754814009513e-13,
+          "oracle_norm": 252.68618598896384,
+          "relative": 3.604373851448808e-15,
+          "informative": true,
+          "finite_difference_relative": 6.831067516727076e-10
+        },
+        "tangent": {
+          "absolute": 8.473782581649959e-13,
+          "oracle_norm": 8.551324185473023,
+          "relative": 9.909322109487099e-14,
+          "informative": true,
+          "finite_difference_relative": 3.6948880363870465e-09
+        },
+        "normal": {
+          "absolute": 6.253160280206262e-13,
+          "oracle_norm": 252.6270387149373,
+          "relative": 2.4752537622317966e-15,
+          "informative": true,
+          "finite_difference_relative": 8.390406593866184e-10
+        },
+        "smallest": {
+          "absolute": 4.786507335219702e-13,
+          "oracle_norm": 1.647115090907078e-14,
+          "relative": 29.059944636799717,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 9.825152068348087e-16,
+          "oracle_norm": 6.059700102804984e-16,
+          "relative": 1.6213924619471032,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.9275225192780997e-15,
+          "oracle_norm": 2.910589221802884e-15,
+          "relative": 0.6622447801425407,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/clustered_top",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.2975682840951374e-15,
+      "oracle_reconstruction": 2.9749481868620003e-15,
+      "left_orthogonality": 6.392161038716776e-15,
+      "right_orthogonality": 1.6364634115972727e-15,
+      "polar_relative": 2.0091014666449414e-15,
+      "singular_max_relative": 2.9976021664909176e-15,
+      "nuclear_relative": 1.2212453270876722e-15,
+      "rcond_abs": 1.6653345369377348e-15,
+      "oracle_rcond": 0.9999999999989998,
+      "candidate_rcond": 0.9999999999989981,
+      "derivative": {
+        "random": {
+          "absolute": 2.021402504215359e-14,
+          "oracle_norm": 8.197325077120812,
+          "relative": 2.4659294162399457e-15,
+          "informative": true,
+          "finite_difference_relative": 8.502876686043962e-10
+        },
+        "tangent": {
+          "absolute": 1.1443040510122316e-14,
+          "oracle_norm": 3.861155659736892,
+          "relative": 2.9636309743860653e-15,
+          "informative": true,
+          "finite_difference_relative": 7.025743236603473e-10
+        },
+        "normal": {
+          "absolute": 1.652392642406708e-14,
+          "oracle_norm": 7.6791618470511525,
+          "relative": 2.151787754077924e-15,
+          "informative": true,
+          "finite_difference_relative": 1.1003684037775576e-09
+        },
+        "smallest": {
+          "absolute": 4.11408254799933e-15,
+          "oracle_norm": 1.5215645553148569e-15,
+          "relative": 2.7038501479472252,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.4952573033039223e-15,
+          "oracle_norm": 6.85267722226522e-16,
+          "relative": 2.1820045725277137,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.007929602159707e-15,
+          "oracle_norm": 1.1094271872478918e-15,
+          "relative": 1.809879571403592,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/repeated_bottom",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.0525343005119644e-15,
+      "oracle_reconstruction": 3.3437412390101034e-15,
+      "left_orthogonality": 1.0383259899199772e-14,
+      "right_orthogonality": 2.439074865702545e-15,
+      "polar_relative": 4.1683919514535757e-13,
+      "singular_max_relative": 3.970890456727671e-13,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 1.9596954267675493e-17,
+      "oracle_rcond": 0.00010999999999996593,
+      "candidate_rcond": 0.00010999999999998553,
+      "derivative": {
+        "random": {
+          "absolute": 1.0118286299014029e-08,
+          "oracle_norm": 24443.451105959015,
+          "relative": 4.139467154270746e-13,
+          "informative": true,
+          "finite_difference_relative": 1.1752449955000256e-08
+        },
+        "tangent": {
+          "absolute": 5.628680078599815e-09,
+          "oracle_norm": 5784.0175821855255,
+          "relative": 9.731436667716672e-13,
+          "informative": true,
+          "finite_difference_relative": 2.9370325180851135e-08
+        },
+        "normal": {
+          "absolute": 8.402470879965806e-09,
+          "oracle_norm": 23741.48167093363,
+          "relative": 3.5391518509364286e-13,
+          "informative": true,
+          "finite_difference_relative": 9.744643401804896e-09
+        },
+        "smallest": {
+          "absolute": 1.2626935257871411e-09,
+          "oracle_norm": 1.11359616547165e-11,
+          "relative": 113.38881768260605,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 4.648863923364658e-14,
+          "oracle_norm": 6.949125653322295e-14,
+          "relative": 0.6689854458369293,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.2634034061364393e-13,
+          "oracle_norm": 1.8407616507307176e-13,
+          "relative": 1.2296015647859395,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/nearly_rank_one",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 5.678016036158337e-16,
+      "oracle_reconstruction": 2.8699414389183963e-15,
+      "left_orthogonality": 3.2743977418226932e-15,
+      "right_orthogonality": 1.1196266610351137e-15,
+      "polar_relative": 3.6026891367407707e-09,
+      "singular_max_relative": 6.161104240775741e-10,
+      "nuclear_relative": 1.5543122344752192e-15,
+      "rcond_abs": 3.127389570689461e-18,
+      "oracle_rcond": 9.999999966165823e-09,
+      "candidate_rcond": 9.999999969293213e-09,
+      "derivative": {
+        "random": {
+          "absolute": 0.9342094777814871,
+          "oracle_norm": 356921703.4789657,
+          "relative": 2.617407315597838e-09,
+          "informative": true,
+          "finite_difference_relative": 5.5394288366315105e-05
+        },
+        "tangent": {
+          "absolute": 0.5069311197861041,
+          "oracle_norm": 162420807.17748782,
+          "relative": 3.1210971586426567e-09,
+          "informative": true,
+          "finite_difference_relative": 0.00012743589770858267
+        },
+        "normal": {
+          "absolute": 0.6466827805322988,
+          "oracle_norm": 334862074.4534386,
+          "relative": 1.9311914661814526e-09,
+          "informative": true,
+          "finite_difference_relative": 5.8862619147987626e-05
+        },
+        "smallest": {
+          "absolute": 0.13855948829748638,
+          "oracle_norm": 3.2444903518945603e-08,
+          "relative": 4270608.7326342985,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 1.4114855591765352e-09,
+          "oracle_norm": 1.5400830437788551e-09,
+          "relative": 0.9164996425862958,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 7.716276034041201e-08,
+          "oracle_norm": 8.77535959177333e-08,
+          "relative": 0.8793116627693535,
+          "informative": true
+        }
+      }
+    },
+    {
+      "name": "24x8/wide_dynamic",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 2.9046715045716935e-15,
+      "oracle_reconstruction": 2.324426338510426e-15,
+      "left_orthogonality": 7.565283057648598e-15,
+      "right_orthogonality": 2.9371082486412096e-15,
+      "polar_relative": 6.468368584905765e-08,
+      "singular_max_relative": 3.147653175985392e-08,
+      "nuclear_relative": 2.220446049250313e-15,
+      "rcond_abs": 3.147653272649114e-18,
+      "oracle_rcond": 9.999999526931616e-11,
+      "candidate_rcond": 9.999999212166289e-11,
+      "derivative": {
+        "random": {
+          "absolute": 713.0723678028322,
+          "oracle_norm": 14601107143.61414,
+          "relative": 4.883686975166795e-08,
+          "informative": true,
+          "finite_difference_relative": 0.010666442216655185
+        },
+        "tangent": {
+          "absolute": 173.48206861586831,
+          "oracle_norm": 257826824.49522373,
+          "relative": 6.728627595499943e-07,
+          "informative": true,
+          "finite_difference_relative": 0.08214859404854208
+        },
+        "normal": {
+          "absolute": 570.7519523746386,
+          "oracle_norm": 14600634036.453886,
+          "relative": 3.9090901871084726e-08,
+          "informative": true,
+          "finite_difference_relative": 0.0011734600814415016
+        },
+        "smallest": {
+          "absolute": 543.6836980027597,
+          "oracle_norm": 8.382672746667675e-06,
+          "relative": 64858036.86167848,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 1.3728783650661913e-08,
+          "oracle_norm": 1.7412057781298094e-08,
+          "relative": 0.7884641679404313,
+          "informative": true
+        },
+        "clustered": {
+          "absolute": 9.851087601939998e-08,
+          "oracle_norm": 1.2789107462324652e-07,
+          "relative": 0.7702717043359165,
+          "informative": true
+        }
+      }
+    },
+    {
+      "name": "24x8/scale=1e-150",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 1.4991617077579504e-15,
+      "oracle_reconstruction": 3.1002720569452547e-15,
+      "left_orthogonality": 4.670634372880982e-15,
+      "right_orthogonality": 3.1391905957348736e-15,
+      "polar_relative": 4.698718292179568e-15,
+      "singular_max_relative": 7.4192577583292e-15,
+      "nuclear_relative": 2.220446049250313e-16,
+      "rcond_abs": 7.28583859910259e-17,
+      "oracle_rcond": 0.00999999999999996,
+      "candidate_rcond": 0.010000000000000033,
+      "derivative": {
+        "random": {
+          "absolute": 1.7300276968268085e-12,
+          "oracle_norm": 193.21380354161516,
+          "relative": 8.953954971722237e-15,
+          "informative": true,
+          "finite_difference_relative": 5.902314505020267e-10
+        },
+        "tangent": {
+          "absolute": 2.3835952109132915e-13,
+          "oracle_norm": 8.81987090406059,
+          "relative": 2.702528457435704e-14,
+          "informative": true,
+          "finite_difference_relative": 2.076107705733413e-09
+        },
+        "normal": {
+          "absolute": 1.5423175356655653e-12,
+          "oracle_norm": 193.13225436888402,
+          "relative": 7.985810245448321e-15,
+          "informative": true,
+          "finite_difference_relative": 8.529272139529965e-10
+        },
+        "smallest": {
+          "absolute": 4.8772686629995e-13,
+          "oracle_norm": 5.242406114420501e-14,
+          "relative": 9.30349262637894,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 8.161865990712657e-16,
+          "oracle_norm": 8.9014711274231e-16,
+          "relative": 0.9169120332894285,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.47610088244296e-15,
+          "oracle_norm": 1.8404303076341018e-15,
+          "relative": 0.8020411728279501,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/scale=1e+150",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.8885918995896085e-15,
+      "oracle_reconstruction": 3.771228961581232e-15,
+      "left_orthogonality": 9.734021969374575e-15,
+      "right_orthogonality": 2.5895155626051835e-15,
+      "polar_relative": 5.174789269750095e-15,
+      "singular_max_relative": 8.091759235322182e-15,
+      "nuclear_relative": 2.55351295663786e-15,
+      "rcond_abs": 1.196959198423997e-16,
+      "oracle_rcond": 0.009999999999999988,
+      "candidate_rcond": 0.010000000000000108,
+      "derivative": {
+        "random": {
+          "absolute": 2.0939573581528745e-12,
+          "oracle_norm": 193.21380354161428,
+          "relative": 1.083751429644559e-14,
+          "informative": true,
+          "finite_difference_relative": 6.253965700353511e-10
+        },
+        "tangent": {
+          "absolute": 4.1211543882267816e-13,
+          "oracle_norm": 8.81987090406056,
+          "relative": 4.672579035515648e-14,
+          "informative": true,
+          "finite_difference_relative": 1.7092824588592792e-09
+        },
+        "normal": {
+          "absolute": 1.7804345814418972e-12,
+          "oracle_norm": 193.13225436888317,
+          "relative": 9.218732454917975e-15,
+          "informative": true,
+          "finite_difference_relative": 9.021897792091785e-10
+        },
+        "smallest": {
+          "absolute": 5.132873528072029e-13,
+          "oracle_norm": 7.34117578819772e-14,
+          "relative": 6.991895680149847,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 2.8455473552532e-15,
+          "oracle_norm": 4.707538469646825e-16,
+          "relative": 6.044660863847772,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 4.537803718207514e-15,
+          "oracle_norm": 2.2934983333026547e-15,
+          "relative": 1.9785511296505032,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/gaussian",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 3.2624319561716376e-15,
+      "oracle_reconstruction": 3.067471826300137e-15,
+      "left_orthogonality": 7.520006234659992e-15,
+      "right_orthogonality": 2.950275131167826e-15,
+      "polar_relative": 2.426165464970665e-15,
+      "singular_max_relative": 4.08276241944711e-15,
+      "nuclear_relative": 6.661338147750939e-16,
+      "rcond_abs": 3.3306690738754696e-16,
+      "oracle_rcond": 0.2818980663028644,
+      "candidate_rcond": 0.28189806630286407,
+      "derivative": {
+        "random": {
+          "absolute": 2.892533756400553e-14,
+          "oracle_norm": 9.315059408930619,
+          "relative": 3.1052230902868924e-15,
+          "informative": true,
+          "finite_difference_relative": 4.4756125728641067e-10
+        },
+        "tangent": {
+          "absolute": 2.1836374430676886e-14,
+          "oracle_norm": 4.053142526235717,
+          "relative": 5.3875170412418305e-15,
+          "informative": true,
+          "finite_difference_relative": 2.437018775742348e-10
+        },
+        "normal": {
+          "absolute": 1.6461456161194016e-14,
+          "oracle_norm": 8.758835038115638,
+          "relative": 1.8794115986382943e-15,
+          "informative": true,
+          "finite_difference_relative": 6.985044390699377e-10
+        },
+        "smallest": {
+          "absolute": 2.8456362333672442e-15,
+          "oracle_norm": 1.4641327595218277e-15,
+          "relative": 1.9435643488344614,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.734476859079414e-15,
+          "oracle_norm": 9.50665589589951e-16,
+          "relative": 1.8244868417163842,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.2342255266265133e-15,
+          "oracle_norm": 1.0393014396506106e-15,
+          "relative": 2.1497377386272154,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=1",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 4.489571491459471e-15,
+      "oracle_reconstruction": 4.851470606858468e-15,
+      "left_orthogonality": 2.0667199885452904e-14,
+      "right_orthogonality": 6.179589131814694e-15,
+      "polar_relative": 3.283203408931005e-15,
+      "singular_max_relative": 5.662137425588341e-15,
+      "nuclear_relative": 6.661338147750939e-16,
+      "rcond_abs": 2.3314683517128287e-15,
+      "oracle_rcond": 0.9999999999999891,
+      "candidate_rcond": 0.9999999999999915,
+      "derivative": {
+        "random": {
+          "absolute": 5.84473542661126e-14,
+          "oracle_norm": 14.769046088268606,
+          "relative": 3.95742243045329e-15,
+          "informative": true,
+          "finite_difference_relative": 3.1015018741635257e-10
+        },
+        "tangent": {
+          "absolute": 3.7087568671869216e-14,
+          "oracle_norm": 5.726688447985823,
+          "relative": 6.4762679179646255e-15,
+          "informative": true,
+          "finite_difference_relative": 2.8053967207258713e-10
+        },
+        "normal": {
+          "absolute": 4.5704171298307294e-14,
+          "oracle_norm": 13.75789875194358,
+          "relative": 3.3220313742933063e-15,
+          "informative": true,
+          "finite_difference_relative": 3.3399163687516225e-10
+        },
+        "smallest": {
+          "absolute": 4.688583841654337e-15,
+          "oracle_norm": 4.265345851604041e-15,
+          "relative": 1.0992271212640663,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.160173204817397e-15,
+          "oracle_norm": 1.4204870702536557e-15,
+          "relative": 0.8167432348470622,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.19828739910524e-15,
+          "oracle_norm": 2.9424358726524735e-15,
+          "relative": 0.7470978108772114,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.1",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 7.009405397353798e-15,
+      "oracle_reconstruction": 6.075794765954485e-15,
+      "left_orthogonality": 2.6022855405837567e-14,
+      "right_orthogonality": 1.5054070139186384e-14,
+      "polar_relative": 4.572440668384151e-15,
+      "singular_max_relative": 9.575673587391994e-15,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 1.8041124150158794e-16,
+      "oracle_rcond": 0.10000000000000009,
+      "candidate_rcond": 0.10000000000000027,
+      "derivative": {
+        "random": {
+          "absolute": 1.9574067319343274e-13,
+          "oracle_norm": 32.47580256598401,
+          "relative": 6.027277472072593e-15,
+          "informative": true,
+          "finite_difference_relative": 4.003095774672493e-10
+        },
+        "tangent": {
+          "absolute": 1.317195538085367e-13,
+          "oracle_norm": 8.47806509304969,
+          "relative": 1.553651126322683e-14,
+          "informative": true,
+          "finite_difference_relative": 7.218972490074028e-10
+        },
+        "normal": {
+          "absolute": 1.38053524358223e-13,
+          "oracle_norm": 31.188338655448934,
+          "relative": 4.4264468807832306e-15,
+          "informative": true,
+          "finite_difference_relative": 2.9803335030949995e-10
+        },
+        "smallest": {
+          "absolute": 9.364050143365661e-15,
+          "oracle_norm": 2.8373669808674527e-15,
+          "relative": 3.3002604902742756,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.0322678720834316e-15,
+          "oracle_norm": 9.52882021317379e-16,
+          "relative": 1.0833113113586716,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.5163163667921289e-15,
+          "oracle_norm": 1.0975541095907546e-15,
+          "relative": 1.3815413322606194,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.01",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.281619434057554e-15,
+      "oracle_reconstruction": 6.807767184296638e-15,
+      "left_orthogonality": 3.700234890737321e-14,
+      "right_orthogonality": 1.698564792923611e-14,
+      "polar_relative": 4.569660068518412e-15,
+      "singular_max_relative": 9.746232658923106e-15,
+      "nuclear_relative": 5.551115123125783e-16,
+      "rcond_abs": 1.0408340855860843e-17,
+      "oracle_rcond": 0.010000000000000057,
+      "candidate_rcond": 0.010000000000000068,
+      "derivative": {
+        "random": {
+          "absolute": 1.439231015660103e-12,
+          "oracle_norm": 196.97672681543048,
+          "relative": 7.306604383819818e-15,
+          "informative": true,
+          "finite_difference_relative": 9.902426761197785e-10
+        },
+        "tangent": {
+          "absolute": 5.141086466666193e-13,
+          "oracle_norm": 8.86942717564775,
+          "relative": 5.796413189773702e-14,
+          "informative": true,
+          "finite_difference_relative": 1.0812071034533984e-08
+        },
+        "normal": {
+          "absolute": 4.4430438925284484e-13,
+          "oracle_norm": 196.72788158104714,
+          "relative": 2.258471883507789e-15,
+          "informative": true,
+          "finite_difference_relative": 7.543405089716225e-10
+        },
+        "smallest": {
+          "absolute": 8.297145490539362e-14,
+          "oracle_norm": 9.300210275238449e-14,
+          "relative": 0.892146010142403,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.823984010042998e-15,
+          "oracle_norm": 2.9791933485638286e-15,
+          "relative": 0.6122408976652289,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.3436620648547572e-15,
+          "oracle_norm": 2.569689362127527e-15,
+          "relative": 0.9120410036310247,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.001",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 8.793722648765876e-15,
+      "oracle_reconstruction": 6.719509760248081e-15,
+      "left_orthogonality": 3.2850914902441735e-14,
+      "right_orthogonality": 1.6707692490377236e-14,
+      "polar_relative": 4.629667183430063e-15,
+      "singular_max_relative": 9.212040413187173e-15,
+      "nuclear_relative": 1.1102230246251565e-15,
+      "rcond_abs": 2.8189256484623115e-18,
+      "oracle_rcond": 0.0009999999999999905,
+      "candidate_rcond": 0.0009999999999999877,
+      "derivative": {
+        "random": {
+          "absolute": 1.4011664092660082e-11,
+          "oracle_norm": 1952.2704352398932,
+          "relative": 7.17711226874075e-15,
+          "informative": true,
+          "finite_difference_relative": 7.921986156539163e-09
+        },
+        "tangent": {
+          "absolute": 6.612501965841412e-12,
+          "oracle_norm": 8.936142138365126,
+          "relative": 7.399727828245102e-13,
+          "informative": true,
+          "finite_difference_relative": 8.455441283238309e-07
+        },
+        "normal": {
+          "absolute": 1.8406095253696543e-12,
+          "oracle_norm": 1952.244559229165,
+          "relative": 9.428170854252044e-16,
+          "informative": true,
+          "finite_difference_relative": 5.711731227554905e-09
+        },
+        "smallest": {
+          "absolute": 1.909797170406423e-13,
+          "oracle_norm": 6.562487352097745e-13,
+          "relative": 0.291017272558391,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 9.387698258505427e-15,
+          "oracle_norm": 6.924601558740553e-15,
+          "relative": 1.3557022998176465,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 7.282809960547778e-15,
+          "oracle_norm": 6.968368563252227e-15,
+          "relative": 1.0451241053686169,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.0003",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.234045804698807e-15,
+      "oracle_reconstruction": 7.0327601981134465e-15,
+      "left_orthogonality": 2.7685896784413737e-14,
+      "right_orthogonality": 1.67267215917509e-14,
+      "polar_relative": 4.731687867714342e-15,
+      "singular_max_relative": 1.1072755298695195e-14,
+      "nuclear_relative": 2.220446049250313e-15,
+      "rcond_abs": 1.951563910473908e-18,
+      "oracle_rcond": 0.00029999999999998924,
+      "candidate_rcond": 0.0002999999999999873,
+      "derivative": {
+        "random": {
+          "absolute": 3.6550661589788604e-11,
+          "oracle_norm": 6506.999158842792,
+          "relative": 5.617130215871857e-15,
+          "informative": true,
+          "finite_difference_relative": 1.8289176654467126e-08
+        },
+        "tangent": {
+          "absolute": 3.078654271397979e-11,
+          "oracle_norm": 8.941682622678085,
+          "relative": 3.443036843635929e-12,
+          "informative": true,
+          "finite_difference_relative": 5.994863122840583e-06
+        },
+        "normal": {
+          "absolute": 8.119976746452946e-12,
+          "oracle_norm": 6506.991375476341,
+          "relative": 1.2478849713948678e-15,
+          "informative": true,
+          "finite_difference_relative": 1.6323033624303785e-08
+        },
+        "smallest": {
+          "absolute": 3.0771614777431214e-12,
+          "oracle_norm": 1.7656204552877472e-12,
+          "relative": 1.742821606154098,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 2.2131055376701342e-14,
+          "oracle_norm": 1.5926153961925773e-14,
+          "relative": 1.3896045102671655,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.923360312860499e-14,
+          "oracle_norm": 1.9455006534364507e-14,
+          "relative": 1.5026262302697242,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.0002",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 7.357889384678787e-15,
+      "oracle_reconstruction": 9.251006519105192e-15,
+      "left_orthogonality": 3.434900102338594e-14,
+      "right_orthogonality": 1.3877474601702286e-14,
+      "polar_relative": 5.318039911593146e-15,
+      "singular_max_relative": 1.2444335295007264e-14,
+      "nuclear_relative": 3.552713678800501e-15,
+      "rcond_abs": 1.7618285302889447e-18,
+      "oracle_rcond": 0.00019999999999996746,
+      "candidate_rcond": 0.00019999999999996922,
+      "derivative": {
+        "random": {
+          "absolute": 8.204167003266177e-11,
+          "oracle_norm": 9760.447624183,
+          "relative": 8.40552331118411e-15,
+          "informative": true,
+          "finite_difference_relative": 2.2656276194459696e-08
+        },
+        "tangent": {
+          "absolute": 4.23417005788144e-11,
+          "oracle_norm": 8.942478533944179,
+          "relative": 4.734895411612369e-12,
+          "informative": true,
+          "finite_difference_relative": 1.593554833963476e-05
+        },
+        "normal": {
+          "absolute": 1.9076276748134577e-11,
+          "oracle_norm": 9760.442433334401,
+          "relative": 1.9544479544271706e-15,
+          "informative": true,
+          "finite_difference_relative": 2.179114659903878e-08
+        },
+        "smallest": {
+          "absolute": 9.410549534296863e-12,
+          "oracle_norm": 6.122602526962441e-12,
+          "relative": 1.5370178764430826,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 4.098402642540757e-14,
+          "oracle_norm": 3.17336170168117e-14,
+          "relative": 1.2915018922581447,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 4.083007981786383e-14,
+          "oracle_norm": 4.057641944473706e-14,
+          "relative": 1.0062514232797757,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.00015",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.750337812871077e-15,
+      "oracle_reconstruction": 6.364191083289829e-15,
+      "left_orthogonality": 2.2615288213581754e-14,
+      "right_orthogonality": 1.57562393577423e-14,
+      "polar_relative": 3.642542792676052e-15,
+      "singular_max_relative": 7.1110487400042e-15,
+      "nuclear_relative": 1.5543122344752192e-15,
+      "rcond_abs": 5.149960319306146e-19,
+      "oracle_rcond": 0.0001499999999999907,
+      "candidate_rcond": 0.00014999999999999017,
+      "derivative": {
+        "random": {
+          "absolute": 8.157965729434567e-11,
+          "oracle_norm": 13013.904944770617,
+          "relative": 6.268653232105162e-15,
+          "informative": true,
+          "finite_difference_relative": 3.840392830638374e-08
+        },
+        "tangent": {
+          "absolute": 4.069892988509937e-11,
+          "oracle_norm": 8.942876905701016,
+          "relative": 4.550988492210388e-12,
+          "informative": true,
+          "finite_difference_relative": 3.023163582643127e-05
+        },
+        "normal": {
+          "absolute": 4.775948384669006e-11,
+          "oracle_norm": 13013.901050909015,
+          "relative": 3.669882202105269e-15,
+          "informative": true,
+          "finite_difference_relative": 3.675475347472813e-08
+        },
+        "smallest": {
+          "absolute": 1.4378362848221136e-12,
+          "oracle_norm": 2.2623527176141434e-12,
+          "relative": 0.6355491226577802,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 4.749830411128591e-14,
+          "oracle_norm": 3.174134722218634e-14,
+          "relative": 1.4964173945989883,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 5.800464619216582e-14,
+          "oracle_norm": 4.234845421063293e-14,
+          "relative": 1.3696992552233915,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.00012",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 8.467120696081356e-15,
+      "oracle_reconstruction": 6.516792541985473e-15,
+      "left_orthogonality": 3.177685072649151e-14,
+      "right_orthogonality": 1.8243263397036952e-14,
+      "polar_relative": 4.618634437631609e-15,
+      "singular_max_relative": 1.0331006618458525e-14,
+      "nuclear_relative": 1.7763568394002505e-15,
+      "rcond_abs": 5.285485590866834e-19,
+      "oracle_rcond": 0.00011999999999995893,
+      "candidate_rcond": 0.00011999999999995945,
+      "derivative": {
+        "random": {
+          "absolute": 1.0983036071769685e-10,
+          "oracle_norm": 16267.365807825801,
+          "relative": 6.751576254888198e-15,
+          "informative": true,
+          "finite_difference_relative": 4.880866465376239e-08
+        },
+        "tangent": {
+          "absolute": 6.651092742451714e-11,
+          "oracle_norm": 8.943116062074475,
+          "relative": 7.437108829054941e-12,
+          "informative": true,
+          "finite_difference_relative": 4.778304759190996e-05
+        },
+        "normal": {
+          "absolute": 5.806077108192074e-11,
+          "oracle_norm": 16267.362692388824,
+          "relative": 3.5691569789051435e-15,
+          "informative": true,
+          "finite_difference_relative": 5.1173333805868147e-08
+        },
+        "smallest": {
+          "absolute": 1.7186963806069507e-12,
+          "oracle_norm": 1.2350312239180053e-11,
+          "relative": 0.13916218046330595,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 6.531487934444949e-14,
+          "oracle_norm": 5.0055345354648874e-14,
+          "relative": 1.3048532355872235,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 6.442627486708356e-14,
+          "oracle_norm": 5.809227461545282e-14,
+          "relative": 1.1090334350575741,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.000105",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.765399517195353e-15,
+      "oracle_reconstruction": 7.136030295732703e-15,
+      "left_orthogonality": 3.0102307904636884e-14,
+      "right_orthogonality": 1.399313219033167e-14,
+      "polar_relative": 4.687615748935209e-15,
+      "singular_max_relative": 1.1785444415251745e-14,
+      "nuclear_relative": 1.5543122344752192e-15,
+      "rcond_abs": 2.981555974335137e-19,
+      "oracle_rcond": 0.00010499999999999363,
+      "candidate_rcond": 0.00010499999999999334,
+      "derivative": {
+        "random": {
+          "absolute": 9.175136988889448e-11,
+          "oracle_norm": 18591.267562995246,
+          "relative": 4.9351863490749725e-15,
+          "informative": true,
+          "finite_difference_relative": 5.322280147648575e-08
+        },
+        "tangent": {
+          "absolute": 6.931634672466774e-11,
+          "oracle_norm": 8.943235677778604,
+          "relative": 7.750701113345267e-12,
+          "informative": true,
+          "finite_difference_relative": 7.326464072451021e-05
+        },
+        "normal": {
+          "absolute": 2.792715556046142e-11,
+          "oracle_norm": 18591.264836835864,
+          "relative": 1.5021654419729344e-15,
+          "informative": true,
+          "finite_difference_relative": 4.692666802533355e-08
+        },
+        "smallest": {
+          "absolute": 7.825564499762049e-12,
+          "oracle_norm": 2.1761710395364684e-12,
+          "relative": 3.59602455762343,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 6.657515845144597e-14,
+          "oracle_norm": 4.586333360972709e-14,
+          "relative": 1.4515987655403693,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 8.525461244538803e-14,
+          "oracle_norm": 6.960391005247093e-14,
+          "relative": 1.2248537816498932,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.000101",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 8.844788948064575e-15,
+      "oracle_reconstruction": 7.995808218768488e-15,
+      "left_orthogonality": 2.9712208430079286e-14,
+      "right_orthogonality": 1.5241091937725057e-14,
+      "polar_relative": 4.545408494950018e-15,
+      "singular_max_relative": 8.403966692732147e-15,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 4.0657581468206416e-20,
+      "oracle_rcond": 0.00010099999999996361,
+      "candidate_rcond": 0.00010099999999996357,
+      "derivative": {
+        "random": {
+          "absolute": 1.2319924984599667e-10,
+          "oracle_norm": 19327.55340090201,
+          "relative": 6.374280659871157e-15,
+          "informative": true,
+          "finite_difference_relative": 4.037238721293313e-08
+        },
+        "tangent": {
+          "absolute": 6.617816698662572e-11,
+          "oracle_norm": 8.943267579522754,
+          "relative": 7.399774903096127e-12,
+          "informative": true,
+          "finite_difference_relative": 6.201768577460491e-05
+        },
+        "normal": {
+          "absolute": 3.468809154068153e-11,
+          "oracle_norm": 19327.55077855733,
+          "relative": 1.7947484364736854e-15,
+          "informative": true,
+          "finite_difference_relative": 5.259859704062099e-08
+        },
+        "smallest": {
+          "absolute": 1.8411318839141843e-12,
+          "oracle_norm": 5.9332349700721165e-12,
+          "relative": 0.31030827081702544,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 6.637744463969504e-14,
+          "oracle_norm": 5.148345435182589e-14,
+          "relative": 1.2892966386071747,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 8.069070007596594e-14,
+          "oracle_norm": 6.360558744045878e-14,
+          "relative": 1.26861024829777,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.0001",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 9.650253893200524e-15,
+      "oracle_reconstruction": 6.8451738908794845e-15,
+      "left_orthogonality": 3.154316283670871e-14,
+      "right_orthogonality": 1.8116526659477645e-14,
+      "polar_relative": 4.342520380928487e-15,
+      "singular_max_relative": 9.012398670486585e-15,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 6.2341624917916505e-19,
+      "oracle_rcond": 9.999999999996523e-05,
+      "candidate_rcond": 9.99999999999646e-05,
+      "derivative": {
+        "random": {
+          "absolute": 1.0955803799761952e-10,
+          "oracle_norm": 19520.828442207847,
+          "relative": 5.612366212938669e-15,
+          "informative": true,
+          "finite_difference_relative": 6.143896765445348e-08
+        },
+        "tangent": {
+          "absolute": 6.275749789190232e-11,
+          "oracle_norm": 8.943275555245297,
+          "relative": 7.017283265424443e-12,
+          "informative": true,
+          "finite_difference_relative": 5.1890838172823065e-05
+        },
+        "normal": {
+          "absolute": 6.663441535673523e-11,
+          "oracle_norm": 19520.825845817333,
+          "relative": 3.413503910287319e-15,
+          "informative": true,
+          "finite_difference_relative": 5.614904230467273e-08
+        },
+        "smallest": {
+          "absolute": 1.3429047401618424e-11,
+          "oracle_norm": 5.751262980189975e-12,
+          "relative": 2.3349736306397935,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 7.12784649487226e-14,
+          "oracle_norm": 6.115632905533375e-14,
+          "relative": 1.1655124833315358,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 7.759713608689705e-14,
+          "oracle_norm": 7.456204948056927e-14,
+          "relative": 1.04070551476886,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=9.9e-05",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 5.423956878787912e-15,
+      "oracle_reconstruction": 7.0337643489230764e-15,
+      "left_orthogonality": 2.8470564829552967e-14,
+      "right_orthogonality": 1.752659371232866e-14,
+      "polar_relative": 4.548598765580431e-15,
+      "singular_max_relative": 7.979727989493273e-15,
+      "nuclear_relative": 5.551115123125783e-16,
+      "rcond_abs": 7.318364664277155e-19,
+      "oracle_rcond": 9.899999999996073e-05,
+      "candidate_rcond": 9.899999999996146e-05,
+      "derivative": {
+        "random": {
+          "absolute": 1.1905561241549833e-10,
+          "oracle_norm": 19718.008033382466,
+          "relative": 6.0379127655257015e-15,
+          "informative": true,
+          "finite_difference_relative": 6.884996241340764e-08
+        },
+        "tangent": {
+          "absolute": 7.411219304010582e-11,
+          "oracle_norm": 8.943283531065306,
+          "relative": 8.286910817785257e-12,
+          "informative": true,
+          "finite_difference_relative": 7.45380864432605e-05
+        },
+        "normal": {
+          "absolute": 4.164426341353984e-11,
+          "oracle_norm": 19718.0054629463,
+          "relative": 2.111991676429796e-15,
+          "informative": true,
+          "finite_difference_relative": 5.308771835356862e-08
+        },
+        "smallest": {
+          "absolute": 1.222347433249253e-11,
+          "oracle_norm": 8.954963608049706e-12,
+          "relative": 1.364994305672524,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 6.521789555839588e-14,
+          "oracle_norm": 5.4655533747940217e-14,
+          "relative": 1.1932532917740233,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 9.30453976478218e-14,
+          "oracle_norm": 7.919626765471064e-14,
+          "relative": 1.1748709933338304,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=5e-05",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 7.225450774977542e-15,
+      "oracle_reconstruction": 9.182318226071754e-15,
+      "left_orthogonality": 2.739505474505639e-14,
+      "right_orthogonality": 1.560985216798309e-14,
+      "polar_relative": 4.6087240245361535e-15,
+      "singular_max_relative": 9.484476696083506e-15,
+      "nuclear_relative": 1.2212453270876722e-15,
+      "rcond_abs": 3.6591823321385775e-19,
+      "oracle_rcond": 4.999999999997533e-05,
+      "candidate_rcond": 4.9999999999975696e-05,
+      "derivative": {
+        "random": {
+          "absolute": 3.2932346549918627e-10,
+          "oracle_norm": 39041.61664850519,
+          "relative": 8.435190285897019e-15,
+          "informative": true,
+          "finite_difference_relative": 1.0302657429645484e-07
+        },
+        "tangent": {
+          "absolute": 1.573989068633682e-10,
+          "oracle_norm": 8.943674482836911,
+          "relative": 1.7598908274828186e-11,
+          "informative": true,
+          "finite_difference_relative": 0.0002500602275027965
+        },
+        "normal": {
+          "absolute": 2.1637835973250552e-10,
+          "oracle_norm": 39041.61535006886,
+          "relative": 5.542249156248702e-15,
+          "informative": true,
+          "finite_difference_relative": 7.931067061448725e-08
+        },
+        "smallest": {
+          "absolute": 4.85126239816859e-11,
+          "oracle_norm": 1.9569024518675863e-11,
+          "relative": 2.479051724596056,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.1488320859679987e-13,
+          "oracle_norm": 1.160332497089936e-13,
+          "relative": 0.9900886934126384,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.103750240254593e-13,
+          "oracle_norm": 1.6411014249194485e-13,
+          "relative": 1.2819136028462428,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/repeated_top",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.4999954239484105e-15,
+      "oracle_reconstruction": 7.304786649036882e-15,
+      "left_orthogonality": 2.8328215914822738e-14,
+      "right_orthogonality": 1.423745288769644e-14,
+      "polar_relative": 4.3016439206992206e-15,
+      "singular_max_relative": 8.931059005306473e-15,
+      "nuclear_relative": 8.881784197001252e-16,
+      "rcond_abs": 6.245004513516506e-17,
+      "oracle_rcond": 0.010000000000000031,
+      "candidate_rcond": 0.009999999999999969,
+      "derivative": {
+        "random": {
+          "absolute": 6.988174400538969e-13,
+          "oracle_norm": 188.4950349957441,
+          "relative": 3.7073519738579584e-15,
+          "informative": true,
+          "finite_difference_relative": 7.52545726983799e-10
+        },
+        "tangent": {
+          "absolute": 9.32456723117051e-13,
+          "oracle_norm": 12.365921445188762,
+          "relative": 7.540535715434648e-14,
+          "informative": true,
+          "finite_difference_relative": 6.430619254670812e-09
+        },
+        "normal": {
+          "absolute": 2.08603500102365e-13,
+          "oracle_norm": 187.83427065320808,
+          "relative": 1.11057209835527e-15,
+          "informative": true,
+          "finite_difference_relative": 6.933317400494175e-10
+        },
+        "smallest": {
+          "absolute": 7.445306627180447e-14,
+          "oracle_norm": 3.517426814988527e-14,
+          "relative": 2.116691268587128,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.448087616808382e-15,
+          "oracle_norm": 7.261242681555265e-16,
+          "relative": 1.9942696867669216,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.1886534870828933e-15,
+          "oracle_norm": 1.073254728771464e-15,
+          "relative": 2.0392674995135653,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/clustered_top",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 4.388417386182966e-15,
+      "oracle_reconstruction": 5.378844135872104e-15,
+      "left_orthogonality": 2.0673501197760792e-14,
+      "right_orthogonality": 8.341940057119309e-15,
+      "polar_relative": 3.5124675440433157e-15,
+      "singular_max_relative": 5.329070518201013e-15,
+      "nuclear_relative": 9.992007221626409e-16,
+      "rcond_abs": 2.6645352591003757e-15,
+      "oracle_rcond": 0.999999999998999,
+      "candidate_rcond": 0.9999999999990017,
+      "derivative": {
+        "random": {
+          "absolute": 6.329328817289795e-14,
+          "oracle_norm": 14.76904608826992,
+          "relative": 4.285536641609348e-15,
+          "informative": true,
+          "finite_difference_relative": 2.6891876575464904e-10
+        },
+        "tangent": {
+          "absolute": 4.1935821685930534e-14,
+          "oracle_norm": 5.726688447986166,
+          "relative": 7.322874653793606e-15,
+          "informative": true,
+          "finite_difference_relative": 2.921870943303561e-10
+        },
+        "normal": {
+          "absolute": 5.215806152544378e-14,
+          "oracle_norm": 13.75789875194472,
+          "relative": 3.7911357297982065e-15,
+          "informative": true,
+          "finite_difference_relative": 3.3520346130609027e-10
+        },
+        "smallest": {
+          "absolute": 1.1492094727195726e-15,
+          "oracle_norm": 8.5707504752155e-16,
+          "relative": 1.3408504611618357,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 2.552350312035949e-15,
+          "oracle_norm": 1.8393806689209915e-15,
+          "relative": 1.3876139698332246,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.577150404006932e-15,
+          "oracle_norm": 1.7831299836107487e-15,
+          "relative": 1.4452958716942954,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/repeated_bottom",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 5.766433039105541e-15,
+      "oracle_reconstruction": 9.68698105115088e-15,
+      "left_orthogonality": 2.4201318660884013e-14,
+      "right_orthogonality": 1.504247400943411e-14,
+      "polar_relative": 4.3909778808932365e-15,
+      "singular_max_relative": 8.72776481786243e-15,
+      "nuclear_relative": 6.661338147750939e-16,
+      "rcond_abs": 4.2012834183813297e-19,
+      "oracle_rcond": 0.00010999999999996826,
+      "candidate_rcond": 0.00010999999999996868,
+      "derivative": {
+        "random": {
+          "absolute": 1.4264518576139292e-10,
+          "oracle_norm": 27484.05015894792,
+          "relative": 5.1901078966322674e-15,
+          "informative": true,
+          "finite_difference_relative": 5.1808344008845135e-08
+        },
+        "tangent": {
+          "absolute": 1.1002014277273445e-10,
+          "oracle_norm": 3441.730677543649,
+          "relative": 3.196651716259665e-14,
+          "informative": true,
+          "finite_difference_relative": 2.4159418161258424e-07
+        },
+        "normal": {
+          "absolute": 8.407735455126151e-11,
+          "oracle_norm": 27003.54357996818,
+          "relative": 3.1135674583698685e-15,
+          "informative": true,
+          "finite_difference_relative": 4.887940537775117e-08
+        },
+        "smallest": {
+          "absolute": 5.027454272495322e-12,
+          "oracle_norm": 5.3090469931049235e-12,
+          "relative": 0.9469598364875433,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 8.959600356795596e-14,
+          "oracle_norm": 7.555924071767343e-14,
+          "relative": 1.1857716239199754,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.3741895577168876e-13,
+          "oracle_norm": 1.2115018362872047e-13,
+          "relative": 1.1342859883136944,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/nearly_rank_one",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 1.5063543240086065e-15,
+      "oracle_reconstruction": 1.3843396912196213e-15,
+      "left_orthogonality": 3.3690931486057905e-14,
+      "right_orthogonality": 1.4326091987435983e-14,
+      "polar_relative": 1.9047650616692738e-09,
+      "singular_max_relative": 4.466775312404455e-14,
+      "nuclear_relative": 1.1102230246251565e-15,
+      "rcond_abs": 9.926167350636332e-24,
+      "oracle_rcond": 9.999999923513263e-09,
+      "candidate_rcond": 9.999999923513272e-09,
+      "derivative": {
+        "random": {
+          "absolute": 0.29595865014449496,
+          "oracle_norm": 430419958.46018666,
+          "relative": 6.876043834102799e-10,
+          "informative": true,
+          "finite_difference_relative": 0.00018819044624746723
+        },
+        "tangent": {
+          "absolute": 0.3244742787248478,
+          "oracle_norm": 164915092.0208159,
+          "relative": 1.9675232554452444e-09,
+          "informative": true,
+          "finite_difference_relative": 0.0003146385488896297
+        },
+        "normal": {
+          "absolute": 0.002647932496136104,
+          "oracle_norm": 401519482.85965973,
+          "relative": 6.594779603911816e-12,
+          "informative": true,
+          "finite_difference_relative": 0.00019670626076802612
+        },
+        "smallest": {
+          "absolute": 0.008929563886190728,
+          "oracle_norm": 6.64355042158004e-08,
+          "relative": 134409.51478572513,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 1.2660921514262753e-09,
+          "oracle_norm": 9.528894837593315e-10,
+          "relative": 1.3286872958564924,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 2.489720322662568e-08,
+          "oracle_norm": 9.195216816082368e-09,
+          "relative": 2.7076254670885684,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/wide_dynamic",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 1.0708911377875605e-14,
+      "oracle_reconstruction": 8.124994709792848e-15,
+      "left_orthogonality": 3.481690336505265e-14,
+      "right_orthogonality": 2.220943185063121e-14,
+      "polar_relative": 2.756976986808277e-10,
+      "singular_max_relative": 1.1495114504314391e-14,
+      "nuclear_relative": 5.10702591327572e-15,
+      "rcond_abs": 7.108583389127582e-25,
+      "oracle_rcond": 1.0000000310404515e-10,
+      "candidate_rcond": 1.0000000310404444e-10,
+      "derivative": {
+        "random": {
+          "absolute": 5.935674148316857,
+          "oracle_norm": 9379364324.193562,
+          "relative": 6.328439692875676e-10,
+          "informative": true,
+          "finite_difference_relative": 0.023662802094254854
+        },
+        "tangent": {
+          "absolute": 0.2332434865694738,
+          "oracle_norm": 433292398.70320433,
+          "relative": 5.383050505098761e-10,
+          "informative": true,
+          "finite_difference_relative": 0.5426456679582947
+        },
+        "normal": {
+          "absolute": 5.910334642387515,
+          "oracle_norm": 9338387684.60214,
+          "relative": 6.329073970802192e-10,
+          "informative": true,
+          "finite_difference_relative": 0.02308917111207267
+        },
+        "smallest": {
+          "absolute": 0.1507223754939932,
+          "oracle_norm": 7.785120570689006e-06,
+          "relative": 19360.313578374524,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 3.5457775251200435e-08,
+          "oracle_norm": 2.98503816574299e-08,
+          "relative": 1.1878499798804023,
+          "informative": true
+        },
+        "clustered": {
+          "absolute": 4.2710442494608067e-08,
+          "oracle_norm": 3.371178404285793e-08,
+          "relative": 1.2669291675667507,
+          "informative": true
+        }
+      }
+    },
+    {
+      "name": "96x24/gaussian",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.249596651447311e-15,
+      "oracle_reconstruction": 5.76660911016532e-15,
+      "left_orthogonality": 3.032577029469475e-14,
+      "right_orthogonality": 1.0974900772976756e-14,
+      "polar_relative": 5.144823010022798e-15,
+      "singular_max_relative": 1.0123778397804589e-14,
+      "nuclear_relative": 1.6653345369377348e-15,
+      "rcond_abs": 1.7763568394002505e-15,
+      "oracle_rcond": 0.33945146079060573,
+      "candidate_rcond": 0.33945146079060395,
+      "derivative": {
+        "random": {
+          "absolute": 1.181726978941966e-13,
+          "oracle_norm": 19.345318383589355,
+          "relative": 6.108594107938931e-15,
+          "informative": true,
+          "finite_difference_relative": 2.6508268284823837e-10
+        },
+        "tangent": {
+          "absolute": 7.66491486739575e-14,
+          "oracle_norm": 6.884930281402195,
+          "relative": 1.1132886687466504e-14,
+          "informative": true,
+          "finite_difference_relative": 2.8700814298756675e-10
+        },
+        "normal": {
+          "absolute": 8.799565482094425e-14,
+          "oracle_norm": 18.121482135130087,
+          "relative": 4.855875152196129e-15,
+          "informative": true,
+          "finite_difference_relative": 2.6575870599350595e-10
+        },
+        "smallest": {
+          "absolute": 8.783984932091517e-15,
+          "oracle_norm": 6.675441824300904e-15,
+          "relative": 1.3158657004716587,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 8.828314762867855e-16,
+          "oracle_norm": 6.083183729682457e-16,
+          "relative": 1.4512655141074777,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 1.1811883517928535e-15,
+          "oracle_norm": 1.2037211063504815e-15,
+          "relative": 0.9812807514641458,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 2.587518429077919e-14,
+      "oracle_reconstruction": 2.587518429077919e-14,
+      "left_orthogonality": 4.687566622377934e-13,
+      "right_orthogonality": 1.6707023720438916e-13,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.999999999999936,
+      "candidate_rcond": 0.999999999999936,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 99.16765585601125,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 47.50138542466646,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 86.97731744769348,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0605642144109494e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.830720273940066e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0821747575692992e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.242581083533654e-13,
+      "oracle_reconstruction": 1.242581083533654e-13,
+      "left_orthogonality": 9.907690895527134e-13,
+      "right_orthogonality": 2.7070836627229223e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.10000000000000199,
+      "candidate_rcond": 0.10000000000000199,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 175.04709033421267,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 65.42112658789844,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 162.3349367398978,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.666260671669821e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.361435603002537e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0583816334537586e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.01",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2702288991063142e-13,
+      "oracle_reconstruction": 1.2702288991063142e-13,
+      "left_orthogonality": 1.0038931425135072e-12,
+      "right_orthogonality": 2.785959076805e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.010000000000000325,
+      "candidate_rcond": 0.010000000000000325,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 309.48098892881455,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 65.88931199067568,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 302.4288160261953,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.455801530223153e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.0044431971244503e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 3.946587581947755e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.001",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2308275666272288e-13,
+      "oracle_reconstruction": 1.2308275666272288e-13,
+      "left_orthogonality": 9.612425948298903e-13,
+      "right_orthogonality": 2.6838160812572036e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0009999999999999926,
+      "candidate_rcond": 0.0009999999999999926,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2573.216982951516,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.01012649283378,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2572.3767606243355,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.9239834158842184e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.261002365364855e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.471269949542289e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.0003",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.222500308892615e-13,
+      "oracle_reconstruction": 1.222500308892615e-13,
+      "left_orthogonality": 9.676009529888424e-13,
+      "right_orthogonality": 2.734352467103501e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00030000000000001716,
+      "candidate_rcond": 0.00030000000000001716,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 8559.558227269157,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.0206618148836,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 8559.305631048295,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.286864054749466e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.546752114620929e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 9.317895907443859e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.0002",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.264737648842432e-13,
+      "oracle_reconstruction": 1.264737648842432e-13,
+      "left_orthogonality": 9.789803499493276e-13,
+      "right_orthogonality": 2.7443247879219474e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00020000000000003403,
+      "candidate_rcond": 0.00020000000000003403,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 12837.833382556042,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02218160971839,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 12837.664962693183,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.926725624470725e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.045154183042628e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 7.228573732753007e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.00015",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2152785646911422e-13,
+      "oracle_reconstruction": 1.2152785646911422e-13,
+      "left_orthogonality": 9.782826909568695e-13,
+      "right_orthogonality": 2.7360840221043954e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00014999999999999877,
+      "candidate_rcond": 0.00014999999999999877,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 17116.398638229028,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02294290173991,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 17116.272316919905,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1500950340980637e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1029667481651442e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.3132069376548214e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.00012",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.1936775766164641e-13,
+      "oracle_reconstruction": 1.1936775766164641e-13,
+      "left_orthogonality": 1.0166682665579608e-12,
+      "right_orthogonality": 2.7248559145904876e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00012000000000003288,
+      "candidate_rcond": 0.00012000000000003288,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 21395.07995233113,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02340012405135,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 21394.978892713563,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.223723080044015e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1308006859575379e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.7192511377928205e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.000105",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.1770003965404437e-13,
+      "oracle_reconstruction": 1.1770003965404437e-13,
+      "left_orthogonality": 1.004197315633794e-12,
+      "right_orthogonality": 2.704836772975268e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00010500000000000505,
+      "candidate_rcond": 0.00010500000000000505,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 24451.318197804565,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.0236288610686,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 24451.229769639613,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.2255843082793682e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0669724421643173e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.5378416596734044e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.000101",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.3082466395977888e-13,
+      "oracle_reconstruction": 1.3082466395977888e-13,
+      "left_orthogonality": 9.79537934066459e-13,
+      "right_orthogonality": 2.7765912326665328e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00010100000000001618,
+      "candidate_rcond": 0.00010100000000001618,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 25419.635672219636,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02368987178508,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 25419.550612503816,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1140691633310365e-11,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 9.161828607784154e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.3795133856794277e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.0001",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2140334592577567e-13,
+      "oracle_reconstruction": 1.2140334592577567e-13,
+      "left_orthogonality": 9.905593388368254e-13,
+      "right_orthogonality": 2.736099207122196e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00010000000000002856,
+      "candidate_rcond": 0.00010000000000002856,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 25673.81929942601,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02370512537662,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 25673.73508182636,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.4147521641887575e-12,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 9.367375411605333e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.2880525635439041e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=9.9e-05",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2598642333781626e-13,
+      "oracle_reconstruction": 1.2598642333781626e-13,
+      "left_orthogonality": 9.642162822258728e-13,
+      "right_orthogonality": 2.7082619036521485e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 9.900000000002569e-05,
+      "candidate_rcond": 9.900000000002569e-05,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 25933.138066649597,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.0237203793788,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 25933.05469116765,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.042993539419009e-11,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0119032837507062e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.3225635686142824e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=5e-05",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2262249744354429e-13,
+      "oracle_reconstruction": 1.2262249744354429e-13,
+      "left_orthogonality": 9.632856941506943e-13,
+      "right_orthogonality": 2.6860049325395983e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 5.000000000002761e-05,
+      "candidate_rcond": 5.000000000002761e-05,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 51346.661632408126,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02446828209735,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 51346.619522352186,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.6898974739804524e-11,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.8253636074479838e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 2.6060765494985737e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/repeated_top",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.214628393138247e-13,
+      "oracle_reconstruction": 1.214628393138247e-13,
+      "left_orthogonality": 9.860346430486355e-13,
+      "right_orthogonality": 2.719073676984295e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.009999999999999815,
+      "candidate_rcond": 0.009999999999999815,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 453.7242208861158,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 93.0000027267918,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 444.5987421648835,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.397713585020214e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.187136390578376e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 3.732348025166657e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/clustered_top",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 4.2429133078311806e-14,
+      "oracle_reconstruction": 4.2429133078311806e-14,
+      "left_orthogonality": 1.1772228791353103e-12,
+      "right_orthogonality": 1.1606830228329334e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.9999999999989688,
+      "candidate_rcond": 0.9999999999989688,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 99.16765585602029,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 47.50138542467124,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 86.97731744770142,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.2565543152188705e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.760327784787835e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 5.800486230329246e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/repeated_bottom",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.273284231855788e-13,
+      "oracle_reconstruction": 1.273284231855788e-13,
+      "left_orthogonality": 9.73724970135747e-13,
+      "right_orthogonality": 2.757768948838605e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00010999999999997368,
+      "candidate_rcond": 0.00010999999999997368,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 40322.96403093532,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1083.029229555788,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 40288.62297999838,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.391343684320609e-11,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.7160473845791854e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 2.78453371600756e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/nearly_rank_one",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 2.0154695674772341e-13,
+      "oracle_reconstruction": 2.0154695674772341e-13,
+      "left_orthogonality": 9.67787148438691e-13,
+      "right_orthogonality": 2.2877254751687963e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 9.99999979038822e-09,
+      "candidate_rcond": 9.99999979038822e-09,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1046229187.9780308,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 500604321.9142796,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 917927876.254748,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.4879560437109694e-07,
+          "relative": 0.0,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.167000647539311e-10,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.1829411847715645e-07,
+          "relative": 0.0,
+          "informative": true
+        }
+      }
+    },
+    {
+      "name": "1024x384/wide_dynamic",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.0014827614689522e-13,
+      "oracle_reconstruction": 1.0014827614689522e-13,
+      "left_orthogonality": 1.7076279606745656e-12,
+      "right_orthogonality": 2.9794907865733286e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 1.0000000235286975e-10,
+      "candidate_rcond": 1.0000000235286975e-10,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 25105651851.0429,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 3616463688.67616,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 24883700691.517326,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.5197160745398575e-05,
+          "relative": 0.0,
+          "informative": true
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.6733773595454868e-08,
+          "relative": 0.0,
+          "informative": true
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 2.251133477522925e-08,
+          "relative": 0.0,
+          "informative": true
+        }
+      }
+    },
+    {
+      "name": "1024x384/gaussian",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2279924942298355e-13,
+      "oracle_reconstruction": 1.2279924942298355e-13,
+      "left_orthogonality": 1.0053731644516654e-12,
+      "right_orthogonality": 2.8064827654077256e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.24566461409696738,
+      "candidate_rcond": 0.24566461409696738,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 100.46014097458578,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 44.79139381012931,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 89.89402067305811,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.008672043510999e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.2096970576588375e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 6.7305815347261914e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "24x8/rcond=0.00011",
+      "shape": [
+        24,
+        8
+      ],
+      "reconstruction": 4.395098301437099e-15,
+      "oracle_reconstruction": 4.053156139095886e-15,
+      "left_orthogonality": 8.997747982539878e-15,
+      "right_orthogonality": 3.821846665994675e-15,
+      "polar_relative": 4.536585062166236e-13,
+      "singular_max_relative": 6.247715018949454e-13,
+      "nuclear_relative": 7.771561172376096e-16,
+      "rcond_abs": 6.833184192089892e-17,
+      "oracle_rcond": 0.00010999999999996985,
+      "candidate_rcond": 0.00011000000000003818,
+      "derivative": {
+        "random": {
+          "absolute": 1.5045517650906637e-08,
+          "oracle_norm": 18491.35111136193,
+          "relative": 8.136516125996863e-13,
+          "informative": true,
+          "finite_difference_relative": 1.1157697696096233e-08
+        },
+        "tangent": {
+          "absolute": 1.4841850716428779e-09,
+          "oracle_norm": 7.350885236383722,
+          "relative": 2.0190562414126664e-10,
+          "informative": true,
+          "finite_difference_relative": 2.05325312036267e-05
+        },
+        "normal": {
+          "absolute": 1.3360260755978348e-08,
+          "oracle_norm": 18491.350457816847,
+          "relative": 7.225140633430895e-13,
+          "informative": true,
+          "finite_difference_relative": 1.0940386180281117e-08
+        },
+        "smallest": {
+          "absolute": 4.831887803467711e-09,
+          "oracle_norm": 1.378053649877841e-11,
+          "relative": 350.63132729963297,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 1.7050057525529287e-14,
+          "oracle_norm": 2.2585228280921916e-14,
+          "relative": 0.7549207523366823,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 9.938195635833337e-14,
+          "oracle_norm": 1.3059804926901776e-13,
+          "relative": 0.760975810240606,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "96x24/rcond=0.00011",
+      "shape": [
+        96,
+        24
+      ],
+      "reconstruction": 6.502843628574245e-15,
+      "oracle_reconstruction": 7.583708702066045e-15,
+      "left_orthogonality": 3.0217646692465855e-14,
+      "right_orthogonality": 1.6537565667238636e-14,
+      "polar_relative": 4.786936272704247e-15,
+      "singular_max_relative": 1.115141734227916e-14,
+      "nuclear_relative": 4.440892098500626e-16,
+      "rcond_abs": 7.860465750519907e-19,
+      "oracle_rcond": 0.00010999999999997332,
+      "candidate_rcond": 0.0001099999999999741,
+      "derivative": {
+        "random": {
+          "absolute": 1.4945812217402294e-10,
+          "oracle_norm": 17746.21229878213,
+          "relative": 8.421973075588632e-15,
+          "informative": true,
+          "finite_difference_relative": 4.29265258149977e-08
+        },
+        "tangent": {
+          "absolute": 7.827347447034638e-11,
+          "oracle_norm": 8.943195803099394,
+          "relative": 8.75229349705388e-12,
+          "informative": true,
+          "finite_difference_relative": 5.316420210096054e-05
+        },
+        "normal": {
+          "absolute": 5.301825587438789e-11,
+          "oracle_norm": 17746.209442858715,
+          "relative": 2.987581998572831e-15,
+          "informative": true,
+          "finite_difference_relative": 4.270334112532952e-08
+        },
+        "smallest": {
+          "absolute": 1.455677247291346e-11,
+          "oracle_norm": 1.1796863584939081e-11,
+          "relative": 1.2339527678778894,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 7.35814534409511e-14,
+          "oracle_norm": 6.085520732608353e-14,
+          "relative": 1.2091233712618197,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 8.108915214860448e-14,
+          "oracle_norm": 6.032177974130936e-14,
+          "relative": 1.3442765199627107,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "1024x384/rcond=0.00011",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2322288645606881e-13,
+      "oracle_reconstruction": 1.2322288645606881e-13,
+      "left_orthogonality": 1.017114922010656e-12,
+      "right_orthogonality": 2.7617578736210416e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00011000000000000223,
+      "candidate_rcond": 0.00011000000000000223,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 23339.956197903455,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 66.02355260607544,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 23339.863559212874,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.3172719072836609e-11,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 8.987479785878212e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.3314376231518194e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval0_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.1118329515041584e-13,
+      "oracle_reconstruction": 1.1118329515041584e-13,
+      "left_orthogonality": 1.0801557946261772e-12,
+      "right_orthogonality": 2.815704172709968e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.012549217640463678,
+      "candidate_rcond": 0.012549217640463678,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 448.68286723611806,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 169.14162701770442,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 416.019678274164,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.532330602909733e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.5016359755197167e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 6.97094998009397e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval0_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.3293149718613197e-13,
+      "oracle_reconstruction": 1.3293149718613197e-13,
+      "left_orthogonality": 1.0672886438891352e-12,
+      "right_orthogonality": 2.8219404391794822e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.013590848781204284,
+      "candidate_rcond": 0.013590848781204284,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 547.080505840974,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 219.8585906928698,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 500.78586396474253,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.918564389147862e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.79009854221224e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 9.262310935244964e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval1_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2676224533261938e-13,
+      "oracle_reconstruction": 1.2676224533261938e-13,
+      "left_orthogonality": 1.0269314296591768e-12,
+      "right_orthogonality": 2.8303719085724104e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.012556175323455487,
+      "candidate_rcond": 0.012556175323455487,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 448.64760317777274,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 169.13269005390873,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 415.99045848636393,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.088642921128121e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.9367525775960108e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.477139749536447e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval1_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.577601989908085e-13,
+      "oracle_reconstruction": 1.577601989908085e-13,
+      "left_orthogonality": 1.02012858099172e-12,
+      "right_orthogonality": 2.8857613951779668e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.013590260899375048,
+      "candidate_rcond": 0.013590260899375048,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 546.7899440810463,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 219.7465512458734,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 500.51726981601405,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.994278087029889e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.121010622507417e-16,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 2.8948233287950502e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval2_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2914314494675305e-13,
+      "oracle_reconstruction": 1.2914314494675305e-13,
+      "left_orthogonality": 1.0377921212941343e-12,
+      "right_orthogonality": 2.82797267184116e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0125554842244744,
+      "candidate_rcond": 0.0125554842244744,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 448.64598172787817,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 169.1320350560742,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 415.9888366996917,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.520661081372387e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.850059670248644e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 5.151489722170728e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval2_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.4032058632956275e-13,
+      "oracle_reconstruction": 1.4032058632956275e-13,
+      "left_orthogonality": 1.073843270299647e-12,
+      "right_orthogonality": 2.851252707798711e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.013590491866143608,
+      "candidate_rcond": 0.013590491866143608,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 546.721955628136,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 219.71907948704342,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 500.45516389362837,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.328090779132353e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.9244924660009527e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 6.051005526605263e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval3_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.653996035342834e-13,
+      "oracle_reconstruction": 1.653996035342834e-13,
+      "left_orthogonality": 1.0535454709541244e-12,
+      "right_orthogonality": 2.8269366242767143e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.008736540322738084,
+      "candidate_rcond": 0.008736540322738084,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 950.7583974018925,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 369.0952239851197,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 876.2944866838624,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.488531032324648e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 8.407025919815194e-16,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 3.2411137858542386e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval3_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2625724259715527e-13,
+      "oracle_reconstruction": 1.2625724259715527e-13,
+      "left_orthogonality": 1.1010645072757404e-12,
+      "right_orthogonality": 2.922673454987295e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.010631476842003402,
+      "candidate_rcond": 0.010631476842003402,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 895.5720499405885,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 353.50959190320725,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 822.1009774522071,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.21877643331246e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.701670411656179e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 8.45350458116402e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval4_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.1981655142816642e-13,
+      "oracle_reconstruction": 1.1981655142816642e-13,
+      "left_orthogonality": 1.05746495195738e-12,
+      "right_orthogonality": 2.851964379215414e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.008738106290530233,
+      "candidate_rcond": 0.008738106290530233,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 950.705120497731,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 369.0766248498551,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 876.2399881192072,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.8792976738513647e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.140410266875381e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0049093929057926e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval4_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2644442854499722e-13,
+      "oracle_reconstruction": 1.2644442854499722e-13,
+      "left_orthogonality": 1.0813904274740564e-12,
+      "right_orthogonality": 2.894637009732303e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.010632699651117456,
+      "candidate_rcond": 0.010632699651117456,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 895.5053135536332,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 353.4840194455988,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 822.0345175148634,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.827206906028347e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.082636874175294e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 8.011522827677137e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval5_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.410966480340591e-13,
+      "oracle_reconstruction": 1.410966480340591e-13,
+      "left_orthogonality": 1.0503391111857682e-12,
+      "right_orthogonality": 2.8523107062166747e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.008738091779322362,
+      "candidate_rcond": 0.008738091779322362,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 950.7030880916805,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 369.0757794393334,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 876.2381809013406,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.241504390003748e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.449783154488823e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.7858617861051686e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval5_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.290228146349916e-13,
+      "oracle_reconstruction": 1.290228146349916e-13,
+      "left_orthogonality": 1.0889218017014677e-12,
+      "right_orthogonality": 2.913014611111465e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.010632628977259235,
+      "candidate_rcond": 0.010632628977259235,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 895.501397979632,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 353.4824359059556,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 822.0309040571711,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 9.372051840465948e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.932373489360367e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 9.93140831757662e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval6_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2847864015178678e-13,
+      "oracle_reconstruction": 1.2847864015178678e-13,
+      "left_orthogonality": 1.043280668007309e-12,
+      "right_orthogonality": 2.8317711649833978e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.005406133567086155,
+      "candidate_rcond": 0.005406133567086155,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1396.309689695566,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 545.3344499362028,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1286.1572080300998,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 9.69147302658423e-14,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.9742920743434354e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 7.042083423779883e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval6_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.3639789073405953e-13,
+      "oracle_reconstruction": 1.3639789073405953e-13,
+      "left_orthogonality": 1.076104804130065e-12,
+      "right_orthogonality": 2.8271762776659796e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.005835032245694905,
+      "candidate_rcond": 0.005835032245694905,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1703.689390251313,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 656.5429010535456,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1572.7203914370627,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.768989107792169e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.207588846083414e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 8.481816945248093e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval7_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.5405116734859996e-13,
+      "oracle_reconstruction": 1.5405116734859996e-13,
+      "left_orthogonality": 9.921289848921293e-13,
+      "right_orthogonality": 2.8849369149823297e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0054079690163267,
+      "candidate_rcond": 0.0054079690163267,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1396.2377440216062,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 545.3117245602191,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1286.0886789815813,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1783154123660317e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.07369946940433e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.9534702236598645e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval7_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.0345982623028453e-13,
+      "oracle_reconstruction": 1.0345982623028453e-13,
+      "left_orthogonality": 1.0633421252901344e-12,
+      "right_orthogonality": 2.807942980025466e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.005835467595482522,
+      "candidate_rcond": 0.005835467595482522,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1703.5864472848784,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 656.5209147785446,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1572.6140296176056,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.146508566363241e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.167166560686584e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.2216462824037426e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval8_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2501352537412859e-13,
+      "oracle_reconstruction": 1.2501352537412859e-13,
+      "left_orthogonality": 1.0427908171800398e-12,
+      "right_orthogonality": 2.829637865173643e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.005407973134086965,
+      "candidate_rcond": 0.005407973134086965,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1396.2352284650844,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 545.310824577852,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1286.0863861754535,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.329856207762852e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.3803559430571156e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 9.135010231490922e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval8_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2963175651508175e-13,
+      "oracle_reconstruction": 1.2963175651508175e-13,
+      "left_orthogonality": 1.0532068495395037e-12,
+      "right_orthogonality": 2.911929421753916e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.005835489938424396,
+      "candidate_rcond": 0.005835489938424396,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1703.5816436726948,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 656.5192200336564,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1572.6095633135658,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.4225690606253772e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.94939850773374e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0343500750019008e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval9_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 8.737024009504053e-14,
+      "oracle_reconstruction": 8.737024009504053e-14,
+      "left_orthogonality": 1.1076825327220715e-12,
+      "right_orthogonality": 2.878400246396236e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0037736324910434276,
+      "candidate_rcond": 0.0037736324910434276,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1603.3394771063302,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 621.7310654847188,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1476.824714407397,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.2224414704934053e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.219476267941854e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1105874928878053e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval9_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.0437443686561703e-13,
+      "oracle_reconstruction": 1.0437443686561703e-13,
+      "left_orthogonality": 1.0538069778028912e-12,
+      "right_orthogonality": 2.826263595742612e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.003926648087196769,
+      "candidate_rcond": 0.003926648087196769,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2362.5877070529646,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 887.7158559759672,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2188.3463326626584,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.6826057949792212e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.6273119644739596e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.2750672185961915e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval10_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2235765028923324e-13,
+      "oracle_reconstruction": 1.2235765028923324e-13,
+      "left_orthogonality": 1.0489580555292744e-12,
+      "right_orthogonality": 2.8507170634558622e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0037738637425780435,
+      "candidate_rcond": 0.0037738637425780435,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1603.1535927992709,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 621.6602221459074,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1476.6669108449466,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.063470687590213e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.72222616563161e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 8.226881743924505e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval10_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.0251715505620998e-13,
+      "oracle_reconstruction": 1.0251715505620998e-13,
+      "left_orthogonality": 1.054800496188772e-12,
+      "right_orthogonality": 2.905839700004706e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.003926605429614596,
+      "candidate_rcond": 0.003926605429614596,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2362.5481796217477,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 887.7140539540117,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2188.293446312014,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.584585674151895e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.542648971718215e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.448668188612835e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval11_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 7.098195296780342e-14,
+      "oracle_reconstruction": 7.098195296780342e-14,
+      "left_orthogonality": 1.044639992796483e-12,
+      "right_orthogonality": 2.8316810495168527e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0037738293758082415,
+      "candidate_rcond": 0.0037738293758082415,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 1603.150191517425,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 621.6587288887554,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 1476.6637742879186,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.5490995308680143e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.510833032769649e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1965740662256245e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval11_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.0124891592981868e-13,
+      "oracle_reconstruction": 1.0124891592981868e-13,
+      "left_orthogonality": 1.0902254540306477e-12,
+      "right_orthogonality": 2.8408534550465525e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.00392662793038669,
+      "candidate_rcond": 0.00392662793038669,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2362.551099882707,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 887.7150030395755,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2188.296116368915,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.8732868812961096e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 8.795945370262585e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.612476157939466e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval12_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 9.774904145870309e-14,
+      "oracle_reconstruction": 9.774904145870309e-14,
+      "left_orthogonality": 1.098325109135204e-12,
+      "right_orthogonality": 2.894615949740492e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0028589424804289594,
+      "candidate_rcond": 0.0028589424804289594,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2609.20210358699,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1008.747051469497,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2405.612578961951,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.5816180257096937e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 7.43786032194595e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.508951015225083e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval12_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.3165813997794645e-13,
+      "oracle_reconstruction": 1.3165813997794645e-13,
+      "left_orthogonality": 1.0437538371129221e-12,
+      "right_orthogonality": 2.8004795284176687e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.002611993673676376,
+      "candidate_rcond": 0.002611993673676376,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2905.9117008615667,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1066.0567833969064,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2702.7096184209868,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.875857990628052e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.3760018539503267e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 6.1438532266800316e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval13_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.2651511796806359e-13,
+      "oracle_reconstruction": 1.2651511796806359e-13,
+      "left_orthogonality": 1.0482189466021615e-12,
+      "right_orthogonality": 2.9193235762184768e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0028587954447397723,
+      "candidate_rcond": 0.0028587954447397723,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2609.1559436988955,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1008.7377036853437,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2405.5585219817376,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.4360731779617435e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.4726239278105195e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.1652681150126353e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval13_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.6841382160193629e-13,
+      "oracle_reconstruction": 1.6841382160193629e-13,
+      "left_orthogonality": 1.0257949554679943e-12,
+      "right_orthogonality": 2.8300409396657847e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.002612538799341774,
+      "candidate_rcond": 0.002612538799341774,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2905.8821157429975,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1066.0513991159355,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2702.703049386151,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.7203260630169964e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 1.6557761397186778e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.2247618503668685e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval14_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 6.563840306279477e-14,
+      "oracle_reconstruction": 6.563840306279477e-14,
+      "left_orthogonality": 1.1054233903474411e-12,
+      "right_orthogonality": 2.8849798238652286e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0028588144023958635,
+      "candidate_rcond": 0.0028588144023958635,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2609.1554336139097,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1008.7377210994347,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2405.557565890745,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.110941128326565e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.499430711622506e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.7317347699820938e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval14_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.4003050362586902e-13,
+      "oracle_reconstruction": 1.4003050362586902e-13,
+      "left_orthogonality": 1.0585579658830527e-12,
+      "right_orthogonality": 2.8455950515544395e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0026125150719656857,
+      "candidate_rcond": 0.0026125150719656857,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2905.8859154543015,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1066.052578733642,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2702.7065014783398,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.333417187725278e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.5850088740806473e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 4.976065706432109e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval15_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 8.492477154496882e-14,
+      "oracle_reconstruction": 8.492477154496882e-14,
+      "left_orthogonality": 1.0673168237385208e-12,
+      "right_orthogonality": 2.8834320534473765e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.002256181867603565,
+      "candidate_rcond": 0.002256181867603565,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2640.554159613224,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1019.1405473468499,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2436.2442452304963,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.0164559145486345e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.771991977582402e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.2211835325155369e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval15_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.18276595773964e-13,
+      "oracle_reconstruction": 1.18276595773964e-13,
+      "left_orthogonality": 1.0704049827414897e-12,
+      "right_orthogonality": 2.811722189008673e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0014665148360317347,
+      "candidate_rcond": 0.0014665148360317347,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 3932.2097684659043,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1370.7950858238355,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 3685.4077509277467,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 3.893438096944825e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.267635194946385e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 8.144361385237818e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval16_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 7.608421441787679e-14,
+      "oracle_reconstruction": 7.608421441787679e-14,
+      "left_orthogonality": 1.0311040267954907e-12,
+      "right_orthogonality": 2.9135040101445143e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0022567935388040973,
+      "candidate_rcond": 0.0022567935388040973,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2640.4335444473086,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1019.1088064594949,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2436.140351924813,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.453731532142147e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 6.544119366125233e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.4421148140339032e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval16_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 9.344631257183167e-14,
+      "oracle_reconstruction": 9.344631257183167e-14,
+      "left_orthogonality": 1.021363770272196e-12,
+      "right_orthogonality": 2.8121791888935144e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.0014665867007785341,
+      "candidate_rcond": 0.0014665867007785341,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 3932.217461857916,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1370.7735924563679,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 3685.428732237512,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.960866881724139e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.9141119288799344e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 9.88381778345389e-15,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval17_side0",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 9.919475421930458e-14,
+      "oracle_reconstruction": 9.919475421930458e-14,
+      "left_orthogonality": 1.111246003739862e-12,
+      "right_orthogonality": 2.862706247405304e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.002256811100179901,
+      "candidate_rcond": 0.002256811100179901,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 2640.432354285838,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1019.1081961418552,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 2436.139720134519,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 2.0347162253955045e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.400783251677618e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0733033588810646e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    },
+    {
+      "name": "real_step25_eval17_side1",
+      "shape": [
+        1024,
+        384
+      ],
+      "reconstruction": 1.1101589453323893e-13,
+      "oracle_reconstruction": 1.1101589453323893e-13,
+      "left_orthogonality": 1.0834498578241089e-12,
+      "right_orthogonality": 2.881439013372273e-12,
+      "polar_relative": 0.0,
+      "singular_max_relative": 0.0,
+      "nuclear_relative": 0.0,
+      "rcond_abs": 0.0,
+      "oracle_rcond": 0.001466583825731313,
+      "candidate_rcond": 0.001466583825731313,
+      "derivative": {
+        "random": {
+          "absolute": 0.0,
+          "oracle_norm": 3932.1742755397277,
+          "relative": 0.0,
+          "informative": true
+        },
+        "tangent": {
+          "absolute": 0.0,
+          "oracle_norm": 1370.7594420205273,
+          "relative": 0.0,
+          "informative": true
+        },
+        "normal": {
+          "absolute": 0.0,
+          "oracle_norm": 3685.3871706832024,
+          "relative": 0.0,
+          "informative": true
+        },
+        "smallest": {
+          "absolute": 0.0,
+          "oracle_norm": 5.088161368207623e-13,
+          "relative": 0.0,
+          "informative": false
+        },
+        "largest": {
+          "absolute": 0.0,
+          "oracle_norm": 4.774828015278178e-15,
+          "relative": 0.0,
+          "informative": false
+        },
+        "clustered": {
+          "absolute": 0.0,
+          "oracle_norm": 1.0694618925761512e-14,
+          "relative": 0.0,
+          "informative": false
+        }
+      }
+    }
+  ],
+  "replay": [
+    {
+      "pair": "blocks.0.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        3,
+        3
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.16142219305038452,
+        0.1615210548043251
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    },
+    {
+      "pair": "blocks.1.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        5,
+        5
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.16357110440731049,
+        0.16376058757305145
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    },
+    {
+      "pair": "blocks.2.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        5,
+        5
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.16310659795999527,
+        0.1641090288758278
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    },
+    {
+      "pair": "blocks.3.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        5,
+        5
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.1667269617319107,
+        0.16677499562501907
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    },
+    {
+      "pair": "blocks.4.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        5,
+        5
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.1654052659869194,
+        0.16882914304733276
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    },
+    {
+      "pair": "blocks.5.mlp",
+      "converged": [
+        true,
+        true
+      ],
+      "reasons": [
+        "certified_gap",
+        "certified_gap"
+      ],
+      "newton": [
+        2,
+        2
+      ],
+      "cg": [
+        5,
+        5
+      ],
+      "line_trials": [
+        2,
+        2
+      ],
+      "evaluations": [
+        3,
+        3
+      ],
+      "seconds": [
+        0.1645553782582283,
+        0.1648958921432495
+      ],
+      "initial_hvp_relative": 0.0,
+      "initial_direction_relative": 0.0,
+      "trace_value_max_abs": 0.0,
+      "trace_gradient_max_abs": 0.0,
+      "trace_coordinate_max_abs": 0.0,
+      "certificate_decisions": [
+        [
+          false,
+          false,
+          true
+        ],
+        [
+          false,
+          false,
+          true
+        ]
+      ],
+      "lambda_max_abs": 0.0,
+      "direction_relative": 0.0,
+      "gap_abs": 0.0
+    }
+  ],
+  "performance": {
+    "components": {
+      "tall_svd": {
+        "median": 0.04334845393896103,
+        "p95": 0.04341670125722885,
+        "samples": [
+          0.04329361766576767,
+          0.04334845393896103,
+          0.0433649942278862,
+          0.043307118117809296,
+          0.04662758857011795,
+          0.043376170098781586,
+          0.04333317279815674,
+          0.04341670125722885,
+          0.043357424437999725,
+          0.043268561363220215,
+          0.04332081973552704,
+          0.04336870461702347,
+          0.04335593432188034,
+          0.043335847556591034,
+          0.04326874762773514,
+          0.0433676615357399,
+          0.043410539627075195,
+          0.043267570436000824,
+          0.043310120701789856,
+          0.04332362115383148,
+          0.04338822513818741
+        ]
+      },
+      "qr": {
+        "median": 0.004343278706073761,
+        "p95": 0.004362881183624268,
+        "samples": [
+          0.0043707191944122314,
+          0.004332363605499268,
+          0.004350610077381134,
+          0.004346974194049835,
+          0.004350520670413971,
+          0.00433514267206192,
+          0.004346027970314026,
+          0.004362881183624268,
+          0.00433775782585144,
+          0.004333332180976868,
+          0.004343278706073761,
+          0.004346385598182678,
+          0.004337795078754425,
+          0.004322506487369537,
+          0.004335522651672363,
+          0.004359245300292969,
+          0.004338204860687256,
+          0.004327178001403809,
+          0.004344195127487183,
+          0.004336245357990265,
+          0.004344664514064789
+        ]
+      },
+      "square_svd": {
+        "median": 0.03899802267551422,
+        "p95": 0.03906313329935074,
+        "samples": [
+          0.038990318775177,
+          0.03896094113588333,
+          0.038968175649642944,
+          0.03904307633638382,
+          0.039049237966537476,
+          0.039001137018203735,
+          0.03897777199745178,
+          0.03894438594579697,
+          0.03905072808265686,
+          0.0417945459485054,
+          0.03898797929286957,
+          0.03895729035139084,
+          0.03894224017858505,
+          0.03904389590024948,
+          0.03906313329935074,
+          0.039012350142002106,
+          0.03893373906612396,
+          0.038943156599998474,
+          0.03899802267551422,
+          0.039031676948070526,
+          0.0390312597155571
+        ]
+      },
+      "reconstruction": {
+        "median": 6.05657696723938e-05,
+        "p95": 6.268918514251709e-05,
+        "samples": [
+          6.268918514251709e-05,
+          6.180256605148315e-05,
+          6.151944398880005e-05,
+          6.05657696723938e-05,
+          6.0424208641052246e-05,
+          6.0267746448516846e-05,
+          5.986541509628296e-05,
+          6.076693534851074e-05,
+          6.313621997833252e-05,
+          6.074458360671997e-05,
+          6.084144115447998e-05,
+          6.111711263656616e-05,
+          6.029754877090454e-05,
+          6.043165922164917e-05,
+          6.138533353805542e-05,
+          6.027519702911377e-05,
+          6.050616502761841e-05,
+          6.0074031352996826e-05,
+          6.002187728881836e-05,
+          6.154924631118774e-05,
+          6.026029586791992e-05
+        ]
+      },
+      "qr_reduced_svd": {
+        "median": 0.04350636154413223,
+        "p95": 0.043599531054496765,
+        "samples": [
+          0.04355447739362717,
+          0.04347927123308182,
+          0.04340064525604248,
+          0.04349958151578903,
+          0.043599531054496765,
+          0.043561115860939026,
+          0.04349462687969208,
+          0.04344676434993744,
+          0.04353930056095123,
+          0.04351089894771576,
+          0.04352150857448578,
+          0.04348649084568024,
+          0.04343947023153305,
+          0.04354814440011978,
+          0.04352770000696182,
+          0.043444275856018066,
+          0.04341281205415726,
+          0.045542359352111816,
+          0.04350636154413223,
+          0.04356130212545395,
+          0.04348795861005783
+        ]
+      }
+    },
+    "drivers": {
+      "default": {
+        "square": {
+          "median": 0.039062805473804474,
+          "p95": 0.03909546136856079,
+          "samples": [
+            0.03902168571949005,
+            0.03901967406272888,
+            0.03906911611557007,
+            0.03907698392868042,
+            0.039063602685928345,
+            0.03904709219932556,
+            0.03901827335357666,
+            0.03908022493124008,
+            0.03909699618816376,
+            0.039072565734386444,
+            0.039021432399749756,
+            0.03901418298482895,
+            0.03906264156103134,
+            0.03909045457839966,
+            0.03906700015068054,
+            0.03899287432432175,
+            0.03898811340332031,
+            0.039062805473804474,
+            0.039089687168598175,
+            0.03909546136856079,
+            0.03901813179254532
+          ]
+        },
+        "total": {
+          "median": 0.04348786920309067,
+          "p95": 0.0435587614774704,
+          "samples": [
+            0.04353389889001846,
+            0.04346010088920593,
+            0.04369771480560303,
+            0.043519698083400726,
+            0.0435587614774704,
+            0.043496474623680115,
+            0.043432943522930145,
+            0.043478235602378845,
+            0.0435243621468544,
+            0.04348786920309067,
+            0.0434817373752594,
+            0.04348711669445038,
+            0.043484434485435486,
+            0.04352584481239319,
+            0.043554529547691345,
+            0.04338864982128143,
+            0.04343850910663605,
+            0.04350562393665314,
+            0.04355008155107498,
+            0.04343665391206741,
+            0.04337300360202789
+          ]
+        },
+        "spectrum_relative": 0.0
+      },
+      "gesvdj": {
+        "square": {
+          "median": 0.03902032971382141,
+          "p95": 0.03906727582216263,
+          "samples": [
+            0.038966983556747437,
+            0.03900618851184845,
+            0.039043352007865906,
+            0.03903152048587799,
+            0.03902032971382141,
+            0.03896620124578476,
+            0.039108552038669586,
+            0.039041630923748016,
+            0.03906727582216263,
+            0.03897229582071304,
+            0.03895988315343857,
+            0.03897744417190552,
+            0.03906562179327011,
+            0.03906603157520294,
+            0.03899896889925003,
+            0.03895387798547745,
+            0.03895790874958038,
+            0.03904983401298523,
+            0.03902380168437958,
+            0.03902241587638855,
+            0.03894353657960892
+          ]
+        },
+        "total": {
+          "median": 0.043480321764945984,
+          "p95": 0.043528661131858826,
+          "samples": [
+            0.043432362377643585,
+            0.04344042390584946,
+            0.043445415794849396,
+            0.043542586266994476,
+            0.04351314157247543,
+            0.04341346025466919,
+            0.04343743622303009,
+            0.04348626732826233,
+            0.04351844638586044,
+            0.043458424508571625,
+            0.04346781224012375,
+            0.04350155591964722,
+            0.043513983488082886,
+            0.043528661131858826,
+            0.04345356673002243,
+            0.04348035901784897,
+            0.043500207364559174,
+            0.043480321764945984,
+            0.04350701719522476,
+            0.043468177318573,
+            0.04344043880701065
+          ]
+        },
+        "spectrum_relative": 0.0
+      },
+      "gesvd": {
+        "square": {
+          "median": 0.07496370375156403,
+          "p95": 0.07501226663589478,
+          "samples": [
+            0.07490555942058563,
+            0.07500775903463364,
+            0.07496856898069382,
+            0.074874147772789,
+            0.07486721128225327,
+            0.07501188665628433,
+            0.07501454651355743,
+            0.07496370375156403,
+            0.074946828186512,
+            0.07500148564577103,
+            0.07497557252645493,
+            0.07489736378192902,
+            0.07490115612745285,
+            0.07497763633728027,
+            0.07500351965427399,
+            0.07486007362604141,
+            0.0748744085431099,
+            0.07501226663589478,
+            0.0749642550945282,
+            0.07486848533153534,
+            0.07488204538822174
+          ]
+        },
+        "total": {
+          "median": 0.07941187173128128,
+          "p95": 0.07952344417572021,
+          "samples": [
+            0.07950127124786377,
+            0.0794079527258873,
+            0.07938864827156067,
+            0.07953103631734848,
+            0.07941187173128128,
+            0.07937879115343094,
+            0.07935690879821777,
+            0.07945273816585541,
+            0.07948332279920578,
+            0.07935803383588791,
+            0.07936713099479675,
+            0.0794980600476265,
+            0.0794338658452034,
+            0.07940219342708588,
+            0.07933519780635834,
+            0.07952344417572021,
+            0.07946215569972992,
+            0.07938123494386673,
+            0.07939129322767258,
+            0.07948414236307144,
+            0.07949689030647278
+          ]
+        },
+        "spectrum_relative": 1.2658271510874676e-13
+      }
+    },
+    "batching": {
+      "tall_svd": {
+        "sequential": {
+          "median": 0.26214198768138885,
+          "p95": 0.2623839005827904,
+          "samples": [
+            0.26214198768138885,
+            0.2620124816894531,
+            0.2623839005827904,
+            0.2621142417192459,
+            0.2620953544974327,
+            0.26203062385320663,
+            0.26210322231054306,
+            0.26217523217201233,
+            0.2622065469622612,
+            0.2621641531586647,
+            0.2621637284755707
+          ]
+        },
+        "batched": {
+          "median": 0.26120902597904205,
+          "p95": 0.26159214973449707,
+          "samples": [
+            0.26109080016613007,
+            0.26123031228780746,
+            0.26144910603761673,
+            0.2611361891031265,
+            0.2611377686262131,
+            0.26159214973449707,
+            0.26138993352651596,
+            0.26117802411317825,
+            0.26120902597904205,
+            0.2611854821443558,
+            0.26135391741991043
+          ]
+        }
+      },
+      "qr_reduced_svd": {
+        "sequential": {
+          "median": 0.2630988359451294,
+          "p95": 0.26317792385816574,
+          "samples": [
+            0.2630755305290222,
+            0.2631731852889061,
+            0.26297199726104736,
+            0.2631056606769562,
+            0.2631243020296097,
+            0.2631206661462784,
+            0.26302631199359894,
+            0.2630988359451294,
+            0.2630951404571533,
+            0.2629893273115158,
+            0.26317792385816574
+          ]
+        },
+        "batched": {
+          "median": 0.2616846486926079,
+          "p95": 0.2617674246430397,
+          "samples": [
+            0.2617338001728058,
+            0.26176537573337555,
+            0.2616846486926079,
+            0.2616761028766632,
+            0.2617270052433014,
+            0.26168201863765717,
+            0.2616671398282051,
+            0.2617408186197281,
+            0.26164228469133377,
+            0.2617674246430397,
+            0.2616717591881752
+          ]
+        }
+      }
+    }
+  },
+  "provenance": {
+    "checkpoint": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28936-qso-seed2026/checkpoint.pt",
+    "batch_sha256": "df948d1e1872ba312565fb8d3f5774455b7527104354e97544d96b5229e99b8c"
+  }
+}

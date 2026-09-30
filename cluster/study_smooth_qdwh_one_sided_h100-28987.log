@@ -1,0 +1,78 @@
+lagrange0
+2026-09-30T13:21:25+02:00
+JOB=28987 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Wed Sep 30 13:21:25 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   35C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+........                                                                 [100%]
+8 passed in 4.79s
+STEP 0 qdwh_certified 6 qdwh_seconds 5.076 svd_fallbacks 10
+STEP 1 qdwh_certified 6 qdwh_seconds 5.395 svd_fallbacks 12
+STEP 2 qdwh_certified 6 qdwh_seconds 4.662 svd_fallbacks 11
+STEP 3 qdwh_certified 6 qdwh_seconds 1.529 svd_fallbacks 2
+STEP 4 qdwh_certified 6 qdwh_seconds 1.531 svd_fallbacks 2
+STEP 5 qdwh_certified 6 qdwh_seconds 2.212 svd_fallbacks 4
+STEP 6 qdwh_certified 6 qdwh_seconds 3.71 svd_fallbacks 8
+STEP 7 qdwh_certified 6 qdwh_seconds 4.437 svd_fallbacks 10
+STEP 8 qdwh_certified 6 qdwh_seconds 3.662 svd_fallbacks 8
+STEP 9 qdwh_certified 6 qdwh_seconds 4.392 svd_fallbacks 10
+STEP 10 qdwh_certified 6 qdwh_seconds 3.662 svd_fallbacks 8
+STEP 11 qdwh_certified 6 qdwh_seconds 4.436 svd_fallbacks 10
+STEP 12 qdwh_certified 6 qdwh_seconds 3.663 svd_fallbacks 8
+STEP 13 qdwh_certified 6 qdwh_seconds 3.661 svd_fallbacks 8
+STEP 14 qdwh_certified 6 qdwh_seconds 3.662 svd_fallbacks 8
+STEP 15 qdwh_certified 6 qdwh_seconds 3.661 svd_fallbacks 8
+STEP 16 qdwh_certified 6 qdwh_seconds 3.666 svd_fallbacks 8
+STEP 17 qdwh_certified 6 qdwh_seconds 3.663 svd_fallbacks 8
+STEP 18 qdwh_certified 6 qdwh_seconds 4.391 svd_fallbacks 10
+STEP 19 qdwh_certified 6 qdwh_seconds 3.668 svd_fallbacks 8
+STEP 20 qdwh_certified 6 qdwh_seconds 3.661 svd_fallbacks 8
+STEP 21 qdwh_certified 6 qdwh_seconds 3.661 svd_fallbacks 8
+STEP 22 qdwh_certified 6 qdwh_seconds 4.393 svd_fallbacks 10
+STEP 23 qdwh_certified 6 qdwh_seconds 3.66 svd_fallbacks 8
+STEP 24 qdwh_certified 6 qdwh_seconds 4.393 svd_fallbacks 10
+STEP 25 qdwh_certified 6 qdwh_seconds 4.388 svd_fallbacks 10
+STEP 26 qdwh_certified 6 qdwh_seconds 3.658 svd_fallbacks 8
+STEP 27 qdwh_certified 6 qdwh_seconds 4.391 svd_fallbacks 10
+STEP 28 qdwh_certified 6 qdwh_seconds 3.66 svd_fallbacks 8
+STEP 29 qdwh_certified 6 qdwh_seconds 4.429 svd_fallbacks 10
+STEP 30 qdwh_certified 6 qdwh_seconds 4.39 svd_fallbacks 10
+STEP 31 qdwh_certified 6 qdwh_seconds 4.387 svd_fallbacks 10
+STEP 32 qdwh_certified 6 qdwh_seconds 4.389 svd_fallbacks 10
+STEP 33 qdwh_certified 6 qdwh_seconds 4.389 svd_fallbacks 10
+STEP 34 qdwh_certified 6 qdwh_seconds 4.39 svd_fallbacks 10
+STEP 35 qdwh_certified 6 qdwh_seconds 4.39 svd_fallbacks 10
+STEP 36 qdwh_certified 6 qdwh_seconds 5.16 svd_fallbacks 12
+STEP 37 qdwh_certified 6 qdwh_seconds 5.164 svd_fallbacks 12
+STEP 38 qdwh_certified 6 qdwh_seconds 5.157 svd_fallbacks 12
+STEP 39 qdwh_certified 6 qdwh_seconds 4.387 svd_fallbacks 10
+STEP 40 qdwh_certified 6 qdwh_seconds 5.162 svd_fallbacks 12
+STEP 41 qdwh_certified 6 qdwh_seconds 5.163 svd_fallbacks 12
+STEP 42 qdwh_certified 6 qdwh_seconds 5.162 svd_fallbacks 12
+STEP 43 qdwh_certified 6 qdwh_seconds 5.162 svd_fallbacks 12
+STEP 44 qdwh_certified 6 qdwh_seconds 4.397 svd_fallbacks 10
+STEP 45 qdwh_certified 6 qdwh_seconds 5.156 svd_fallbacks 12
+STEP 46 qdwh_certified 6 qdwh_seconds 5.162 svd_fallbacks 12
+STEP 47 qdwh_certified 6 qdwh_seconds 4.393 svd_fallbacks 10
+STEP 48 qdwh_certified 6 qdwh_seconds 4.393 svd_fallbacks 10
+STEP 49 qdwh_certified 6 qdwh_seconds 4.393 svd_fallbacks 10
+RESULT {"path": "cluster/smooth_qdwh_one_sided-28987.json", "summary": {"solves": 300, "certified": 300, "unsafe": 0, "qdwh_evaluations": 6313, "svd_evaluations": 469, "oracle_svd": 931, "line_trials": 6013, "qdwh_seconds": 209.78080243617296, "oracle_seconds": 50.84181981533766, "fallbacks": {"qdwh_line_search_exhausted": 234, "full_svd_solver_rescue": 234, "qdwh_cg_uncertain": 1}, "actions": {"certificate_qdwh_continue": 631, "armijo_qdwh_accept": 397, "armijo_qdwh_ambiguous": 5616, "certificate_qdwh_accept": 66}, "timing": {"qdwh_decomposition": 157.72405873984098, "factor_posterior": 10.891240410506725, "certificate": 6.378068044781685, "derivative_posterior": 5.004002071917057, "full_svd_solver_rescue": 25.852440498769283, "full_svd_fallback": 0.0439458042383194}, "newton_bins": {"0": 0, "1": 203, "2": 97, "3+": 0}}, "near_guard": [{"ratio": 0.000101, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 16, "svd_evaluations": 1, "newton": 9, "line_trials": 15, "fallbacks": {"qdwh_cg_uncertain": 1}, "oracle_converged": true, "oracle_newton": 9, "unsafe": false, "certified": true, "independent_gap": 3.5809572996459697e-06, "independent_rcond": 0.008220056251015852, "independent_horizontal": 3.925231146709437e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.4293613024352468e-16}, {"ratio": 0.000102, "converged": false, "reason": "newton_budget_exhausted", "qdwh_evaluations": 60, "svd_evaluations": 136, "newton": 12, "line_trials": 59, "fallbacks": {"qdwh_rcond_uncertain": 9, "full_svd_solver_rescue": 1}, "oracle_converged": false, "oracle_newton": 12, "unsafe": false, "certified": false}, {"ratio": 0.000105, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 13, "svd_evaluations": 1, "newton": 8, "line_trials": 12, "fallbacks": {"qdwh_cg_uncertain": 1}, "oracle_converged": true, "oracle_newton": 8, "unsafe": false, "certified": true, "independent_gap": 2.2348546768504154e-05, "independent_rcond": 0.004698524593563411, "independent_horizontal": 3.925231146709438e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 2.2038178081303105e-16}, {"ratio": 0.00011, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 15, "svd_evaluations": 1, "newton": 8, "line_trials": 14, "fallbacks": {"qdwh_cg_uncertain": 1}, "oracle_converged": true, "oracle_newton": 8, "unsafe": false, "certified": true, "independent_gap": 5.627513749835516e-06, "independent_rcond": 0.008162785627133766, "independent_horizontal": 3.925231146709437e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.6416410595709433e-16}, {"ratio": 0.00012, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 10, "svd_evaluations": 1, "newton": 7, "line_trials": 9, "fallbacks": {"qdwh_cg_uncertain": 1}, "oracle_converged": true, "oracle_newton": 7, "unsafe": false, "certified": true, "independent_gap": 1.9136777936936123e-05, "independent_rcond": 0.0017403769186131377, "independent_horizontal": 2.9439233600320786e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.1725178645286192e-16}, {"ratio": 0.00015, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 7, "svd_evaluations": 0, "newton": 6, "line_trials": 6, "fallbacks": {}, "oracle_converged": true, "oracle_newton": 6, "unsafe": false, "certified": true, "independent_gap": 1.1895948165315503e-06, "independent_rcond": 0.0017503268884010124, "independent_horizontal": 3.925231146709438e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.0568615733341185e-16}, {"ratio": 0.0002, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 11, "svd_evaluations": 0, "newton": 9, "line_trials": 10, "fallbacks": {}, "oracle_converged": true, "oracle_newton": 9, "unsafe": false, "certified": true, "independent_gap": 7.478965842212775e-06, "independent_rcond": 0.006284221440482197, "independent_horizontal": 1.962615573354719e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.023080912333881e-16}, {"ratio": 0.0003, "converged": true, "reason": "certified_gap", "qdwh_evaluations": 9, "svd_evaluations": 0, "newton": 7, "line_trials": 8, "fallbacks": {}, "oracle_converged": true, "oracle_newton": 7, "unsafe": false, "certified": true, "independent_gap": 1.4588334732261435e-05, "independent_rcond": 0.01007861853944802, "independent_horizontal": 1.962615573354719e-17, "independent_spectral_excess": 0.0, "direction_recovery_difference": 1.5807277268000814e-16}], "elapsed_seconds": 297.39419458806515}

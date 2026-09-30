@@ -1,0 +1,1400 @@
+{
+  "job_id": "28915",
+  "step": 25,
+  "checkpoint": "/home/prignano/qnormuon-runs/tiny-transformer/smoke-28914-qso-seed2026/checkpoint.pt",
+  "gpu": "NVIDIA H100 NVL",
+  "torch": "2.10.0+cu128",
+  "cuda_build": "12.8",
+  "loss": 6.118260383605957,
+  "optimizer_seconds": 2.6285587400197983,
+  "step_seconds": 2.6575583443045616,
+  "baseline_loss": 6.118260383605957,
+  "rows": [
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "calls": 12,
+      "matrices": 24,
+      "total_seconds": 0.5159356892108917,
+      "median_seconds": 0.04277920722961426
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "calls": 6,
+      "matrices": 12,
+      "total_seconds": 0.25711968541145325,
+      "median_seconds": 0.04283259063959122
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "calls": 6,
+      "matrices": 12,
+      "total_seconds": 0.24516433477401733,
+      "median_seconds": 0.041187822818756104
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "calls": 18,
+      "matrices": 36,
+      "total_seconds": 0.7442843317985535,
+      "median_seconds": 0.04147832468152046
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "calls": 18,
+      "matrices": 36,
+      "total_seconds": 0.7750087007880211,
+      "median_seconds": 0.04296169802546501
+    }
+  ],
+  "per_pair": {
+    "blocks.0.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08501911908388138,
+        "median_seconds": 0.04250955954194069
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04265866428613663,
+        "median_seconds": 0.04265866428613663
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.041238754987716675,
+        "median_seconds": 0.041238754987716675
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12521715462207794,
+        "median_seconds": 0.04184423387050629
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12760501354932785,
+        "median_seconds": 0.04257939010858536
+      }
+    ],
+    "blocks.1.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08517178893089294,
+        "median_seconds": 0.04258589446544647
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04317571967840195,
+        "median_seconds": 0.04317571967840195
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.03960181772708893,
+        "median_seconds": 0.03960181772708893
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12291319668292999,
+        "median_seconds": 0.04137864708900452
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12772922217845917,
+        "median_seconds": 0.04265034943819046
+      }
+    ],
+    "blocks.2.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08623751997947693,
+        "median_seconds": 0.043118759989738464
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.042951397597789764,
+        "median_seconds": 0.042951397597789764
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04071350395679474,
+        "median_seconds": 0.04071350395679474
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.1236533522605896,
+        "median_seconds": 0.04147452861070633
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12926146388053894,
+        "median_seconds": 0.043032608926296234
+      }
+    ],
+    "blocks.3.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08559213578701019,
+        "median_seconds": 0.042796067893505096
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.042764268815517426,
+        "median_seconds": 0.042764268815517426
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04122213274240494,
+        "median_seconds": 0.04122213274240494
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12406269460916519,
+        "median_seconds": 0.04140461981296539
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.1302422136068344,
+        "median_seconds": 0.043476179242134094
+      }
+    ],
+    "blocks.4.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08628641813993454,
+        "median_seconds": 0.04314320906996727
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.042668722569942474,
+        "median_seconds": 0.042668722569942474
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04115351289510727,
+        "median_seconds": 0.04115351289510727
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12375418841838837,
+        "median_seconds": 0.041482120752334595
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12973569333553314,
+        "median_seconds": 0.043078742921352386
+      }
+    ],
+    "blocks.5.mlp": [
+      {
+        "operator": "svd",
+        "category": "line_search_trial",
+        "calls": 2,
+        "matrices": 4,
+        "total_seconds": 0.08762870728969574,
+        "median_seconds": 0.04381435364484787
+      },
+      {
+        "operator": "svd",
+        "category": "newton_residual_evaluation",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.04290091246366501,
+        "median_seconds": 0.04290091246366501
+      },
+      {
+        "operator": "svdvals",
+        "category": "cast_diagnostics",
+        "calls": 1,
+        "matrices": 2,
+        "total_seconds": 0.041234612464904785,
+        "median_seconds": 0.041234612464904785
+      },
+      {
+        "operator": "svdvals",
+        "category": "primal_feasible_recovery",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.12468374520540237,
+        "median_seconds": 0.041736900806427
+      },
+      {
+        "operator": "svdvals",
+        "category": "residual_dual_certificate",
+        "calls": 3,
+        "matrices": 6,
+        "total_seconds": 0.13043509423732758,
+        "median_seconds": 0.04334741830825806
+      }
+    ]
+  },
+  "calls": [
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04265866428613663,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04206272214651108,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04275815188884735,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04243256151676178,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04184423387050629,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04257939010858536,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.0425865575671196,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04131019860506058,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04226747155189514,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.0.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041238754987716675,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04317571967840195,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04191408306360245,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.0427573099732399,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04248446971178055,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04137864708900452,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04232156276702881,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042687319219112396,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.03962046653032303,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04265034943819046,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.1.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.03960181772708893,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042951397597789764,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04147452861070633,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04287364333868027,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04276704043149948,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04151545464992523,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.043032608926296234,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04347047954797745,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04066336899995804,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04335521161556244,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.2.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04071350395679474,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042764268815517426,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04140461981296539,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04350072890520096,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04280076175928116,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04163482040166855,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.043476179242134094,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042791374027729034,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04102325439453125,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04326530545949936,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.3.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04122213274240494,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042668722569942474,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04155817627906799,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04289078712463379,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042757317423820496,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041482120752334595,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.043078742921352386,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.043529100716114044,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04071389138698578,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04376616328954697,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.4.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04115351289510727,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "newton_residual_evaluation",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04290091246366501,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04206637293100357,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.044430047273635864,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04405387490987778,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041736900806427,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.042657628655433655,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svd",
+      "category": "line_search_trial",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04357483237981796,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "primal_feasible_recovery",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.0408804714679718,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "residual_dual_certificate",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.04334741830825806,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    },
+    {
+      "operator": "svdvals",
+      "category": "cast_diagnostics",
+      "pair": "blocks.5.mlp",
+      "shape": [
+        2,
+        1024,
+        384
+      ],
+      "matrices": 2,
+      "seconds": 0.041234612464904785,
+      "device": "cuda:0",
+      "dtype": "torch.float64"
+    }
+  ],
+  "solver_metrics": {
+    "blocks.0.mlp": {
+      "horizontal_residual": 7.806255641895632e-18,
+      "normalized_horizontal_residual": 2.6020901021737467e-17,
+      "spectral_norms": [
+        0.9999991570899471,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.27966490008118916,
+      "dual_objective": 0.2796684640273893,
+      "residual_rcond": 0.012555290597512574,
+      "signed_gap": 3.563946200157986e-06,
+      "normalized_gap": 1.2743468279673288e-05,
+      "signed_normalized_gap": 1.2743468279673288e-05,
+      "newton_iterations": 2,
+      "cg_iterations": 3,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 3.563946200157986e-06,
+      "absolute_gap": 3.563946200157986e-06,
+      "minimum_smooth_rcond": 0.012548987452284551,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.0.mlp",
+      "cast_direction_relative_error": 2.5358338018274537e-08,
+      "cast_horizontal_residual": 9.099131552392503e-10,
+      "cast_spectral_excess": 5.302442929178142e-10,
+      "cast_diagnostic_svd_evaluations": 2
+    },
+    "blocks.1.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4566255994781837e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999999001567892
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.20639681901426693,
+      "dual_objective": 0.2063970397445029,
+      "residual_rcond": 0.008739359456218,
+      "signed_gap": 2.2073023597801722e-07,
+      "normalized_gap": 1.0694447762005563e-06,
+      "signed_normalized_gap": 1.0694447762005563e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.2073023597801722e-07,
+      "absolute_gap": 2.2073023597801722e-07,
+      "minimum_smooth_rcond": 0.008737781175201622,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.1.mlp",
+      "cast_direction_relative_error": 2.5377972918098907e-08,
+      "cast_horizontal_residual": 9.056393655837436e-10,
+      "cast_spectral_excess": 1.874056687611869e-09,
+      "cast_diagnostic_svd_evaluations": 2
+    },
+    "blocks.2.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4827612637482945e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999998343600013
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.16843007804042182,
+      "dual_objective": 0.16843028533213356,
+      "residual_rcond": 0.005408951823009593,
+      "signed_gap": 2.0729171174016514e-07,
+      "normalized_gap": 1.2307270710335696e-06,
+      "signed_normalized_gap": 1.2307270710335696e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.0729171174016514e-07,
+      "absolute_gap": 2.0729171174016514e-07,
+      "minimum_smooth_rcond": 0.00540711443808581,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.2.mlp",
+      "cast_direction_relative_error": 2.5321198939788077e-08,
+      "cast_horizontal_residual": 8.173594127913741e-10,
+      "cast_spectral_excess": 0.0,
+      "cast_diagnostic_svd_evaluations": 2
+    },
+    "blocks.3.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.409039723811681e-17,
+      "spectral_norms": [
+        1.0,
+        0.9999996842850546
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.1423768208202886,
+      "dual_objective": 0.14237704315726968,
+      "residual_rcond": 0.0037738394166370167,
+      "signed_gap": 2.223369810760989e-07,
+      "normalized_gap": 1.561606956751486e-06,
+      "signed_normalized_gap": 1.561606956751486e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 2.223369810760989e-07,
+      "absolute_gap": 2.223369810760989e-07,
+      "minimum_smooth_rcond": 0.0037736226210908475,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.3.mlp",
+      "cast_direction_relative_error": 2.5287614273183578e-08,
+      "cast_horizontal_residual": 9.51749521208023e-10,
+      "cast_spectral_excess": 0.0,
+      "cast_diagnostic_svd_evaluations": 2
+    },
+    "blocks.4.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.4703490546126884e-17,
+      "spectral_norms": [
+        0.9999999876680392,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.12352972685174668,
+      "dual_objective": 0.12352982643834162,
+      "residual_rcond": 0.002611535873143902,
+      "signed_gap": 9.958659494269106e-08,
+      "normalized_gap": 8.061744909226314e-07,
+      "signed_normalized_gap": 8.061744909226314e-07,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 9.958659494269106e-08,
+      "absolute_gap": 9.958659494269106e-08,
+      "minimum_smooth_rcond": 0.0026110543549388845,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.4.mlp",
+      "cast_direction_relative_error": 2.535608949463979e-08,
+      "cast_horizontal_residual": 1.1095387542764401e-09,
+      "cast_spectral_excess": 0.0,
+      "cast_diagnostic_svd_evaluations": 2
+    },
+    "blocks.5.mlp": {
+      "horizontal_residual": 1.0408340855860843e-17,
+      "normalized_horizontal_residual": 3.646795171688978e-17,
+      "spectral_norms": [
+        0.9999997772172625,
+        1.0
+      ],
+      "spectral_excess": 0.0,
+      "primal_objective": 0.11260261964326952,
+      "dual_objective": 0.11260316949172797,
+      "residual_rcond": 0.0014670977062940533,
+      "signed_gap": 5.498484584448571e-07,
+      "normalized_gap": 4.883063779880991e-06,
+      "signed_normalized_gap": 4.883063779880991e-06,
+      "newton_iterations": 2,
+      "cg_iterations": 5,
+      "svd_evaluations": 18,
+      "reference_iterations": 0,
+      "primal_dual_gap": 5.498484584448571e-07,
+      "absolute_gap": 5.498484584448571e-07,
+      "minimum_smooth_rcond": 0.0014669931325430924,
+      "fallback_used": false,
+      "fallback_reason": null,
+      "solver_dtype": "torch.float64",
+      "gap_tolerance": 3e-05,
+      "fallback_backend": null,
+      "certification_dtype": "torch.float64",
+      "returned_direction_dtype": "torch.float64",
+      "secondary_selection": "smooth_primary_unique_in_exact_limit",
+      "converged": true,
+      "extended_initial_budget": false,
+      "model_dtype": "torch.float32",
+      "momentum_dtype": "torch.float32",
+      "canonical_dtype": "torch.float32",
+      "returned_update_dtype": "torch.float32",
+      "pair_name": "blocks.5.mlp",
+      "cast_direction_relative_error": 2.533993097748737e-08,
+      "cast_horizontal_residual": 9.300889537711132e-10,
+      "cast_spectral_excess": 4.4884784777821096e-10,
+      "cast_diagnostic_svd_evaluations": 2
+    }
+  },
+  "total_svd_seconds": 0.773055374622345,
+  "total_svdvals_seconds": 1.7644573673605919
+}
