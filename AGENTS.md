@@ -42,6 +42,7 @@ decision order:
 7. `docs/PRIMAL_SPECTRAL_NORM_OPTIMIZATION.md`
 8. `docs/SMOOTH_GRAM_BACKEND_STUDY.md`
 9. `docs/SMOOTH_GRAM_DECISION_BOUNDS.md`
+10. `docs/DUAL_WARM_START_PREDICTOR_STUDY.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1054,10 +1055,21 @@ fp64 SVD remains the smooth default and independent oracle. The obstacle is
 insufficient practical benefit after posterior-validation cost and unresolved
 control of a Gram-driven solver trajectory, not mathematical invalidity of
 Gram. Do not continue optimizing the smooth Gram posterior by default unless
-a future task explicitly reopens it. The next approved performance direction
-is to reduce the number of required smooth full-SVD evaluations, primarily
-through improved certified warm starts or temporal prediction of the dual
-multiplier, without changing the coupled LMO or acceptance criteria.
+a future task explicitly reopens it. Fixed O(m)-state temporal/history-only
+lambda predictors have also been studied. None materially reduced smooth
+full-SVD evaluations: the best saved 3 of 908 warm evaluations and regressed
+on two states; no real warm solve certified in zero or one Newton iteration.
+The previous original-coordinate lambda remains the production warm start.
+Do not continue tuning fixed two-history extrapolation by default.
+
+If explicitly requested, a distinct final warm-start research direction is
+to recycle the previous accepted smooth residual decomposition for a
+first-order stationarity predictor without a new current SVD. This permits
+O(mn+n^2) cached factor state, unlike the completed compact-history study.
+It remains research-only until a material reduction in smooth SVD count
+justifies its memory and checkpoint cost. Full fp64 SVD remains the production
+smooth backend; neither this possible predictor nor its state is a production
+default.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
