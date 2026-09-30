@@ -44,6 +44,7 @@ decision order:
 9. `docs/SMOOTH_GRAM_DECISION_BOUNDS.md`
 10. `docs/DUAL_WARM_START_PREDICTOR_STUDY.md`
 11. `docs/DUAL_FACTOR_RECYCLING_PREDICTOR.md`
+12. `docs/SMOOTH_POLAR_ALTERNATIVE_STUDY.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1073,10 +1074,21 @@ all real warm states. It is not recommended for production integration.
 Previous original-coordinate lambda remains the production warm start; no
 cached residual-factor predictor state is part of production. Do not continue
 warm-start predictor work by default unless a future task explicitly reopens
-it. The next approved performance direction is to investigate numerically
-stable alternatives to the tall fp64 smooth residual SVD/polar itself, while
-retaining full SVD as oracle/fallback and preserving the exact coupled
-objective and certificate contract.
+it.
+
+Direct fp64 QDWH has now been studied as an alternative to the tall smooth
+SVD. It accurately recovered Q, H, the singular spectrum, nuclear value,
+rcond, and polar-derivative/HVP quantities on the tested corpus. All 931 real
+shadow evaluations passed the research posterior, and direct QDWH retained a
+material decomposition-kernel advantage over the current thin SVD. It was
+NOT adopted for production: the existing posterior does not yet certify
+curvature, CG, descent, and Armijo decisions throughout the admitted domain
+near the rcond guard. Full fp64 thin SVD remains the production smooth backend
+and independent oracle. The next approved low-cost research step is to check
+whether a native PyTorch/CUDA polar-decomposition primitive is available on
+Lagrange and whether it uses a genuine QDWH/backend path rather than an SVD
+fallback. If materially faster and numerically suitable, study that native
+backend before investing further in the custom QDWH implementation.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
