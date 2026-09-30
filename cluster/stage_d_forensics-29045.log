@@ -1,0 +1,105 @@
+lagrange0
+2026-09-30T18:28:21+02:00
+JOB=29045 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Wed Sep 30 18:28:21 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   36C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+........................................................................ [ 17%]
+........................................................................ [ 35%]
+........................................................................ [ 53%]
+........................................................................ [ 71%]
+........................................................................ [ 89%]
+...........................................                              [100%]
+403 passed in 17.80s
+CASE_BEGIN coarse-qso-a0.0003-q0.0003 initial_validation 6.998700022697449
+REPLAY coarse-qso-a0.0003-q0.0003 0 6.999040603637695
+REPLAY coarse-qso-a0.0003-q0.0003 10 6.5132598876953125
+REPLAY coarse-qso-a0.0003-q0.0003 20 6.212827682495117
+REPLAY coarse-qso-a0.0003-q0.0003 30 6.020544052124023
+REPLAY coarse-qso-a0.0003-q0.0003 40 6.027158737182617
+REPLAY coarse-qso-a0.0003-q0.0003 50 6.069572925567627
+REPLAY coarse-qso-a0.0003-q0.0003 60 6.025654315948486
+REPLAY coarse-qso-a0.0003-q0.0003 70 6.028231620788574
+REPLAY coarse-qso-a0.0003-q0.0003 80 5.9824323654174805
+REPLAY coarse-qso-a0.0003-q0.0003 90 5.939619541168213
+FIRST_REFERENCE_REQUEST coarse-qso-a0.0003-q0.0003 92 blocks.0.mlp ill_conditioned_residual 7.727830020669396e-05 0.07662799505296876
+CASE_END coarse-qso-a0.0003-q0.0003 {'status': 'captured', 'reason': 'ill_conditioned_residual', 'step': 92, 'pair': 'blocks.0.mlp', 'failing_step_uncommitted': True, 'matched_original_losses': True}
+CASE_BEGIN coarse-qso-a0.0003-q0.001 initial_validation 6.998700022697449
+REPLAY coarse-qso-a0.0003-q0.001 0 6.999040603637695
+REPLAY coarse-qso-a0.0003-q0.001 10 6.5124831199646
+REPLAY coarse-qso-a0.0003-q0.001 20 6.2121782302856445
+REPLAY coarse-qso-a0.0003-q0.001 30 6.019842624664307
+REPLAY coarse-qso-a0.0003-q0.001 40 6.026149749755859
+REPLAY coarse-qso-a0.0003-q0.001 50 6.068389415740967
+REPLAY coarse-qso-a0.0003-q0.001 60 6.023489952087402
+REPLAY coarse-qso-a0.0003-q0.001 70 6.024630546569824
+REPLAY coarse-qso-a0.0003-q0.001 80 5.96709680557251
+FIRST_REFERENCE_REQUEST coarse-qso-a0.0003-q0.001 87 blocks.0.mlp ill_conditioned_residual 4.520296714959618e-05 0.07683931527820777
+CASE_END coarse-qso-a0.0003-q0.001 {'status': 'captured', 'reason': 'ill_conditioned_residual', 'step': 87, 'pair': 'blocks.0.mlp', 'failing_step_uncommitted': True, 'matched_original_losses': True}
+CASE_BEGIN coarse-qso-a0.0003-q0.004 initial_validation 6.998700022697449
+REPLAY coarse-qso-a0.0003-q0.004 0 6.999040603637695
+REPLAY coarse-qso-a0.0003-q0.004 10 6.509313583374023
+REPLAY coarse-qso-a0.0003-q0.004 20 6.209633827209473
+REPLAY coarse-qso-a0.0003-q0.004 30 6.016196250915527
+REPLAY coarse-qso-a0.0003-q0.004 40 6.020223617553711
+REPLAY coarse-qso-a0.0003-q0.004 50 6.056044578552246
+FIRST_REFERENCE_REQUEST coarse-qso-a0.0003-q0.004 56 blocks.0.mlp ill_conditioned_residual 7.93289264347961e-05 0.10353633226017843
+CASE_END coarse-qso-a0.0003-q0.004 {'status': 'captured', 'reason': 'ill_conditioned_residual', 'step': 56, 'pair': 'blocks.0.mlp', 'failing_step_uncommitted': True, 'matched_original_losses': True}
+CASE_BEGIN ablation-qso-a0.0002-q0.00122474487139 initial_validation 6.998700022697449
+REPLAY ablation-qso-a0.0002-q0.00122474487139 0 6.999040603637695
+REPLAY ablation-qso-a0.0002-q0.00122474487139 10 6.569623947143555
+REPLAY ablation-qso-a0.0002-q0.00122474487139 20 6.323071002960205
+REPLAY ablation-qso-a0.0002-q0.00122474487139 30 6.092685222625732
+REPLAY ablation-qso-a0.0002-q0.00122474487139 40 6.035210609436035
+REPLAY ablation-qso-a0.0002-q0.00122474487139 50 6.08272123336792
+REPLAY ablation-qso-a0.0002-q0.00122474487139 60 6.027295112609863
+REPLAY ablation-qso-a0.0002-q0.00122474487139 70 6.0221452713012695
+REPLAY ablation-qso-a0.0002-q0.00122474487139 80 5.924299716949463
+FIRST_REFERENCE_REQUEST ablation-qso-a0.0002-q0.00122474487139 81 blocks.0.mlp ill_conditioned_residual 8.760208491579925e-05 0.06883982012576997
+CASE_END ablation-qso-a0.0002-q0.00122474487139 {'status': 'captured', 'reason': 'ill_conditioned_residual', 'step': 81, 'pair': 'blocks.0.mlp', 'failing_step_uncommitted': True, 'matched_original_losses': True}
+CASE_BEGIN coarse-qso-a0.0003-q0.0015 initial_validation 6.998700022697449
+REPLAY coarse-qso-a0.0003-q0.0015 0 6.999040603637695
+REPLAY coarse-qso-a0.0003-q0.0015 10 6.511962413787842
+REPLAY coarse-qso-a0.0003-q0.0015 20 6.211686611175537
+REPLAY coarse-qso-a0.0003-q0.0015 30 6.019433975219727
+REPLAY coarse-qso-a0.0003-q0.0015 40 6.025345802307129
+REPLAY coarse-qso-a0.0003-q0.0015 50 6.067132949829102
+REPLAY coarse-qso-a0.0003-q0.0015 60 6.0213470458984375
+REPLAY coarse-qso-a0.0003-q0.0015 70 6.018858909606934
+REPLAY coarse-qso-a0.0003-q0.0015 80 5.946012020111084
+REPLAY coarse-qso-a0.0003-q0.0015 90 5.892830848693848
+REPLAY coarse-qso-a0.0003-q0.0015 100 5.907284736633301
+CASE_END coarse-qso-a0.0003-q0.0015 {'status': 'control_reproduced', 'completed_steps': 101}
+CASE_BEGIN refinement-qso-a0.0003-q0.00122474487139 initial_validation 6.998700022697449
+REPLAY refinement-qso-a0.0003-q0.00122474487139 0 6.999040603637695
+REPLAY refinement-qso-a0.0003-q0.00122474487139 10 6.512228965759277
+REPLAY refinement-qso-a0.0003-q0.00122474487139 20 6.2119293212890625
+REPLAY refinement-qso-a0.0003-q0.00122474487139 30 6.019632339477539
+REPLAY refinement-qso-a0.0003-q0.00122474487139 40 6.02571964263916
+REPLAY refinement-qso-a0.0003-q0.00122474487139 50 6.067875862121582
+REPLAY refinement-qso-a0.0003-q0.00122474487139 60 6.022618770599365
+REPLAY refinement-qso-a0.0003-q0.00122474487139 70 6.022607803344727
+REPLAY refinement-qso-a0.0003-q0.00122474487139 80 5.946440696716309
+REPLAY refinement-qso-a0.0003-q0.00122474487139 90 5.910876750946045
+REPLAY refinement-qso-a0.0003-q0.00122474487139 100 5.906554698944092
+CASE_END refinement-qso-a0.0003-q0.00122474487139 {'status': 'control_reproduced', 'completed_steps': 101}
+CAPTURE_COMPLETE /home/prignano/qnormuon-runs/stage-d-forensics/capture-29045

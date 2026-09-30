@@ -1,0 +1,4 @@
+lagrange0
+2026-09-30T18:28:21+02:00
+JOB=29047 NODE=lagrange0 CPUS=4 MEM=8192 PWD=/home/prignano/qnormuon
+{"status": "bounded_timeout", "limit_seconds": 240, "elapsed": 240.16894000768661, "selection_status": "not established; primary reference did not return"}

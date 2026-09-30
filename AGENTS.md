@@ -34,8 +34,8 @@ documents. For production optimizer work, read at minimum, in this order:
 3. `docs/HORIZONTAL_SPECTRAL_LMO.md`
 4. `docs/DUAL_SOLVER_STUDY.md`
 
-For current numerical or performance work, additionally read in chronological
-decision order:
+For current numerical, performance, or experimental work, additionally read in
+chronological decision order:
 
 5. `docs/TRAINING_SOLVER_DIAGNOSIS.md`
 6. `docs/SOLVER_PERFORMANCE_OPTIMIZATION.md`
@@ -50,6 +50,7 @@ decision order:
 15. `docs/SMOOTH_QDWH_ONE_SIDED_SOLVER.md`
 16. `docs/SMOOTH_QR_REDUCED_SVD_STUDY.md`
 17. `docs/SMOOTH_QDWH_CERTIFIED_OUTPUT_HYBRID.md`
+18. `docs/QSO_LR_SWEEP.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -721,10 +722,11 @@ Comparisons should use identical:
 Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
-The next approved phase is optimizer-specific learning-rate sweeps on the
-controlled tiny Transformer. Proceed to longer and multi-seed experiments only
-if the tuned pilot is promising. This is a workflow state, not a mathematical
-claim.
+Stage-D tuning is complete but its QSO confirmation failed. The next approved
+step is forensic diagnosis of the first smooth-solver -> CPU-reference
+transition; another sweep or multi-seed study is not approved until the failure
+mechanism is identified. A promising short pilot alone does not justify scaling.
+This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
 
@@ -1053,7 +1055,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: optimizer-quality evaluation
+# 39. Current research priority: Stage-D solver-transition diagnosis
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1133,10 +1135,32 @@ previous-factor recycling, or cross-pair batching.
 
 The exact/certified production-v0 solver-performance exploration is closed by
 default. Reopen only for a qualitatively new method or hardware implementation
-with a clear mathematical and performance rationale. The next approved project
-phase is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
-on the controlled tiny Transformer, followed by longer and multi-seed
-experiments only if the tuned pilot is promising.
+with a clear mathematical and performance rationale.
+
+Stage D (`docs/QSO_LR_SWEEP.md`) completed the 256-step single-seed tuning
+study. The best AdamW peak LR was `2e-4`; the best paired-QSO LR was approximately
+`1.2247449e-3`, with unsupported-parameter AdamW at `3e-4`. The completed QSO
+pilot had lower late validation loss than the tuned AdamW pilot. However, the
+required 512-step QSO confirmation failed at step 87, after 87 completed steps.
+The equal-token long-horizon comparison is unavailable: classification B /
+inconclusive. No multi-seed experiment is currently justified.
+
+Nine declared QSO candidates timed out after entering CPU reference fallback.
+These were operational solver/reference failures, not observed NaN or loss
+divergence. The initiating smooth-solver failure reason was not observable
+because the reference call was interrupted before returning; do not infer it
+from the timeout alone. Successful longer QSO pilots also showed substantially
+increased Newton/CG/line-search work and residual conditioning approaching the
+production guard.
+
+The next approved research step is forensic diagnosis of the first
+smooth-solver -> CPU-reference transition on Stage-D QSO trajectories.
+Determine whether it is caused by residual rank/conditioning, globalization
+failure, gap stagnation, no-descent, iteration budget, cancellation, or another
+explicit existing solver reason. Until that mechanism is identified, another
+LR sweep, multi-seed runs, tolerance relaxation, QDWH/Gram smooth backends, and
+replacement of the CPU reference solver are not approved. Production-v0
+defaults remain unchanged, including projected-primal `gram_upper`.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
