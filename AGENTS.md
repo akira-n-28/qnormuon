@@ -48,6 +48,8 @@ decision order:
 13. `docs/TORCH_POLAR_CAPABILITY.md`
 14. `docs/SMOOTH_QDWH_DECISION_VALIDATION.md`
 15. `docs/SMOOTH_QDWH_ONE_SIDED_SOLVER.md`
+16. `docs/SMOOTH_QR_REDUCED_SVD_STUDY.md`
+17. `docs/SMOOTH_QDWH_CERTIFIED_OUTPUT_HYBRID.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -1109,17 +1111,30 @@ integration. A mathematically equivalent numerical backend need not follow
 identical floating-point branches; that does not remove the final certificate
 requirements or explicit full-SVD fallback on stagnation or budget exhaustion.
 
+Reduced QR followed by square full SVD was numerically valid on the tested
+domain but had no kernel speed advantage over direct tall SVD. Cross-pair
+batching also gave no material throughput gain. The QDWH-inner plus
+authoritative-final-SVD hybrid was numerically successful: with the
+three-Newton policy, all 300 locked real problems produced candidates accepted
+by the final production SVD verifier with no rescue. Nevertheless, its net
+benefit was negligible overall and slightly negative in the warm portion:
+mandatory final SVD verification/recovery consumed the QDWH kernel advantage.
+All tested near-rcond-guard hybrid cases required SVD rescue. Neither
+QR-reduced SVD nor the certified-output QDWH hybrid is recommended for production
+integration.
+
 The resulting production-v0 performance decision is to retain full fp64 thin
 SVD as the smooth production backend and independent oracle, previous
 original-coordinate lambda as the warm start, and projected-primal
 `gram_upper` as the radial-feasibility backend. Do not continue by default with
-Gram smooth backends, QDWH posterior tuning, QDWH globalization variants,
-temporal lambda predictors, or previous-factor recycling.
+Gram smooth backends, QDWH backend/posterior/globalization work, QDWH
+certified-output hybrids, QR-reduced SVD, temporal lambda predictors,
+previous-factor recycling, or cross-pair batching.
 
-The exact-production-v0 numerical/performance optimization phase is considered
-complete unless a future task introduces a qualitatively new method with a
-clear mathematical and performance rationale. The next approved project phase
-is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
+The exact/certified production-v0 solver-performance exploration is closed by
+default. Reopen only for a qualitatively new method or hardware implementation
+with a clear mathematical and performance rationale. The next approved project
+phase is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
 on the controlled tiny Transformer, followed by longer and multi-seed
 experiments only if the tuned pilot is promising.
 

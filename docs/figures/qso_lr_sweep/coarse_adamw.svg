@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#222">
+<text x="100" y="30" font-size="20">Coarse adamw: equal-token validation</text>
+<path d="M 100.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 515.000 H 690" stroke="#eeeeee"/>
+<text x="100.000" y="540" text-anchor="middle">0k</text>
+<text x="88" y="520.000" text-anchor="end">4.859</text>
+<path d="M 218.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 425.000 H 690" stroke="#eeeeee"/>
+<text x="218.000" y="540" text-anchor="middle">105k</text>
+<text x="88" y="430.000" text-anchor="end">5.311</text>
+<path d="M 336.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 335.000 H 690" stroke="#eeeeee"/>
+<text x="336.000" y="540" text-anchor="middle">210k</text>
+<text x="88" y="340.000" text-anchor="end">5.764</text>
+<path d="M 454.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 245.000 H 690" stroke="#eeeeee"/>
+<text x="454.000" y="540" text-anchor="middle">315k</text>
+<text x="88" y="250.000" text-anchor="end">6.216</text>
+<path d="M 572.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 155.000 H 690" stroke="#eeeeee"/>
+<text x="572.000" y="540" text-anchor="middle">419k</text>
+<text x="88" y="160.000" text-anchor="end">6.668</text>
+<path d="M 690.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 65.000 H 690" stroke="#eeeeee"/>
+<text x="690.000" y="540" text-anchor="middle">524k</text>
+<text x="88" y="70.000" text-anchor="end">7.12</text>
+<path d="M 100 65 V 515 H 690" fill="none" stroke="#222"/>
+<text x="395.0" y="575" text-anchor="middle">Training tokens</text>
+<text transform="translate(24 290.0) rotate(-90)" text-anchor="middle">Validation cross entropy</text>
+<polyline points="100.000,89.107 173.750,241.000 247.500,288.242 321.250,326.102 395.000,369.754 468.750,399.669 542.500,419.389 616.250,429.861 690.000,436.154" fill="none" stroke="#0072B2" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#0072B2"/>
+<circle cx="173.750" cy="241.000" r="2.4" fill="#0072B2"/>
+<circle cx="247.500" cy="288.242" r="2.4" fill="#0072B2"/>
+<circle cx="321.250" cy="326.102" r="2.4" fill="#0072B2"/>
+<circle cx="395.000" cy="369.754" r="2.4" fill="#0072B2"/>
+<circle cx="468.750" cy="399.669" r="2.4" fill="#0072B2"/>
+<circle cx="542.500" cy="419.389" r="2.4" fill="#0072B2"/>
+<circle cx="616.250" cy="429.861" r="2.4" fill="#0072B2"/>
+<circle cx="690.000" cy="436.154" r="2.4" fill="#0072B2"/>
+<path d="M 715 65 h 22" stroke="#0072B2" stroke-width="3"/>
+<text x="745" y="70">peak LR 0.0001</text>
+<polyline points="100.000,89.107 173.750,276.729 247.500,296.171 321.250,345.879 395.000,408.696 468.750,447.459 542.500,471.123 616.250,483.618 690.000,490.893" fill="none" stroke="#D55E00" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#D55E00"/>
+<circle cx="173.750" cy="276.729" r="2.4" fill="#D55E00"/>
+<circle cx="247.500" cy="296.171" r="2.4" fill="#D55E00"/>
+<circle cx="321.250" cy="345.879" r="2.4" fill="#D55E00"/>
+<circle cx="395.000" cy="408.696" r="2.4" fill="#D55E00"/>
+<circle cx="468.750" cy="447.459" r="2.4" fill="#D55E00"/>
+<circle cx="542.500" cy="471.123" r="2.4" fill="#D55E00"/>
+<circle cx="616.250" cy="483.618" r="2.4" fill="#D55E00"/>
+<circle cx="690.000" cy="490.893" r="2.4" fill="#D55E00"/>
+<path d="M 715 89 h 22" stroke="#D55E00" stroke-width="3"/>
+<text x="745" y="94">peak LR 0.0002</text>
+<polyline points="100.000,89.107 173.750,287.165 247.500,296.408 321.250,311.531 395.000,367.674 468.750,398.776 542.500,417.470 616.250,435.362 690.000,449.443" fill="none" stroke="#009E73" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#009E73"/>
+<circle cx="173.750" cy="287.165" r="2.4" fill="#009E73"/>
+<circle cx="247.500" cy="296.408" r="2.4" fill="#009E73"/>
+<circle cx="321.250" cy="311.531" r="2.4" fill="#009E73"/>
+<circle cx="395.000" cy="367.674" r="2.4" fill="#009E73"/>
+<circle cx="468.750" cy="398.776" r="2.4" fill="#009E73"/>
+<circle cx="542.500" cy="417.470" r="2.4" fill="#009E73"/>
+<circle cx="616.250" cy="435.362" r="2.4" fill="#009E73"/>
+<circle cx="690.000" cy="449.443" r="2.4" fill="#009E73"/>
+<path d="M 715 113 h 22" stroke="#009E73" stroke-width="3"/>
+<text x="745" y="118">peak LR 0.0003</text>
+<polyline points="100.000,89.107 173.750,286.498 247.500,293.369 321.250,313.400 395.000,381.516 468.750,413.316 542.500,441.196 616.250,465.595 690.000,481.208" fill="none" stroke="#CC79A7" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#CC79A7"/>
+<circle cx="173.750" cy="286.498" r="2.4" fill="#CC79A7"/>
+<circle cx="247.500" cy="293.369" r="2.4" fill="#CC79A7"/>
+<circle cx="321.250" cy="313.400" r="2.4" fill="#CC79A7"/>
+<circle cx="395.000" cy="381.516" r="2.4" fill="#CC79A7"/>
+<circle cx="468.750" cy="413.316" r="2.4" fill="#CC79A7"/>
+<circle cx="542.500" cy="441.196" r="2.4" fill="#CC79A7"/>
+<circle cx="616.250" cy="465.595" r="2.4" fill="#CC79A7"/>
+<circle cx="690.000" cy="481.208" r="2.4" fill="#CC79A7"/>
+<path d="M 715 137 h 22" stroke="#CC79A7" stroke-width="3"/>
+<text x="745" y="142">peak LR 0.0005</text>
+<polyline points="100.000,89.107 173.750,288.096 247.500,312.927 321.250,387.089 395.000,417.060 468.750,440.515 542.500,460.013 616.250,474.296 690.000,484.769" fill="none" stroke="#E69F00" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#E69F00"/>
+<circle cx="173.750" cy="288.096" r="2.4" fill="#E69F00"/>
+<circle cx="247.500" cy="312.927" r="2.4" fill="#E69F00"/>
+<circle cx="321.250" cy="387.089" r="2.4" fill="#E69F00"/>
+<circle cx="395.000" cy="417.060" r="2.4" fill="#E69F00"/>
+<circle cx="468.750" cy="440.515" r="2.4" fill="#E69F00"/>
+<circle cx="542.500" cy="460.013" r="2.4" fill="#E69F00"/>
+<circle cx="616.250" cy="474.296" r="2.4" fill="#E69F00"/>
+<circle cx="690.000" cy="484.769" r="2.4" fill="#E69F00"/>
+<path d="M 715 161 h 22" stroke="#E69F00" stroke-width="3"/>
+<text x="745" y="166">peak LR 0.0008</text>
+<polyline points="100.000,89.107 173.750,288.189 247.500,293.127 321.250,346.243 395.000,391.378 468.750,410.293 542.500,423.745 616.250,431.229 690.000,439.534" fill="none" stroke="#56B4E9" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#56B4E9"/>
+<circle cx="173.750" cy="288.189" r="2.4" fill="#56B4E9"/>
+<circle cx="247.500" cy="293.127" r="2.4" fill="#56B4E9"/>
+<circle cx="321.250" cy="346.243" r="2.4" fill="#56B4E9"/>
+<circle cx="395.000" cy="391.378" r="2.4" fill="#56B4E9"/>
+<circle cx="468.750" cy="410.293" r="2.4" fill="#56B4E9"/>
+<circle cx="542.500" cy="423.745" r="2.4" fill="#56B4E9"/>
+<circle cx="616.250" cy="431.229" r="2.4" fill="#56B4E9"/>
+<circle cx="690.000" cy="439.534" r="2.4" fill="#56B4E9"/>
+<path d="M 715 185 h 22" stroke="#56B4E9" stroke-width="3"/>
+<text x="745" y="190">peak LR 0.0012</text>
+</g></svg>
