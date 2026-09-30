@@ -47,6 +47,7 @@ decision order:
 12. `docs/SMOOTH_POLAR_ALTERNATIVE_STUDY.md`
 13. `docs/TORCH_POLAR_CAPABILITY.md`
 14. `docs/SMOOTH_QDWH_DECISION_VALIDATION.md`
+15. `docs/SMOOTH_QDWH_ONE_SIDED_SOLVER.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -55,6 +56,10 @@ context; the latter is the historical/original specification. Later validated
 production/performance reports override older numerical implementation
 assumptions, but do not silently override mathematical theorems unless a report
 explicitly changes them.
+
+Historical `EXPERIMENT_PLAN.md` QNorMuon/shared-leverage entries are not current
+production QSO requirements. Historical experiment plans do not override the
+current quotient-spectral production contract.
 
 Important reference implementations and tests include:
 
@@ -695,7 +700,7 @@ and checkpoint continuation. Claim trajectory identity only if measured.
 # 23. Experimental methodology
 
 When comparing optimizers, do not force the same learning rate if the methods
-have different natural scales.
+have different natural scales. QSO and AdamW need not use the same learning rate.
 
 Once the numerical and practicality gates are passed, perform
 optimizer-specific learning-rate sweeps.
@@ -711,12 +716,13 @@ Comparisons should use identical:
 - seed;
 - evaluation procedure.
 
-After pilot hyperparameter selection, use multiple seeds. Do not automatically
-advance from numerical correctness to a sweep: first establish mathematical
-correctness, H100 numerical validation, and solver practicality/performance.
-At the current project stage, broad LR sweeps remain deferred while smooth
-decomposition safety and performance remain unresolved. This is a workflow
-state, not a mathematical claim.
+Do not automatically advance from numerical correctness to a sweep: first
+establish mathematical correctness, H100 numerical validation, and solver
+practicality/performance.
+The next approved phase is optimizer-specific learning-rate sweeps on the
+controlled tiny Transformer. Proceed to longer and multi-seed experiments only
+if the tuned pilot is promising. This is a workflow state, not a mathematical
+claim.
 
 Report both quality and cost.
 
@@ -1045,7 +1051,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: smooth decomposition
+# 39. Current research priority: optimizer-quality evaluation
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1092,14 +1098,30 @@ The first adaptive design was not production-worthy, requiring full SVD on
 primal certificate was the dominant cause, not unsafe QDWH acceptance. Full
 fp64 thin SVD remains the production smooth backend and independent oracle.
 
-One final approved QDWH research direction is one-sided conservative solver
-semantics: certify potentially unsafe acceptance, while allowing conservative
-certificate or Armijo rejection to continue the QDWH solver without
-immediately reproducing the SVD branch. A mathematically equivalent numerical
-backend need not follow identical floating-point branches. Any such study must
-preserve all final production certificate thresholds and use explicit full-SVD
-fallback on stagnation or budget exhaustion. It does not authorize production
-integration by default.
+One-sided conservative QDWH-controlled solver semantics have now been studied.
+The final production certificate was preserved, and no unsafe accepted internal
+action was observed on the tested locked or near-guard corpora. Nevertheless,
+the approach is operationally impractical: conservative Armijo ambiguity caused
+extensive backtracking, 234/300 locked pair solves required full-SVD
+smooth-solver rescue, and paired-solver work was substantially slower than the
+current direct-fp64-SVD production solver. QDWH is NOT recommended for production
+integration. A mathematically equivalent numerical backend need not follow
+identical floating-point branches; that does not remove the final certificate
+requirements or explicit full-SVD fallback on stagnation or budget exhaustion.
+
+The resulting production-v0 performance decision is to retain full fp64 thin
+SVD as the smooth production backend and independent oracle, previous
+original-coordinate lambda as the warm start, and projected-primal
+`gram_upper` as the radial-feasibility backend. Do not continue by default with
+Gram smooth backends, QDWH posterior tuning, QDWH globalization variants,
+temporal lambda predictors, or previous-factor recycling.
+
+The exact-production-v0 numerical/performance optimization phase is considered
+complete unless a future task introduces a qualitatively new method with a
+clear mathematical and performance rationale. The next approved project phase
+is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
+on the controlled tiny Transformer, followed by longer and multi-seed
+experiments only if the tuned pilot is promising.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the
