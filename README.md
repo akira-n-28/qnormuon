@@ -1,4 +1,4 @@
-# QNorMuon / Quotient Spectral Optimizer
+# Quotient Spectral Optimizer
 
 Research code for gauge-invariant spectral optimization of coupled SwiGLU
 parameters.
