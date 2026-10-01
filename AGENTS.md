@@ -53,6 +53,7 @@ chronological decision order:
 18. `docs/QSO_LR_SWEEP.md`
 19. `docs/STAGE_D_QSO_FAILURE_FORENSICS.md`
 20. `docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`
+21. `docs/FULL_RANK_DIRECTION_ADMISSION.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -728,12 +729,13 @@ Comparisons should use identical:
 Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
-Stage-D tuning, failure forensics, and fixed-fixture optimum classification are
-complete, but its QSO confirmation failed. The next approved step is a posterior
-full-rank direction-accuracy certificate for numerical admission below the
-current guard. Another sweep or multi-seed study is not approved until the
-admission question is resolved. A promising short pilot alone does not justify
-scaling.
+Stage-D tuning, failure forensics, fixed-fixture optimum classification, and the
+posterior direction-accuracy study are complete, but its QSO confirmation failed.
+The direction study established no principled production direction-error budget.
+The next approved step is to resolve QSO's explicit numerical output contract;
+production-v1 admission and resumed training are not justified by that study.
+Another sweep or multi-seed study is not approved until the admission question
+is resolved. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
@@ -1063,7 +1065,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: posterior full-rank direction accuracy
+# 39. Current research priority: explicit numerical output contract
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1184,13 +1186,25 @@ blocker is not evidence that a nonsmooth deficient-face solver is required.
 Efficient deficient-face / P-dagger recovery remains important general theory,
 but is not the currently observed blocker.
 
-The next approved research question is to derive and validate a posterior
-full-rank direction-accuracy certificate using primal-dual gap, actual residual
-singular values, and numerical decomposition uncertainty, so admission below
-`1e-4` can be judged by direction accuracy rather than a fixed rcond threshold.
-This is research authorization, not permission to simply lower or remove the
-production guard. Another LR sweep or multi-seed experiment is not approved
-until the admission question is resolved. Tolerance relaxation,
+The completed study (`docs/FULL_RANK_DIRECTION_ADMISSION.md`) established the
+full-rank support-gap direction theorem and constructed a conditional fp64
+posterior direction-error bound. All measured offline errors, including all
+five below-guard Stage-D fixtures, lie inside the posterior. It is inexpensive
+and reuses current smooth factors, but is orders of magnitude looser than
+observed direction error. Casting error, EMA sensitivity, existing production
+errors, and LR-scaled update error supply no principled gauge-invariant
+production direction-error budget. The result is classification C: NO PRINCIPLED
+DIRECTION BUDGET. Production-v1 admission and resumed training are NOT justified
+by this study. Do not continue merely by fitting a direction-error threshold
+to the observed fixtures.
+
+The next approved research question is to determine QSO's explicit numerical
+output contract: whether production should require proximity to the exact
+selected direction, or instead certify an epsilon-optimal feasible solution of
+the coupled spectral LMO together with numerical full-rank validity.
+This is a contract/theory question, not permission to lower or remove the
+existing production rcond guard. No LR sweep, multi-seed experiment, or
+production code change is approved yet. Tolerance relaxation,
 QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
 unapproved. Production-v0 defaults remain unchanged, including projected-primal
 `gram_upper`.
