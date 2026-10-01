@@ -1,0 +1,3399 @@
+{
+  "job": "29073",
+  "warm": {
+    "path": "/home/prignano/qnormuon-runs/tiny-transformer/precision-28904-mini/failed-warm-pair.pt",
+    "name": "blocks.0.mlp",
+    "step": 2,
+    "reference": {
+      "metrics": {
+        "horizontal_residual": 8.673617379884035e-18,
+        "normalized_horizontal_residual": 2.954164813641211e-17,
+        "spectral_norms": [
+          1.0,
+          0.9999999999999949
+        ],
+        "spectral_excess": 0.0,
+        "primal_spectral_backend": "full_svd_reference",
+        "primal_objective": 0.7293353694753472,
+        "dual_objective": 0.7293353694754435,
+        "residual_rcond": 0.010174284301029134,
+        "dual_spectrum_source": "independent_original_residual",
+        "signed_gap": 9.636735853746359e-14,
+        "normalized_gap": 1.3213037865800123e-13,
+        "signed_normalized_gap": 1.3213037865800123e-13
+      },
+      "gradient_norm": 5.8911188115236e-14,
+      "gradient_max": 1.7688107922797514e-14,
+      "normalized_gradient_norm": 1.99066227725929e-13,
+      "sides": [
+        {
+          "sigma_max": 0.014913869133694238,
+          "sigma_min": 0.00015173794459454827,
+          "rcond": 0.010174284301029134,
+          "tail": [
+            0.0001742674971095348,
+            0.0001712616052602727,
+            0.0001700700062465884,
+            0.0001643833607299522,
+            0.00016133338595545845,
+            0.00015752657772002688,
+            0.0001536485360909571,
+            0.00015173794459454827
+          ]
+        },
+        {
+          "sigma_max": 0.019720531147173467,
+          "sigma_min": 0.00021172740900822167,
+          "rcond": 0.010736394847994164,
+          "tail": [
+            0.0002448966126948963,
+            0.00024080192599835158,
+            0.0002393674420741321,
+            0.00023411432331243458,
+            0.00023052753888278292,
+            0.00022465755578119213,
+            0.00021990865876002436,
+            0.00021172740900822167
+          ]
+        }
+      ]
+    },
+    "reason": "certified_gap",
+    "iterations": 2,
+    "counts": {
+      "svd_matrices": 6,
+      "polar_matrices": 6,
+      "hvp": 3,
+      "line_trials": 2,
+      "reference_iterations": 0
+    },
+    "seconds_with_observer": 0.374761700630188,
+    "rows": [
+      {
+        "iteration": 0,
+        "horizontal_residual": 1.0408340855860843e-17,
+        "normalized_horizontal_residual": 3.42364238665873e-17,
+        "spectral_norms": [
+          0.9999784148988343,
+          1.0
+        ],
+        "spectral_excess": 0.0,
+        "primal_spectral_backend": "gram_eigh_upper",
+        "primal_objective": 0.7207430807813389,
+        "dual_objective": 0.7293776709312223,
+        "residual_rcond": 0.010172411913457467,
+        "dual_spectrum_source": "cached_smooth_residual",
+        "signed_gap": 0.008634590149883437,
+        "normalized_gap": 0.01183829789971408,
+        "signed_normalized_gap": 0.01183829789971408,
+        "posterior": {
+          "alpha_lower": [
+            0.00015171312069011184,
+            0.00021172465744260163
+          ],
+          "sigma_min": [
+            0.0001517131216087858,
+            0.00021172465840738034
+          ],
+          "rcond": [
+            0.010172411913457467,
+            0.010736585684078254
+          ],
+          "uncertainty": [
+            9.186739477189196e-13,
+            9.64778645638067e-13
+          ],
+          "construction_uncertainty": [
+            9.341057926442088e-18,
+            9.790113127349634e-18
+          ],
+          "dual_upper": 0.7293776709681628,
+          "primal_lower": 0.7207430807063644,
+          "gap_upper": 0.008634590261799002,
+          "feasibility_distance_upper": 4.2513237202051904e-11,
+          "horizontal_projection_distance_upper": 1.4948709716514243e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 21.338028433835582,
+          "direction_error_upper": 20.57090118556517,
+          "two_side_direction_error_upper": 20.57090118556517,
+          "normalized_direction_upper": 0.7422884585599527,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.470368224305742e-11,
+            4.4715806183977134e-11
+          ],
+          "right_defect_upper": [
+            1.9174977590527e-11,
+            1.926127206832851e-11
+          ],
+          "reconstruction_relative": [
+            1.3869063650076807e-13,
+            1.467647558120599e-13
+          ]
+        },
+        "observed_error": 0.4489954606413231,
+        "relative_observed_error": 0.016201728129137963,
+        "observed_over_bound": 0.021826727793354442,
+        "fp32_cast_error": 6.931831533774054e-07,
+        "relative_fp32_cast_error": 2.531373348971673e-08,
+        "cg": 0,
+        "line_trials": 0,
+        "gradient_norm": 0.34224664201873894,
+        "posterior_seconds": 0.002576075494289398
+      },
+      {
+        "iteration": 1,
+        "horizontal_residual": 7.37257477290143e-18,
+        "normalized_horizontal_residual": 2.5408287758671198e-17,
+        "spectral_norms": [
+          1.0,
+          0.9999597852977054
+        ],
+        "spectral_excess": 0.0,
+        "primal_spectral_backend": "gram_eigh_upper",
+        "primal_objective": 0.7286243185150214,
+        "dual_objective": 0.7293355605697613,
+        "residual_rcond": 0.01017617823578706,
+        "dual_spectrum_source": "cached_smooth_residual",
+        "signed_gap": 0.0007112420547399356,
+        "normalized_gap": 0.0009751917953709936,
+        "signed_normalized_gap": 0.0009751917953709936,
+        "posterior": {
+          "alpha_lower": [
+            0.00015176667501365897,
+            0.0002117440131447071
+          ],
+          "sigma_min": [
+            0.00015176667593379896,
+            0.0002117440141087325
+          ],
+          "rcond": [
+            0.010176178235787058,
+            0.010737272799917052
+          ],
+          "uncertainty": [
+            9.201399549757345e-13,
+            9.640253662372632e-13
+          ],
+          "construction_uncertainty": [
+            9.344581531697073e-18,
+            9.793815151129596e-18
+          ],
+          "dual_upper": 0.7293355606067159,
+          "primal_lower": 0.7286243184392039,
+          "gap_upper": 0.0007112421675125971,
+          "feasibility_distance_upper": 4.344328574228189e-11,
+          "horizontal_projection_distance_upper": 1.511348236817344e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 6.123017943864296,
+          "direction_error_upper": 5.903602372044362,
+          "two_side_direction_error_upper": 5.903602372044362,
+          "normalized_direction_upper": 0.21302790116802037,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4759773602470046e-11,
+            4.467896266564322e-11
+          ],
+          "right_defect_upper": [
+            1.9231678167268092e-11,
+            1.9250226047392695e-11
+          ],
+          "reconstruction_relative": [
+            1.3488844909595297e-13,
+            1.4449614185587334e-13
+          ]
+        },
+        "observed_error": 0.03408155925862992,
+        "relative_observed_error": 0.0012298123382733527,
+        "observed_over_bound": 0.005773010631613355,
+        "fp32_cast_error": 7.01319486026618e-07,
+        "relative_fp32_cast_error": 2.5331403398467707e-08,
+        "cg": 1,
+        "line_trials": 1,
+        "gradient_norm": 0.022740640925818865,
+        "posterior_seconds": 0.0021443814039230347
+      },
+      {
+        "iteration": 2,
+        "horizontal_residual": 1.0408340855860843e-17,
+        "normalized_horizontal_residual": 3.2385875394607e-17,
+        "spectral_norms": [
+          1.0,
+          0.9999982934281554
+        ],
+        "spectral_excess": 0.0,
+        "primal_spectral_backend": "gram_eigh_upper",
+        "primal_objective": 0.7293212065260233,
+        "dual_objective": 0.7293353694926417,
+        "residual_rcond": 0.010174297618785556,
+        "dual_spectrum_source": "cached_smooth_residual",
+        "signed_gap": 1.4162966618380679e-05,
+        "normalized_gap": 1.9419004220559156e-05,
+        "signed_normalized_gap": 1.9419004220559156e-05,
+        "posterior": {
+          "alpha_lower": [
+            0.0001517381462635655,
+            0.00021172748507665778
+          ],
+          "sigma_min": [
+            0.0001517381471826486,
+            0.0002117274860424183
+          ],
+          "rcond": [
+            0.010174297618785556,
+            0.010736398986255192
+          ],
+          "uncertainty": [
+            9.190830793660464e-13,
+            9.657604526406113e-13
+          ],
+          "construction_uncertainty": [
+            9.344807811882519e-18,
+            9.793964697991979e-18
+          ],
+          "dual_upper": 0.7293353695296094,
+          "primal_lower": 0.7293212064501319,
+          "gap_upper": 1.416307947819491e-05,
+          "feasibility_distance_upper": 4.352179975353399e-11,
+          "horizontal_projection_distance_upper": 1.5128032605238108e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.8641247666017194,
+          "direction_error_upper": 0.833016984519713,
+          "two_side_direction_error_upper": 0.833016984519713,
+          "normalized_direction_upper": 0.030058911265749163,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4665937851031926e-11,
+            4.4756077465254747e-11
+          ],
+          "right_defect_upper": [
+            1.9255661511619658e-11,
+            1.9269151357937135e-11
+          ],
+          "reconstruction_relative": [
+            1.3198799570926044e-13,
+            1.55723772783066e-13
+          ]
+        },
+        "observed_error": 0.0005732601855941518,
+        "relative_observed_error": 2.068574515428145e-05,
+        "observed_over_bound": 0.000688173466144478,
+        "fp32_cast_error": 7.017598182451859e-07,
+        "relative_fp32_cast_error": 2.5323067848432963e-08,
+        "cg": 3,
+        "line_trials": 2,
+        "gradient_norm": 0.0002146458112373401,
+        "posterior_seconds": 0.002171143889427185
+      }
+    ]
+  },
+  "perturbations": {
+    "tuned": [
+      {
+        "kind": "random",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.2356349741357855e-16,
+        "relative_optimum_direction_change": 9.835612342569783e-14,
+        "within_problem_observed_error": 5.519567490361133e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.795751736661541e-05,
+            3.75805264177578e-05
+          ],
+          "sigma_min": [
+            4.7957529576418046e-05,
+            3.758054065354779e-05
+          ],
+          "rcond": [
+            0.00012954384844864088,
+            8.678981340950674e-05
+          ],
+          "uncertainty": [
+            1.2209802621250523e-11,
+            1.4235789982641712e-11
+          ],
+          "construction_uncertainty": [
+            1.2385703860778484e-16,
+            1.4455088424137782e-16
+          ],
+          "dual_upper": 1.2453477290493478,
+          "primal_lower": 1.2453477276514033,
+          "gap_upper": 1.3979455329751007e-09,
+          "feasibility_distance_upper": 4.370758687737876e-11,
+          "horizontal_projection_distance_upper": 1.5193239130611472e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017250778159365324,
+          "direction_error_upper": 0.015886416239817836,
+          "two_side_direction_error_upper": 0.015886416239817836,
+          "normalized_direction_upper": 0.0005732516682823294,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.471558811112322e-11,
+            4.474902881958198e-11
+          ],
+          "right_defect_upper": [
+            1.917376098178347e-11,
+            1.9163673362440603e-11
+          ],
+          "reconstruction_relative": [
+            5.45767624693198e-14,
+            9.510908540357443e-15
+          ]
+        },
+        "within_problem_observed_over_bound": 3.474394354924962e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.6450866252276695e-17,
+            "spectral_norms": [
+              0.9999999999999785,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 1.2453477285307737,
+            "dual_objective": 1.2453477285310668,
+            "residual_rcond": 8.678981340950674e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 2.9309887850104133e-13,
+            "normalized_gap": 2.353550512729181e-13,
+            "signed_normalized_gap": 2.353550512729181e-13
+          },
+          "gradient_norm": 5.37006073118159e-13,
+          "gradient_max": 1.3207664129044616e-13,
+          "normalized_gradient_norm": 1.7626177106781546e-12,
+          "sides": [
+            {
+              "sigma_max": 0.3702030636787153,
+              "sigma_min": 4.7957529576418046e-05,
+              "rcond": 0.00012954384844864088,
+              "tail": [
+                5.359754984599618e-05,
+                5.350499736780538e-05,
+                5.217292685194402e-05,
+                5.1839143457918026e-05,
+                5.066250585528565e-05,
+                5.0005954687415534e-05,
+                4.9199613861158385e-05,
+                4.7957529576418046e-05
+              ]
+            },
+            {
+              "sigma_max": 0.4330063538243685,
+              "sigma_min": 3.758054065354779e-05,
+              "rcond": 8.678981340950674e-05,
+              "tail": [
+                4.309255123632504e-05,
+                4.285046066669859e-05,
+                4.23400784362399e-05,
+                4.175415136910173e-05,
+                4.0702732981329716e-05,
+                4.018640536114835e-05,
+                3.8707425920491754e-05,
+                3.758054065354779e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.225685238472061e-16,
+        "relative_optimum_direction_change": 1.3919397247960726e-13,
+        "within_problem_observed_error": 5.519881318904638e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.795751737297836e-05,
+            3.758052632015422e-05
+          ],
+          "sigma_min": [
+            4.7957529576417775e-05,
+            3.758054065354781e-05
+          ],
+          "rcond": [
+            0.00012954384844863847,
+            8.678981340951353e-05
+          ],
+          "uncertainty": [
+            1.2203439401349848e-11,
+            1.433339359162333e-11
+          ],
+          "construction_uncertainty": [
+            1.2385703860778484e-16,
+            1.4455088424137782e-16
+          ],
+          "dual_upper": 1.2453477290511086,
+          "primal_lower": 1.24534772765136,
+          "gap_upper": 1.3997496453901166e-09,
+          "feasibility_distance_upper": 4.370757934821794e-11,
+          "horizontal_projection_distance_upper": 1.5193163839006815e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017261906050323905,
+          "direction_error_upper": 0.015898682750458804,
+          "two_side_direction_error_upper": 0.015898682750458804,
+          "normalized_direction_upper": 0.0005736942978586156,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.470684601129179e-11,
+            4.480395526462435e-11
+          ],
+          "right_defect_upper": [
+            1.9186676277909694e-11,
+            1.924416481314835e-11
+          ],
+          "reconstruction_relative": [
+            3.537548193569701e-14,
+            1.667297284169536e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.471911104550687e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.734723475976807e-17,
+            "normalized_horizontal_residual": 5.702430010661326e-17,
+            "spectral_norms": [
+              0.9999999999999545,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 1.2453477285307444,
+            "dual_objective": 1.2453477285310393,
+            "residual_rcond": 8.678981340951353e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 2.948752353404416e-13,
+            "normalized_gap": 2.3678144552306225e-13,
+            "signed_normalized_gap": 2.3678144552306225e-13
+          },
+          "gradient_norm": 5.413598713587407e-13,
+          "gradient_max": 1.3337247972700084e-13,
+          "normalized_gradient_norm": 1.7769670270597891e-12,
+          "sides": [
+            {
+              "sigma_max": 0.3702030636787201,
+              "sigma_min": 4.7957529576417775e-05,
+              "rcond": 0.00012954384844863847,
+              "tail": [
+                5.3597549845995715e-05,
+                5.350499736780543e-05,
+                5.217292685194449e-05,
+                5.1839143457919266e-05,
+                5.066250585528576e-05,
+                5.0005954687414294e-05,
+                4.919961386115857e-05,
+                4.7957529576417775e-05
+              ]
+            },
+            {
+              "sigma_max": 0.4330063538243348,
+              "sigma_min": 3.758054065354781e-05,
+              "rcond": 8.678981340951353e-05,
+              "tail": [
+                4.309255123632517e-05,
+                4.285046066670078e-05,
+                4.234007843624045e-05,
+                4.1754151369099974e-05,
+                4.070273298133074e-05,
+                4.018640536114741e-05,
+                3.870742592049141e-05,
+                3.758054065354781e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "random",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.192092895508234e-07,
+        "relative_optimum_direction_change": 1.750390870525497e-05,
+        "within_problem_observed_error": 5.51992438523748e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.795764145441633e-05,
+            3.758063785018801e-05
+          ],
+          "sigma_min": [
+            4.7957653653175886e-05,
+            3.75806521025043e-05
+          ],
+          "rcond": [
+            0.00012954418359807548,
+            8.679007078051907e-05
+          ],
+          "uncertainty": [
+            1.2198759542256971e-11,
+            1.4252316284301938e-11
+          ],
+          "construction_uncertainty": [
+            1.2385703863978471e-16,
+            1.4455088424461588e-16
+          ],
+          "dual_upper": 1.2453477282722005,
+          "primal_lower": 1.2453477268742112,
+          "gap_upper": 1.397990385985295e-09,
+          "feasibility_distance_upper": 4.371375788638143e-11,
+          "horizontal_projection_distance_upper": 1.5193414414657275e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01725102932626599,
+          "direction_error_upper": 0.015886899644937086,
+          "two_side_direction_error_upper": 0.015886899644937086,
+          "normalized_direction_upper": 0.0005732691116620624,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.473001569752752e-11,
+            4.472327639315273e-11
+          ],
+          "right_defect_upper": [
+            1.9171405547607825e-11,
+            1.9232490445249246e-11
+          ],
+          "reconstruction_relative": [
+            1.8838930250174635e-14,
+            2.6063479780731053e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.474513283651664e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.64965930166569e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999751
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 1.245347727753601,
+            "dual_objective": 1.245347727753812,
+            "residual_rcond": 8.679007078051907e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 2.1116441928370477e-13,
+            "normalized_gap": 1.6956261659109001e-13,
+            "signed_normalized_gap": 1.6956261659109001e-13
+          },
+          "gradient_norm": 4.746387844062336e-13,
+          "gradient_max": 2.130327164673318e-13,
+          "normalized_gradient_norm": 1.564554803480781e-12,
+          "sides": [
+            {
+              "sigma_max": 0.3702030637050412,
+              "sigma_min": 4.7957653653175886e-05,
+              "rcond": 0.00012954418359807548,
+              "tail": [
+                5.359755232210595e-05,
+                5.350504204646318e-05,
+                5.2172891065533535e-05,
+                5.183902677551254e-05,
+                5.066261701312295e-05,
+                5.000603995457939e-05,
+                4.919978361432327e-05,
+                4.7957653653175886e-05
+              ]
+            },
+            {
+              "sigma_max": 0.43300635388973163,
+              "sigma_min": 3.75806521025043e-05,
+              "rcond": 8.679007078051907e-05,
+              "tail": [
+                4.309264761573859e-05,
+                4.285050102552469e-05,
+                4.23401225095748e-05,
+                4.175414510774557e-05,
+                4.0702682341461136e-05,
+                4.018645527834717e-05,
+                3.870754371027764e-05,
+                3.75806521025043e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 17,
+        "counts": {
+          "svd_matrices": 38,
+          "polar_matrices": 38,
+          "hvp": 0,
+          "line_trials": 18,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955078961e-07,
+        "relative_optimum_direction_change": 5.848232634327892e-05,
+        "within_problem_observed_error": 5.519075205690735e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.795753820478536e-05,
+            3.7580555194503004e-05
+          ],
+          "sigma_min": [
+            4.7957550435847274e-05,
+            3.758056945194594e-05
+          ],
+          "rcond": [
+            0.00012954390479323489,
+            8.678987991808505e-05
+          ],
+          "uncertainty": [
+            1.2231061902512844e-11,
+            1.4257442928441508e-11
+          ],
+          "construction_uncertainty": [
+            1.2385703868013285e-16,
+            1.4455088433318055e-16
+          ],
+          "dual_upper": 1.2453477291049053,
+          "primal_lower": 1.2453477277061145,
+          "gap_upper": 1.3987919670090751e-09,
+          "feasibility_distance_upper": 4.370758694706497e-11,
+          "horizontal_projection_distance_upper": 1.5193239827473925e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017255993299719365,
+          "direction_error_upper": 0.01589179375356655,
+          "two_side_direction_error_upper": 0.01589179375356655,
+          "normalized_direction_upper": 0.0005734457125954788,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4730921639168875e-11,
+            4.475508951666387e-11
+          ],
+          "right_defect_upper": [
+            1.9170344278244525e-11,
+            1.9206884192001757e-11
+          ],
+          "reconstruction_relative": [
+            1.0579786763131541e-13,
+            3.477441483983919e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.4729089058635086e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.0816681711721685e-17,
+            "normalized_horizontal_residual": 7.047430071693069e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999791
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 1.2453477285854624,
+            "dual_objective": 1.2453477285857832,
+            "residual_rcond": 8.678987991808505e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 3.2085445411667024e-13,
+            "normalized_gap": 2.5764246142001843e-13,
+            "signed_normalized_gap": 2.5764246142001843e-13
+          },
+          "gradient_norm": 3.391294832168339e-13,
+          "gradient_max": 1.4738210651898953e-13,
+          "normalized_gradient_norm": 1.103020398611508e-12,
+          "sides": [
+            {
+              "sigma_max": 0.3702030636824817,
+              "sigma_min": 4.7957550435847274e-05,
+              "rcond": 0.00012954390479323489,
+              "tail": [
+                5.35975542062728e-05,
+                5.3504982363193234e-05,
+                5.217290546499305e-05,
+                5.183913813185185e-05,
+                5.066251363443583e-05,
+                5.000593361697589e-05,
+                4.919960539863347e-05,
+                4.7957550435847274e-05
+              ]
+            },
+            {
+              "sigma_max": 0.43300635382161645,
+              "sigma_min": 3.758056945194594e-05,
+              "rcond": 8.678987991808505e-05,
+              "tail": [
+                4.309254537986376e-05,
+                4.285045433247033e-05,
+                4.234007921755167e-05,
+                4.175415843290443e-05,
+                4.070273620944203e-05,
+                4.0186398074717765e-05,
+                3.870744157465557e-05,
+                3.758056945194594e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 17,
+        "counts": {
+          "svd_matrices": 40,
+          "polar_matrices": 40,
+          "hvp": 0,
+          "line_trials": 19,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "one_fp32_ulp_proxy",
+        "scale": null,
+        "relative_objective_change": 8.776452238853693e-08,
+        "relative_optimum_direction_change": 8.82202993724099e-06,
+        "within_problem_observed_error": 5.519758249003889e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.7957553466357145e-05,
+            3.75805754058928e-05
+          ],
+          "sigma_min": [
+            4.7957565740965083e-05,
+            3.758058966088728e-05
+          ],
+          "rcond": [
+            0.00012954394608257437,
+            8.678992654452635e-05
+          ],
+          "uncertainty": [
+            1.227460792241181e-11,
+            1.4254994473312199e-11
+          ],
+          "construction_uncertainty": [
+            1.2385703867124316e-16,
+            1.4455088430633453e-16
+          ],
+          "dual_upper": 1.2453477277386762,
+          "primal_lower": 1.2453477263390502,
+          "gap_upper": 1.399627076768197e-09,
+          "feasibility_distance_upper": 4.37075963386051e-11,
+          "horizontal_projection_distance_upper": 1.5193333742884464e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.0172611389943897,
+          "direction_error_upper": 0.01589673396654187,
+          "two_side_direction_error_upper": 0.01589673396654187,
+          "normalized_direction_upper": 0.000573623977176176,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4760795673731626e-11,
+            4.473123619167504e-11
+          ],
+          "right_defect_upper": [
+            1.9147539092891676e-11,
+            1.923423411132929e-11
+          ],
+          "reconstruction_relative": [
+            2.193859428081796e-13,
+            2.738362882043912e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.4722593084978456e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.6947063332874484e-17,
+            "spectral_norms": [
+              0.9999999999999947,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 1.2453477272184288,
+            "dual_objective": 1.2453477272187488,
+            "residual_rcond": 8.678992654452635e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 3.199662756969701e-13,
+            "normalized_gap": 2.5692926457701495e-13,
+            "signed_normalized_gap": 2.5692926457701495e-13
+          },
+          "gradient_norm": 5.954542137907579e-13,
+          "gradient_max": 3.7528834206934647e-13,
+          "normalized_gradient_norm": 1.9607824554854937e-12,
+          "sides": [
+            {
+              "sigma_max": 0.37020306383438245,
+              "sigma_min": 4.7957565740965083e-05,
+              "rcond": 0.00012954394608257437,
+              "tail": [
+                5.35975629440422e-05,
+                5.350499971154625e-05,
+                5.2172935964717685e-05,
+                5.183910061387857e-05,
+                5.06624783016524e-05,
+                5.0005976941030595e-05,
+                4.9199613436213855e-05,
+                4.7957565740965083e-05
+              ]
+            },
+            {
+              "sigma_max": 0.43300635404509863,
+              "sigma_min": 3.758058966088728e-05,
+              "rcond": 8.678992654452635e-05,
+              "tail": [
+                4.309255451636175e-05,
+                4.285041321175726e-05,
+                4.234007087894039e-05,
+                4.1754131933838604e-05,
+                4.070274292889079e-05,
+                4.01864357102947e-05,
+                3.8707447016580924e-05,
+                3.758058966088728e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 16,
+        "counts": {
+          "svd_matrices": 38,
+          "polar_matrices": 38,
+          "hvp": 0,
+          "line_trials": 18,
+          "reference_iterations": 0
+        }
+      }
+    ],
+    "low": [
+      {
+        "kind": "random",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.237006120880065e-16,
+        "relative_optimum_direction_change": 1.177301708038833e-13,
+        "within_problem_observed_error": 5.5188229116992094e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.270839838159675e-05,
+            4.4864420736629275e-05
+          ],
+          "sigma_min": [
+            4.270841326238211e-05,
+            4.48644398927123e-05
+          ],
+          "rcond": [
+            9.785839639639344e-05,
+            7.741479766097627e-05
+          ],
+          "uncertainty": [
+            1.488078535350553e-11,
+            1.9156083014186583e-11
+          ],
+          "construction_uncertainty": [
+            1.5073317126922009e-16,
+            1.9379267516698233e-16
+          ],
+          "dual_upper": 2.0727971566039947,
+          "primal_lower": 2.0727971546976014,
+          "gap_upper": 1.9063951064854083e-09,
+          "feasibility_distance_upper": 4.35990699347823e-11,
+          "horizontal_projection_distance_upper": 1.5154161405963495e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.018897084680172413,
+          "direction_error_upper": 0.01778798935566699,
+          "two_side_direction_error_upper": 0.01778798935566699,
+          "normalized_direction_upper": 0.0006418687776772834,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.476098760770238e-11,
+            4.476134375729763e-11
+          ],
+          "right_defect_upper": [
+            1.9165736303261406e-11,
+            1.9219563518627897e-11
+          ],
+          "reconstruction_relative": [
+            8.987250563489723e-14,
+            1.0141322187159833e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.102555775895489e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.644308860588462e-17,
+            "spectral_norms": [
+              0.9999999999999503,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 2.072797155936157,
+            "dual_objective": 2.072797155936918,
+            "residual_rcond": 7.741479766097627e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 7.611689056830073e-13,
+            "normalized_gap": 3.672182314139436e-13,
+            "signed_normalized_gap": 3.672182314139436e-13
+          },
+          "gradient_norm": 5.020123834861368e-13,
+          "gradient_max": 2.2676305277968822e-13,
+          "normalized_gradient_norm": 1.6766868076537733e-12,
+          "sides": [
+            {
+              "sigma_max": 0.4364307492775973,
+              "sigma_min": 4.270841326238211e-05,
+              "rcond": 9.785839639639344e-05,
+              "tail": [
+                4.9611133096277844e-05,
+                4.808549005810356e-05,
+                4.7816185151320224e-05,
+                4.65055156658331e-05,
+                4.537677599903589e-05,
+                4.486848100868609e-05,
+                4.320255054648157e-05,
+                4.270841326238211e-05
+              ]
+            },
+            {
+              "sigma_max": 0.579533128655684,
+              "sigma_min": 4.48644398927123e-05,
+              "rcond": 7.741479766097627e-05,
+              "tail": [
+                5.138297744701816e-05,
+                5.093775515054583e-05,
+                4.996808189125591e-05,
+                4.8981950871253234e-05,
+                4.821485930976209e-05,
+                4.796249457434232e-05,
+                4.717633509446051e-05,
+                4.48644398927123e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.227943688212387e-16,
+        "relative_optimum_direction_change": 1.7512835797455303e-13,
+        "within_problem_observed_error": 5.519647476028063e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.270839841957072e-05,
+            4.4864420720569876e-05
+          ],
+          "sigma_min": [
+            4.270841326238286e-05,
+            4.486443989271298e-05
+          ],
+          "rcond": [
+            9.785839639639795e-05,
+            7.741479766097753e-05
+          ],
+          "uncertainty": [
+            1.4842812141362803e-11,
+            1.9172143091489962e-11
+          ],
+          "construction_uncertainty": [
+            1.5073317126922009e-16,
+            1.9379267516698233e-16
+          ],
+          "dual_upper": 2.072797156603552,
+          "primal_lower": 2.0727971546975796,
+          "gap_upper": 1.9059741099144704e-09,
+          "feasibility_distance_upper": 4.359906753646215e-11,
+          "horizontal_projection_distance_upper": 1.515413742276258e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01889499799858704,
+          "direction_error_upper": 0.017785722823433193,
+          "two_side_direction_error_upper": 0.017785722823433193,
+          "normalized_direction_upper": 0.0006417869912400765,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4719754123187674e-11,
+            4.481233093173946e-11
+          ],
+          "right_defect_upper": [
+            1.913481922316199e-11,
+            1.9206585297508678e-11
+          ],
+          "reconstruction_relative": [
+            4.2008484500994716e-14,
+            1.1001862780808043e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.103414761842443e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.732710379647356e-17,
+            "spectral_norms": [
+              0.9999999999999674,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 2.072797155936196,
+            "dual_objective": 2.0727971559369056,
+            "residual_rcond": 7.741479766097753e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 7.096545573404001e-13,
+            "normalized_gap": 3.423656556589763e-13,
+            "signed_normalized_gap": 3.423656556589763e-13
+          },
+          "gradient_norm": 5.051149604370133e-13,
+          "gradient_max": 2.2753327000302193e-13,
+          "normalized_gradient_norm": 1.6868159439681761e-12,
+          "sides": [
+            {
+              "sigma_max": 0.4364307492775848,
+              "sigma_min": 4.270841326238286e-05,
+              "rcond": 9.785839639639795e-05,
+              "tail": [
+                4.9611133096279186e-05,
+                4.808549005810472e-05,
+                4.781618515132029e-05,
+                4.650551566583384e-05,
+                4.5376775999036846e-05,
+                4.4868481008686425e-05,
+                4.320255054648352e-05,
+                4.270841326238286e-05
+              ]
+            },
+            {
+              "sigma_max": 0.5795331286556833,
+              "sigma_min": 4.486443989271298e-05,
+              "rcond": 7.741479766097753e-05,
+              "tail": [
+                5.138297744701711e-05,
+                5.093775515054643e-05,
+                4.9968081891255767e-05,
+                4.898195087125122e-05,
+                4.821485930976307e-05,
+                4.79624945743412e-05,
+                4.717633509446044e-05,
+                4.486443989271298e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "random",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955082662e-07,
+        "relative_optimum_direction_change": 2.0735553721076976e-05,
+        "within_problem_observed_error": 5.520238210844421e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.270829828723019e-05,
+            4.4864280050050494e-05
+          ],
+          "sigma_min": [
+            4.2708313155462565e-05,
+            4.486429920331478e-05
+          ],
+          "rcond": [
+            9.785816704883609e-05,
+            7.741455487422856e-05
+          ],
+          "uncertainty": [
+            1.486823237266001e-11,
+            1.9153264283222606e-11
+          ],
+          "construction_uncertainty": [
+            1.5073317123395093e-16,
+            1.9379267524717813e-16
+          ],
+          "dual_upper": 2.072797158413767,
+          "primal_lower": 2.0727971565078787,
+          "gap_upper": 1.9058901770538104e-09,
+          "feasibility_distance_upper": 4.359905181209622e-11,
+          "horizontal_projection_distance_upper": 1.5153980179060866e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.018894604106843495,
+          "direction_error_upper": 0.01778536282363192,
+          "two_side_direction_error_upper": 0.01778536282363192,
+          "normalized_direction_upper": 0.0006417740008661907,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.470669914566906e-11,
+            4.4812250271208436e-11
+          ],
+          "right_defect_upper": [
+            1.9168103194356574e-11,
+            1.921574524265335e-11
+          ],
+          "reconstruction_relative": [
+            8.808509665519474e-14,
+            7.302323657002766e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.1038097257760313e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.8067919051967175e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999565
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 2.07279715774654,
+            "dual_objective": 2.0727971577469924,
+            "residual_rcond": 7.741455487422856e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 4.525269048372138e-13,
+            "normalized_gap": 2.18317023036197e-13,
+            "signed_normalized_gap": 2.18317023036197e-13
+          },
+          "gradient_norm": 4.2481919357120433e-13,
+          "gradient_max": 2.2327018706080892e-13,
+          "normalized_gradient_norm": 1.420335274537842e-12,
+          "sides": [
+            {
+              "sigma_max": 0.43643074914890845,
+              "sigma_min": 4.2708313155462565e-05,
+              "rcond": 9.785816704883609e-05,
+              "tail": [
+                4.961119685820568e-05,
+                4.808541588546667e-05,
+                4.7816253014220826e-05,
+                4.650552357593382e-05,
+                4.537671241225668e-05,
+                4.4868403134868754e-05,
+                4.32025696646395e-05,
+                4.2708313155462565e-05
+              ]
+            },
+            {
+              "sigma_max": 0.579533128830922,
+              "sigma_min": 4.486429920331478e-05,
+              "rcond": 7.741455487422856e-05,
+              "tail": [
+                5.1383103052110315e-05,
+                5.093779149526968e-05,
+                4.99680685960794e-05,
+                4.898181480717688e-05,
+                4.821485952626862e-05,
+                4.796247111699079e-05,
+                4.7176259730128244e-05,
+                4.486429920331478e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 16,
+        "counts": {
+          "svd_matrices": 36,
+          "polar_matrices": 36,
+          "hvp": 0,
+          "line_trials": 17,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955077572e-07,
+        "relative_optimum_direction_change": 7.210465113774176e-05,
+        "within_problem_observed_error": 5.519259810737257e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.270844247268203e-05,
+            4.486446355970122e-05
+          ],
+          "sigma_min": [
+            4.270845738334276e-05,
+            4.486448273471049e-05
+          ],
+          "rcond": [
+            9.785849749140624e-05,
+            7.741487158603727e-05
+          ],
+          "uncertainty": [
+            1.4910660724084414e-11,
+            1.917500926589406e-11
+          ],
+          "construction_uncertainty": [
+            1.5073317131357623e-16,
+            1.9379267520268672e-16
+          ],
+          "dual_upper": 2.0727971566925856,
+          "primal_lower": 2.0727971547853046,
+          "gap_upper": 1.907282840815899e-09,
+          "feasibility_distance_upper": 4.359907193788838e-11,
+          "horizontal_projection_distance_upper": 1.5154181437009584e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01890147423142004,
+          "direction_error_upper": 0.017792628997719804,
+          "two_side_direction_error_upper": 0.017792628997719804,
+          "normalized_direction_upper": 0.0006420361963390419,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.477825333004659e-11,
+            4.481994332039894e-11
+          ],
+          "right_defect_upper": [
+            1.9179481122063427e-11,
+            1.9250662076650813e-11
+          ],
+          "reconstruction_relative": [
+            1.4040636295200503e-13,
+            8.910146320668835e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.1019922977344005e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.7822836297147185e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999818
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 2.0727971560238925,
+            "dual_objective": 2.0727971560245533,
+            "residual_rcond": 7.741487158603727e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 6.608047442568932e-13,
+            "normalized_gap": 3.1879855794681804e-13,
+            "signed_normalized_gap": 3.1879855794681804e-13
+          },
+          "gradient_norm": 4.659228083021474e-13,
+          "gradient_max": 2.0362878050406152e-13,
+          "normalized_gradient_norm": 1.5693957613394074e-12,
+          "sides": [
+            {
+              "sigma_max": 0.4364307492774794,
+              "sigma_min": 4.270845738334276e-05,
+              "rcond": 9.785849749140624e-05,
+              "tail": [
+                4.961112156381307e-05,
+                4.8085502788076165e-05,
+                4.781622419112996e-05,
+                4.6505496126524137e-05,
+                4.537677729098935e-05,
+                4.4868470184727956e-05,
+                4.320253756570528e-05,
+                4.270845738334276e-05
+              ]
+            },
+            {
+              "sigma_max": 0.5795331286553779,
+              "sigma_min": 4.486448273471049e-05,
+              "rcond": 7.741487158603727e-05,
+              "tail": [
+                5.1382964196657504e-05,
+                5.093774947991903e-05,
+                4.9968104367572486e-05,
+                4.898194815860894e-05,
+                4.821486788474995e-05,
+                4.79624933031689e-05,
+                4.7176339950684434e-05,
+                4.486448273471049e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 17,
+        "counts": {
+          "svd_matrices": 40,
+          "polar_matrices": 40,
+          "hvp": 0,
+          "line_trials": 19,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "one_fp32_ulp_proxy",
+        "scale": null,
+        "relative_objective_change": 8.772457235149355e-08,
+        "relative_optimum_direction_change": 1.1015490576835386e-05,
+        "within_problem_observed_error": 5.519419807952662e-09,
+        "posterior": {
+          "alpha_lower": [
+            4.270839297243938e-05,
+            4.486441908462318e-05
+          ],
+          "sigma_min": [
+            4.270840782735835e-05,
+            4.486443834006453e-05
+          ],
+          "rcond": [
+            9.785838398343305e-05,
+            7.741479490173798e-05
+          ],
+          "uncertainty": [
+            1.4854918962107698e-11,
+            1.925544134185463e-11
+          ],
+          "construction_uncertainty": [
+            1.5073317125313405e-16,
+            1.9379267541734238e-16
+          ],
+          "dual_upper": 2.0727971616117213,
+          "primal_lower": 2.072797159704215,
+          "gap_upper": 1.907507994045297e-09,
+          "feasibility_distance_upper": 4.35990674735569e-11,
+          "horizontal_projection_distance_upper": 1.5154136793642806e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.018902600804845023,
+          "direction_error_upper": 0.01779362939042611,
+          "two_side_direction_error_upper": 0.01779362939042611,
+          "normalized_direction_upper": 0.0006420722949014345,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.475373243987357e-11,
+            4.4887675227924915e-11
+          ],
+          "right_defect_upper": [
+            1.9146093713156282e-11,
+            1.9276350785400925e-11
+          ],
+          "reconstruction_relative": [
+            4.6144063967379825e-14,
+            1.8066692853297344e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.1019078159076384e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.6950034151898966e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999831
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 2.072797160942815,
+            "dual_objective": 2.072797160943205,
+            "residual_rcond": 7.741479490173798e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 3.89910326248355e-13,
+            "normalized_gap": 1.8810828844966687e-13,
+            "signed_normalized_gap": 1.8810828844966687e-13
+          },
+          "gradient_norm": 3.2375096490750615e-13,
+          "gradient_max": 1.0288991880713638e-13,
+          "normalized_gradient_norm": 1.0876615457678862e-12,
+          "sides": [
+            {
+              "sigma_max": 0.4364307490974782,
+              "sigma_min": 4.270840782735835e-05,
+              "rcond": 9.785838398343305e-05,
+              "tail": [
+                4.961121441670092e-05,
+                4.808553433817645e-05,
+                4.781615512087252e-05,
+                4.650555356665572e-05,
+                4.537664733743018e-05,
+                4.486847933787191e-05,
+                4.320255565156567e-05,
+                4.270840782735835e-05
+              ]
+            },
+            {
+              "sigma_max": 0.5795331292553397,
+              "sigma_min": 4.486443834006453e-05,
+              "rcond": 7.741479490173798e-05,
+              "tail": [
+                5.1382943963815904e-05,
+                5.0937812848158706e-05,
+                4.996801842701677e-05,
+                4.898199912034639e-05,
+                4.821484681523756e-05,
+                4.796252763962694e-05,
+                4.71763465196889e-05,
+                4.486443834006453e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 16,
+        "counts": {
+          "svd_matrices": 36,
+          "polar_matrices": 36,
+          "hvp": 0,
+          "line_trials": 17,
+          "reference_iterations": 0
+        }
+      }
+    ],
+    "middle": [
+      {
+        "kind": "random",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.2338974143378247e-16,
+        "relative_optimum_direction_change": 1.934648327170409e-13,
+        "within_problem_observed_error": 5.519444411393733e-09,
+        "posterior": {
+          "alpha_lower": [
+            7.522036913104725e-05,
+            6.44824824187309e-05
+          ],
+          "sigma_min": [
+            7.522040659183282e-05,
+            6.448253002637546e-05
+          ],
+          "rcond": [
+            6.648727921693412e-05,
+            4.4894131191845975e-05
+          ],
+          "uncertainty": [
+            3.746078556070708e-11,
+            4.7607644550652946e-11
+          ],
+          "construction_uncertainty": [
+            3.796986562604704e-16,
+            4.7904707371455135e-16
+          ],
+          "dual_upper": 4.129359901404221,
+          "primal_lower": 4.129359896854612,
+          "gap_upper": 4.54961235739395e-09,
+          "feasibility_distance_upper": 4.3465227677775874e-11,
+          "horizontal_projection_distance_upper": 1.5107969760953574e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.023758078748818624,
+          "direction_error_upper": 0.022069938055576013,
+          "two_side_direction_error_upper": 0.022069938055576013,
+          "normalized_direction_upper": 0.0007963802923365736,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.474900923697679e-11,
+            4.484050937874494e-11
+          ],
+          "right_defect_upper": [
+            1.9172063490268646e-11,
+            1.9229801719194257e-11
+          ],
+          "reconstruction_relative": [
+            6.847350494014851e-14,
+            2.3090426212293367e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 2.5008880394203165e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.7755575615628914e-17,
+            "normalized_horizontal_residual": 8.800390681438988e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999696
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.129359899736055,
+            "dual_objective": 4.129359899737041,
+            "residual_rcond": 4.4894131191845975e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 9.85878045867139e-13,
+            "normalized_gap": 2.387483943770365e-13,
+            "signed_normalized_gap": 2.387483943770365e-13
+          },
+          "gradient_norm": 2.936099740733645e-13,
+          "gradient_max": 1.370917268594951e-13,
+          "normalized_gradient_norm": 9.50994227016904e-13,
+          "sides": [
+            {
+              "sigma_max": 1.1313503496872586,
+              "sigma_min": 7.522040659183282e-05,
+              "rcond": 6.648727921693412e-05,
+              "tail": [
+                9.092042494971576e-05,
+                8.819354624228167e-05,
+                8.727490698441087e-05,
+                8.338634757320175e-05,
+                8.260682297500494e-05,
+                8.050888924697103e-05,
+                7.667171866664263e-05,
+                7.522040659183282e-05
+              ]
+            },
+            {
+              "sigma_max": 1.4363242658783713,
+              "sigma_min": 6.448253002637546e-05,
+              "rcond": 4.4894131191845975e-05,
+              "tail": [
+                7.318546333682499e-05,
+                7.20262789031786e-05,
+                7.131268044696423e-05,
+                6.937416267912082e-05,
+                6.897710980463415e-05,
+                6.758705186057527e-05,
+                6.562290268176494e-05,
+                6.448253002637546e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.2255892901275365e-16,
+        "relative_optimum_direction_change": 2.7433884981627984e-13,
+        "within_problem_observed_error": 5.51929673217866e-09,
+        "posterior": {
+          "alpha_lower": [
+            7.522036915574426e-05,
+            6.44824822363036e-05
+          ],
+          "sigma_min": [
+            7.52204065918351e-05,
+            6.448253002637472e-05
+          ],
+          "rcond": [
+            6.648727921694095e-05,
+            4.489413119184781e-05
+          ],
+          "uncertainty": [
+            3.7436090822058723e-11,
+            4.779007110390686e-11
+          ],
+          "construction_uncertainty": [
+            3.796986562604704e-16,
+            4.7904707371455135e-16
+          ],
+          "dual_upper": 4.129359901407147,
+          "primal_lower": 4.12935989685448,
+          "gap_upper": 4.552671243871397e-09,
+          "feasibility_distance_upper": 4.346523198484633e-11,
+          "horizontal_projection_distance_upper": 1.5108012831656864e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.02376606419402721,
+          "direction_error_upper": 0.022078691755552503,
+          "two_side_direction_error_upper": 0.022078691755552503,
+          "normalized_direction_upper": 0.0007966961642764381,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.474935253595661e-11,
+            4.490416537305152e-11
+          ],
+          "right_defect_upper": [
+            1.9104754328517874e-11,
+            1.922629984992859e-11
+          ],
+          "reconstruction_relative": [
+            8.02883040749704e-14,
+            3.2768760725816547e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 2.499829606430657e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.5463309947752656e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999802
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.129359899735903,
+            "dual_objective": 4.129359899736878,
+            "residual_rcond": 4.489413119184781e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 9.752199048307375e-13,
+            "normalized_gap": 2.3616733065405087e-13,
+            "signed_normalized_gap": 2.3616733065405087e-13
+          },
+          "gradient_norm": 2.9539622383127803e-13,
+          "gradient_max": 1.367864155277232e-13,
+          "normalized_gradient_norm": 9.583632420725658e-13,
+          "sides": [
+            {
+              "sigma_max": 1.1313503496871766,
+              "sigma_min": 7.52204065918351e-05,
+              "rcond": 6.648727921694095e-05,
+              "tail": [
+                9.092042494971908e-05,
+                8.819354624228301e-05,
+                8.727490698441012e-05,
+                8.338634757320228e-05,
+                8.26068229750036e-05,
+                8.050888924697076e-05,
+                7.667171866664677e-05,
+                7.52204065918351e-05
+              ]
+            },
+            {
+              "sigma_max": 1.436324265878296,
+              "sigma_min": 6.448253002637472e-05,
+              "rcond": 4.489413119184781e-05,
+              "tail": [
+                7.318546333682518e-05,
+                7.202627890317901e-05,
+                7.131268044696774e-05,
+                6.937416267912227e-05,
+                6.897710980463113e-05,
+                6.758705186057614e-05,
+                6.562290268176464e-05,
+                6.448253002637472e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "random",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955083212e-07,
+        "relative_optimum_direction_change": 3.277033140881339e-05,
+        "within_problem_observed_error": 5.5192844277063e-09,
+        "posterior": {
+          "alpha_lower": [
+            7.522096354763225e-05,
+            6.448235874096793e-05
+          ],
+          "sigma_min": [
+            7.522100098461119e-05,
+            6.448240631046952e-05
+          ],
+          "rcond": [
+            6.648780463077782e-05,
+            4.48940450494596e-05
+          ],
+          "uncertainty": [
+            3.743697892115672e-11,
+            4.756950156778678e-11
+          ],
+          "construction_uncertainty": [
+            3.7969865599779376e-16,
+            4.790470737757708e-16
+          ],
+          "dual_upper": 4.12935990359437,
+          "primal_lower": 4.129359899045661,
+          "gap_upper": 4.548712632654795e-09,
+          "feasibility_distance_upper": 4.346523777859567e-11,
+          "horizontal_projection_distance_upper": 1.5108070769184508e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.023755752232920254,
+          "direction_error_upper": 0.022067458771835403,
+          "two_side_direction_error_upper": 0.022067458771835403,
+          "normalized_direction_upper": 0.0007962908288906337,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.479505306167477e-11,
+            4.478937123740403e-11
+          ],
+          "right_defect_upper": [
+            1.914070085733727e-11,
+            1.9264567609556786e-11
+          ],
+          "reconstruction_relative": [
+            4.0244044920128885e-14,
+            2.1256554532772471e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 2.5010965171714914e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.5874769843642547e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999998852
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.1293599019270815,
+            "dual_objective": 4.129359901928406,
+            "residual_rcond": 4.48940450494596e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.3242740237728867e-12,
+            "normalized_gap": 3.2069716741194016e-13,
+            "signed_normalized_gap": 3.2069716741194016e-13
+          },
+          "gradient_norm": 2.9119965976870835e-13,
+          "gradient_max": 1.798977633526988e-13,
+          "normalized_gradient_norm": 9.340674171828118e-13,
+          "sides": [
+            {
+              "sigma_max": 1.1313503491705108,
+              "sigma_min": 7.522100098461119e-05,
+              "rcond": 6.648780463077782e-05,
+              "tail": [
+                9.092026622008228e-05,
+                8.819380826478147e-05,
+                8.727475174381708e-05,
+                8.338645628075231e-05,
+                8.260709249539762e-05,
+                8.050910979622819e-05,
+                7.667175075756882e-05,
+                7.522100098461119e-05
+              ]
+            },
+            {
+              "sigma_max": 1.4363242661566695,
+              "sigma_min": 6.448240631046952e-05,
+              "rcond": 4.48940450494596e-05,
+              "tail": [
+                7.318562005890228e-05,
+                7.202654900048879e-05,
+                7.131268144857518e-05,
+                6.937407800972833e-05,
+                6.897732220520508e-05,
+                6.75870843812088e-05,
+                6.56230268332599e-05,
+                6.448240631046952e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 20,
+        "counts": {
+          "svd_matrices": 46,
+          "polar_matrices": 46,
+          "hvp": 0,
+          "line_trials": 22,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955077296e-07,
+        "relative_optimum_direction_change": 0.00011336808754405061,
+        "within_problem_observed_error": 5.521228926371611e-09,
+        "posterior": {
+          "alpha_lower": [
+            7.522059390341976e-05,
+            6.448265648960679e-05
+          ],
+          "sigma_min": [
+            7.522063128132095e-05,
+            6.448270386493052e-05
+          ],
+          "rcond": [
+            6.648747781605121e-05,
+            4.489425222359325e-05
+          ],
+          "uncertainty": [
+            3.7377901174988166e-11,
+            4.7375323714661964e-11
+          ],
+          "construction_uncertainty": [
+            3.7969865582473e-16,
+            4.790470733986339e-16
+          ],
+          "dual_upper": 4.129359901740165,
+          "primal_lower": 4.129359897196067,
+          "gap_upper": 4.54410209847813e-09,
+          "feasibility_distance_upper": 4.346523496352542e-11,
+          "horizontal_projection_distance_upper": 1.5108042618518392e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.023743655054007023,
+          "direction_error_upper": 0.02205459882211757,
+          "two_side_direction_error_upper": 0.02205459882211757,
+          "normalized_direction_upper": 0.000795826785426174,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4714104135277406e-11,
+            4.482302096921375e-11
+          ],
+          "right_defect_upper": [
+            1.9157056277742594e-11,
+            1.9246764210706587e-11
+          ],
+          "reconstruction_relative": [
+            2.0703649584996508e-14,
+            6.961006157394215e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 2.503436571620889e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.673760488567109e-17,
+            "spectral_norms": [
+              0.9999999999999205,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.129359900077777,
+            "dual_objective": 4.129359900079163,
+            "residual_rcond": 4.489425222359325e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.3864465131518955e-12,
+            "normalized_gap": 3.3575337260511395e-13,
+            "signed_normalized_gap": 3.3575337260511395e-13
+          },
+          "gradient_norm": 5.581134750495611e-13,
+          "gradient_max": 2.4606705562035813e-13,
+          "normalized_gradient_norm": 1.8186269609739719e-12,
+          "sides": [
+            {
+              "sigma_max": 1.131350349752046,
+              "sigma_min": 7.522063128132095e-05,
+              "rcond": 6.648747781605121e-05,
+              "tail": [
+                9.092037664526774e-05,
+                8.819357682398979e-05,
+                8.727490064853766e-05,
+                8.338636328774321e-05,
+                8.260685877800536e-05,
+                8.05088723931477e-05,
+                7.667172298467037e-05,
+                7.522063128132095e-05
+              ]
+            },
+            {
+              "sigma_max": 1.4363242658275743,
+              "sigma_min": 6.448270386493052e-05,
+              "rcond": 4.489425222359325e-05,
+              "tail": [
+                7.318535401121993e-05,
+                7.202628260631879e-05,
+                7.131273294224119e-05,
+                6.9374155710809e-05,
+                6.897714315685758e-05,
+                6.758713430764361e-05,
+                6.562289563705937e-05,
+                6.448270386493052e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 20,
+        "counts": {
+          "svd_matrices": 46,
+          "polar_matrices": 46,
+          "hvp": 0,
+          "line_trials": 22,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "one_fp32_ulp_proxy",
+        "scale": null,
+        "relative_objective_change": 8.784229420447244e-08,
+        "relative_optimum_direction_change": 1.5584800228274692e-05,
+        "within_problem_observed_error": 5.51996131204664e-09,
+        "posterior": {
+          "alpha_lower": [
+            7.522044697936516e-05,
+            6.448251508823027e-05
+          ],
+          "sigma_min": [
+            7.522048457132053e-05,
+            6.448256281495067e-05
+          ],
+          "rcond": [
+            6.648734815852565e-05,
+            4.489415397345808e-05
+          ],
+          "uncertainty": [
+            3.759195535314193e-11,
+            4.7726720391598824e-11
+          ],
+          "construction_uncertainty": [
+            3.796986562609389e-16,
+            4.790470743527318e-16
+          ],
+          "dual_upper": 4.12935989294388,
+          "primal_lower": 4.129359888389269,
+          "gap_upper": 4.5546145782536935e-09,
+          "feasibility_distance_upper": 4.3465235441881274e-11,
+          "horizontal_projection_distance_upper": 1.5108047402017826e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.023771129939340323,
+          "direction_error_upper": 0.022083505427517337,
+          "two_side_direction_error_upper": 0.022083505427517337,
+          "normalized_direction_upper": 0.0007968698627017311,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.474271088344134e-11,
+            4.4853360825552424e-11
+          ],
+          "right_defect_upper": [
+            1.9173317097497674e-11,
+            1.9249310179261785e-11
+          ],
+          "reconstruction_relative": [
+            1.8608940513925192e-13,
+            2.975302558683945e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 2.4995856433048195e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.613960709164652e-17,
+            "spectral_norms": [
+              0.9999999999999558,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.1293598912707905,
+            "dual_objective": 4.129359891271797,
+            "residual_rcond": 4.489415397345808e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.0063061495202419e-12,
+            "normalized_gap": 2.4369543367902253e-13,
+            "signed_normalized_gap": 2.4369543367902253e-13
+          },
+          "gradient_norm": 3.826189191282995e-13,
+          "gradient_max": 1.3075142097501713e-13,
+          "normalized_gradient_norm": 1.2595104400130397e-12,
+          "sides": [
+            {
+              "sigma_max": 1.1313503494224566,
+              "sigma_min": 7.522048457132053e-05,
+              "rcond": 6.648734815852565e-05,
+              "tail": [
+                9.092035581973006e-05,
+                8.819357802219403e-05,
+                8.727483384055793e-05,
+                8.33864922127282e-05,
+                8.260695620523348e-05,
+                8.050926772035455e-05,
+                7.667190814004741e-05,
+                7.522048457132053e-05
+              ]
+            },
+            {
+              "sigma_max": 1.436324267366158,
+              "sigma_min": 6.448256281495067e-05,
+              "rcond": 4.489415397345808e-05,
+              "tail": [
+                7.31856729439641e-05,
+                7.202643633890513e-05,
+                7.131278913389217e-05,
+                6.937409422996243e-05,
+                6.897721841379404e-05,
+                6.758721565489599e-05,
+                6.562286421815761e-05,
+                6.448256281495067e-05
+              ]
+            }
+          ]
+        },
+        "iterations": 20,
+        "counts": {
+          "svd_matrices": 46,
+          "polar_matrices": 46,
+          "hvp": 0,
+          "line_trials": 22,
+          "reference_iterations": 0
+        }
+      }
+    ],
+    "high": [
+      {
+        "kind": "random",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.2359429309699205e-16,
+        "relative_optimum_direction_change": 1.2925890809246027e-13,
+        "within_problem_observed_error": 5.519345958726893e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00011724834765056712,
+            0.00011102853240970651
+          ],
+          "sigma_min": [
+            0.00011724838158444388,
+            0.00011102857996442208
+          ],
+          "rcond": [
+            0.00011524662772268846,
+            7.706061262960297e-05
+          ],
+          "uncertainty": [
+            3.3933876737111734e-11,
+            4.755471553830708e-11
+          ],
+          "construction_uncertainty": [
+            3.447378297911474e-16,
+            4.809599654271343e-16
+          ],
+          "dual_upper": 4.488891271121539,
+          "primal_lower": 4.488891266705967,
+          "gap_upper": 4.4155758950481686e-09,
+          "feasibility_distance_upper": 4.41856220165152e-11,
+          "horizontal_projection_distance_upper": 1.5358480075163305e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01783698190928468,
+          "direction_error_upper": 0.01678743720409611,
+          "two_side_direction_error_upper": 0.01678743720409611,
+          "normalized_direction_upper": 0.0006057644617993018,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.478429042633584e-11,
+            4.4821301998565516e-11
+          ],
+          "right_defect_upper": [
+            1.9091502303013358e-11,
+            1.925399605092278e-11
+          ],
+          "reconstruction_relative": [
+            3.061282094769524e-14,
+            6.841187806820952e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.287783532188094e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.7755575615628914e-17,
+            "normalized_horizontal_residual": 8.16231845974335e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999842
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.488891269523636,
+            "dual_objective": 4.488891269524494,
+            "residual_rcond": 7.706061262960297e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 8.57980353430321e-13,
+            "normalized_gap": 1.9113413578431506e-13,
+            "signed_normalized_gap": 1.9113413578431506e-13
+          },
+          "gradient_norm": 3.3600825225482553e-13,
+          "gradient_max": 1.0519536630670956e-13,
+          "normalized_gradient_norm": 1.0313213205979516e-12,
+          "sides": [
+            {
+              "sigma_max": 1.017369305300387,
+              "sigma_min": 0.00011724838158444388,
+              "rcond": 0.00011524662772268846,
+              "tail": [
+                0.0001356151650613889,
+                0.0001334457703514941,
+                0.0001296755688295502,
+                0.00012741186699343545,
+                0.00012708643130591147,
+                0.00012279959834102878,
+                0.00012085537648103947,
+                0.00011724838158444388
+              ]
+            },
+            {
+              "sigma_max": 1.4407954488772161,
+              "sigma_min": 0.00011102857996442208,
+              "rcond": 7.706061262960297e-05,
+              "tail": [
+                0.00013100747710624198,
+                0.00012796974645174055,
+                0.00012571289657720621,
+                0.00012454191244968456,
+                0.00012236556868421784,
+                0.00011838583672677962,
+                0.00011695674804274026,
+                0.00011102857996442208
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.228565964495181e-16,
+        "relative_optimum_direction_change": 1.6883115867617939e-13,
+        "within_problem_observed_error": 5.5194628791152835e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.0001172483475730009,
+            0.00011102853242898803
+          ],
+          "sigma_min": [
+            0.00011724838158444698,
+            0.00011102857996441321
+          ],
+          "rcond": [
+            0.0001152466277226858,
+            7.706061262959682e-05
+          ],
+          "uncertainty": [
+            3.4011446058102564e-11,
+            4.753542515110572e-11
+          ],
+          "construction_uncertainty": [
+            3.447378297911474e-16,
+            4.809599654271343e-16
+          ],
+          "dual_upper": 4.488891271122724,
+          "primal_lower": 4.4888912667059815,
+          "gap_upper": 4.416746514205333e-09,
+          "feasibility_distance_upper": 4.4185606557030463e-11,
+          "horizontal_projection_distance_upper": 1.5358325480318382e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017839346143959323,
+          "direction_error_upper": 0.016789866764503558,
+          "two_side_direction_error_upper": 0.016789866764503558,
+          "normalized_direction_upper": 0.000605852131009005,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4769090965635896e-11,
+            4.478965280335552e-11
+          ],
+          "right_defect_upper": [
+            1.9141048902258335e-11,
+            1.925134016965997e-11
+          ],
+          "reconstruction_relative": [
+            8.843736285171957e-14,
+            7.219974938973227e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.287377414324873e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.7755575615628914e-17,
+            "normalized_horizontal_residual": 7.99162854094034e-17,
+            "spectral_norms": [
+              0.999999999999958,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.48889126952367,
+            "dual_objective": 4.488891269524538,
+            "residual_rcond": 7.706061262959682e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 8.686384944667225e-13,
+            "normalized_gap": 1.935084728748015e-13,
+            "signed_normalized_gap": 1.935084728748015e-13
+          },
+          "gradient_norm": 3.3905343961767947e-13,
+          "gradient_max": 1.0533587890826368e-13,
+          "normalized_gradient_norm": 1.0401131772932414e-12,
+          "sides": [
+            {
+              "sigma_max": 1.0173693053004373,
+              "sigma_min": 0.00011724838158444698,
+              "rcond": 0.0001152466277226858,
+              "tail": [
+                0.00013561516506138956,
+                0.00013344577035149382,
+                0.00012967556882955645,
+                0.00012741186699343496,
+                0.00012708643130591267,
+                0.0001227995983410306,
+                0.00012085537648104058,
+                0.00011724838158444698
+              ]
+            },
+            {
+              "sigma_max": 1.4407954488772161,
+              "sigma_min": 0.00011102857996441321,
+              "rcond": 7.706061262959682e-05,
+              "tail": [
+                0.00013100747710623862,
+                0.00012796974645174077,
+                0.00012571289657720329,
+                0.0001245419124496868,
+                0.00012236556868421407,
+                0.00011838583672677654,
+                0.00011695674804273635,
+                0.00011102857996441321
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "random",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955073272e-07,
+        "relative_optimum_direction_change": 1.9250564086452428e-05,
+        "within_problem_observed_error": 5.51967210088512e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00011724801812625702,
+            0.00011102852296667777
+          ],
+          "sigma_min": [
+            0.00011724805207929106,
+            0.00011102857060381207
+          ],
+          "rcond": [
+            0.00011524630386001499,
+            7.706060611811204e-05
+          ],
+          "uncertainty": [
+            3.395303400864042e-11,
+            4.763713426561963e-11
+          ],
+          "construction_uncertainty": [
+            3.447378296746581e-16,
+            4.809599655039763e-16
+          ],
+          "dual_upper": 4.4888912722395515,
+          "primal_lower": 4.488891267822079,
+          "gap_upper": 4.417476596866328e-09,
+          "feasibility_distance_upper": 4.4185588939710487e-11,
+          "horizontal_projection_distance_upper": 1.5358149307106408e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017840821254040528,
+          "direction_error_upper": 0.016791517424473913,
+          "two_side_direction_error_upper": 0.016791517424473913,
+          "normalized_direction_upper": 0.0006059116940701441,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4740464270119114e-11,
+            4.4780998293684784e-11
+          ],
+          "right_defect_upper": [
+            1.9145215594867914e-11,
+            1.9268804982972368e-11
+          ],
+          "reconstruction_relative": [
+            4.4191519299178815e-14,
+            1.382601770240286e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.287178854270852e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 4.163336342344337e-17,
+            "normalized_horizontal_residual": 1.2243477689615025e-16,
+            "spectral_norms": [
+              0.9999999999999873,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.488891270639801,
+            "dual_objective": 4.488891270640516,
+            "residual_rcond": 7.706060611811204e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 7.149836278586008e-13,
+            "normalized_gap": 1.5927844644732962e-13,
+            "signed_normalized_gap": 1.5927844644732962e-13
+          },
+          "gradient_norm": 3.86132751183064e-13,
+          "gradient_max": 1.6310737482871929e-13,
+          "normalized_gradient_norm": 1.1989997703733188e-12,
+          "sides": [
+            {
+              "sigma_max": 1.0173693051510573,
+              "sigma_min": 0.00011724805207929106,
+              "rcond": 0.00011524630386001499,
+              "tail": [
+                0.00013561498143408932,
+                0.0001334456309262237,
+                0.0001296754596279184,
+                0.0001274116461185954,
+                0.00012708637443206497,
+                0.00012279954943409893,
+                0.0001208554353898438,
+                0.00011724805207929106
+              ]
+            },
+            {
+              "sigma_max": 1.4407954491512405,
+              "sigma_min": 0.00011102857060381207,
+              "rcond": 7.706060611811204e-05,
+              "tail": [
+                0.00013100760697400306,
+                0.00012796983140906347,
+                0.00012571303880438078,
+                0.00012454156062205986,
+                0.00012236602426445912,
+                0.00011838590924969267,
+                0.00011695688099238821,
+                0.00011102857060381207
+              ]
+            }
+          ]
+        },
+        "iterations": 18,
+        "counts": {
+          "svd_matrices": 46,
+          "polar_matrices": 46,
+          "hvp": 0,
+          "line_trials": 22,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955080902e-07,
+        "relative_optimum_direction_change": 6.668985230217592e-05,
+        "within_problem_observed_error": 5.519622862193724e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00011724838825859968,
+            0.00011102868500483218
+          ],
+          "sigma_min": [
+            0.0001172484222434558,
+            0.00011102873256752088
+          ],
+          "rcond": [
+            0.00011524666768309517,
+            7.706071854676202e-05
+          ],
+          "uncertainty": [
+            3.3984856096320413e-11,
+            4.7562688684224353e-11
+          ],
+          "construction_uncertainty": [
+            3.447378297407251e-16,
+            4.809599652704337e-16
+          ],
+          "dual_upper": 4.488891271317989,
+          "primal_lower": 4.488891266901307,
+          "gap_upper": 4.416686118072794e-09,
+          "feasibility_distance_upper": 4.4185600593694517e-11,
+          "horizontal_projection_distance_upper": 1.5358265846953238e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01783921191546839,
+          "direction_error_upper": 0.016789762216904505,
+          "two_side_direction_error_upper": 0.016789762216904505,
+          "normalized_direction_upper": 0.0006058483584724765,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.477567018667387e-11,
+            4.479787567591552e-11
+          ],
+          "right_defect_upper": [
+            1.9120910137565396e-11,
+            1.9229736436181272e-11
+          ],
+          "reconstruction_relative": [
+            6.950855601720429e-14,
+            9.777876127351357e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.2874931704728846e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.7755575615628914e-17,
+            "normalized_horizontal_residual": 7.54780181175059e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999742
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.488891269719019,
+            "dual_objective": 4.488891269719789,
+            "residual_rcond": 7.706071854676202e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 7.700506898800086e-13,
+            "normalized_gap": 1.7154585478032251e-13,
+            "signed_normalized_gap": 1.7154585478032251e-13
+          },
+          "gradient_norm": 3.0816621105791236e-13,
+          "gradient_max": 1.2976425489696908e-13,
+          "normalized_gradient_norm": 9.672373530981797e-13,
+          "sides": [
+            {
+              "sigma_max": 1.0173693053396133,
+              "sigma_min": 0.0001172484222434558,
+              "rcond": 0.00011524666768309517,
+              "tail": [
+                0.00013561519326003589,
+                0.00013344577261253457,
+                0.00012967560458932134,
+                0.00012741190008789378,
+                0.00012708657101059205,
+                0.00012279954586572682,
+                0.00012085545301653235,
+                0.0001172484222434558
+              ]
+            },
+            {
+              "sigma_max": 1.4407954488530546,
+              "sigma_min": 0.00011102873256752088,
+              "rcond": 7.706071854676202e-05,
+              "tail": [
+                0.0001310073769054108,
+                0.0001279696723083767,
+                0.00012571292981630508,
+                0.00012454187892527524,
+                0.00012236557742310007,
+                0.00011838585081797376,
+                0.00011695669623259197,
+                0.00011102873256752088
+              ]
+            }
+          ]
+        },
+        "iterations": 19,
+        "counts": {
+          "svd_matrices": 42,
+          "polar_matrices": 42,
+          "hvp": 0,
+          "line_trials": 20,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "one_fp32_ulp_proxy",
+        "scale": null,
+        "relative_objective_change": 8.743786428541331e-08,
+        "relative_optimum_direction_change": 1.0278234146434943e-05,
+        "within_problem_observed_error": 5.519007525514569e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00011724827965756192,
+            0.00011102853869997259
+          ],
+          "sigma_min": [
+            0.00011724831363118443,
+            0.00011102858628858996
+          ],
+          "rcond": [
+            0.0001152465608536436,
+            7.706061701346945e-05
+          ],
+          "uncertainty": [
+            3.397362248744129e-11,
+            4.758861734581781e-11
+          ],
+          "construction_uncertainty": [
+            3.4473783013355e-16,
+            4.809599655483311e-16
+          ],
+          "dual_upper": 4.4888912747287995,
+          "primal_lower": 4.488891270311583,
+          "gap_upper": 4.4172208014814565e-09,
+          "feasibility_distance_upper": 4.4185600978128684e-11,
+          "horizontal_projection_distance_upper": 1.5358269691316639e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01784030344332457,
+          "direction_error_upper": 0.01679092798581945,
+          "two_side_direction_error_upper": 0.01679092798581945,
+          "normalized_direction_upper": 0.00060589042453478,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4744555744251295e-11,
+            4.4771406933379405e-11
+          ],
+          "right_defect_upper": [
+            1.9113189075485163e-11,
+            1.9297862774418685e-11
+          ],
+          "reconstruction_relative": [
+            7.806504116348105e-14,
+            9.491372166154396e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.286898455032129e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.7755575615628914e-17,
+            "normalized_horizontal_residual": 8.281578547472573e-17,
+            "spectral_norms": [
+              0.9999999999999465,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 4.488891273129196,
+            "dual_objective": 4.488891273130312,
+            "residual_rcond": 7.706061701346945e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.1155520951433573e-12,
+            "normalized_gap": 2.485139486048258e-13,
+            "signed_normalized_gap": 2.485139486048258e-13
+          },
+          "gradient_norm": 3.0164405075590866e-13,
+          "gradient_max": 1.8629629089383926e-13,
+          "normalized_gradient_norm": 9.118619313306548e-13,
+          "sides": [
+            {
+              "sigma_max": 1.017369305970726,
+              "sigma_min": 0.00011724831363118443,
+              "rcond": 0.0001152465608536436,
+              "tail": [
+                0.0001356152170986032,
+                0.00013344575658596022,
+                0.00012967573635271502,
+                0.00012741184336976656,
+                0.00012708640259178082,
+                0.00012279962888341986,
+                0.00012085559013450233,
+                0.00011724831363118443
+              ]
+            },
+            {
+              "sigma_max": 1.4407954489799017,
+              "sigma_min": 0.00011102858628858996,
+              "rcond": 7.706061701346945e-05,
+              "tail": [
+                0.0001310073128851998,
+                0.0001279698022500245,
+                0.00012571282480553994,
+                0.00012454167293544693,
+                0.00012236572410355328,
+                0.00011838599589578034,
+                0.00011695675550399683,
+                0.00011102858628858996
+              ]
+            }
+          ]
+        },
+        "iterations": 18,
+        "counts": {
+          "svd_matrices": 40,
+          "polar_matrices": 40,
+          "hvp": 0,
+          "line_trials": 19,
+          "reference_iterations": 0
+        }
+      }
+    ],
+    "ablation": [
+      {
+        "kind": "random",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.236535731035346e-16,
+        "relative_optimum_direction_change": 1.0375101664240792e-13,
+        "within_problem_observed_error": 5.519345962365026e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00017088734928712962,
+            0.0001603508994089494
+          ],
+          "sigma_min": [
+            0.00017088739651060359,
+            0.00016035096012883063
+          ],
+          "rcond": [
+            0.00012078486483325795,
+            8.761157251280996e-05
+          ],
+          "uncertainty": [
+            4.722347392772037e-11,
+            6.071988117669077e-11
+          ],
+          "construction_uncertainty": [
+            4.794093003487337e-16,
+            6.1099360033223e-16
+          ],
+          "dual_upper": 6.2883626670592285,
+          "primal_lower": 6.288362661090647,
+          "gap_upper": 5.968586770033348e-09,
+          "feasibility_distance_upper": 4.3324853698125595e-11,
+          "horizontal_projection_distance_upper": 1.505799569546622e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017256195423529356,
+          "direction_error_upper": 0.016216106202857405,
+          "two_side_direction_error_upper": 0.016216106202857405,
+          "normalized_direction_upper": 0.0005851483300892053,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4747701369962653e-11,
+            4.481326604631707e-11
+          ],
+          "right_defect_upper": [
+            1.9154831888706352e-11,
+            1.9253848874697343e-11
+          ],
+          "reconstruction_relative": [
+            3.161311633757724e-14,
+            2.362329781572117e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.403619767483068e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.6291365135464776e-17,
+            "spectral_norms": [
+              0.9999999999999958,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 6.288362664942838,
+            "dual_objective": 6.288362664943699,
+            "residual_rcond": 8.761157251280996e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 8.615330671091215e-13,
+            "normalized_gap": 1.3700435439450516e-13,
+            "signed_normalized_gap": 1.3700435439450516e-13
+          },
+          "gradient_norm": 1.0298112874222479e-13,
+          "gradient_max": 6.738533342431907e-14,
+          "normalized_gradient_norm": 3.396693917220747e-13,
+          "sides": [
+            {
+              "sigma_max": 1.4148080286922669,
+              "sigma_min": 0.00017088739651060359,
+              "rcond": 0.00012078486483325795,
+              "tail": [
+                0.00020301496070813298,
+                0.00020195065670980313,
+                0.00019616953781916347,
+                0.00019366473543872285,
+                0.0001834089192221698,
+                0.00018224691206396445,
+                0.00017621903296632723,
+                0.00017088739651060359
+              ]
+            },
+            {
+              "sigma_max": 1.83024862503621,
+              "sigma_min": 0.00016035096012883063,
+              "rcond": 8.761157251280996e-05,
+              "tail": [
+                0.00018315437010998816,
+                0.00018136452432754944,
+                0.00017919573309787477,
+                0.0001736706937116896,
+                0.00017151403623864937,
+                0.00016701353723219388,
+                0.00016500910547517377,
+                0.00016035096012883063
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 2.220446049250313e-16,
+        "relative_objective_change": 2.2289706119881473e-16,
+        "relative_optimum_direction_change": 1.448610689708069e-13,
+        "within_problem_observed_error": 5.519444410973506e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.0001708873493040542,
+            0.0001603508995482493
+          ],
+          "sigma_min": [
+            0.00017088739651060288,
+            0.0001603509601288359
+          ],
+          "rcond": [
+            0.00012078486483325866,
+            8.761157251281034e-05
+          ],
+          "uncertainty": [
+            4.720654866003724e-11,
+            6.058058654416445e-11
+          ],
+          "construction_uncertainty": [
+            4.794093003487337e-16,
+            6.1099360033223e-16
+          ],
+          "dual_upper": 6.288362667056211,
+          "primal_lower": 6.288362661090642,
+          "gap_upper": 5.9655749570121445e-09,
+          "feasibility_distance_upper": 4.331868386609931e-11,
+          "horizontal_projection_distance_upper": 1.5057832181165369e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017251841035833656,
+          "direction_error_upper": 0.01621146348577663,
+          "two_side_direction_error_upper": 0.01621146348577663,
+          "normalized_direction_upper": 0.0005849808004669329,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4749211890815925e-11,
+            4.479607168445767e-11
+          ],
+          "right_defect_upper": [
+            1.9134148633822204e-11,
+            1.9240655470542528e-11
+          ],
+          "reconstruction_relative": [
+            2.943530477173685e-14,
+            1.7546997546069348e-13
+          ]
+        },
+        "within_problem_observed_over_bound": 3.404655240297135e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.350791959948869e-17,
+            "spectral_norms": [
+              0.9999999999999953,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 6.2883626649428415,
+            "dual_objective": 6.288362664943744,
+            "residual_rcond": 8.761157251281034e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 9.023892744153272e-13,
+            "normalized_gap": 1.43501468108058e-13,
+            "signed_normalized_gap": 1.43501468108058e-13
+          },
+          "gradient_norm": 1.1015600429063055e-13,
+          "gradient_max": 7.186005263060125e-14,
+          "normalized_gradient_norm": 3.637763398408087e-13,
+          "sides": [
+            {
+              "sigma_max": 1.4148080286922526,
+              "sigma_min": 0.00017088739651060288,
+              "rcond": 0.00012078486483325866,
+              "tail": [
+                0.0002030149607081305,
+                0.0002019506567098043,
+                0.00019616953781916287,
+                0.0001936647354387169,
+                0.0001834089192221659,
+                0.00018224691206396407,
+                0.00017621903296632824,
+                0.00017088739651060288
+              ]
+            },
+            {
+              "sigma_max": 1.830248625036262,
+              "sigma_min": 0.0001603509601288359,
+              "rcond": 8.761157251281034e-05,
+              "tail": [
+                0.00018315437010999125,
+                0.00018136452432754806,
+                0.00017919573309787849,
+                0.0001736706937116931,
+                0.00017151403623865314,
+                0.000167013537232195,
+                0.0001650091054751763,
+                0.0001603509601288359
+              ]
+            }
+          ]
+        },
+        "iterations": 0,
+        "counts": {
+          "svd_matrices": 2,
+          "polar_matrices": 2,
+          "hvp": 0,
+          "line_trials": 0,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "random",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.1920928955086987e-07,
+        "relative_optimum_direction_change": 1.740735534492132e-05,
+        "within_problem_observed_error": 5.519272115756302e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00017088725283573872,
+            0.00016035076607172675
+          ],
+          "sigma_min": [
+            0.00017088730010865878,
+            0.00016035082648448452
+          ],
+          "rcond": [
+            0.00012078479671435793,
+            8.76114994807173e-05
+          ],
+          "uncertainty": [
+            4.727292003687016e-11,
+            6.041275774141993e-11
+          ],
+          "construction_uncertainty": [
+            4.794093003677507e-16,
+            6.109936005131928e-16
+          ],
+          "dual_upper": 6.288362667975701,
+          "primal_lower": 6.288362662011294,
+          "gap_upper": 5.964412331460758e-09,
+          "feasibility_distance_upper": 4.33186928348593e-11,
+          "horizontal_projection_distance_upper": 1.505792186882094e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.01725016703555628,
+          "direction_error_upper": 0.01620958311908941,
+          "two_side_direction_error_upper": 0.01620958311908941,
+          "normalized_direction_upper": 0.0005849129485786178,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.4729183693696316e-11,
+            4.4830025040327055e-11
+          ],
+          "right_defect_upper": [
+            1.9080618156442086e-11,
+            1.9278528604591086e-11
+          ],
+          "reconstruction_relative": [
+            1.1234713633153412e-13,
+            4.8040254702822795e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.4049438996715867e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.734723475976807e-17,
+            "normalized_horizontal_residual": 5.551506463056684e-17,
+            "spectral_norms": [
+              0.9999999999999643,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 6.288362665863453,
+            "dual_objective": 6.288362665865221,
+            "residual_rcond": 8.76114994807173e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.7683632336229493e-12,
+            "normalized_gap": 2.8121203047369703e-13,
+            "signed_normalized_gap": 2.8121203047369703e-13
+          },
+          "gradient_norm": 3.641400303061558e-13,
+          "gradient_max": 1.5916781781477596e-13,
+          "normalized_gradient_norm": 1.1912478430320417e-12,
+          "sides": [
+            {
+              "sigma_max": 1.4148080284705655,
+              "sigma_min": 0.00017088730010865878,
+              "rcond": 0.00012078479671435793,
+              "tail": [
+                0.00020301487803942524,
+                0.00020195047411508286,
+                0.00019616984729300748,
+                0.00019366476920236112,
+                0.00018340906470733562,
+                0.00018224708311984815,
+                0.00017621947746151125,
+                0.00017088730010865878
+              ]
+            },
+            {
+              "sigma_max": 1.8302486252934944,
+              "sigma_min": 0.00016035082648448452,
+              "rcond": 8.76114994807173e-05,
+              "tail": [
+                0.00018315392060155058,
+                0.00018136400488751186,
+                0.00017919588349002926,
+                0.00017367048227648533,
+                0.00017151327747919761,
+                0.00016701287353171595,
+                0.00016500867024233834,
+                0.00016035082648448452
+              ]
+            }
+          ]
+        },
+        "iterations": 15,
+        "counts": {
+          "svd_matrices": 32,
+          "polar_matrices": 32,
+          "hvp": 0,
+          "line_trials": 15,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "smallest_normal",
+        "scale": 1.1920928955078125e-07,
+        "relative_objective_change": 1.192092895507919e-07,
+        "relative_optimum_direction_change": 6.034790909784151e-05,
+        "within_problem_observed_error": 5.5204966633727025e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00017088750390280017,
+            0.00016035096619525436
+          ],
+          "sigma_min": [
+            0.00017088755113522683,
+            0.00016035102661419016
+          ],
+          "rcond": [
+            0.0001207849741177812,
+            8.761160884140088e-05
+          ],
+          "uncertainty": [
+            4.723242663788581e-11,
+            6.041893577476838e-11
+          ],
+          "construction_uncertainty": [
+            4.794092997426623e-16,
+            6.109936001940458e-16
+          ],
+          "dual_upper": 6.288362667285528,
+          "primal_lower": 6.288362661321465,
+          "gap_upper": 5.964068606412333e-09,
+          "feasibility_distance_upper": 4.331869159405819e-11,
+          "horizontal_projection_distance_upper": 1.5057909460831602e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017249659206572395,
+          "direction_error_upper": 0.016209071819998158,
+          "two_side_direction_error_upper": 0.016209071819998158,
+          "normalized_direction_upper": 0.0005848944986618697,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.474587451772973e-11,
+            4.483912931879115e-11
+          ],
+          "right_defect_upper": [
+            1.911251027668977e-11,
+            1.925010623225943e-11
+          ],
+          "reconstruction_relative": [
+            5.991007175681228e-14,
+            6.106816783281158e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.4058067757844813e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 2.0816681711721685e-17,
+            "normalized_horizontal_residual": 6.653993894490653e-17,
+            "spectral_norms": [
+              1.0,
+              0.9999999999999902
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 6.288362665173903,
+            "dual_objective": 6.288362665175721,
+            "residual_rcond": 8.761160884140088e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.8181012251261564e-12,
+            "normalized_gap": 2.8912156024247873e-13,
+            "signed_normalized_gap": 2.8912156024247873e-13
+          },
+          "gradient_norm": 4.435724145250846e-13,
+          "gradient_max": 2.0798640587571526e-13,
+          "normalized_gradient_norm": 1.4460991422916927e-12,
+          "sides": [
+            {
+              "sigma_max": 1.4148080287585196,
+              "sigma_min": 0.00017088755113522683,
+              "rcond": 0.0001207849741177812,
+              "tail": [
+                0.00020301494822960424,
+                0.00020195067921760352,
+                0.00019616949821458165,
+                0.0001936647118763143,
+                0.00018340889861637576,
+                0.00018224695576575317,
+                0.00017621902792657357,
+                0.00017088755113522683
+              ]
+            },
+            {
+              "sigma_max": 1.8302486249792078,
+              "sigma_min": 0.00016035102661419016,
+              "rcond": 8.761160884140088e-05,
+              "tail": [
+                0.0001831544506785385,
+                0.00018136451034032205,
+                0.00017919566503796653,
+                0.00017367070340248267,
+                0.00017151404934014598,
+                0.0001670134793652398,
+                0.00016500909644361723,
+                0.00016035102661419016
+              ]
+            }
+          ]
+        },
+        "iterations": 16,
+        "counts": {
+          "svd_matrices": 36,
+          "polar_matrices": 36,
+          "hvp": 0,
+          "line_trials": 17,
+          "reference_iterations": 0
+        }
+      },
+      {
+        "kind": "one_fp32_ulp_proxy",
+        "scale": null,
+        "relative_objective_change": 8.745556169085578e-08,
+        "relative_optimum_direction_change": 9.541245320292115e-06,
+        "within_problem_observed_error": 5.519641327638049e-09,
+        "posterior": {
+          "alpha_lower": [
+            0.00017088758051359167,
+            0.00016035095287420504
+          ],
+          "sigma_min": [
+            0.00017088762771230216,
+            0.0001603510131292761
+          ],
+          "rcond": [
+            0.00012078502821805077,
+            8.761160147280071e-05
+          ],
+          "uncertainty": [
+            4.7198710466028e-11,
+            6.025507103877399e-11
+          ],
+          "construction_uncertainty": [
+            4.794093005980799e-16,
+            6.109936005404024e-16
+          ],
+          "dual_upper": 6.288362671835758,
+          "primal_lower": 6.288362665875776,
+          "gap_upper": 5.959987426573815e-09,
+          "feasibility_distance_upper": 4.332485044066889e-11,
+          "horizontal_projection_distance_upper": 1.5057963120965556e-12,
+          "radial_norm_upper": 1.0000000000000027,
+          "global_direction_error_upper": 0.017243756988666224,
+          "direction_error_upper": 0.016202807861813738,
+          "two_side_direction_error_upper": 0.016202807861813738,
+          "normalized_direction_upper": 0.0005846684675403716,
+          "model": "conditional fp64 gamma model; no directed interval arithmetic",
+          "left_defect_upper": [
+            4.468189579738283e-11,
+            4.475804335681663e-11
+          ],
+          "right_defect_upper": [
+            1.9126391898597506e-11,
+            1.922212348253282e-11
+          ],
+          "reconstruction_relative": [
+            6.152364860509046e-14,
+            2.6247644875002108e-14
+          ]
+        },
+        "within_problem_observed_over_bound": 3.40659555720991e-07,
+        "kkt": {
+          "metrics": {
+            "horizontal_residual": 1.3877787807814457e-17,
+            "normalized_horizontal_residual": 4.66974273501392e-17,
+            "spectral_norms": [
+              0.9999999999999098,
+              1.0
+            ],
+            "spectral_excess": 0.0,
+            "primal_spectral_backend": "full_svd_reference",
+            "primal_objective": 6.288362669728034,
+            "dual_objective": 6.288362669729822,
+            "residual_rcond": 8.761160147280071e-05,
+            "dual_spectrum_source": "independent_original_residual",
+            "signed_gap": 1.787903158856352e-12,
+            "normalized_gap": 2.8431934555281765e-13,
+            "signed_normalized_gap": 2.8431934555281765e-13
+          },
+          "gradient_norm": 2.56270836956836e-13,
+          "gradient_max": 1.6536771951791707e-13,
+          "normalized_gradient_norm": 8.421102887165336e-13,
+          "sides": [
+            {
+              "sigma_max": 1.4148080290530891,
+              "sigma_min": 0.00017088762771230216,
+              "rcond": 0.00012078502821805077,
+              "tail": [
+                0.000203015122258839,
+                0.0002019505112556982,
+                0.00019616935367585783,
+                0.00019366484815951362,
+                0.00018340890820224461,
+                0.00018224699461080412,
+                0.00017621902986780024,
+                0.00017088762771230216
+              ]
+            },
+            {
+              "sigma_max": 1.8302486249958296,
+              "sigma_min": 0.0001603510131292761,
+              "rcond": 8.761160147280071e-05,
+              "tail": [
+                0.00018315449600401552,
+                0.0001813644606585297,
+                0.00017919585141475851,
+                0.00017367056465126388,
+                0.00017151358517727261,
+                0.00016701334744543306,
+                0.00016500884957546826,
+                0.0001603510131292761
+              ]
+            }
+          ]
+        },
+        "iterations": 15,
+        "counts": {
+          "svd_matrices": 34,
+          "polar_matrices": 34,
+          "hvp": 0,
+          "line_trials": 16,
+          "reference_iterations": 0
+        }
+      }
+    ]
+  },
+  "update_scales": {
+    "tuned": {
+      "step": 87,
+      "actual_paired_lr": 0.0012081708304993765,
+      "raw_pair_weight_norm": 13.250160470833128,
+      "lift_norm_upper": 1.9960677978421535,
+      "rows": [
+        {
+          "iteration": 0,
+          "raw_update_error_over_weight_upper": 0.01756386015744921
+        },
+        {
+          "iteration": 1,
+          "raw_update_error_over_weight_upper": 0.007957012078494956
+        },
+        {
+          "iteration": 2,
+          "raw_update_error_over_weight_upper": 0.0021996417997843637
+        },
+        {
+          "iteration": 3,
+          "raw_update_error_over_weight_upper": 0.0003262235721638597
+        },
+        {
+          "iteration": 4,
+          "raw_update_error_over_weight_upper": 2.966985290709942e-05
+        },
+        {
+          "iteration": 5,
+          "raw_update_error_over_weight_upper": 2.1082733220984917e-05
+        },
+        {
+          "iteration": 6,
+          "raw_update_error_over_weight_upper": 2.1081610600420625e-05
+        }
+      ]
+    },
+    "low": {
+      "step": 92,
+      "actual_paired_lr": 0.0002483411306363157,
+      "raw_pair_weight_norm": 13.07907101891495,
+      "lift_norm_upper": 2.0014827304054448,
+      "rows": [
+        {
+          "iteration": 0,
+          "raw_update_error_over_weight_upper": 0.006630585346572004
+        },
+        {
+          "iteration": 1,
+          "raw_update_error_over_weight_upper": 0.0024418113393573936
+        },
+        {
+          "iteration": 2,
+          "raw_update_error_over_weight_upper": 0.0006643386842722544
+        },
+        {
+          "iteration": 3,
+          "raw_update_error_over_weight_upper": 8.177009901666169e-05
+        },
+        {
+          "iteration": 4,
+          "raw_update_error_over_weight_upper": 8.285590678675959e-06
+        },
+        {
+          "iteration": 5,
+          "raw_update_error_over_weight_upper": 7.53441228698204e-07
+        },
+        {
+          "iteration": 6,
+          "raw_update_error_over_weight_upper": 6.761118886858647e-07
+        },
+        {
+          "iteration": 7,
+          "raw_update_error_over_weight_upper": 6.761010556723252e-07
+        },
+        {
+          "iteration": 8,
+          "raw_update_error_over_weight_upper": 6.761008124678088e-07
+        }
+      ]
+    },
+    "middle": {
+      "step": 87,
+      "actual_paired_lr": 0.0008514144973213139,
+      "raw_pair_weight_norm": 13.273325653087957,
+      "lift_norm_upper": 2.0014887348900676,
+      "rows": [
+        {
+          "iteration": 0,
+          "raw_update_error_over_weight_upper": 0.02492050654205426
+        },
+        {
+          "iteration": 1,
+          "raw_update_error_over_weight_upper": 0.010870010677931021
+        },
+        {
+          "iteration": 2,
+          "raw_update_error_over_weight_upper": 0.001693540706243671
+        },
+        {
+          "iteration": 3,
+          "raw_update_error_over_weight_upper": 0.0004642907870134065
+        },
+        {
+          "iteration": 4,
+          "raw_update_error_over_weight_upper": 4.0120230062841616e-05
+        },
+        {
+          "iteration": 5,
+          "raw_update_error_over_weight_upper": 2.8434554413474405e-05
+        },
+        {
+          "iteration": 6,
+          "raw_update_error_over_weight_upper": 2.9322892885292185e-06
+        },
+        {
+          "iteration": 7,
+          "raw_update_error_over_weight_upper": 2.9198644847018796e-06
+        },
+        {
+          "iteration": 8,
+          "raw_update_error_over_weight_upper": 2.8780284149903075e-06
+        },
+        {
+          "iteration": 9,
+          "raw_update_error_over_weight_upper": 2.833713369247246e-06
+        },
+        {
+          "iteration": 10,
+          "raw_update_error_over_weight_upper": 2.83411016241885e-06
+        }
+      ]
+    },
+    "high": {
+      "step": 56,
+      "actual_paired_lr": 0.0038496944810611157,
+      "raw_pair_weight_norm": 14.4206694331382,
+      "lift_norm_upper": 2.0015528979029233,
+      "rows": [
+        {
+          "iteration": 0,
+          "raw_update_error_over_weight_upper": 0.09774975824735606
+        },
+        {
+          "iteration": 1,
+          "raw_update_error_over_weight_upper": 0.04549365544625778
+        },
+        {
+          "iteration": 2,
+          "raw_update_error_over_weight_upper": 0.008122042154327096
+        },
+        {
+          "iteration": 3,
+          "raw_update_error_over_weight_upper": 0.0024202841471849886
+        },
+        {
+          "iteration": 4,
+          "raw_update_error_over_weight_upper": 0.00020483968965159975
+        },
+        {
+          "iteration": 5,
+          "raw_update_error_over_weight_upper": 1.1450958628429344e-05
+        },
+        {
+          "iteration": 6,
+          "raw_update_error_over_weight_upper": 1.1171202686064794e-05
+        },
+        {
+          "iteration": 7,
+          "raw_update_error_over_weight_upper": 1.1047232193063424e-05
+        },
+        {
+          "iteration": 8,
+          "raw_update_error_over_weight_upper": 1.0930116327119563e-05
+        },
+        {
+          "iteration": 9,
+          "raw_update_error_over_weight_upper": 8.970835928354158e-06
+        },
+        {
+          "iteration": 10,
+          "raw_update_error_over_weight_upper": 8.972096721849828e-06
+        }
+      ]
+    },
+    "ablation": {
+      "step": 81,
+      "actual_paired_lr": 0.001075162852082692,
+      "raw_pair_weight_norm": 13.321421379996162,
+      "lift_norm_upper": 2.001487555786907,
+      "rows": [
+        {
+          "iteration": 0,
+          "raw_update_error_over_weight_upper": 0.023550687174776097
+        },
+        {
+          "iteration": 1,
+          "raw_update_error_over_weight_upper": 0.011344596938618254
+        },
+        {
+          "iteration": 2,
+          "raw_update_error_over_weight_upper": 0.002700646181657218
+        },
+        {
+          "iteration": 3,
+          "raw_update_error_over_weight_upper": 0.0006159979283212873
+        },
+        {
+          "iteration": 4,
+          "raw_update_error_over_weight_upper": 3.9531434258332e-05
+        },
+        {
+          "iteration": 5,
+          "raw_update_error_over_weight_upper": 2.801538705670101e-05
+        },
+        {
+          "iteration": 6,
+          "raw_update_error_over_weight_upper": 2.8014543534688872e-05
+        }
+      ]
+    }
+  }
+}

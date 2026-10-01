@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#222">
+<text x="100" y="30" font-size="20">Coarse qso: equal-token validation</text>
+<path d="M 100.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 515.000 H 690" stroke="#eeeeee"/>
+<text x="100.000" y="540" text-anchor="middle">0k</text>
+<text x="88" y="520.000" text-anchor="end">4.77</text>
+<path d="M 218.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 425.000 H 690" stroke="#eeeeee"/>
+<text x="218.000" y="540" text-anchor="middle">105k</text>
+<text x="88" y="430.000" text-anchor="end">5.241</text>
+<path d="M 336.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 335.000 H 690" stroke="#eeeeee"/>
+<text x="336.000" y="540" text-anchor="middle">210k</text>
+<text x="88" y="340.000" text-anchor="end">5.712</text>
+<path d="M 454.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 245.000 H 690" stroke="#eeeeee"/>
+<text x="454.000" y="540" text-anchor="middle">315k</text>
+<text x="88" y="250.000" text-anchor="end">6.183</text>
+<path d="M 572.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 155.000 H 690" stroke="#eeeeee"/>
+<text x="572.000" y="540" text-anchor="middle">419k</text>
+<text x="88" y="160.000" text-anchor="end">6.654</text>
+<path d="M 690.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 65.000 H 690" stroke="#eeeeee"/>
+<text x="690.000" y="540" text-anchor="middle">524k</text>
+<text x="88" y="70.000" text-anchor="end">7.125</text>
+<path d="M 100 65 V 515 H 690" fill="none" stroke="#222"/>
+<text x="395.0" y="575" text-anchor="middle">Training tokens</text>
+<text transform="translate(24 290.0) rotate(-90)" text-anchor="middle">Validation cross entropy</text>
+<polyline points="100.000,89.107 173.750,278.594 247.500,285.103" fill="none" stroke="#0072B2" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#0072B2"/>
+<circle cx="173.750" cy="278.594" r="2.4" fill="#0072B2"/>
+<circle cx="247.500" cy="285.103" r="2.4" fill="#0072B2"/>
+<path d="M 715 65 h 22" stroke="#0072B2" stroke-width="3"/>
+<text x="745" y="70">peak LR 0.0003 FAILED</text>
+<polyline points="100.000,89.107 173.750,278.646 247.500,285.294" fill="none" stroke="#D55E00" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#D55E00"/>
+<circle cx="173.750" cy="278.646" r="2.4" fill="#D55E00"/>
+<circle cx="247.500" cy="285.294" r="2.4" fill="#D55E00"/>
+<path d="M 715 89 h 22" stroke="#D55E00" stroke-width="3"/>
+<text x="745" y="94">peak LR 0.0006 FAILED</text>
+<polyline points="100.000,89.107 173.750,278.712 247.500,285.641" fill="none" stroke="#009E73" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#009E73"/>
+<circle cx="173.750" cy="278.712" r="2.4" fill="#009E73"/>
+<circle cx="247.500" cy="285.641" r="2.4" fill="#009E73"/>
+<path d="M 715 113 h 22" stroke="#009E73" stroke-width="3"/>
+<text x="745" y="118">peak LR 0.001 FAILED</text>
+<polyline points="100.000,89.107 173.750,278.814 247.500,286.279 321.250,297.569 395.000,374.573 468.750,438.359 542.500,468.065 616.250,482.769 690.000,490.893" fill="none" stroke="#CC79A7" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#CC79A7"/>
+<circle cx="173.750" cy="278.814" r="2.4" fill="#CC79A7"/>
+<circle cx="247.500" cy="286.279" r="2.4" fill="#CC79A7"/>
+<circle cx="321.250" cy="297.569" r="2.4" fill="#CC79A7"/>
+<circle cx="395.000" cy="374.573" r="2.4" fill="#CC79A7"/>
+<circle cx="468.750" cy="438.359" r="2.4" fill="#CC79A7"/>
+<circle cx="542.500" cy="468.065" r="2.4" fill="#CC79A7"/>
+<circle cx="616.250" cy="482.769" r="2.4" fill="#CC79A7"/>
+<circle cx="690.000" cy="490.893" r="2.4" fill="#CC79A7"/>
+<path d="M 715 137 h 22" stroke="#CC79A7" stroke-width="3"/>
+<text x="745" y="142">peak LR 0.0015</text>
+<polyline points="100.000,89.107 173.750,279.008 247.500,281.666" fill="none" stroke="#E69F00" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#E69F00"/>
+<circle cx="173.750" cy="279.008" r="2.4" fill="#E69F00"/>
+<circle cx="247.500" cy="281.666" r="2.4" fill="#E69F00"/>
+<path d="M 715 161 h 22" stroke="#E69F00" stroke-width="3"/>
+<text x="745" y="166">peak LR 0.0025 FAILED</text>
+<polyline points="100.000,89.107 173.750,279.348" fill="none" stroke="#56B4E9" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#56B4E9"/>
+<circle cx="173.750" cy="279.348" r="2.4" fill="#56B4E9"/>
+<path d="M 715 185 h 22" stroke="#56B4E9" stroke-width="3"/>
+<text x="745" y="190">peak LR 0.004 FAILED</text>
+</g></svg>

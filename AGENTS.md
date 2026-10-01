@@ -34,8 +34,8 @@ documents. For production optimizer work, read at minimum, in this order:
 3. `docs/HORIZONTAL_SPECTRAL_LMO.md`
 4. `docs/DUAL_SOLVER_STUDY.md`
 
-For current numerical or performance work, additionally read in chronological
-decision order:
+For current numerical, performance, or experimental work, additionally read in
+chronological decision order:
 
 5. `docs/TRAINING_SOLVER_DIAGNOSIS.md`
 6. `docs/SOLVER_PERFORMANCE_OPTIMIZATION.md`
@@ -48,6 +48,11 @@ decision order:
 13. `docs/TORCH_POLAR_CAPABILITY.md`
 14. `docs/SMOOTH_QDWH_DECISION_VALIDATION.md`
 15. `docs/SMOOTH_QDWH_ONE_SIDED_SOLVER.md`
+16. `docs/SMOOTH_QR_REDUCED_SVD_STUDY.md`
+17. `docs/SMOOTH_QDWH_CERTIFIED_OUTPUT_HYBRID.md`
+18. `docs/QSO_LR_SWEEP.md`
+19. `docs/STAGE_D_QSO_FAILURE_FORENSICS.md`
+20. `docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -451,6 +456,10 @@ rcond `> 1e-4`, normalized horizontal residual `<= 1e-10`, spectral excess
 for performance. A stricter `1e-8` warm-start line-search failure is a known
 separate limitation, not the production target.
 
+`rcond > 1e-4` is a conservative production numerical-admission policy, not a
+mathematical rank criterion. Do not simply lower or remove the guard from
+observations of full-rank optima below it.
+
 The default `primal_norm_backend="gram_upper"` applies ONLY to projected-primal
 radial feasibility. It uses a conservative fp64 Gram/eigensystem upper estimate
 of each top singular value under its documented numerical model and may
@@ -719,10 +728,13 @@ Comparisons should use identical:
 Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
-The next approved phase is optimizer-specific learning-rate sweeps on the
-controlled tiny Transformer. Proceed to longer and multi-seed experiments only
-if the tuned pilot is promising. This is a workflow state, not a mathematical
-claim.
+Stage-D tuning, failure forensics, and fixed-fixture optimum classification are
+complete, but its QSO confirmation failed. The next approved step is a posterior
+full-rank direction-accuracy certificate for numerical admission below the
+current guard. Another sweep or multi-seed study is not approved until the
+admission question is resolved. A promising short pilot alone does not justify
+scaling.
+This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
 
@@ -1051,7 +1063,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: optimizer-quality evaluation
+# 39. Current research priority: posterior full-rank direction accuracy
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1109,19 +1121,79 @@ integration. A mathematically equivalent numerical backend need not follow
 identical floating-point branches; that does not remove the final certificate
 requirements or explicit full-SVD fallback on stagnation or budget exhaustion.
 
+Reduced QR followed by square full SVD was numerically valid on the tested
+domain but had no kernel speed advantage over direct tall SVD. Cross-pair
+batching also gave no material throughput gain. The QDWH-inner plus
+authoritative-final-SVD hybrid was numerically successful: with the
+three-Newton policy, all 300 locked real problems produced candidates accepted
+by the final production SVD verifier with no rescue. Nevertheless, its net
+benefit was negligible overall and slightly negative in the warm portion:
+mandatory final SVD verification/recovery consumed the QDWH kernel advantage.
+All tested near-rcond-guard hybrid cases required SVD rescue. Neither
+QR-reduced SVD nor the certified-output QDWH hybrid is recommended for production
+integration.
+
 The resulting production-v0 performance decision is to retain full fp64 thin
 SVD as the smooth production backend and independent oracle, previous
 original-coordinate lambda as the warm start, and projected-primal
 `gram_upper` as the radial-feasibility backend. Do not continue by default with
-Gram smooth backends, QDWH posterior tuning, QDWH globalization variants,
-temporal lambda predictors, or previous-factor recycling.
+Gram smooth backends, QDWH backend/posterior/globalization work, QDWH
+certified-output hybrids, QR-reduced SVD, temporal lambda predictors,
+previous-factor recycling, or cross-pair batching.
 
-The exact-production-v0 numerical/performance optimization phase is considered
-complete unless a future task introduces a qualitatively new method with a
-clear mathematical and performance rationale. The next approved project phase
-is optimizer-quality evaluation through optimizer-specific learning-rate sweeps
-on the controlled tiny Transformer, followed by longer and multi-seed
-experiments only if the tuned pilot is promising.
+The exact/certified production-v0 solver-performance exploration is closed by
+default. Reopen only for a qualitatively new method or hardware implementation
+with a clear mathematical and performance rationale.
+
+Stage D (`docs/QSO_LR_SWEEP.md`) completed the 256-step single-seed tuning
+study. The best AdamW peak LR was `2e-4`; the best paired-QSO LR was approximately
+`1.2247449e-3`, with unsupported-parameter AdamW at `3e-4`. The completed QSO
+pilot had lower late validation loss than the tuned AdamW pilot. However, the
+required 512-step QSO confirmation failed at step 87, after 87 completed steps.
+The equal-token long-horizon comparison is unavailable: classification B /
+inconclusive. No multi-seed experiment is currently justified.
+
+Nine declared QSO candidates timed out after entering CPU reference fallback.
+These were operational solver/reference failures, not observed NaN or loss
+divergence. At sweep time, the initiating smooth-solver failure reason was not
+observable because the reference call was interrupted before returning; do not
+infer it from the timeout alone. Successful longer QSO pilots also showed
+substantially increased Newton/CG/line-search work and residual conditioning
+approaching the production guard.
+
+Completed forensics (`docs/STAGE_D_QSO_FAILURE_FORENSICS.md`) recovered the exact
+production reason `ill_conditioned_residual` for the tuned 512-step confirmation
+at zero-based step 87, pair `blocks.1.mlp`. Its first smooth evaluation is already
+below the `1e-4` residual-rcond guard; Newton, CG, and line search have not run.
+All five representative Stage-D failures reproduced the same iteration-zero
+conditioning exit. Regular weight rows remain nonzero and well defined;
+normalization/cancellation and SVD failure are not the observed mechanism.
+The captured residual matrices remain numerically full rank: this evidence does
+NOT establish exact rank deficiency. The unchanged CPU reference is not a
+practical training fallback on the tuned fixture at the existing timeout.
+
+Completed classification (`docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`) supports
+FULL-RANK optima for all five saved Stage-D failure fixtures. Their positive
+singular tails stabilize rather than collapse as stationarity improves.
+GPU and independent CPU decompositions agree; the smallest singular values are
+many orders of magnitude above estimated fp64 decomposition uncertainty. Every
+fixture's down residual optimum is below the current `1e-4` rcond admission
+guard, and some up residuals are too. High-accuracy KKT and primal-dual checks
+do not require deficient subgradient completion. Thus the observed Stage-D
+blocker is not evidence that a nonsmooth deficient-face solver is required.
+Efficient deficient-face / P-dagger recovery remains important general theory,
+but is not the currently observed blocker.
+
+The next approved research question is to derive and validate a posterior
+full-rank direction-accuracy certificate using primal-dual gap, actual residual
+singular values, and numerical decomposition uncertainty, so admission below
+`1e-4` can be judged by direction accuracy rather than a fixed rcond threshold.
+This is research authorization, not permission to simply lower or remove the
+production guard. Another LR sweep or multi-seed experiment is not approved
+until the admission question is resolved. Tolerance relaxation,
+QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
+unapproved. Production-v0 defaults remain unchanged, including projected-primal
+`gram_upper`.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600">
+<rect width="100%" height="100%" fill="white"/>
+<g font-family="DejaVu Sans,Arial,sans-serif" font-size="16" fill="#222">
+<text x="100" y="30" font-size="20">Tuned confirmation: equal-token validation</text>
+<path d="M 100.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 515.000 H 690" stroke="#eeeeee"/>
+<text x="100.000" y="540" text-anchor="middle">0k</text>
+<text x="88" y="520.000" text-anchor="end">4.363</text>
+<path d="M 218.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 425.000 H 690" stroke="#eeeeee"/>
+<text x="218.000" y="540" text-anchor="middle">210k</text>
+<text x="88" y="430.000" text-anchor="end">4.92</text>
+<path d="M 336.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 335.000 H 690" stroke="#eeeeee"/>
+<text x="336.000" y="540" text-anchor="middle">419k</text>
+<text x="88" y="340.000" text-anchor="end">5.477</text>
+<path d="M 454.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 245.000 H 690" stroke="#eeeeee"/>
+<text x="454.000" y="540" text-anchor="middle">629k</text>
+<text x="88" y="250.000" text-anchor="end">6.034</text>
+<path d="M 572.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 155.000 H 690" stroke="#eeeeee"/>
+<text x="572.000" y="540" text-anchor="middle">839k</text>
+<text x="88" y="160.000" text-anchor="end">6.591</text>
+<path d="M 690.000 65 V 515" stroke="#eeeeee"/>
+<path d="M 100 65.000 H 690" stroke="#eeeeee"/>
+<text x="690.000" y="540" text-anchor="middle">1049k</text>
+<text x="88" y="70.000" text-anchor="end">7.148</text>
+<path d="M 100 65 V 515 H 690" fill="none" stroke="#222"/>
+<text x="395.0" y="575" text-anchor="middle">Training tokens</text>
+<text transform="translate(24 290.0) rotate(-90)" text-anchor="middle">Validation cross entropy</text>
+<polyline points="100.000,89.107 136.875,215.016 173.750,258.283 210.625,287.159 247.500,343.423 284.375,386.529 321.250,416.433 358.125,438.086 395.000,450.667 431.875,461.900 468.750,470.484 505.625,476.253 542.500,480.896 579.375,484.830 616.250,487.590 653.125,489.357 690.000,490.893" fill="none" stroke="#0072B2" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#0072B2"/>
+<circle cx="136.875" cy="215.016" r="2.4" fill="#0072B2"/>
+<circle cx="173.750" cy="258.283" r="2.4" fill="#0072B2"/>
+<circle cx="210.625" cy="287.159" r="2.4" fill="#0072B2"/>
+<circle cx="247.500" cy="343.423" r="2.4" fill="#0072B2"/>
+<circle cx="284.375" cy="386.529" r="2.4" fill="#0072B2"/>
+<circle cx="321.250" cy="416.433" r="2.4" fill="#0072B2"/>
+<circle cx="358.125" cy="438.086" r="2.4" fill="#0072B2"/>
+<circle cx="395.000" cy="450.667" r="2.4" fill="#0072B2"/>
+<circle cx="431.875" cy="461.900" r="2.4" fill="#0072B2"/>
+<circle cx="468.750" cy="470.484" r="2.4" fill="#0072B2"/>
+<circle cx="505.625" cy="476.253" r="2.4" fill="#0072B2"/>
+<circle cx="542.500" cy="480.896" r="2.4" fill="#0072B2"/>
+<circle cx="579.375" cy="484.830" r="2.4" fill="#0072B2"/>
+<circle cx="616.250" cy="487.590" r="2.4" fill="#0072B2"/>
+<circle cx="653.125" cy="489.357" r="2.4" fill="#0072B2"/>
+<circle cx="690.000" cy="490.893" r="2.4" fill="#0072B2"/>
+<path d="M 715 65 h 22" stroke="#0072B2" stroke-width="3"/>
+<text x="745" y="70">adamw</text>
+<polyline points="100.000,89.107 136.875,231.931 173.750,254.728" fill="none" stroke="#D55E00" stroke-width="2"/>
+<circle cx="100.000" cy="89.107" r="2.4" fill="#D55E00"/>
+<circle cx="136.875" cy="231.931" r="2.4" fill="#D55E00"/>
+<circle cx="173.750" cy="254.728" r="2.4" fill="#D55E00"/>
+<path d="M 715 89 h 22" stroke="#D55E00" stroke-width="3"/>
+<text x="745" y="94">qso FAILED</text>
+</g></svg>
