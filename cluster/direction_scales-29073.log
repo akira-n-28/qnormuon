@@ -1,0 +1,31 @@
+lagrange0
+2026-10-01T15:37:26+02:00
+JOB=29073 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Thu Oct  1 15:37:26 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   33C    P0             61W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+warm 2 blocks.0.mlp {'iteration': 2, 'horizontal_residual': 1.0408340855860843e-17, 'normalized_horizontal_residual': 3.2385875394607e-17, 'spectral_norms': [1.0, 0.9999982934281554], 'spectral_excess': 0.0, 'primal_spectral_backend': 'gram_eigh_upper', 'primal_objective': 0.7293212065260233, 'dual_objective': 0.7293353694926417, 'residual_rcond': 0.010174297618785556, 'dual_spectrum_source': 'cached_smooth_residual', 'signed_gap': 1.4162966618380679e-05, 'normalized_gap': 1.9419004220559156e-05, 'signed_normalized_gap': 1.9419004220559156e-05, 'posterior': {'alpha_lower': [0.0001517381462635655, 0.00021172748507665778], 'sigma_min': [0.0001517381471826486, 0.0002117274860424183], 'rcond': [0.010174297618785556, 0.010736398986255192], 'uncertainty': [9.190830793660464e-13, 9.657604526406113e-13], 'construction_uncertainty': [9.344807811882519e-18, 9.793964697991979e-18], 'dual_upper': 0.7293353695296094, 'primal_lower': 0.7293212064501319, 'gap_upper': 1.416307947819491e-05, 'feasibility_distance_upper': 4.352179975353399e-11, 'horizontal_projection_distance_upper': 1.5128032605238108e-12, 'radial_norm_upper': 1.0000000000000027, 'global_direction_error_upper': 0.8641247666017194, 'direction_error_upper': 0.833016984519713, 'two_side_direction_error_upper': 0.833016984519713, 'normalized_direction_upper': 0.030058911265749163, 'model': 'conditional fp64 gamma model; no directed interval arithmetic', 'left_defect_upper': [4.4665937851031926e-11, 4.4756077465254747e-11], 'right_defect_upper': [1.9255661511619658e-11, 1.9269151357937135e-11], 'reconstruction_relative': [1.3198799570926044e-13, 1.55723772783066e-13]}, 'observed_error': 0.0005732601855941518, 'relative_observed_error': 2.068574515428145e-05, 'observed_over_bound': 0.000688173466144478, 'fp32_cast_error': 7.017598182451859e-07, 'relative_fp32_cast_error': 2.5323067848432963e-08, 'cg': 3, 'line_trials': 2, 'gradient_norm': 0.0002146458112373401, 'posterior_seconds': 0.002171143889427185}
+tuned reoptimized perturbations [('random', 2.220446049250313e-16, 9.835612342569783e-14), ('smallest_normal', 2.220446049250313e-16, 1.3919397247960726e-13), ('random', 1.1920928955078125e-07, 1.750390870525497e-05), ('smallest_normal', 1.1920928955078125e-07, 5.848232634327892e-05), ('one_fp32_ulp_proxy', None, 8.82202993724099e-06)]
+low reoptimized perturbations [('random', 2.220446049250313e-16, 1.177301708038833e-13), ('smallest_normal', 2.220446049250313e-16, 1.7512835797455303e-13), ('random', 1.1920928955078125e-07, 2.0735553721076976e-05), ('smallest_normal', 1.1920928955078125e-07, 7.210465113774176e-05), ('one_fp32_ulp_proxy', None, 1.1015490576835386e-05)]
+middle reoptimized perturbations [('random', 2.220446049250313e-16, 1.934648327170409e-13), ('smallest_normal', 2.220446049250313e-16, 2.7433884981627984e-13), ('random', 1.1920928955078125e-07, 3.277033140881339e-05), ('smallest_normal', 1.1920928955078125e-07, 0.00011336808754405061), ('one_fp32_ulp_proxy', None, 1.5584800228274692e-05)]
+high reoptimized perturbations [('random', 2.220446049250313e-16, 1.2925890809246027e-13), ('smallest_normal', 2.220446049250313e-16, 1.6883115867617939e-13), ('random', 1.1920928955078125e-07, 1.9250564086452428e-05), ('smallest_normal', 1.1920928955078125e-07, 6.668985230217592e-05), ('one_fp32_ulp_proxy', None, 1.0278234146434943e-05)]
+ablation reoptimized perturbations [('random', 2.220446049250313e-16, 1.0375101664240792e-13), ('smallest_normal', 2.220446049250313e-16, 1.448610689708069e-13), ('random', 1.1920928955078125e-07, 1.740735534492132e-05), ('smallest_normal', 1.1920928955078125e-07, 6.034790909784151e-05), ('one_fp32_ulp_proxy', None, 9.541245320292115e-06)]

@@ -1,0 +1,44 @@
+lagrange0
+2026-10-01T15:29:29+02:00
+JOB=29072 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Thu Oct  1 15:29:29 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+{"job": "29072", "python": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]", "torch": "2.10.0+cu128", "cuda": "12.8", "gpu": "NVIDIA H100 NVL", "output": "/home/prignano/qnormuon-runs/full-rank-direction/study-29072", "controls": "/home/prignano/qnormuon-runs/tiny-transformer/precision-28899-cold/step0-pairs.pt", "production_hashes": {"qnormuon/coupled_solver.py": "a9239a1cc11463c0c0e4cc857c2297dd6628a00f08f44e9f521db5c42e2b754a", "qnormuon/optimizer.py": "04a00a4631e1e37b7dfdd29c887fabfd5006fc6df34907f6256fa73a300db720"}}
+tuned first gap pass 3 endpoint bound 0.01589214521542718
+low first gap pass 3 endpoint bound 0.017787219906961374
+middle first gap pass 3 endpoint bound 0.02205630679612447
+high first gap pass 4 endpoint bound 0.016789042723721115
+ablation first gap pass 4 endpoint bound 0.0162037891244788
+control blocks.0.mlp gap 2.2790729961256367e-07 bound 0.10111434628422453
+control blocks.1.mlp gap 2.7684506467417315e-07 bound 0.09974290670686375
+control blocks.2.mlp gap 2.2758896466806927e-05 bound 0.9170647233426188
+control blocks.3.mlp gap 3.360864103203745e-07 bound 0.11782564818442932
+control blocks.4.mlp gap 9.806224944311009e-07 bound 0.22248287902519254
+control blocks.5.mlp gap 7.593824058699363e-07 bound 0.23483488302941874
+SUMMARY {"posterior": {"median": 0.002085871994495392, "p95": 0.0021119799464941027, "min": 0.0020687654614448547, "max": 0.0021139830350875854}, "current_certificate": {"median": 0.009152501821517944, "p95": 0.009186041355133057, "min": 0.009099870920181274, "max": 0.00920792669057846}}
+........................................................................ [ 17%]
+........................................................................ [ 34%]
+........................................................................ [ 51%]
+........................................................................ [ 68%]
+........................................................................ [ 86%]
+..........................................................               [100%]

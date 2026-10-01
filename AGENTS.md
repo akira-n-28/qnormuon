@@ -52,6 +52,7 @@ chronological decision order:
 17. `docs/SMOOTH_QDWH_CERTIFIED_OUTPUT_HYBRID.md`
 18. `docs/QSO_LR_SWEEP.md`
 19. `docs/STAGE_D_QSO_FAILURE_FORENSICS.md`
+20. `docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -455,6 +456,10 @@ rcond `> 1e-4`, normalized horizontal residual `<= 1e-10`, spectral excess
 for performance. A stricter `1e-8` warm-start line-search failure is a known
 separate limitation, not the production target.
 
+`rcond > 1e-4` is a conservative production numerical-admission policy, not a
+mathematical rank criterion. Do not simply lower or remove the guard from
+observations of full-rank optima below it.
+
 The default `primal_norm_backend="gram_upper"` applies ONLY to projected-primal
 radial feasibility. It uses a conservative fp64 Gram/eigensystem upper estimate
 of each top singular value under its documented numerical model and may
@@ -723,11 +728,12 @@ Comparisons should use identical:
 Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
-Stage-D tuning and failure forensics are complete, but its QSO confirmation
-failed. The next approved step is to distinguish full-rank dual optima below the
-smooth admission guard from genuinely rank-deficient/nonsmooth optimal faces on
-the fixed failure fixtures. Another sweep or multi-seed study is not approved
-yet. A promising short pilot alone does not justify scaling.
+Stage-D tuning, failure forensics, and fixed-fixture optimum classification are
+complete, but its QSO confirmation failed. The next approved step is a posterior
+full-rank direction-accuracy certificate for numerical admission below the
+current guard. Another sweep or multi-seed study is not approved until the
+admission question is resolved. A promising short pilot alone does not justify
+scaling.
 This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
@@ -1057,7 +1063,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: Stage-D residual-optimum diagnosis
+# 39. Current research priority: posterior full-rank direction accuracy
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1166,13 +1172,25 @@ The captured residual matrices remain numerically full rank: this evidence does
 NOT establish exact rank deficiency. The unchanged CPU reference is not a
 practical training fallback on the tuned fixture at the existing timeout.
 
-The next approved research question is whether the fixed Stage-D failure
-fixtures have full-rank dual optima below the current smooth admission guard,
-or optimization approaches a genuinely rank-deficient/nonsmooth optimal face.
-If the optimum is full rank, study numerical admission/stability separately.
-If it is deficient, study a coupled nonsmooth solver with the accepted
-minimum-Frobenius optimal-face selection. Current observations do not approve
-lowering the rcond guard. Another LR sweep, multi-seed runs, tolerance relaxation,
+Completed classification (`docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`) supports
+FULL-RANK optima for all five saved Stage-D failure fixtures. Their positive
+singular tails stabilize rather than collapse as stationarity improves.
+GPU and independent CPU decompositions agree; the smallest singular values are
+many orders of magnitude above estimated fp64 decomposition uncertainty. Every
+fixture's down residual optimum is below the current `1e-4` rcond admission
+guard, and some up residuals are too. High-accuracy KKT and primal-dual checks
+do not require deficient subgradient completion. Thus the observed Stage-D
+blocker is not evidence that a nonsmooth deficient-face solver is required.
+Efficient deficient-face / P-dagger recovery remains important general theory,
+but is not the currently observed blocker.
+
+The next approved research question is to derive and validate a posterior
+full-rank direction-accuracy certificate using primal-dual gap, actual residual
+singular values, and numerical decomposition uncertainty, so admission below
+`1e-4` can be judged by direction accuracy rather than a fixed rcond threshold.
+This is research authorization, not permission to simply lower or remove the
+production guard. Another LR sweep or multi-seed experiment is not approved
+until the admission question is resolved. Tolerance relaxation,
 QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
 unapproved. Production-v0 defaults remain unchanged, including projected-primal
 `gram_upper`.
