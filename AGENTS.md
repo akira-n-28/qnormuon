@@ -51,6 +51,7 @@ chronological decision order:
 16. `docs/SMOOTH_QR_REDUCED_SVD_STUDY.md`
 17. `docs/SMOOTH_QDWH_CERTIFIED_OUTPUT_HYBRID.md`
 18. `docs/QSO_LR_SWEEP.md`
+19. `docs/STAGE_D_QSO_FAILURE_FORENSICS.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -722,10 +723,11 @@ Comparisons should use identical:
 Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
-Stage-D tuning is complete but its QSO confirmation failed. The next approved
-step is forensic diagnosis of the first smooth-solver -> CPU-reference
-transition; another sweep or multi-seed study is not approved until the failure
-mechanism is identified. A promising short pilot alone does not justify scaling.
+Stage-D tuning and failure forensics are complete, but its QSO confirmation
+failed. The next approved step is to distinguish full-rank dual optima below the
+smooth admission guard from genuinely rank-deficient/nonsmooth optimal faces on
+the fixed failure fixtures. Another sweep or multi-seed study is not approved
+yet. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
@@ -1055,7 +1057,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: Stage-D solver-transition diagnosis
+# 39. Current research priority: Stage-D residual-optimum diagnosis
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1147,20 +1149,33 @@ inconclusive. No multi-seed experiment is currently justified.
 
 Nine declared QSO candidates timed out after entering CPU reference fallback.
 These were operational solver/reference failures, not observed NaN or loss
-divergence. The initiating smooth-solver failure reason was not observable
-because the reference call was interrupted before returning; do not infer it
-from the timeout alone. Successful longer QSO pilots also showed substantially
-increased Newton/CG/line-search work and residual conditioning approaching the
-production guard.
+divergence. At sweep time, the initiating smooth-solver failure reason was not
+observable because the reference call was interrupted before returning; do not
+infer it from the timeout alone. Successful longer QSO pilots also showed
+substantially increased Newton/CG/line-search work and residual conditioning
+approaching the production guard.
 
-The next approved research step is forensic diagnosis of the first
-smooth-solver -> CPU-reference transition on Stage-D QSO trajectories.
-Determine whether it is caused by residual rank/conditioning, globalization
-failure, gap stagnation, no-descent, iteration budget, cancellation, or another
-explicit existing solver reason. Until that mechanism is identified, another
-LR sweep, multi-seed runs, tolerance relaxation, QDWH/Gram smooth backends, and
-replacement of the CPU reference solver are not approved. Production-v0
-defaults remain unchanged, including projected-primal `gram_upper`.
+Completed forensics (`docs/STAGE_D_QSO_FAILURE_FORENSICS.md`) recovered the exact
+production reason `ill_conditioned_residual` for the tuned 512-step confirmation
+at zero-based step 87, pair `blocks.1.mlp`. Its first smooth evaluation is already
+below the `1e-4` residual-rcond guard; Newton, CG, and line search have not run.
+All five representative Stage-D failures reproduced the same iteration-zero
+conditioning exit. Regular weight rows remain nonzero and well defined;
+normalization/cancellation and SVD failure are not the observed mechanism.
+The captured residual matrices remain numerically full rank: this evidence does
+NOT establish exact rank deficiency. The unchanged CPU reference is not a
+practical training fallback on the tuned fixture at the existing timeout.
+
+The next approved research question is whether the fixed Stage-D failure
+fixtures have full-rank dual optima below the current smooth admission guard,
+or optimization approaches a genuinely rank-deficient/nonsmooth optimal face.
+If the optimum is full rank, study numerical admission/stability separately.
+If it is deficient, study a coupled nonsmooth solver with the accepted
+minimum-Frobenius optimal-face selection. Current observations do not approve
+lowering the rcond guard. Another LR sweep, multi-seed runs, tolerance relaxation,
+QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
+unapproved. Production-v0 defaults remain unchanged, including projected-primal
+`gram_upper`.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the

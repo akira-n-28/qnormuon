@@ -1,0 +1,41 @@
+lagrange0
+2026-10-01T14:10:01+02:00
+JOB=29071 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Thu Oct  1 14:10:01 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   35C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+tuned warm audited 45 evaluations
+tuned beta audited 29 evaluations
+tuned zero audited 61 evaluations
+tuned admm audited 34 evaluations
+low warm audited 56 evaluations
+low beta audited 33 evaluations
+low zero audited 33 evaluations
+middle warm audited 57 evaluations
+middle beta audited 30 evaluations
+middle zero audited 31 evaluations
+high warm audited 46 evaluations
+high beta audited 36 evaluations
+high zero audited 35 evaluations
+ablation warm audited 46 evaluations
+ablation beta audited 41 evaluations
+ablation zero audited 53 evaluations
