@@ -54,6 +54,7 @@ chronological decision order:
 19. `docs/STAGE_D_QSO_FAILURE_FORENSICS.md`
 20. `docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`
 21. `docs/FULL_RANK_DIRECTION_ADMISSION.md`
+22. `docs/QSO_NUMERICAL_OUTPUT_CONTRACT.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -732,8 +733,9 @@ practicality/performance.
 Stage-D tuning, failure forensics, fixed-fixture optimum classification, and the
 posterior direction-accuracy study are complete, but its QSO confirmation failed.
 The direction study established no principled production direction-error budget.
-The next approved step is to resolve QSO's explicit numerical output contract;
-production-v1 admission and resumed training are not justified by that study.
+The completed output-contract study justifies a separate research-only
+full-rank epsilon-LMO admission experiment, with selection scope kept separate.
+Resumed training is not approved before that admission experiment passes.
 Another sweep or multi-seed study is not approved until the admission question
 is resolved. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
@@ -1065,7 +1067,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: explicit numerical output contract
+# 39. Current research priority: research-only full-rank epsilon-LMO admission
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1198,13 +1200,34 @@ DIRECTION BUDGET. Production-v1 admission and resumed training are NOT justified
 by this study. Do not continue merely by fitting a direction-error threshold
 to the observed fixtures.
 
-The next approved research question is to determine QSO's explicit numerical
-output contract: whether production should require proximity to the exact
-selected direction, or instead certify an epsilon-optimal feasible solution of
-the coupled spectral LMO together with numerical full-rank validity.
-This is a contract/theory question, not permission to lower or remove the
-existing production rcond guard. No LR sweep, multi-seed experiment, or
-production code change is approved yet. Tolerance relaxation,
+The completed contract study (`docs/QSO_NUMERICAL_OUTPUT_CONTRACT.md`) establishes
+feasibility plus a conservative primal-dual support-value bound as a coherent
+epsilon-LMO contract for the PRIMARY coupled spectral LMO. The existing
+normalized `3e-5` gap can serve as the unchanged relative primary support-regret
+tolerance for positive support values; no separately fitted direction-distance
+budget is required for that primary contract. Primary value accuracy does NOT
+certify the accepted minimum-Frobenius P-dagger selection on a nonunique optimal
+face. Even exact primary optimality and full rank at the current multiplier can
+fail to identify P-dagger. Exact zero intrinsic cotangent must still select
+exactly zero; deficient/nonunique-face selection remains a separate contract.
+The result is classification B: EPSILON-LMO CONTRACT NEEDS ADDITIONAL CONDITION.
+The additional condition is structural selection scope, not a newly fitted
+numerical threshold.
+
+All five below-guard Stage-D fixtures satisfy the conservative primary
+value/rank/feasibility checks at Newton iterations 3,3,3,4,4, respectively.
+All seven available ordinary above-guard controls also pass at their existing
+stopping iterations. This justifies a separate research production-v1 admission
+experiment for the smooth full-rank branch.
+
+The next approved research step is a research-only full-rank epsilon-LMO
+admission experiment with conservative final value/feasibility/rank
+certification and fail-closed iterative numerical safeguards. This does NOT
+authorize simply lowering/removing the production rcond guard, acceptance on
+deficient or rank-ambiguous faces, claiming P-dagger recovery from a primary
+value certificate, or resumed training before the admission experiment passes.
+No LR sweep, multi-seed experiment, or production code change is approved yet.
+Tolerance relaxation,
 QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
 unapproved. Production-v0 defaults remain unchanged, including projected-primal
 `gram_upper`.

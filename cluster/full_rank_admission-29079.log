@@ -1,0 +1,46 @@
+lagrange0
+2026-10-01T18:01:52+02:00
+JOB=29079 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Thu Oct  1 18:01:52 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   33C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+{"job": "29079", "python": "3.10.20 (main, Mar 10 2026, 18:16:33) [Clang 21.1.4 ]", "torch": "2.10.0+cu128", "cuda": "12.8", "gpu": "NVIDIA H100 NVL", "output": "/home/prignano/qnormuon-runs/full-rank-admission/study-29079", "cpus": "4", "memory": "16384", "tf32": false, "deterministic": true, "seed": 2091, "inputs": ["/home/prignano/qnormuon-runs/stage-d-forensics/capture-29044/confirmation-qso-a0.0003-q0.00122474487139/failed_pair.pt", "/home/prignano/qnormuon-runs/stage-d-forensics/capture-29045/coarse-qso-a0.0003-q0.0003/failed_pair.pt", "/home/prignano/qnormuon-runs/stage-d-forensics/capture-29045/coarse-qso-a0.0003-q0.001/failed_pair.pt", "/home/prignano/qnormuon-runs/stage-d-forensics/capture-29045/coarse-qso-a0.0003-q0.004/failed_pair.pt", "/home/prignano/qnormuon-runs/stage-d-forensics/capture-29045/ablation-qso-a0.0002-q0.00122474487139/failed_pair.pt", "/home/prignano/qnormuon-runs/near-rank-optimum/study-29066/refinement-29068/tuned-lbfgs.pt", "/home/prignano/qnormuon-runs/near-rank-optimum/study-29066/refinement-29068/low-lbfgs.pt", "/home/prignano/qnormuon-runs/near-rank-optimum/study-29066/refinement-29068/middle-lbfgs.pt", "/home/prignano/qnormuon-runs/near-rank-optimum/study-29066/refinement-29068/high-lbfgs.pt", "/home/prignano/qnormuon-runs/near-rank-optimum/study-29066/refinement-29068/ablation-lbfgs.pt", "/home/prignano/qnormuon-runs/tiny-transformer/precision-28899-cold/step0-pairs.pt", "/home/prignano/qnormuon-runs/tiny-transformer/precision-28904-mini/failed-warm-pair.pt"], "production_configuration": "SolverConfig(dtype=torch.float64, tolerance=3e-05, rcond_guard=0.0001, initial_iterations=2, max_iterations=100, max_cg=30, fallback=True, reference_max_iterations=20000, independent_certificate=False, primal_norm_backend='gram_upper')", "production_hashes": {"qnormuon/coupled_solver.py": "a9239a1cc11463c0c0e4cc857c2297dd6628a00f08f44e9f521db5c42e2b754a", "qnormuon/optimizer.py": "04a00a4631e1e37b7dfdd29c887fabfd5006fc6df34907f6256fa73a300db720"}, "research_contract": "primary_epsilon_lmo_full_rank; conditional normal finite fp64 model"}
+FIXTURE tuned primary_certified 3 1.2823756922877337e-05
+FIXTURE low primary_certified 3 1.2042319898090838e-05
+FIXTURE middle primary_certified 3 2.656943972766733e-05
+FIXTURE high primary_certified 4 4.6104385409491095e-07
+FIXTURE ablation primary_certified 4 1.9444355578541502e-07
+CONTROL blocks.0.mlp primary_certified 3 v0 3
+CONTROL blocks.1.mlp primary_certified 3 v0 3
+CONTROL blocks.2.mlp primary_certified 2 v0 2
+CONTROL blocks.3.mlp primary_certified 3 v0 3
+CONTROL blocks.4.mlp primary_certified 3 v0 3
+CONTROL blocks.5.mlp primary_certified 3 v0 3
+CONTROL saved warm blocks.0.mlp primary_certified 2 v0 2
+COMPLETE 5 7 66
+........................................................................ [ 15%]
+........................................................................ [ 31%]
+........................................................................ [ 47%]
+........................................................................ [ 63%]
+........................................................................ [ 79%]
+........................................................................ [ 95%]
+......................                                                   [100%]
