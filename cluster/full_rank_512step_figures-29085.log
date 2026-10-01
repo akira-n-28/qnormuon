@@ -1,0 +1,6 @@
+lagrange0
+2026-10-01T19:07:55+02:00
+JOB=29085 NODE=lagrange0 CUDA_VISIBLE_DEVICES= CPUS=1 MEM=2048 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+No devices were found

@@ -1,0 +1,4 @@
+lagrange0
+2026-10-01T19:14:52+02:00
+CPU-only figure job=29086 CPUs=1 memory=2048 MB PWD=/home/prignano/qnormuon
+FIGURES docs/figures/full_rank_epsilon_512

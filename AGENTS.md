@@ -55,6 +55,7 @@ chronological decision order:
 20. `docs/NEAR_RANK_OPTIMUM_CLASSIFICATION.md`
 21. `docs/FULL_RANK_DIRECTION_ADMISSION.md`
 22. `docs/QSO_NUMERICAL_OUTPUT_CONTRACT.md`
+23. `docs/FULL_RANK_EPSILON_LMO_ADMISSION_EXPERIMENT.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -733,11 +734,13 @@ practicality/performance.
 Stage-D tuning, failure forensics, fixed-fixture optimum classification, and the
 posterior direction-accuracy study are complete, but its QSO confirmation failed.
 The direction study established no principled production direction-error budget.
-The completed output-contract study justifies a separate research-only
-full-rank epsilon-LMO admission experiment, with selection scope kept separate.
-Resumed training is not approved before that admission experiment passes.
-Another sweep or multi-seed study is not approved until the admission question
-is resolved. A promising short pilot alone does not justify scaling.
+The completed output-contract and full-rank epsilon-LMO admission studies
+justify one controlled tuned 512-step tiny-Transformer research trajectory
+using the isolated admission branch, with selection scope kept separate.
+This is not another LR sweep; extra seeds, production integration, and
+deficient-face heuristics are not approved. The trajectory must fail closed on
+rank ambiguity, invalid numerical actions, globalization failure, or final
+certificate failure. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
 
 Report both quality and cost.
@@ -1067,7 +1070,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: research-only full-rank epsilon-LMO admission
+# 39. Current research priority: controlled full-rank epsilon-LMO research trajectory
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1214,23 +1217,36 @@ The result is classification B: EPSILON-LMO CONTRACT NEEDS ADDITIONAL CONDITION.
 The additional condition is structural selection scope, not a newly fitted
 numerical threshold.
 
-All five below-guard Stage-D fixtures satisfy the conservative primary
-value/rank/feasibility checks at Newton iterations 3,3,3,4,4, respectively.
-All seven available ordinary above-guard controls also pass at their existing
-stopping iterations. This justifies a separate research production-v1 admission
-experiment for the smooth full-rank branch.
+The completed admission experiment
+(`docs/FULL_RANK_EPSILON_LMO_ADMISSION_EXPERIMENT.md`) is classification A:
+FULL-RANK EPSILON-LMO ADMISSION READY FOR CONTROLLED TRAINING, under its stated
+conditional fp64 model and primary-only scope. All five saved Stage-D blockers
+certify at Newton iterations 3,3,3,4,4; all seven available ordinary controls
+certify at their original stopping iterations. The synthetic full-rank corpus
+admits all numerically separated cases, including below the old `1e-4` rcond
+guard; deficient/rank-ambiguous cases fail closed. Below-guard HVP/CG and line
+search were operational on all tested real blockers, with no hidden CPU
+reference use. Incremental measured cost was approximately 8 percent on the
+saved problems, with no additional tall SVD.
 
-The next approved research step is a research-only full-rank epsilon-LMO
-admission experiment with conservative final value/feasibility/rank
-certification and fail-closed iterative numerical safeguards. This does NOT
-authorize simply lowering/removing the production rcond guard, acceptance on
-deficient or rank-ambiguous faces, claiming P-dagger recovery from a primary
-value certificate, or resumed training before the admission experiment passes.
-No LR sweep, multi-seed experiment, or production code change is approved yet.
-Tolerance relaxation,
-QDWH/Gram smooth backends, and replacement of the CPU reference solver remain
-unapproved. Production-v0 defaults remain unchanged, including projected-primal
-`gram_upper`.
+The research output semantics are `primary_epsilon_lmo_full_rank` and
+`selection_certified = False`: only the primary epsilon-LMO contract is
+certified, not P-dagger recovery on a nonunique optimal face. Exact intrinsic
+zero retains exact-zero selection.
+
+The next approved step is one controlled tuned 512-step tiny-Transformer
+research trajectory using the isolated full-rank epsilon-LMO admission branch.
+This is NOT another LR sweep. No extra seeds, production integration, or
+deficient-face heuristic is approved. The trajectory must fail closed on rank
+ambiguity, invalid numerical actions, globalization failure, or final
+certificate failure. This does not authorize simply lowering/removing the
+production rcond guard or claiming P-dagger recovery from a primary value
+certificate. Tolerance relaxation, QDWH/Gram smooth backends, and replacement
+of the CPU reference solver remain unapproved.
+
+Production-v0 remains unchanged: `rcond_guard = 1e-4`, full fp64 thin SVD,
+previous original-coordinate lambda, existing certificate thresholds, CPU ADMM
+fallback, and projected-primal `gram_upper`.
 
 A smooth Gram/EVD backend must NOT become the production default merely because
 it is faster. Before adoption, compare against independent full SVD for the

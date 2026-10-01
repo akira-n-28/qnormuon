@@ -1,0 +1,52 @@
+lagrange0
+2026-10-01T18:45:43+02:00
+JOB=29082 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Thu Oct  1 18:45:43 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+........................................................................ [ 15%]
+........................................................................ [ 31%]
+........................................................................ [ 47%]
+........................................................................ [ 62%]
+........................................................................ [ 78%]
+........................................................................ [ 94%]
+..........................                                               [100%]
+458 passed in 17.37s
+VALIDATION 32 6.1148521900177
+VALIDATION 64 5.973775625228882
+OLD_GUARD_CROSSED {'horizontal_residual': 2.0816681711721685e-17, 'normalized_horizontal_residual': 6.605267453319647e-17, 'spectral_norms': [1.0, 0.9999955248901635], 'spectral_excess': 0.0, 'primal_spectral_backend': 'gram_eigh_upper', 'primal_objective': 1.2453317596459248, 'dual_objective': 1.2453477285327954, 'residual_rcond': 8.6789841260466e-05, 'dual_spectrum_source': 'cached_smooth_residual', 'signed_gap': 1.5968886870609822e-05, 'normalized_gap': 1.2822833739315156e-05, 'signed_normalized_gap': 1.2822833739315156e-05, 'rank_seconds': 0.007240481674671173, 'value_seconds': 0.008714139461517334, 'selection_semantics': 'primary_epsilon_lmo_full_rank', 'selection_certified': False, 'reference_used': False, 'production_rcond_guard': 0.0001, 'smooth_backend': 'full_fp64_thin_svd', 'newton_iterations': 3, 'cg_iterations': 9, 'line_trials': 3, 'sigma_min': [4.795753309789714e-05, 3.7580552716440625e-05], 'alpha_lower': [4.795752088117294e-05, 3.758053848400503e-05], 'eta': [1.2216724190412558e-11, 1.4232435590253426e-11], 'rcond_sides': [0.00012954385797686523, 8.678984126046602e-05], 'sigma_min_over_eta': [3925564.034222305, 2640486.4071316314], 'initial_rcond_sides': [0.00012939482291707301, 8.712293147996454e-05], 'initial_rank': {'alpha_lower': [4.790245212394732e-05, 3.772469190450935e-05], 'uncertainty': [1.2226696307933889e-11, 1.4302872703611114e-11], 'sigma_min': [4.790246435064364e-05, 3.7724706207382056e-05], 'sigma_max': [0.37020387114980274, 0.43300547360550556], 'rcond': [0.00012939482291707301, 8.712293147996454e-05], 'left_defect_upper': [4.473706297332155e-11, 4.479961129429273e-11], 'right_defect_upper': [1.9202433453108063e-11, 1.920875712422532e-11], 'reconstruction_relative': [7.488951914765871e-14, 1.163106632348599e-13]}, 'minimum_evaluated_rcond': 8.678984126046602e-05, 'below_old_guard': True, 'any_evaluation_below_old_guard': True, 'conservative_normalized_gap': 1.2823756922877337e-05, 'G_upper': 1.597003654851411e-05, 'dual_lower': 1.2453477280143912, 'feasible_proxy_distance': 4.3707033380174785e-11, 'cg_termination': ['residual_target', 'residual_target', 'residual_target'], 'max_cg_queries_per_action': 4, 'minimum_used_curvature': 0.00013363919985317618, 'maximum_hvp_norm': 1996.6460520984338, 'maximum_slope': -7.77920902978556e-09, 'smooth_evaluations': 4, 'solver_dtype': 'torch.float64', 'certification_dtype': 'torch.float64', 'returned_direction_dtype': 'torch.float64', 'fallback_used': False, 'fallback_reason': None, 'fallback_backend': None, 'reference_iterations': 0, 'gap_tolerance': 3e-05, 'converged': True, 'svd_evaluations': 8, 'step': 87, 'pair': 'blocks.1.mlp', 'seconds': 0.23997606337070465}
+VALIDATION 96 5.928315162658691
+VALIDATION 128 5.521119594573975
+GATE_128 {'passed': True, 'newton_median': 3.0, 'cg_median': 12.0, 'line_median': 3.0}
+VALIDATION 160 5.083845019340515
+VALIDATION 192 4.871910572052002
+VALIDATION 224 4.725043773651123
+VALIDATION 256 4.640968203544617
+VALIDATION 288 4.586167097091675
+VALIDATION 320 4.535994529724121
+VALIDATION 352 4.496514201164246
+VALIDATION 384 4.4684107303619385
+VALIDATION 416 4.443840265274048
+VALIDATION 448 4.4274033308029175
+VALIDATION 480 4.417466878890991
+VALIDATION 512 4.408996224403381
+OUTPUT /home/prignano/qnormuon-runs/full-rank-512step/trajectory-29082

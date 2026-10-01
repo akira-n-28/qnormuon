@@ -1,0 +1,3 @@
+/var/lib/slurm/slurmd/job29084/slurm_script: 4: source: not found
+/var/lib/slurm/slurmd/job29084/slurm_script: 4: : Permission denied
+/var/lib/slurm/slurmd/job29084/slurm_script: 4: [[: not found
