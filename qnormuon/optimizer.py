@@ -171,14 +171,14 @@ class QuotientSpectralOptimizer(Optimizer):
 
     def state_dict(self):
         result = super().state_dict()
-        result["qso_format_version"] = 2
+        result["qso_format_version"] = 3
         result["qso_pairs"] = self._topology()
         return result
 
     def load_state_dict(self, state_dict):
         saved = copy.deepcopy(state_dict)
         version = saved.pop("qso_format_version", None)
-        if version not in (1, 2) or saved.pop("qso_pairs", None) != self._topology():
+        if version not in (1, 2, 3) or saved.pop("qso_pairs", None) != self._topology():
             raise ValueError("checkpoint named pair topology does not match")
         groups = saved["param_groups"]
         if len(groups) != len(self.pairs):
@@ -187,6 +187,12 @@ class QuotientSpectralOptimizer(Optimizer):
         for pair, group in zip(self.pairs, groups):
             if group["pair_name"] != pair.name or len(group["params"]) != 2:
                 raise ValueError("checkpoint pair identity/order mismatch")
+            if version in (1, 2):
+                if group["solver"].get("admission_policy", "v0_rcond") != "v0_rcond":
+                    raise ValueError("historical checkpoint cannot carry a v1 admission policy")
+                group["solver"]["admission_policy"] = "v0_rcond"
+            elif "admission_policy" not in group["solver"]:
+                raise ValueError("format 3 checkpoint requires explicit admission_policy")
             if version == 1:
                 # Legacy checkpoints coupled EMA to solver dtype. Preserve their
                 # explicit old policy; loading is not an implicit policy migration.

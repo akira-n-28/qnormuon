@@ -1,7 +1,7 @@
-"""K=I coupled horizontal LMO, ported from the validated dual solver study.
+"""K=I coupled horizontal LMO with default v0 and explicit full-rank v1.
 
 Smooth work is device-local float32/64. Recovery and certification are float64.
-The only research dependency is the explicit, lazy CPU reference fallback.
+The v1 path is package-local; v0 retains its explicit lazy CPU reference.
 """
 from dataclasses import dataclass, field
 import math
@@ -61,6 +61,7 @@ class SolverConfig:
     reference_max_iterations: int = 20000
     independent_certificate: bool = False  # debug/oracle: recompute original residual svdvals
     primal_norm_backend: str = "gram_upper"  # "svd" retains independent radial reference
+    admission_policy: str = "v0_rcond"
 
     def __post_init__(self):
         if self.dtype not in (torch.float32, torch.float64):
@@ -73,6 +74,13 @@ class SolverConfig:
             raise ValueError("invalid iteration budget")
         if self.primal_norm_backend not in ("gram_upper", "svd"):
             raise ValueError("primal norm backend must be gram_upper or svd")
+        if self.admission_policy not in ("v0_rcond", "full_rank_epsilon_lmo"):
+            raise ValueError("unknown admission policy")
+        if self.admission_policy == "full_rank_epsilon_lmo" and (
+                self.dtype != torch.float64 or self.tolerance not in (None, 3e-5)
+                or self.rcond_guard not in (None, 1e-4)
+                or self.primal_norm_backend != "gram_upper"):
+            raise ValueError("full_rank_epsilon_lmo requires frozen fp64/3e-5/1e-4-diagnostic/gram_upper policy")
 
 @dataclass
 class Counts:
@@ -129,7 +137,7 @@ class SmoothDual:
 
 @dataclass
 class SolverResult:
-    pair: torch.Tensor
+    pair: torch.Tensor | None
     lam: torch.Tensor
     method: str
     iterations: int
@@ -142,6 +150,12 @@ class SolverResult:
     min_accepted_rcond: float
     secondary_selection: str
     history: list = field(default_factory=list)
+    admission_policy: str = "v0_rcond"
+    selection_semantics: str = "uncertified_primary"
+    selection_certified: bool = False
+    evaluations: list = field(default_factory=list)
+    actions: list = field(default_factory=list)
+    reference_used: bool = False
 
 
 @dataclass(frozen=True)
@@ -449,7 +463,7 @@ def _reference(u, d, a, max_iterations):
 
 
 @torch.no_grad()
-def solve_coupled(u, d, a, *, config=None, initial_lambda=None):
+def solve_coupled(u, d, a, *, config=None, initial_lambda=None, known_nonsmooth_face=False):
     """Return a certified float64 direction, or an explicitly failed result.
 
     Inputs are balanced weights and canonical covectors. This function disables
@@ -457,9 +471,15 @@ def solve_coupled(u, d, a, *, config=None, initial_lambda=None):
     Optimizer.step refuses any result whose ``converged`` flag is false.
     """
     config = config or SolverConfig()
+    if known_nonsmooth_face and config.admission_policy == "v0_rcond":
+        raise ValueError("known_nonsmooth_face is scoped to full_rank_epsilon_lmo")
     with torch.autocast(device_type=u.device.type, enabled=False):
         u, d, a = (v.to(config.dtype) for v in (u, d, a))
         _validate(u, d, a)
+        if config.admission_policy == "full_rank_epsilon_lmo":
+            from ._full_rank_admission import package_solve
+            return package_solve(u, d, a, config=config, initial_lambda=initial_lambda,
+                                 known_nonsmooth_face=known_nonsmooth_face)
         try:
             result = _solve(u, d, a, config=config, initial_lambda=initial_lambda)
         except torch.linalg.LinAlgError as error:
@@ -470,7 +490,14 @@ def solve_coupled(u, d, a, *, config=None, initial_lambda=None):
             result.reason = "svd_failure: " + str(error)
         tolerance = config.tolerance if config.tolerance is not None else 3e-5
         result.converged = result.converged and accepted(result.metrics, tolerance)
+        result.admission_policy = "v0_rcond"
+        result.selection_semantics = result.secondary_selection
+        result.selection_certified = result.reason == "zero_cotangent" and result.converged
+        result.reference_used = result.fallback
         result.metrics.update({
+            "admission_policy": result.admission_policy,
+            "selection_semantics": result.selection_semantics,
+            "selection_certified": result.selection_certified,
             "newton_iterations": result.iterations if result.method == "newton" else 0,
             "cg_iterations": result.counts.hvp,
             "svd_evaluations": result.counts.svd_matrices,

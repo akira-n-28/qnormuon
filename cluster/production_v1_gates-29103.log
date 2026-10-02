@@ -1,0 +1,57 @@
+lagrange0
+2026-10-02T14:39:35+02:00
+JOB=29103 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Fri Oct  2 14:39:35 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+........................................................................ [ 14%]
+........................................................................ [ 28%]
+........................................................................ [ 43%]
+.............................................F.......................... [ 57%]
+........................................................................ [ 72%]
+........................................................................ [ 86%]
+....................................................................     [100%]
+=================================== FAILURES ===================================
+____________________ test_exact_zero_and_primary_face_scope ____________________
+
+    def test_exact_zero_and_primary_face_scope():
+        u,d,a=diagonal()
+        for objective in (torch.zeros_like(a),cs.adjoint(u,d,torch.tensor([1.,2.,3.],dtype=u.dtype))):
+            r=equivalent(u,d,objective)
+            assert r.selection_semantics=='exact_zero' and r.selection_certified
+            assert torch.count_nonzero(r.pair)==0
+        u,d,a=diagonal(0.)
+        initial=torch.tensor([0.,1e-6,0.],dtype=u.dtype)
+        r=equivalent(u,d,a,initial)
+        selected=torch.zeros_like(a);selected[:,0,0]=1
+>       assert r.converged and float((r.pair-selected).norm())>1.4
+E       AssertionError: assert (True and 7.222425309945365e-15 > 1.4)
+E        +  where True = SolverResult(pair=tensor([[[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]],\n\n        [[1.0000,...58682e-16], 'reconstruction_relative': [0.0, 0.0]}, 'below_production_guard': True}], actions=[], reference_used=False).converged
+E        +  and   7.222425309945365e-15 = float(tensor(7.2224e-15))
+E        +    where tensor(7.2224e-15) = norm()
+E        +      where norm = (tensor([[[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]],\n\n        [[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]]]) - tensor([[[1., 0.],\n         [0., 0.],\n         [0., 0.]],\n\n        [[1., 0.],\n         [0., 0.],\n         [0., 0.]]])).norm
+E        +        where tensor([[[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]],\n\n        [[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]]]) = SolverResult(pair=tensor([[[1.0000, 0.0000],\n         [0.0000, 0.0000],\n         [0.0000, 0.0000]],\n\n        [[1.0000,...58682e-16], 'reconstruction_relative': [0.0, 0.0]}, 'below_production_guard': True}], actions=[], reference_used=False).pair
+
+tests/test_production_v1.py:92: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_production_v1.py::test_exact_zero_and_primary_face_scope - ...
+1 failed, 499 passed in 23.63s

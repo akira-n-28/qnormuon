@@ -1,0 +1,42 @@
+lagrange0
+2026-10-02T14:43:03+02:00
+JOB=29105 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Fri Oct  2 14:43:03 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   34C    P0             62W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+EXACT_VALIDATION 32 6.128651142120361
+EXACT_VALIDATION 64 5.9847540855407715
+EXACT_VALIDATION 96 5.955932378768921
+EXACT_VALIDATION 128 5.797837018966675
+EXACT_VALIDATION 160 5.273452401161194
+EXACT_VALIDATION 192 4.988864779472351
+EXACT_VALIDATION 224 4.80967652797699
+EXACT_VALIDATION 256 4.698948979377747
+EXACT_VALIDATION 288 4.621868014335632
+EXACT_VALIDATION 320 4.578961372375488
+EXACT_VALIDATION 352 4.534600853919983
+EXACT_VALIDATION 384 4.505127668380737
+EXACT_VALIDATION 416 4.4767491817474365
+EXACT_VALIDATION 448 4.468212604522705
+EXACT_VALIDATION 480 4.45262885093689
+EXACT_VALIDATION 512 4.441222548484802
+INTEGRATION_PASSED /home/prignano/qnormuon-runs/production-v1/trajectory-29105

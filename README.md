@@ -22,6 +22,24 @@ named `SwiGLUPair` registration. See [production-v0](docs/PRODUCTION_V0.md)
 for usage, certification, precision, fallback limitations, and H100 validation.
 The separate-polar `QNorMuon` API remains historical.
 
+An explicit opt-in production-v1 candidate is available for the numerically
+full-rank primary epsilon-LMO contract:
+
+```python
+from qnormuon import QuotientSpectralOptimizer, SolverConfig, SwiGLUPair
+
+optimizer = QuotientSpectralOptimizer(
+    [SwiGLUPair("mlp", mlp.up_proj.weight, mlp.down_proj.weight)],
+    solver=SolverConfig(admission_policy="full_rank_epsilon_lmo", fallback=False),
+)
+```
+
+`SolverConfig()` still selects production-v0 (`admission_policy="v0_rcond"`).
+The opt-in policy fails closed outside its numerical full-rank domain and
+certifies primary support value, with `selection_certified=False`; it does not
+certify minimum-Frobenius selection on nonunique faces. See
+[the v1 contract and checkpoint migration](docs/PRODUCTION_V1_FULL_RANK_EPSILON_LMO.md).
+
 The current production-v0 candidate combines:
 
 - balanced gauge-canonical coordinates;

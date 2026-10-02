@@ -57,6 +57,7 @@ chronological decision order:
 22. `docs/QSO_NUMERICAL_OUTPUT_CONTRACT.md`
 23. `docs/FULL_RANK_EPSILON_LMO_ADMISSION_EXPERIMENT.md`
 24. `docs/FULL_RANK_EPSILON_LMO_512STEP.md`
+25. `docs/QSO_MULTISEED_512STEP.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -736,13 +737,15 @@ Stage-D tuning, failure forensics, fixed-fixture optimum classification, and the
 posterior direction-accuracy study are complete, but its production-v0 QSO
 confirmation failed.
 The direction study established no principled production direction-error budget.
-The completed output-contract, full-rank epsilon-LMO admission, and controlled
-512-step research trajectory studies support a fixed-hyperparameter paired
-multi-seed comparison of tuned research QSO versus tuned AdamW, using the
-isolated admission branch with selection scope kept separate. Another LR sweep,
-retuning either optimizer, production-v1 integration, and deficient-face
-heuristics are not approved. Research trajectories must fail closed on rank
-ambiguity, invalid numerical actions, globalization failure, or final
+The completed output-contract, full-rank epsilon-LMO admission, controlled
+512-step trajectory, and paired multi-seed studies support opt-in production-v1
+engineering of the validated admission policy, with selection scope kept
+separate and production-v0 preserved as the default. Establish integration
+correctness/equivalence before a separate performance phase. Another LR sweep,
+retuning either optimizer, additional seeds, larger-model training, changing the
+primary `3e-5` contract, deficient-face heuristics, and automatically making
+production-v1 the default are not approved. Research trajectories must fail
+closed on rank ambiguity, invalid numerical actions, globalization failure, or final
 certificate failure. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
 
@@ -1073,7 +1076,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: fixed-hyperparameter paired multi-seed comparison
+# 39. Current research priority: opt-in production-v1 engineering
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1248,16 +1251,35 @@ validation checkpoint from step 160 onward. This remains one seed and does not
 establish statistical significance or general optimizer superiority.
 Implementation cost remains very high, approximately 50.5x AdamW wall time.
 
+The completed paired multi-seed study (`docs/QSO_MULTISEED_512STEP.md`) is
+classification A: MULTI-SEED QUALITY ADVANTAGE SUPPORTED. All 5/5 declared QSO
+seeds completed; all 15,360 training pair solves returned conservative primary
+certificates, with zero rank ambiguity, numerical failure, or CPU reference
+call. The primary final-three paired difference (QSO minus AdamW) had mean
+`-0.064776` and 95% paired Student-t CI `[-0.120781, -0.008771]`; the secondary
+final-checkpoint mean difference was `-0.065574`. All 5/5 seeds favored QSO on
+the primary metric. This is a late-horizon result: the full-horizon post-initial
+mean and normalized AUC do not favor QSO on average, and their intervals cross
+zero. Do not claim full-curve domination or broad optimizer superiority.
+
+Below-old-guard states occurred in 3/5 seeds: 206 / 15,360 final pair solves,
+with minimum observed final rcond approximately `3.92e-5`. All retained strongly
+positive numerical rank margins; no deficient/rank-ambiguous trajectory event
+occurred. Measured QSO step cost remains roughly 50x AdamW, dominated by
+optimizer work. Quality and implementation cost remain separate conclusions.
+
 The research output semantics are `primary_epsilon_lmo_full_rank` and
 `selection_certified = False`: only the primary epsilon-LMO contract is
 certified, not P-dagger recovery on a nonunique optimal face. Exact intrinsic
 zero retains exact-zero selection.
 
-The next approved scientific step is a fixed-hyperparameter paired multi-seed
-comparison of tuned research QSO versus tuned AdamW on the controlled tiny
-Transformer. Another LR sweep, retuning either optimizer, production-v1
-integration, and deficient-face heuristics are NOT approved. Research
-trajectories must fail closed on rank ambiguity, invalid numerical actions,
+The next approved step is opt-in production-v1 engineering of the validated
+full-rank epsilon-LMO admission policy, preserving production-v0 as the default.
+After integration correctness/equivalence is established, a separate performance
+phase is justified. Another LR sweep, retuning either optimizer, additional
+seeds, larger-model training, changing the primary `3e-5` contract, deficient-face
+heuristics, and automatically making production-v1 the default are NOT approved.
+Research trajectories must fail closed on rank ambiguity, invalid numerical actions,
 globalization failure, or final certificate failure. This does not authorize
 simply lowering/removing the production rcond guard or claiming P-dagger
 recovery from a primary value certificate. Tolerance relaxation, QDWH/Gram
