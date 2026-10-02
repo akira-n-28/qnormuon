@@ -56,6 +56,7 @@ chronological decision order:
 21. `docs/FULL_RANK_DIRECTION_ADMISSION.md`
 22. `docs/QSO_NUMERICAL_OUTPUT_CONTRACT.md`
 23. `docs/FULL_RANK_EPSILON_LMO_ADMISSION_EXPERIMENT.md`
+24. `docs/FULL_RANK_EPSILON_LMO_512STEP.md`
 
 For singular-weight or deficient-rank questions, also read
 `docs/ZERO_STRATUM_GEOMETRY.md` and `docs/RANK_DEFICIENT_THEORY.md`.
@@ -732,14 +733,16 @@ Do not automatically advance from numerical correctness to a sweep: first
 establish mathematical correctness, H100 numerical validation, and solver
 practicality/performance.
 Stage-D tuning, failure forensics, fixed-fixture optimum classification, and the
-posterior direction-accuracy study are complete, but its QSO confirmation failed.
+posterior direction-accuracy study are complete, but its production-v0 QSO
+confirmation failed.
 The direction study established no principled production direction-error budget.
-The completed output-contract and full-rank epsilon-LMO admission studies
-justify one controlled tuned 512-step tiny-Transformer research trajectory
-using the isolated admission branch, with selection scope kept separate.
-This is not another LR sweep; extra seeds, production integration, and
-deficient-face heuristics are not approved. The trajectory must fail closed on
-rank ambiguity, invalid numerical actions, globalization failure, or final
+The completed output-contract, full-rank epsilon-LMO admission, and controlled
+512-step research trajectory studies support a fixed-hyperparameter paired
+multi-seed comparison of tuned research QSO versus tuned AdamW, using the
+isolated admission branch with selection scope kept separate. Another LR sweep,
+retuning either optimizer, production-v1 integration, and deficient-face
+heuristics are not approved. Research trajectories must fail closed on rank
+ambiguity, invalid numerical actions, globalization failure, or final
 certificate failure. A promising short pilot alone does not justify scaling.
 This is a workflow state, not a mathematical claim.
 
@@ -1070,7 +1073,7 @@ When uncertain:
 8. do not download large assets on the Lagrange login node.
 
 
-# 39. Current research priority: controlled full-rank epsilon-LMO research trajectory
+# 39. Current research priority: fixed-hyperparameter paired multi-seed comparison
 
 Redundant dual-certificate decompositions and normal-training post-cast
 research SVDs have been removed. The conservative projected-primal top-norm
@@ -1157,8 +1160,9 @@ study. The best AdamW peak LR was `2e-4`; the best paired-QSO LR was approximate
 `1.2247449e-3`, with unsupported-parameter AdamW at `3e-4`. The completed QSO
 pilot had lower late validation loss than the tuned AdamW pilot. However, the
 required 512-step QSO confirmation failed at step 87, after 87 completed steps.
-The equal-token long-horizon comparison is unavailable: classification B /
-inconclusive. No multi-seed experiment is currently justified.
+For production-v0, the equal-token long-horizon comparison remains unavailable:
+classification B / inconclusive. At that stage, no multi-seed experiment was
+justified.
 
 Nine declared QSO candidates timed out after entering CPU reference fallback.
 These were operational solver/reference failures, not observed NaN or loss
@@ -1229,20 +1233,35 @@ search were operational on all tested real blockers, with no hidden CPU
 reference use. Incremental measured cost was approximately 8 percent on the
 saved problems, with no additional tall SVD.
 
+The completed controlled trajectory (`docs/FULL_RANK_EPSILON_LMO_512STEP.md`)
+is classification A: CONTROLLED 512-STEP TRAJECTORY PASSES; QUALITY PROMISING.
+The isolated research branch completed all 512 updates / 1,048,576 nonrepeated
+training tokens, with conservative primary certificates for all 3,072 paired
+solves. Zero rank ambiguity, invalid numerical action, solver failure, CPU
+reference call, or optimizer fallback occurred. The historical step-87 blocker
+was reproduced and crossed. Only eight final pair solves were below the old
+`1e-4` guard, all at zero-based steps 87-94 on `blocks.1.mlp` down.
+Checkpoint continuation from step 256 reproduced exactly. Equal-token
+validation favored research QSO: final QSO-AdamW was `-0.103305`, and the
+final-three mean difference was `-0.104326`. QSO was better at every common
+validation checkpoint from step 160 onward. This remains one seed and does not
+establish statistical significance or general optimizer superiority.
+Implementation cost remains very high, approximately 50.5x AdamW wall time.
+
 The research output semantics are `primary_epsilon_lmo_full_rank` and
 `selection_certified = False`: only the primary epsilon-LMO contract is
 certified, not P-dagger recovery on a nonunique optimal face. Exact intrinsic
 zero retains exact-zero selection.
 
-The next approved step is one controlled tuned 512-step tiny-Transformer
-research trajectory using the isolated full-rank epsilon-LMO admission branch.
-This is NOT another LR sweep. No extra seeds, production integration, or
-deficient-face heuristic is approved. The trajectory must fail closed on rank
-ambiguity, invalid numerical actions, globalization failure, or final
-certificate failure. This does not authorize simply lowering/removing the
-production rcond guard or claiming P-dagger recovery from a primary value
-certificate. Tolerance relaxation, QDWH/Gram smooth backends, and replacement
-of the CPU reference solver remain unapproved.
+The next approved scientific step is a fixed-hyperparameter paired multi-seed
+comparison of tuned research QSO versus tuned AdamW on the controlled tiny
+Transformer. Another LR sweep, retuning either optimizer, production-v1
+integration, and deficient-face heuristics are NOT approved. Research
+trajectories must fail closed on rank ambiguity, invalid numerical actions,
+globalization failure, or final certificate failure. This does not authorize
+simply lowering/removing the production rcond guard or claiming P-dagger
+recovery from a primary value certificate. Tolerance relaxation, QDWH/Gram
+smooth backends, and replacement of the CPU reference solver remain unapproved.
 
 Production-v0 remains unchanged: `rcond_guard = 1e-4`, full fp64 thin SVD,
 previous original-coordinate lambda, existing certificate thresholds, CPU ADMM

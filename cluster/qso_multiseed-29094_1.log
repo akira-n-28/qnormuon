@@ -1,0 +1,59 @@
+lagrange0
+2026-10-02T11:13:52+02:00
+JOB=29097 NODE=lagrange0 CUDA_VISIBLE_DEVICES=0 CPUS=4 MEM=16384 PWD=/home/prignano/qnormuon
+Filesystem                  Size  Used Avail Use% Mounted on
+10.50.19.60:/lagrange_vol0   14T  1.9T   12T  14% /home
+Fri Oct  2 11:13:52 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 570.211.01             Driver Version: 570.211.01     CUDA Version: 12.8     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA H100 NVL                Off |   00000000:21:00.0 Off |                    0 |
+| N/A   45C    P0             96W /  400W |       0MiB /  95830MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+VALIDATION 2028 adamw 32 6.228522777557373
+VALIDATION 2028 adamw 64 5.949373006820679
+VALIDATION 2028 adamw 96 5.586535453796387
+VALIDATION 2028 adamw 128 5.235975027084351
+VALIDATION 2028 adamw 160 5.0094298124313354
+VALIDATION 2028 adamw 192 4.855297327041626
+VALIDATION 2028 adamw 224 4.744509816169739
+VALIDATION 2028 adamw 256 4.686675786972046
+VALIDATION 2028 adamw 288 4.636790633201599
+VALIDATION 2028 adamw 320 4.589199066162109
+VALIDATION 2028 adamw 352 4.553136110305786
+VALIDATION 2028 adamw 384 4.528288841247559
+VALIDATION 2028 adamw 416 4.508248925209045
+VALIDATION 2028 adamw 448 4.493271708488464
+VALIDATION 2028 adamw 480 4.484691858291626
+VALIDATION 2028 adamw 512 4.47753119468689
+RUN_END 2028 adamw passed
+VALIDATION 2028 qso 32 6.119961500167847
+VALIDATION 2028 qso 64 5.97149384021759
+VALIDATION 2028 qso 96 5.958181381225586
+VALIDATION 2028 qso 128 5.930286169052124
+VALIDATION 2028 qso 160 5.590899109840393
+VALIDATION 2028 qso 192 5.114546775817871
+VALIDATION 2028 qso 224 4.880577206611633
+VALIDATION 2028 qso 256 4.775728106498718
+VALIDATION 2028 qso 288 4.679971098899841
+VALIDATION 2028 qso 320 4.612460017204285
+VALIDATION 2028 qso 352 4.565669059753418
+VALIDATION 2028 qso 384 4.536576747894287
+VALIDATION 2028 qso 416 4.508042097091675
+VALIDATION 2028 qso 448 4.487885355949402
+VALIDATION 2028 qso 480 4.475805401802063
+VALIDATION 2028 qso 512 4.467621803283691
+RUN_END 2028 qso passed
